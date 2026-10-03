@@ -523,7 +523,8 @@ export default function BlkShelfApp() {
   function homeScreen() {
     return <>
       <div className="app-promo-banner">
-        <button type="button" className="app-promo-link" aria-label="Open featured promotion" onClick={() => openEmbeddedPage("Featured promotion", "https://www.brae.website")}>
+       <button  type="button"  className="app-promo-link"aria-label="Open featured promotion"  onClick={() => window.open("https://www.brae.website/", "_blank", "noopener,noreferrer")}
+
           <img className="app-promo-image app-promo-desktop" src="https://njgprucvnayyiooiftaw.supabase.co/storage/v1/object/public/ads/BRAE-Banner-1920.png" alt="Featured promotion" />
           <img className="app-promo-image app-promo-mobile" src="https://njgprucvnayyiooiftaw.supabase.co/storage/v1/object/public/ads/BRAE-Banner-1080.png" alt="Featured promotion" />
         </button>
