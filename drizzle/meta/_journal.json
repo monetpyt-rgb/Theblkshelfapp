@@ -1,0 +1,34 @@
+{
+  "version": "7",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1790817087770,
+      "tag": "0000_lucky_morbius",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1790834547022,
+      "tag": "0001_fresh_princess_powerful",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1790836640094,
+      "tag": "0002_ordinary_black_knight",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "6",
+      "when": 1791047036311,
+      "tag": "0003_blushing_quicksilver",
+      "breakpoints": true
+    }
+  ]
+}

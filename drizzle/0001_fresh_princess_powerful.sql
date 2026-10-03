@@ -1,0 +1,1 @@
+ALTER TABLE `reader_shelves` ADD `favorite` integer DEFAULT false NOT NULL;
