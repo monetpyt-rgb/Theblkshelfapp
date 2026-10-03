@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Authors Directory – The Blk Shelf</title>
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  />
+
+  <link rel="stylesheet" href="includes/shared.css">
+
+  <style>
+    :root {
+      --bg: #0f0c0a;
+      --text: #fff8f0;
+      --muted: #e3d2c0;
+      --soft: #c9b7a5;
+      --accent: #d8a35d;
+      --line: rgba(255,255,255,0.18);
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      color: var(--text);
+      line-height: 1.6;
+      background:
+        linear-gradient(rgba(15, 12, 10, 0.5), rgba(15, 12, 10, 0.5)),
+        url("https://njgprucvnayyiooiftaw.supabase.co/storage/v1/object/public/logo/bckgrnd.png");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    header {
+      padding: 2rem 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .page {
+      padding: 2.5rem 0 4rem;
+    }
+
+    .directory-card {
+      background: linear-gradient(180deg, #3f2e23, #241d17);
+      border: 1px solid rgba(255,255,255,0.22);
+      border-radius: 28px;
+      padding: 2rem;
+      box-shadow:
+        0 12px 30px rgba(0,0,0,0.35),
+        inset 0 1px 0 rgba(255,255,255,0.05);
+    }
+
+    .eyebrow {
+      display: inline-block;
+      padding: 0.42rem 0.88rem;
+      border: 1px solid rgba(216,163,93,0.24);
+      border-radius: 999px;
+      background: rgba(216,163,93,0.08);
+      color: #f2cb98;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      font-size: clamp(2.4rem, 5vw, 4.3rem);
+      line-height: 0.98;
+      margin: 0.9rem 0 0.8rem;
+      letter-spacing: -0.03em;
+    }
+
+    .intro {
+      color: var(--muted);
+      max-width: 54rem;
+      font-size: 1.05rem;
+      margin: 0 0 1.6rem;
+    }
+
+    .directory-tools {
+      display: grid;
+      grid-template-columns: 1.4fr 0.8fr 0.8fr;
+      gap: 0.8rem;
+      margin: 1.5rem 0;
+    }
+
+    .field {
+      width: 100%;
+      padding: 0.9rem 1rem;
+      border-radius: 14px;
+      border: 2px solid rgba(255,255,255,0.25);
+      background: #17100c;
+      color: var(--text);
+      font: inherit;
+    }
+
+    .field::placeholder {
+      color: var(--soft);
+    }
+
+    .field:focus {
+      outline: 3px solid #f2c994;
+      border-color: #f2c994;
+    }
+
+    .featured-strip {
+      margin: 2rem 0;
+      padding: 1.2rem;
+      border-radius: 24px;
+      background: rgba(63,46,35,0.9);
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .featured-strip h2,
+    .directory-list h2 {
+      margin: 0 0 1rem;
+      font-size: 1.6rem;
+    }
+
+    .featured-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+    }
+
+    .featured-author {
+  position: relative;
+  padding: 0.75rem;
+  border-radius: 16px;
+  background: linear-gradient(180deg, #3f2e23, #241d17);
+  border: 1px solid rgba(255,255,255,0.2);
+  transition: 0.2s ease;
+  text-align: center;
+
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+    .featured-author:hover {
+      transform: translateY(-3px);
+      border-color: rgba(216,163,93,0.45);
+    }
+
+    .featured-author strong {
+      display: block;
+      font-size: 1.05rem;
+      line-height: 1.2;
+    }
+
+    .featured-author span {
+      display: block;
+      color: var(--soft);
+      font-size: 0.85rem;
+      margin-top: 0.3rem;
+    }
+
+    .featured-author .featured-author-btn {
+  display: inline-block;
+  margin-top: auto;
+  padding: 0.55rem 1rem;
+  background: #d8a35d;
+  color: #120e0b;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  transition: 0.2s ease;
+}
+
+.featured-author:hover .featured-author-btn {
+  background: #e6b06a;
+  transform: translateY(-1px);
+}
+
+.load-more-authors-btn {
+  border: none;
+  cursor: pointer;
+  margin: 1.5rem auto 0;
+  padding: 0.55rem 1rem;
+  background: #d8a35d;
+  color: #120e0b;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  transition: 0.2s ease;
+}
+
+.load-more-authors-btn:hover {
+  background: #e6b06a;
+  transform: translateY(-1px);
+}
+
+.featured-author-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+
+  padding: 0.45rem 0.75rem;
+  border-radius: 999px;
+
+  background: rgba(216,163,93,0.18);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  border: 1px solid rgba(255,255,255,0.18);
+
+  color: #fff8f0;
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1;
+
+  box-shadow:
+    0 4px 12px rgba(0,0,0,0.18),
+    inset 0 1px 0 rgba(255,255,255,0.12);
+
+  z-index: 2;
+}
+
+    .featured-author-image {
+  width: 110px;
+  height: 110px;
+  margin: 0 auto 0.75rem;
+  border-radius: 50%;
+  overflow: hidden;
+  background: rgba(0,0,0,0.22);
+}
+
+.featured-author-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+    .alphabet-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin: 1.4rem 0 2rem;
+  width: 100%;
+}
+
+    .alphabet-nav button {
+  min-width: 34px;
+  height: 34px;
+  padding: 0 0.65rem;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  flex: 0 0 auto;
+
+  border-radius: 999px;
+  background: rgba(216,163,93,0.08);
+  border: 1px solid rgba(216,163,93,0.2);
+  color: var(--muted);
+  font-weight: bold;
+  font-size: 0.85rem;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.alphabet-nav button:hover,
+.alphabet-nav button.active {
+  background: #e6b06a;
+  color: #120e0b;
+}
+
+    .letter-group {
+      padding-top: 1rem;
+      margin-top: 1rem;
+      border-top: 1px solid rgba(255,255,255,0.14);
+    }
+
+    .letter-group h3 {
+      color: #f2c994;
+      font-size: 1.5rem;
+      margin: 0 0 0.7rem;
+    }
+
+    .author-name-list {
+      columns: 3;
+      column-gap: 2rem;
+    }
+
+    .author-name-list a {
+      display: block;
+      break-inside: avoid;
+      padding: 0.38rem 0;
+      color: var(--muted);
+      border-bottom: 1px solid transparent;
+    }
+
+    .author-name-list a:hover {
+      color: #f2c994;
+      border-bottom-color: rgba(216,163,93,0.35);
+    }
+
+    .author-name-list span {
+  display: block;
+  font-weight: bold;
+}
+
+.author-name-list small {
+  display: block;
+  color: var(--soft);
+  font-size: 0.82rem;
+  margin-top: 0.1rem;
+}
+
+.empty-state,
+.loading-state {
+  color: var(--soft);
+  padding: 1rem 0;
+}
+
+    .author-count {
+      color: var(--soft);
+      font-size: 0.85rem;
+    }
+
+    .update-note {
+      margin-top: 2rem;
+      padding: 1rem 1.1rem;
+      border-radius: 18px;
+      background: rgba(216,163,93,0.08);
+      border: 1px solid rgba(216,163,93,0.22);
+      color: var(--muted);
+    }
+
+    .update-note a {
+      color: #f2c994;
+      font-weight: bold;
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 2rem 0 2.2rem;
+      color: var(--soft);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 850px) {
+      .directory-tools {
+        grid-template-columns: 1fr;
+      }
+
+      .featured-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .author-name-list {
+        columns: 2;
+      }
+
+      .alphabet-nav {
+  justify-content: center;
+}
+
+.alphabet-nav button {
+  flex: 0 0 auto;
+}
+    }
+
+    @media (max-width: 600px) {
+      body {
+        background:
+          linear-gradient(rgba(15, 12, 10, 0.5), rgba(15, 12, 10, 0.5)),
+          url("https://njgprucvnayyiooiftaw.supabase.co/storage/v1/object/public/logo/bckgrnd-mobile.png");
+        background-size: cover;
+        background-position: center top;
+        background-repeat: no-repeat;
+        background-attachment: scroll;
+      }
+
+      header {
+        padding: 1.3rem 0 1.7rem;
+      }
+
+      .directory-card {
+        padding: 1.15rem;
+        border-radius: 22px;
+      }
+
+      .alphabet-nav {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(42px, 1fr));
+  gap: 0.45rem;
+}
+
+.alphabet-nav button {
+  width: 100%;
+  min-width: 0;
+}
+
+      h1 {
+        font-size: 2.35rem;
+      }
+
+      .featured-grid {
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+}
+
+.featured-author-image {
+  width: 88px;
+  height: 88px;
+  margin-top: 1.8rem;
+}
+
+.featured-author .featured-author-btn,
+.load-more-authors-btn {
+  font-size: 0.78rem;
+  padding: 0.5rem 0.75rem;
+}
+
+.featured-author-badge {
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.35rem 0.6rem;
+  font-size: 0.62rem;
+  white-space: nowrap;
+}
+
+      .author-name-list {
+        columns: 1;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div id="site-header"></div>
+</header>
+
+<main class="page">
+  <div class="container">
+    <div class="directory-card">
+      <span class="eyebrow">Author Directory</span>
+
+      <h1>The BLK Shelf <span style="color:#d8a35d;">Authors</span></h1>
+
+      <p class="intro">
+        Browse Black indie authors currently with books on the shelf. Search by name, filter by genre, or jump alphabetically.
+      </p>
+
+      <div class="directory-tools">
+  <input
+    class="field"
+    id="authorSearchInput"
+    type="text"
+    placeholder="Search by author name..."
+  />
+
+  <input
+  class="field"
+  id="genreFilter"
+  list="genreOptions"
+  type="text"
+  placeholder="All Genres"
+/>
+
+<datalist id="genreOptions"></datalist>
+
+  <select class="field" id="sortFilter">
+    <option value="az">Sort: A–Z</option>
+    <option value="most-books">Most Books</option>
+    <option value="newest">Newest Added</option>
+  </select>
+</div>
+
+      <nav class="alphabet-nav" aria-label="Author alphabet navigation">
+  <button type="button" class="letter-filter" data-letter="A">A</button>
+  <button type="button" class="letter-filter" data-letter="B">B</button>
+  <button type="button" class="letter-filter" data-letter="C">C</button>
+  <button type="button" class="letter-filter" data-letter="D">D</button>
+  <button type="button" class="letter-filter" data-letter="E">E</button>
+  <button type="button" class="letter-filter" data-letter="F">F</button>
+  <button type="button" class="letter-filter" data-letter="G">G</button>
+  <button type="button" class="letter-filter" data-letter="H">H</button>
+  <button type="button" class="letter-filter" data-letter="I">I</button>
+  <button type="button" class="letter-filter" data-letter="J">J</button>
+  <button type="button" class="letter-filter" data-letter="K">K</button>
+  <button type="button" class="letter-filter" data-letter="L">L</button>
+  <button type="button" class="letter-filter" data-letter="M">M</button>
+  <button type="button" class="letter-filter" data-letter="N">N</button>
+  <button type="button" class="letter-filter" data-letter="O">O</button>
+  <button type="button" class="letter-filter" data-letter="P">P</button>
+  <button type="button" class="letter-filter" data-letter="Q">Q</button>
+  <button type="button" class="letter-filter" data-letter="R">R</button>
+  <button type="button" class="letter-filter" data-letter="S">S</button>
+  <button type="button" class="letter-filter" data-letter="T">T</button>
+  <button type="button" class="letter-filter" data-letter="U">U</button>
+  <button type="button" class="letter-filter" data-letter="V">V</button>
+  <button type="button" class="letter-filter" data-letter="W">W</button>
+  <button type="button" class="letter-filter" data-letter="X">X</button>
+  <button type="button" class="letter-filter" data-letter="Y">Y</button>
+  <button type="button" class="letter-filter" data-letter="Z">Z</button>
+  <button type="button" class="letter-filter active" data-letter="">All</button>
+</nav>
+
+      <section class="featured-strip">
+  <h2>Featured Authors</h2>
+  <div id="featuredAuthorsDirectoryGrid" class="featured-grid loading-state">
+    Loading featured authors...
+  </div>
+</section>
+
+      <section class="directory-list">
+  <h2>Browse All Authors</h2>
+  <div id="authorResultCount" class="author-count">Loading authors...</div>
+
+  <div id="authorDirectoryList" class="loading-state">
+    Loading authors...
+  </div>
+
+  <button class="load-more-authors-btn" id="loadMoreAuthorsButton" style="display:none;">
+  Load More Authors
+</button>
+</section>
+
+      <div class="update-note">
+        Need an author profile or listed book updated?
+        <span style="color:#d8a35d;">Request an update via email.</span>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer id="site-footer"></footer>
+
+<script>
+const SUPABASE_URL =
+  "https://njgprucvnayyiooiftaw.supabase.co";
+
+const SUPABASE_KEY =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5qZ3BydWN2bmF5eWlvb2lmdGF3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc3NDg0ODMsImV4cCI6MjA5MzMyNDQ4M30.1r6r8vyYB0PnrZtugcBz3CPuCP9MMlTTMYXfewEINNw";
+
+let allAuthors = [];
+let filteredAuthors = [];
+let visibleAuthorLimit = 50;
+
+let selectedLetter = "";
+
+function escapeHtml(value) {
+  return String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+function pick(obj, keys, fallback = "") {
+  for (const key of keys) {
+    if (obj && obj[key] != null && String(obj[key]).trim() !== "") return obj[key];
+  }
+  return fallback;
+}
+
+function normalizeForSearch(value) {
+  return String(value || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/['’‘`]/g, "")
+    .replace(/&/g, " and ")
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim();
+}
+
+function getAuthorSearchScore(author, query) {
+  if (!query) return 1;
+
+  const name = normalizeForSearch(author.name);
+  const words = query.split(" ").filter(Boolean);
+
+  if (!name || !words.length) return 0;
+  if (name === query) return 100;
+  if (name.startsWith(query)) return 95;
+  if (name.includes(query)) return 85;
+
+  let matchedWords = 0;
+
+  words.forEach(word => {
+    if (name.includes(word)) matchedWords++;
+  });
+
+  const matchRatio = matchedWords / words.length;
+  return matchRatio >= 0.5 ? Math.round(matchRatio * 70) : 0;
+}
+
+function normalizeArray(data) {
+  if (Array.isArray(data)) return data;
+  if (Array.isArray(data?.books)) return data.books;
+  if (Array.isArray(data?.authors)) return data.authors;
+  if (Array.isArray(data?.items)) return data.items;
+  if (Array.isArray(data?.data)) return data.data;
+  return [];
+}
+
+async function fetchSupabase(table, query = "*") {
+  const url = query.includes("=")
+    ? `${SUPABASE_URL}/rest/v1/${table}?select=${query}`
+    : `${SUPABASE_URL}/rest/v1/${table}?select=${encodeURIComponent(query)}`;
+
+  const response = await fetch(url, {
+    headers: {
+      apikey: SUPABASE_KEY,
+      Authorization: `Bearer ${SUPABASE_KEY}`
+    }
+  });
+
+  if (!response.ok) {
+    throw new Error(await response.text());
+  }
+
+  return response.json();
+}
+
+function buildAuthorsFromBooks(books) {
+  const authorMap = new Map();
+
+  books.forEach(book => {
+    const authorId = pick(book, ["Author_ID", "authorId", "authorID"], "");
+const authorName = pick(book, ["Author_Name", "authorName", "author"], "Unknown Author");
+const genre = pick(book, ["Genre", "Sub_Genres", "genre", "genres", "category"], "");
+const dateAdded = pick(book, ["Release/Expected_Release_Date", "timestamp", "submittedAt", "createdAt", "dateAdded", "releaseDate"], "");
+    const key = authorId || authorName.toLowerCase();
+
+    if (!authorMap.has(key)) {
+      authorMap.set(key, {
+        id: authorId,
+        name: authorName,
+        genres: new Set(),
+        bookCount: 0,
+        newestDate: dateAdded
+      });
+    }
+
+    const author = authorMap.get(key);
+    author.bookCount += 1;
+
+    if (dateAdded && (!author.newestDate || new Date(dateAdded) > new Date(author.newestDate))) {
+      author.newestDate = dateAdded;
+    }
+
+    if (genre) {
+      String(genre).split(",").map(g => g.trim()).filter(Boolean).forEach(g => author.genres.add(g));
+    }
+  });
+
+  return Array.from(authorMap.values()).map(author => ({
+    ...author,
+    genres: Array.from(author.genres)
+  }));
+}
+
+function populateGenreFilter(authors) {
+  const genreOptions = document.getElementById("genreOptions");
+  const genres = [...new Set(authors.flatMap(author => author.genres))].sort();
+
+  genreOptions.innerHTML = genres
+    .map(genre => `<option value="${escapeHtml(genre)}"></option>`)
+    .join("");
+}
+
+function applyFilters() {
+  const search = normalizeForSearch(document.getElementById("authorSearchInput").value);
+  const genre = normalizeForSearch(document.getElementById("genreFilter").value);
+  const sort = document.getElementById("sortFilter").value;
+
+  filteredAuthors = allAuthors
+  .map(author => ({
+    ...author,
+    _searchScore: getAuthorSearchScore(author, search)
+  }))
+  .filter(author => {
+    const firstLetter = String(author.name || "").charAt(0).toUpperCase();
+    const matchesLetter = !selectedLetter || firstLetter === selectedLetter;
+
+    const matchesSearch = !search || author._searchScore > 0;
+
+    const matchesGenre =
+      !genre ||
+      author.genres.some(authorGenre =>
+        normalizeForSearch(authorGenre).includes(genre)
+      );
+
+    return matchesSearch && matchesGenre && matchesLetter;
+  });
+
+  if (search) {
+  filteredAuthors.sort((a, b) =>
+    (b._searchScore || 0) - (a._searchScore || 0) ||
+    a.name.localeCompare(b.name)
+  );
+} else if (sort === "most-books") {
+  filteredAuthors.sort((a, b) => b.bookCount - a.bookCount || a.name.localeCompare(b.name));
+} else if (sort === "newest") {
+  filteredAuthors.sort((a, b) => new Date(b.newestDate || 0) - new Date(a.newestDate || 0));
+} else {
+  filteredAuthors.sort((a, b) => a.name.localeCompare(b.name));
+}
+
+  visibleAuthorLimit = 50;
+  renderAuthorDirectory();
+}
+
+function renderAuthorDirectory() {
+  const target = document.getElementById("authorDirectoryList");
+  const count = document.getElementById("authorResultCount");
+  const loadMoreButton = document.getElementById("loadMoreAuthorsButton");
+
+  const visibleAuthors = filteredAuthors.slice(0, visibleAuthorLimit);
+
+  count.textContent = `Showing ${visibleAuthors.length} of ${filteredAuthors.length} authors`;
+
+  if (!visibleAuthors.length) {
+    target.innerHTML = `<div class="empty-state">No authors found.</div>`;
+    loadMoreButton.style.display = "none";
+    return;
+  }
+
+  const grouped = visibleAuthors.reduce((acc, author) => {
+    const firstLetter = author.name.charAt(0).toUpperCase();
+    const letter = /^[A-Z]$/.test(firstLetter) ? firstLetter : "#";
+    if (!acc[letter]) acc[letter] = [];
+    acc[letter].push(author);
+    return acc;
+  }, {});
+
+  target.innerHTML = Object.keys(grouped).sort().map(letter => `
+    <div class="letter-group" id="${letter}">
+      <h3>${letter}</h3>
+      <div class="author-name-list">
+        ${grouped[letter].map(author => {
+          const href = author.id
+            ? `author.html?id=${encodeURIComponent(author.id)}&source=author_directory`
+            : `library.html?author=${encodeURIComponent(author.name)}`;
+
+          return `
+            <a href="${href}">
+              <span>${escapeHtml(author.name)}</span>
+              <small>${author.bookCount} ${author.bookCount === 1 ? "book" : "books"} • ${escapeHtml(author.genres.slice(0, 2).join(", ") || "On the shelf")}</small>
+            </a>
+          `;
+        }).join("")}
+      </div>
+    </div>
+  `).join("");
+
+  loadMoreButton.style.display = filteredAuthors.length > visibleAuthorLimit ? "inline-block" : "none";
+}
+
+async function renderFeaturedAuthors() {
+  const target = document.getElementById("featuredAuthorsDirectoryGrid");
+
+  try {
+    const now = new Date();
+    const monthKey = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}`;
+
+    const [featuredRows, authorRows] = await Promise.all([
+      fetchSupabase(
+        "public_featured_authors",
+        `*&Month_Key=eq.${monthKey}`
+      ),
+      fetchSupabase(
+        "public_authors",
+        "*"
+      )
+    ]);
+
+    const authorsById = new Map(
+      authorRows.map(author => [author.AUTHOR_ID, author])
+    );
+
+    const featuredAuthors = featuredRows
+      .map(row => authorsById.get(row.Author_ID))
+      .filter(Boolean)
+      .slice(0, 5);
+
+    if (!featuredAuthors.length) {
+      target.innerHTML = `<div class="empty-state">No featured authors available right now.</div>`;
+      return;
+    }
+
+    target.classList.remove("loading-state");
+
+    target.innerHTML = featuredAuthors.map(author => {
+      const id = author.AUTHOR_ID || "";
+      const name = author.AUTHOR_NAME || "Featured Author";
+      const genres = author.GENRES || "Featured Author";
+
+      const image = author.AUTHORIMAGEPATH
+        ? `${SUPABASE_URL}/storage/v1/object/public/authors/${encodeURIComponent(author.AUTHORIMAGEPATH)}`
+        : "";
+
+      const matchedDirectoryAuthor = allAuthors.find(directoryAuthor =>
+        directoryAuthor.id === id ||
+        directoryAuthor.name.toLowerCase() === name.toLowerCase()
+      );
+
+      const bookCount = matchedDirectoryAuthor ? matchedDirectoryAuthor.bookCount : 0;
+      const bookLabel = bookCount === 1 ? "Book" : "Books";
+
+      return `
+        <a class="featured-author" href="author.html?id=${encodeURIComponent(id)}&source=author_directory_featured">
+          <span class="featured-author-badge">${bookCount} ${bookLabel}</span>
+
+          <div class="featured-author-image">
+            ${image ? `<img src="${escapeHtml(image)}" alt="${escapeHtml(name)}">` : ""}
+          </div>
+
+          <strong>${escapeHtml(name)}</strong>
+          <span>${escapeHtml(genres)}</span>
+          <span class="featured-author-btn">View Profile →</span>
+        </a>
+      `;
+    }).join("");
+
+  } catch (error) {
+    console.error(error);
+    target.innerHTML = `<div class="empty-state">Unable to load featured authors.</div>`;
+  }
+}
+
+async function loadAuthorDirectory() {
+  try {
+    const authors = await fetchSupabase(
+      "public_author_directory",
+      "*"
+    );
+
+    allAuthors = authors.map(author => ({
+      id: author.id || "",
+      name: author.name || "Unknown Author",
+      genres: String(author.genres || "")
+        .split(",")
+        .map(g => g.trim())
+        .filter(Boolean),
+      bookCount: Number(author.book_count || 0),
+      newestDate: author.newest_date || ""
+    }));
+
+    filteredAuthors = [...allAuthors].sort((a, b) =>
+      a.name.localeCompare(b.name)
+    );
+
+    populateGenreFilter(allAuthors);
+    renderAuthorDirectory();
+
+    document.getElementById("authorSearchInput").addEventListener("input", applyFilters);
+    document.getElementById("genreFilter").addEventListener("change", applyFilters);
+    document.getElementById("sortFilter").addEventListener("change", applyFilters);
+
+    document.querySelectorAll(".letter-filter").forEach(button => {
+      button.addEventListener("click", () => {
+        selectedLetter = button.dataset.letter || "";
+
+        document.querySelectorAll(".letter-filter").forEach(btn => {
+          btn.classList.toggle("active", btn === button);
+        });
+
+        applyFilters();
+      });
+    });
+
+    document.getElementById("loadMoreAuthorsButton").addEventListener("click", () => {
+      visibleAuthorLimit += 50;
+      renderAuthorDirectory();
+    });
+
+  } catch (error) {
+    console.error(error);
+    document.getElementById("authorDirectoryList").innerHTML =
+      `<div class="empty-state">Unable to load authors right now.</div>`;
+  }
+}
+
+async function loadIncludes() {
+  const header = await fetch("includes/header.html");
+  document.getElementById("site-header").innerHTML = await header.text();
+
+  const footer = await fetch("includes/footer.html");
+  document.getElementById("site-footer").innerHTML = await footer.text();
+}
+
+loadIncludes();
+
+loadAuthorDirectory().then(() => {
+  renderFeaturedAuthors();
+});
+</script>
+
+<script src="includes/shared.js"></script>
+
+</body>
+</html>

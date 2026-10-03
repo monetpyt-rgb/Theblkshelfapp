@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Login – The BLK Shelf</title>
+<link rel="stylesheet" href="includes/shared.css">
+
+  <style>
+    :root {
+      --bg: #0f0c0a;
+      --panel: #3f2e23;
+      --panel-2: #241d17;
+      --text: #fff8f0;
+      --muted: #e3d2c0;
+      --soft: #c9b7a5;
+      --accent: #e6b06a;
+      --line: rgba(255,255,255,0.18);
+      --radius: 22px;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      background:
+        linear-gradient(rgba(15, 12, 10, 0.72), rgba(15, 12, 10, 0.72)),
+        url("https://njgprucvnayyiooiftaw.supabase.co/storage/v1/object/public/logo/bckgrnd.png");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    .admin-wrap {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 2rem;
+    }
+
+    .admin-card {
+      width: 100%;
+      max-width: 430px;
+      background: linear-gradient(180deg, var(--panel), var(--panel-2));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 2rem;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.45);
+    }
+
+    .eyebrow {
+      display: inline-block;
+      padding: 0.45rem 0.8rem;
+      border-radius: 999px;
+      border: 1px solid rgba(230,176,106,0.3);
+      background: rgba(230,176,106,0.1);
+      color: #f2c994;
+      font-size: 0.76rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      margin: 0 0 0.6rem;
+      font-size: 2rem;
+      line-height: 1.05;
+    }
+
+    p {
+      margin: 0 0 1.4rem;
+      color: var(--muted);
+    }
+
+    label {
+      display: block;
+      margin: 0.9rem 0 0.35rem;
+      color: var(--soft);
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    input {
+      width: 100%;
+      padding: 0.95rem;
+      border-radius: 14px;
+      border: 2px solid rgba(255,255,255,0.25);
+      background: #17100c;
+      color: var(--text);
+      font: inherit;
+    }
+
+    input:focus {
+      outline: 3px solid #f2c994;
+      border-color: #f2c994;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 1.3rem;
+      padding: 0.95rem 1.2rem;
+      border-radius: 14px;
+      border: 2px solid #120e0b;
+      background: var(--accent);
+      color: #120e0b;
+      font: inherit;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #f2c994;
+    }
+
+    button:disabled {
+      opacity: 0.7;
+      cursor: wait;
+    }
+
+    .note {
+      margin-top: 1rem;
+      color: var(--soft);
+      font-size: 0.9rem;
+      min-height: 1.4em;
+    }
+
+    .note.error {
+      color: #e7b0a2;
+    }
+
+    .note.success {
+      color: #f2c994;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 1rem;
+      color: #f2c994;
+      text-decoration: none;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="admin-wrap">
+    <section class="admin-card">
+      <span class="eyebrow">Account Access</span>
+<h1>The BLK Shelf Login</h1>
+<p>Log in to continue to your dashboard.</p>
+<form id="loginForm">
+        <label for="email">Email</label>
+        <input id="email" type="email" autocomplete="email" required>
+
+        <label for="password">Password</label>
+        <input id="password" type="password" autocomplete="current-password" required>
+
+        <button id="loginButton" type="submit">Log In</button>
+      </form>
+
+      <div id="loginNote" class="note"></div>
+
+      <a class="back-link" href="index.html">← Back to site</a>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script>
+    const SUPABASE_URL = "https://njgprucvnayyiooiftaw.supabase.co";
+    const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5qZ3BydWN2bmF5eWlvb2lmdGF3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc3NDg0ODMsImV4cCI6MjA5MzMyNDQ4M30.1r6r8vyYB0PnrZtugcBz3CPuCP9MMlTTMYXfewEINNw";
+
+    const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    const form = document.getElementById("loginForm");
+    const note = document.getElementById("loginNote");
+    const button = document.getElementById("loginButton");
+
+    async function routeUserAfterLogin(user) {
+  const email = user.email;
+
+  const { data: profiles, error: profileError } = await supabaseClient
+    .from("profiles")
+    .select("role")
+    .eq("id", user.id)
+    .limit(1);
+
+  if (profileError) throw profileError;
+
+  const isAdmin = profiles && profiles.length && profiles[0].role === "admin";
+
+  if (isAdmin) {
+    window.location.href = "admin/dashboard.html";
+    return;
+  }
+
+  const { data: authorAccounts, error: accountError } = await supabaseClient
+    .from("author_accounts")
+    .select("account_id")
+    .eq("email", email)
+    .limit(1);
+
+  if (accountError) throw accountError;
+
+  if (authorAccounts && authorAccounts.length) {
+    window.location.href = "portal/index.html";
+    return;
+  }
+
+  await supabaseClient.auth.signOut();
+  throw new Error("No BLK Shelf account was found for this email.");
+}
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      note.className = "note";
+      note.textContent = "";
+      button.disabled = true;
+      button.textContent = "Logging in...";
+
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value;
+
+      try {
+        const { data: loginData, error: loginError } =
+          await supabaseClient.auth.signInWithPassword({
+            email,
+            password
+          });
+
+        if (loginError) throw loginError;
+
+        const user = loginData.user;
+
+note.textContent = "Login successful. Redirecting...";
+note.classList.add("success");
+
+await routeUserAfterLogin(user);
+
+      } catch (error) {
+        console.error(error);
+        note.textContent = error.message || "Login failed.";
+        note.classList.add("error");
+      } finally {
+        button.disabled = false;
+        button.textContent = "Log In";
+      }
+    });
+  </script>
+
+<script src="includes/shared.js"></script>
+
+</body>
+</html>

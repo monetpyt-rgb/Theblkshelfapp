@@ -1,0 +1,1989 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KZR7W1MNL3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-KZR7W1MNL3');
+</script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Blk Shelf – Book</title>
+
+  <link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+/>
+
+<link rel="stylesheet" href="includes/shared.css">
+
+  <style>
+    :root {
+  --bg: #0f0c0a;
+  --bg-soft: #171310;
+  --panel: #1d1814;
+  --panel-2: #241d17;
+
+  --text: #fff8f0;
+  --muted: #e3d2c0;
+  --soft: #c9b7a5;
+  --accent: #d8a35d;
+  --accent-soft: rgba(216,163,93,0.14);
+  --line: rgba(255,255,255,0.18);
+
+  --shadow: 0 22px 60px rgba(0,0,0,0.34);
+  --radius: 24px;
+  --max: 1280px;
+}
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  color: var(--text);
+  line-height: 1.6;
+  background:
+    linear-gradient(rgba(15, 12, 10, 0.5), rgba(15, 12, 10, 0.5)),
+    url("https://njgprucvnayyiooiftaw.supabase.co/storage/v1/object/public/logo/bckgrnd.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+    .eyebrow {
+      display: inline-block;
+      padding: 0.42rem 0.88rem;
+      border: 1px solid rgba(216,163,93,0.24);
+      border-radius: 999px;
+      background: rgba(216,163,93,0.08);
+      color: #f2cb98;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .breadcrumb {
+      color: var(--soft);
+      font-size: 0.92rem;
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .breadcrumb span { opacity: 0.7; }
+
+    .page {
+      padding: 2rem 0 4rem;
+    }
+
+    .book-layout {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    .book-cover-panel,
+.book-main,
+.book-side,
+.section-card {
+  background: linear-gradient(180deg, #3f2e23, #241d17);
+  border: 1px solid rgba(255,255,255,0.22);
+  border-radius: 30px;
+  color: var(--text);
+  box-shadow:
+    0 12px 30px rgba(0,0,0,0.35),
+    inset 0 1px 0 rgba(255,255,255,0.05);
+}
+
+    .book-cover-panel {
+      padding: 1.2rem;
+      position: sticky;
+      top: 1rem;
+    }
+
+    .book-cover-frame {
+      aspect-ratio: 2 / 3;
+      border-radius: 22px;
+      overflow: hidden;
+      background: linear-gradient(180deg, rgba(216,163,93,0.18), rgba(28,21,17,0.88));
+      position: relative;
+    }
+
+    .book-cover-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .cover-fallback {
+      width: 100%;
+      height: 100%;
+      padding: 1.4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.12), rgba(0,0,0,0.22)),
+        linear-gradient(180deg, #7b2f2a, #4e1f1a);
+      color: #fff9f2;
+    }
+
+    .cover-fallback .mini {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      opacity: 0.82;
+      margin-bottom: 0.6rem;
+    }
+
+    .cover-fallback h2 {
+      margin: 0 0 0.4rem;
+      font-size: 1.75rem;
+      line-height: 0.95;
+    }
+
+    .cover-fallback p {
+      margin: 0;
+      font-size: 0.9rem;
+      opacity: 0.88;
+    }
+
+    .cover-actions {
+      display: grid;
+      gap: 0.8rem;
+      margin-top: 1rem;
+    }
+
+    .affiliate-disclosure {
+  margin: 0.15rem 0 0.1rem;
+  color: var(--soft);
+  font-size: 0.76rem;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.affiliate-disclosure strong {
+  color: var(--muted);
+}
+
+    .other-books-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.9rem;
+}
+
+.other-book-item {
+  display: block;
+  padding: 0.65rem;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.03);
+  transition: 0.2s ease;
+}
+
+.other-book-item:hover {
+  border-color: rgba(216,163,93,0.24);
+  background: rgba(255,255,255,0.05);
+}
+
+.other-book-cover {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  display: block;
+  border-radius: 12px;
+  margin-bottom: 0.55rem;
+  background: rgba(255,255,255,0.04);
+}
+
+.other-book-title {
+  display: block;
+  font-size: 0.92rem;
+  font-weight: bold;
+  line-height: 1.25;
+  margin-bottom: 0.2rem;
+}
+
+.other-book-date {
+  display: block;
+  color: var(--soft);
+  font-size: 0.84rem;
+}
+
+    .btn {
+      display: inline-block;
+      padding: 0.92rem 1.15rem;
+      border-radius: 14px;
+      font-weight: bold;
+      font-size: 1rem;
+      border: 1px solid transparent;
+      transition: 0.2s ease;
+      cursor: pointer;
+      text-align: center;
+      font-family: inherit;
+      
+    }
+
+    .btn-primary {
+  background: #e6b06a;
+  color: #120e0b;
+  border: 2px solid #120e0b;
+}
+
+.btn-primary:hover {
+  background: #f2c994;
+}
+
+.btn-secondary {
+  background: #241d17;
+  border: 2px solid rgba(255,255,255,0.3);
+  color: var(--text);
+}
+
+.btn-secondary:hover {
+  background: #3f2e23;
+  border-color: rgba(216,163,93,0.45);
+}
+
+    #buy-button {
+  width: 100%;
+}
+
+    .book-main {
+      padding: 1.6rem;
+    }
+
+    .book-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.2rem;
+    }
+
+    .book-head h1 {
+      margin: 0.7rem 0 0.55rem;
+      font-size: clamp(2.4rem, 5vw, 4.3rem);
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+    }
+
+    .series-subtitle {
+  margin: -0.35rem 0 0.75rem;
+  color: var(--accent);
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: .02em;
+}
+
+    .author-line {
+  font-size: 1.05rem;
+  color: var(--muted);
+  margin: 0.5rem 0 0;
+}
+
+.author-name-link {
+  color: var(--accent);
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.author-name-link:hover {
+  color: #f2c994;
+  text-decoration: underline;
+}
+
+    .badge-row,
+    .meta-grid,
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+
+    .badge,
+    .tag {
+      padding: 0.42rem 0.68rem;
+      border-radius: 999px;
+      border: 1px solid rgba(216,163,93,0.18);
+      background: rgba(216,163,93,0.08);
+      color: var(--muted);
+      font-size: 0.84rem;
+    }
+
+    .meta-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(120px, 1fr));
+  gap: 0.8rem;
+  margin: 1.3rem 0 1.5rem;
+}
+
+    .meta-card {
+      padding: 0.95rem;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.06);
+      background: rgba(255,255,255,0.03);
+    }
+
+    .meta-card strong {
+      display: block;
+      color: var(--accent);
+      font-size: 0.82rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.45rem;
+    }
+
+    .meta-card span {
+      color: var(--text);
+      font-size: 0.98rem;
+    }
+
+    .section-stack {
+      display: grid;
+      gap: 1rem;
+      margin-top: 1.2rem;
+    }
+
+    .section-card {
+      padding: 1.25rem;
+    }
+
+    .section-card h2 {
+      margin: 0 0 0.7rem;
+      font-size: 1.45rem;
+    }
+
+    .section-card p {
+  color: var(--muted);
+  margin: 0;
+  line-height: 1.7;
+  white-space: pre-wrap;
+}
+
+    .book-side {
+      padding: 1.25rem;
+      margin-top: 1rem;
+    }
+
+    .book-side h2 {
+      margin: 0 0 0.8rem;
+      font-size: 1.35rem;
+    }
+
+    .side-list {
+      display: grid;
+      gap: 0.7rem;
+    }
+
+    .side-item {
+      padding: 0.85rem 0.95rem;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.06);
+      background: rgba(255,255,255,0.03);
+    }
+
+    .side-item strong {
+      display: block;
+      margin-bottom: 0.2rem;
+    }
+
+    .side-item span {
+      color: var(--soft);
+      font-size: 0.92rem;
+    }
+
+    .error-box {
+      display: none;
+      padding: 1.25rem;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.06);
+      background: rgba(255,255,255,0.03);
+      color: var(--muted);
+      margin-top: 1rem;
+    }
+
+.meta-card,
+.side-item,
+.other-book-item,
+.error-box {
+  background: rgba(63,46,35,0.9);
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+.other-books-note {
+  margin: 0.3rem 0 0.8rem;
+  color: var(--soft);
+  font-size: 0.9rem;
+}
+
+.other-books-subtext {
+  margin: 0;
+  margin-top: -0.2rem;
+  margin-bottom: 0.6rem;
+  color: var(--soft);
+  font-size: 0.88rem;
+}
+
+.detail-link {
+  color: var(--accent);
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.detail-link:hover {
+  color: #f2c994;
+  text-decoration: underline;
+}
+
+.current-series-book {
+  border-color: rgba(216,163,93,.45);
+  background: rgba(216,163,93,.12);
+}
+
+.current-series-book:hover {
+  transform: none;
+}
+
+.current-book-label {
+  display: inline-block;
+  margin-top: .35rem;
+  padding: .2rem .45rem;
+  border-radius: 999px;
+  background: rgba(216,163,93,.18);
+  color: #f2cb98;
+  font-size: .72rem;
+  font-weight: bold;
+}
+
+    @media (max-width: 1080px) {
+      .book-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .book-cover-panel {
+        position: static;
+      }
+    }
+
+    .meta-grid {
+  grid-template-columns: repeat(3, minmax(120px, 1fr));
+}
+
+        @media (max-width: 760px) {
+  body {
+    background:
+      linear-gradient(rgba(15, 12, 10, 0.5), rgba(15, 12, 10, 0.5)),
+      url("https://njgprucvnayyiooiftaw.supabase.co/storage/v1/object/public/logo/bckgrnd-mobile.png");
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+  }
+
+.book-head {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+      .meta-grid {
+        grid-template-columns: repeat(2, minmax(120px, 1fr));
+      }
+
+      .other-books-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.7rem;
+      }
+
+      .other-book-item {
+        padding: 0.55rem;
+        border-radius: 14px;
+      }
+
+      .other-book-cover {
+        width: 100%;
+        margin-bottom: 0.45rem;
+        border-radius: 10px;
+      }
+
+      .other-book-title {
+        font-size: 0.78rem;
+        line-height: 1.15;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+
+      .other-book-date {
+        font-size: 0.68rem;
+        line-height: 1.2;
+      }
+
+    }
+
+    @media (max-width: 520px) {
+      .meta-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    #buy-dropdown {
+  background: #241d17;
+  border: 1px solid rgba(255,255,255,0.22);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.buy-option {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid var(--line);
+  font-size: .92em; /* ← change this */
+  font-weight: bold; /* ← add this */
+  color: var(--text);
+  background: rgba(255,255,255,0.02);
+}
+
+.buy-option:last-child {
+  border-bottom: none;
+}
+
+.buy-option:hover {
+  background: rgba(216,163,93,0.12);
+}
+
+.buy-option-icon {
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  background: rgba(216,163,93,0.12);
+  border: 1px solid rgba(216,163,93,0.18);
+  color: #f2cb98;
+}
+
+.buy-option-icon svg {
+  width: 16px;
+  height: 16px;
+  display: block;
+}
+
+.buy-option-label {
+  display: block;
+  line-height: 1.2;
+}
+
+  </style>
+</head>
+<body>
+  <header>
+  <div id="site-header"></div>
+
+  <div class="container">
+    <div class="breadcrumb">
+        <a href="index.html">Home</a>
+        <span>•</span>
+        <a href="library.html">Library</a>
+        <span>•</span>
+        <span id="breadcrumb-title">Book</span>
+      </div>
+  </div>
+</header>
+
+  <main class="page">
+    <div class="container book-layout">
+      <aside class="book-cover-panel">
+        <div class="book-cover-frame">
+          <img id="book-cover" src="" alt="Book cover" style="display:none;" loading="eager" />
+          <div class="cover-fallback" id="cover-fallback">
+            <div class="mini" id="fallback-genre">Loading</div>
+            <h2 id="fallback-title">Loading...</h2>
+            <p id="fallback-author">Please wait</p>
+          </div>
+        </div>
+
+        <div class="cover-actions" style="position:relative;">
+
+  <p class="affiliate-disclosure">
+    <strong>Affiliate Disclosure:</strong>
+    Some retailer links may be affiliate links. We may earn a commission from qualifying purchases at no additional cost to you.
+  </p>
+
+  <button class="btn btn-primary" id="buy-button">Where to Buy</button>
+  <div id="buy-dropdown" style="display:none; position:absolute; top:100%; left:0; width:100%; margin-top:0.5rem; z-index:10;"></div>
+
+  <a class="btn btn-secondary" id="author-link" href="#">View Author</a>
+</div>
+      </aside>
+
+      <section class="book-main">
+        <span class="eyebrow">Book Spotlight</span>
+
+        <div class="book-head">
+          <div>
+            <h1 id="book-title">Loading...</h1>
+
+<p
+  id="book-series-subtitle"
+  class="series-subtitle"
+  style="display:none;"
+>
+  —
+</p>
+
+<p class="author-line">
+  By <span id="book-author">Loading...</span>
+</p>
+          </div>
+
+          <div class="badge-row" id="badge-row">
+            <span class="badge">Loading</span>
+          </div>
+        </div>
+
+        <div class="app-spotlight-actions" aria-label="Favorite this book and choose My Shelf"></div>
+
+        <div class="meta-grid">
+          <div class="meta-card">
+            <strong>Genre</strong>
+            <span id="book-genre">—</span>
+          </div>
+          <div class="meta-card">
+            <strong>Vibe</strong>
+            <span id="book-vibe">—</span>
+          </div>
+          <div class="meta-card">
+            <strong>Age Range</strong>
+            <span id="book-age">—</span>
+          </div>
+          <div class="meta-card">
+            <strong>Spice Level</strong>
+            <span id="book-spice">—</span>
+          </div>
+          <div
+  class="meta-card"
+  id="page-count-meta"
+  style="display:none;"
+>
+  <strong>Length</strong>
+  <span id="book-pages-meta">—</span>
+</div>
+        </div>
+
+        <div class="section-stack">
+          <article class="section-card">
+            <h2>About This Book</h2>
+            <p id="book-description">Loading description...</p>
+          </article>
+
+          <article class="section-card" id="tags-card">
+            <h2>Tropes & Tags</h2>
+            <div class="tag-row" id="tag-row">
+              <span class="tag">Loading</span>
+            </div>
+          </article>
+        </div>
+
+        <aside class="book-side">
+          <h2>Book Details</h2>
+          <div class="side-list">
+  <div class="side-item">
+    <strong>Release Date</strong>
+    <span id="book-release">—</span>
+  </div>
+
+  <div class="side-item">
+    <strong>Formats</strong>
+    <span id="book-formats">—</span>
+  </div>
+
+  <div
+    class="side-item"
+    id="pages-detail-item"
+    style="display:none;"
+  >
+    <strong>Length</strong>
+    <span id="book-pages">—</span>
+  </div>
+
+  <div
+    class="side-item"
+    id="audiobook-detail-item"
+    style="display:none;"
+  >
+    <strong>Audiobook</strong>
+    <span id="book-audiobook">—</span>
+  </div>
+
+  <div
+    class="side-item"
+    id="kids-detail-item"
+    style="display:none;"
+  >
+    <strong>Young Reader Category</strong>
+    <span id="book-kids-category">—</span>
+  </div>
+</div>
+
+<article
+  class="section-card"
+  id="series-books-card"
+  style="margin-top:1rem;display:none;"
+>
+  <h2 id="series-heading">Series</h2>
+
+  <p class="other-books-subtext">
+    Read the series in order.
+  </p>
+
+  <div
+    class="other-books-grid"
+    id="series-books-list"
+  ></div>
+</article>
+
+<article
+  class="section-card"
+  id="other-books-card"
+  style="margin-top:1rem;display:none;"
+>
+  <h2>Other Books by This Author</h2>
+
+  <p class="other-books-subtext">
+    Click "View Author" to view full catalog.
+  </p>
+
+  <div
+    class="other-books-grid"
+    id="other-books-list"
+  ></div>
+</article>
+        </aside>
+
+        <div class="error-box" id="error-box">
+          We couldn’t load this book. Check the book ID in the URL and make sure the sheet has a matching row.
+        </div>
+      </section>
+    </div>
+  </main>
+
+<footer id="site-footer"></footer>
+
+  <script>
+    const API_URL = "https://script.google.com/macros/s/AKfycbym5D02u8oDcYYchQ40wWQLSGrx1FTuqJcjElJnf7AaD7c3CyQS3C2Xy5qMQjxby6v1hQ/exec";
+
+    const SUPABASE_URL = "https://njgprucvnayyiooiftaw.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5qZ3BydWN2bmF5eWlvb2lmdGF3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc3NDg0ODMsImV4cCI6MjA5MzMyNDQ4M30.1r6r8vyYB0PnrZtugcBz3CPuCP9MMlTTMYXfewEINNw";
+
+async function supabaseFetch(path) {
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/${path}`, {
+    headers: {
+      apikey: SUPABASE_ANON_KEY,
+      Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+      Accept: "application/json"
+    }
+  });
+
+  if (!res.ok) {
+    throw new Error(`Supabase request failed: ${res.status}`);
+  }
+
+  return await res.json();
+}
+
+    const BOOK_CLICK_COOLDOWN_MS = 30 * 60 * 1000; // 30 minutes
+
+    function getBookId() {
+  const params = new URLSearchParams(window.location.search);
+  return params.get("id");
+}
+
+function getBookSource() {
+  const params = new URLSearchParams(window.location.search);
+  return params.get("source") || "unknown";
+}
+
+function getBookClickStorageKey(bookId) {
+  return `tracked_book_click_${bookId}`;
+}
+
+function shouldTrackBookClick(bookId) {
+  if (!bookId) return false;
+
+  const key = getBookClickStorageKey(bookId);
+  const lastTracked = sessionStorage.getItem(key);
+
+  if (!lastTracked) return true;
+
+  const lastTrackedTime = Number(lastTracked);
+  if (!Number.isFinite(lastTrackedTime)) return true;
+
+  return (Date.now() - lastTrackedTime) > BOOK_CLICK_COOLDOWN_MS;
+}
+
+function markBookClickTracked(bookId) {
+  if (!bookId) return;
+  sessionStorage.setItem(getBookClickStorageKey(bookId), String(Date.now()));
+}
+
+    function textOrFallback(value, fallback = "—") {
+  if (value === null || value === undefined) return fallback;
+  const str = String(value).trim();
+  return str ? str : fallback;
+}
+
+function escapeHtml(value) {
+  return String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+function splitToArray(value) {
+  if (!value) return [];
+
+  // Already a real array
+  if (Array.isArray(value)) {
+    return value
+      .map(v => String(v).trim())
+      .filter(Boolean);
+  }
+
+  const text = String(value).trim();
+
+  if (!text) return [];
+
+  // Handle JSON-formatted array stored inside a text column:
+  // ["Slow Burn","Found Family"]
+  if (text.startsWith("[") && text.endsWith("]")) {
+    try {
+      const parsed = JSON.parse(text);
+
+      if (Array.isArray(parsed)) {
+        return parsed
+          .map(v => String(v).trim())
+          .filter(Boolean);
+      }
+    } catch (error) {
+      console.warn("Unable to parse array text:", text);
+    }
+  }
+
+  // Handle PostgreSQL-style array text if any legacy rows contain it:
+  // {"Slow Burn","Found Family"}
+  if (text.startsWith("{") && text.endsWith("}")) {
+    return text
+      .slice(1, -1)
+      .split(",")
+      .map(v =>
+        v
+          .trim()
+          .replace(/^"(.*)"$/, "$1")
+      )
+      .filter(Boolean);
+  }
+
+  // Normal comma-separated text:
+  // Slow Burn, Found Family
+  return text
+    .split(",")
+    .map(v =>
+      v
+        .trim()
+        .replace(/^"(.*)"$/, "$1")
+    )
+    .filter(Boolean);
+}
+
+function normalizeAuthorName(value) {
+  return String(value || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim();
+}
+
+function parseContributors(value) {
+  if (!value) return [];
+
+  let contributors = value;
+
+  if (typeof contributors === "string") {
+    const trimmed = contributors.trim();
+
+    if (!trimmed) return [];
+
+    try {
+      contributors = JSON.parse(trimmed);
+    } catch {
+      contributors = trimmed
+        .split(",")
+        .map(name => name.trim())
+        .filter(Boolean);
+    }
+  }
+
+  if (!Array.isArray(contributors)) {
+    contributors = [contributors];
+  }
+
+  const parsed = contributors
+    .map(contributor => {
+      if (typeof contributor === "string") {
+        return {
+          authorName: contributor.trim(),
+          authorId: ""
+        };
+      }
+
+      if (
+        contributor &&
+        typeof contributor === "object"
+      ) {
+        return {
+          authorName: textOrFallback(
+            contributor.author_name ||
+            contributor.authorName ||
+            contributor.name ||
+            contributor.Author_Name ||
+            contributor.AUTHOR_NAME,
+            ""
+          ),
+
+          authorId: textOrFallback(
+            contributor.author_id ||
+            contributor.authorId ||
+            contributor.Author_ID ||
+            contributor.AUTHOR_ID,
+            ""
+          )
+        };
+      }
+
+      return null;
+    })
+    .filter(contributor => contributor?.authorName);
+
+  const seenNames = new Set();
+
+  return parsed.filter(contributor => {
+    const normalizedName =
+      normalizeAuthorName(contributor.authorName);
+
+    if (
+      !normalizedName ||
+      seenNames.has(normalizedName)
+    ) {
+      return false;
+    }
+
+    seenNames.add(normalizedName);
+    return true;
+  });
+}
+
+async function connectContributorsToAuthors(contributors) {
+  if (!contributors.length) return [];
+
+  try {
+    const authors = await supabaseFetch(
+      "public_authors?select=AUTHOR_ID,AUTHOR_NAME"
+    );
+
+    const authorsByName = new Map(
+      authors.map(author => [
+        normalizeAuthorName(author.AUTHOR_NAME),
+        {
+          authorName: author.AUTHOR_NAME,
+          authorId: author.AUTHOR_ID
+        }
+      ])
+    );
+
+    return contributors.map(contributor => {
+      if (contributor.authorId) {
+        return contributor;
+      }
+
+      const matchingAuthor = authorsByName.get(
+        normalizeAuthorName(contributor.authorName)
+      );
+
+      return matchingAuthor || contributor;
+    });
+  } catch (error) {
+    console.error(
+      "Contributor author matching failed:",
+      error
+    );
+
+    return contributors;
+  }
+}
+
+function formatDate(dateString) {
+  if (!dateString) return "—";
+
+  const raw = String(dateString).trim();
+
+  const isoDateOnly = raw.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  if (isoDateOnly) {
+    const year = Number(isoDateOnly[1]);
+    const month = Number(isoDateOnly[2]) - 1;
+    const day = Number(isoDateOnly[3]);
+
+    const date = new Date(year, month, day);
+
+    return date.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric"
+    });
+  }
+
+  const date = new Date(raw);
+  if (Number.isNaN(date.getTime())) return raw;
+
+  return date.toLocaleDateString("en-US", {
+  year: "numeric",
+  month: "long",
+  day: "numeric"
+});
+}
+
+function toPositiveNumber(value) {
+  const number = Number(value);
+
+  return Number.isFinite(number) && number > 0
+    ? number
+    : null;
+}
+
+function getDisplayPageCount(book) {
+  const actualPages =
+    toPositiveNumber(book.pageCount);
+
+  if (actualPages) {
+    return {
+      pages: Math.round(actualPages),
+      estimated: false
+    };
+  }
+
+  const wordCount =
+    toPositiveNumber(book.wordCount);
+
+  if (wordCount) {
+    return {
+      pages: Math.max(
+        1,
+        Math.round(wordCount / 250)
+      ),
+      estimated: true
+    };
+  }
+
+  return null;
+}
+
+function toBoolean(value) {
+  if (value === true) return true;
+  if (value === false) return false;
+
+  const normalized =
+    String(value || "")
+      .trim()
+      .toLowerCase();
+
+  return [
+    "true",
+    "yes",
+    "1"
+  ].includes(normalized);
+}
+
+function normalizeUrl(url) {
+  const value = textOrFallback(url, "");
+  if (!value || /^(?:n\/?a|none|null|undefined|#)$/i.test(value)) return "";
+  if (/^[a-z][a-z\d+.-]*:/i.test(value) && !/^https?:\/\//i.test(value)) return "";
+  try {
+    const link = new URL(/^https?:\/\//i.test(value) ? value : `https://${value.replace(/^\/\//, "")}`);
+    return /\./.test(link.hostname) && !link.username && !link.password ? link.href : "";
+  } catch { return ""; }
+}
+
+const AMAZON_ASSOCIATE_TAG = "theblkshelf-20";
+
+function buildAmazonAffiliateUrl(asin, fallbackUrl = "") {
+  const cleanAsin = String(asin || "").trim();
+
+  if (cleanAsin) {
+    return `https://www.amazon.com/dp/${encodeURIComponent(cleanAsin)}?tag=${encodeURIComponent(AMAZON_ASSOCIATE_TAG)}`;
+  }
+
+  return normalizeUrl(fallbackUrl);
+}
+
+
+
+    function normalizeBookPayload(payload) {
+  const raw = payload?.book || payload || {};
+
+  const genre = textOrFallback(raw.genre, "");
+  const subgenres = splitToArray(raw.subGenres);
+  const vibes = splitToArray(raw.vibes);
+  const representation = splitToArray(raw.representation);
+const formats = splitToArray(raw.availableFormats);
+const contributors = parseContributors(raw.contributors);
+
+const seriesName =
+  textOrFallback(raw.seriesName, "");
+
+const seriesNumber =
+  toPositiveNumber(raw.seriesNumber);
+
+const wordCount =
+  toPositiveNumber(raw.wordCount);
+
+const pageCount =
+  toPositiveNumber(raw.pageCount);
+
+const hasAudiobook =
+  toBoolean(raw.hasAudiobook);
+
+const audiobookNarrators =
+  textOrFallback(
+    raw.audiobookNarrators,
+    ""
+  );
+
+const audiobookLink =
+  normalizeUrl(raw.audiobookLink);
+
+const kidsCategory =
+  textOrFallback(raw.kidsCategory, "");
+
+  const amazonAsin =
+  textOrFallback(raw.amazonAsin, "");
+
+const otherBooksByAuthor = Array.isArray(payload?.otherBooksByAuthor)
+  ? payload.otherBooksByAuthor.map(book => ({
+      id: textOrFallback(book.bookId, ""),
+      title: textOrFallback(book.title, "Untitled Book"),
+      coverUrl: textOrFallback(book.bookCover, ""),
+      releaseDate: formatDate(book.releaseDate)
+    }))
+  : [];
+
+const seriesBooks = Array.isArray(payload?.seriesBooks)
+  ? payload.seriesBooks.map(book => ({
+      bookId: textOrFallback(book.bookId, ""),
+      title: textOrFallback(book.title, "Untitled Book"),
+      bookCover: textOrFallback(book.bookCover, ""),
+      releaseDate: formatDate(book.releaseDate),
+      seriesNumber:
+        Number(book.seriesNumber) || null
+    }))
+  : [];
+
+const externalLinks = {
+  amazon: buildAmazonAffiliateUrl(
+    amazonAsin,
+    raw.amazonLink
+  ),
+  barnesAndNoble: normalizeUrl(raw.bnLink),
+  kobo: normalizeUrl(raw.koboLink),
+  appleBooks: normalizeUrl(raw.applebooksLink),
+  website: normalizeUrl(raw.websiteLink),
+  bookfunnel: normalizeUrl(raw.bookfunnelLink),
+  other: normalizeUrl(raw.otherLink)
+};
+
+  const firstAvailableBuyLink =
+    externalLinks.amazon ||
+    externalLinks.barnesAndNoble ||
+    externalLinks.kobo ||
+    externalLinks.appleBooks ||
+    externalLinks.website ||
+    externalLinks.bookfunnel ||
+    externalLinks.other ||
+    "";
+
+  return {
+    id: textOrFallback(raw.bookId, ""),
+    title: textOrFallback(raw.title, "Untitled Book"),
+    authorName: textOrFallback(
+  raw.authorName,
+  "Unknown Author"
+),
+authorId: textOrFallback(raw.authorId, ""),
+contributors,
+coverUrl: textOrFallback(raw.bookCover, ""),
+    coverAlt: `${textOrFallback(raw.title, "Book")} cover`,
+    description: textOrFallback(raw.description, "Description coming soon."),
+    genre,
+    subgenres,
+    vibes,
+    tags: formats,
+    representation,
+    formats,
+otherBooksByAuthor,
+
+seriesName,
+seriesNumber,
+seriesBooks,
+
+wordCount,
+pageCount,
+
+hasAudiobook,
+audiobookNarrators,
+audiobookLink,
+
+kidsCategory,
+amazonAsin,
+
+ageRange:
+  textOrFallback(raw.ageRange, "—"),
+
+spiceLevel:
+  textOrFallback(raw.spiceLevel, "—"),
+
+releaseDate:
+  formatDate(raw.releaseDate),
+
+buyLink:
+  firstAvailableBuyLink,
+
+externalLinks,
+    badges: [
+      genre,
+      ...subgenres.slice(0, 2),
+      ...vibes.slice(0, 2)
+    ].filter(Boolean)
+  };
+}
+
+    function setText(id, value, fallback = "—") {
+      const el = document.getElementById(id);
+      if (el) el.textContent = textOrFallback(value, fallback);
+    }
+
+    function setHTML(id, html) {
+  const el = document.getElementById(id);
+  if (el) el.innerHTML = html;
+}
+
+function buildAuthorLink(author) {
+  const authorName = escapeHtml(
+    author.authorName || "Unknown Author"
+  );
+
+  if (!author.authorId) {
+    return `<span>${authorName}</span>`;
+  }
+
+  const source = getBookSource();
+
+  return `
+    <a
+      class="author-name-link"
+      href="author.html?id=${encodeURIComponent(
+        author.authorId
+      )}&source=${encodeURIComponent(source)}"
+    >
+      ${authorName}
+    </a>
+  `;
+}
+
+function buildAuthorLine(book) {
+  const primaryAuthor = {
+    authorName: book.authorName,
+    authorId: book.authorId
+  };
+
+  const allAuthors = [
+    primaryAuthor,
+    ...(book.contributors || [])
+  ];
+
+  const seenNames = new Set();
+
+  const uniqueAuthors = allAuthors.filter(author => {
+    const normalizedName =
+      normalizeAuthorName(author.authorName);
+
+    if (
+      !normalizedName ||
+      seenNames.has(normalizedName)
+    ) {
+      return false;
+    }
+
+    seenNames.add(normalizedName);
+    return true;
+  });
+
+  const authorLinks =
+    uniqueAuthors.map(buildAuthorLink);
+
+  if (authorLinks.length === 1) {
+    return authorLinks[0];
+  }
+
+  if (authorLinks.length === 2) {
+    return `${authorLinks[0]} and ${authorLinks[1]}`;
+  }
+
+  return `${authorLinks
+    .slice(0, -1)
+    .join(", ")}, and ${authorLinks.at(-1)}`;
+}
+
+function showOrHide(id, shouldShow) {
+      const el = document.getElementById(id);
+      if (el) el.style.display = shouldShow ? "" : "none";
+    }
+
+    function buildPills(items, className, emptyLabel) {
+      if (!items || !items.length) {
+        return `<span class="${className}">${emptyLabel}</span>`;
+      }
+
+      return items.map(item => `<span class="${className}">${item}</span>`).join("");
+    }
+
+    function loadCover(book) {
+  const img = document.getElementById("book-cover");
+  const fallback = document.getElementById("cover-fallback");
+  const defaultCover = `${SUPABASE_URL}/storage/v1/object/public/defaults/cover-default.jpg`;
+
+  document.getElementById("fallback-genre").textContent = book.genre || "Featured Book";
+  document.getElementById("fallback-title").textContent = book.title || "Book Title";
+  document.getElementById("fallback-author").textContent = book.authorName || "Author";
+
+  img.onerror = () => {
+    if (img.dataset.fallbackTried === "true") {
+      img.style.display = "none";
+      fallback.style.display = "flex";
+      return;
+    }
+
+    img.dataset.fallbackTried = "true";
+    img.src = defaultCover;
+  };
+
+  if (book.coverUrl) {
+    img.dataset.fallbackTried = "false";
+    img.src = book.coverUrl;
+    img.alt = book.coverAlt;
+    img.style.display = "block";
+    fallback.style.display = "none";
+  } else {
+    img.dataset.fallbackTried = "true";
+    img.src = defaultCover;
+    img.alt = book.coverAlt;
+    img.style.display = "block";
+    fallback.style.display = "none";
+  }
+}
+
+    function renderOtherBooksByAuthor(otherBooks) {
+  const card = document.getElementById("other-books-card");
+  const list = document.getElementById("other-books-list");
+
+  if (!card || !list) return;
+
+  if (!otherBooks || !otherBooks.length) {
+    card.style.display = "none";
+    return;
+  }
+
+  const defaultCover = `${SUPABASE_URL}/storage/v1/object/public/defaults/cover-default.jpg`;
+  const currentSource = getBookSource();
+
+  list.innerHTML = otherBooks.map(book => `
+    <a class="other-book-item" href="book.html?id=${encodeURIComponent(book.id)}&source=${encodeURIComponent(currentSource)}">
+      <img
+        class="other-book-cover"
+        src="${book.coverUrl || defaultCover}"
+        alt="${book.title} cover"
+        onerror="this.onerror=null;this.src='${defaultCover}'"
+      />
+      <span class="other-book-title">${book.title}</span>
+      <span class="other-book-date">${book.releaseDate || "Release date unavailable"}</span>
+    </a>
+  `).join("");
+
+  card.style.display = "";
+}
+
+function renderSeriesBooks(book) {
+
+  const card =
+    document.getElementById("series-books-card");
+
+  const heading =
+    document.getElementById("series-heading");
+
+  const list =
+    document.getElementById("series-books-list");
+
+  if (
+    !book.seriesBooks ||
+    book.seriesBooks.length < 2
+  ) {
+    card.style.display = "none";
+    return;
+  }
+
+  heading.textContent =
+    book.seriesName || "Series";
+
+  const defaultCover =
+    `${SUPABASE_URL}/storage/v1/object/public/defaults/cover-default.jpg`;
+
+  const source = getBookSource();
+
+  list.innerHTML =
+    book.seriesBooks.map(seriesBook => {
+
+      const current =
+        seriesBook.bookId === book.id;
+
+      return current
+        ? `
+        <div class="other-book-item current-series-book">
+
+          <img
+            class="other-book-cover"
+            src="${seriesBook.bookCover || defaultCover}"
+            onerror="this.onerror=null;this.src='${defaultCover}'"
+          >
+
+          <span class="other-book-title">
+            ${seriesBook.title}
+          </span>
+
+          <span class="other-book-date">
+            Book ${seriesBook.seriesNumber}
+          </span>
+
+          <span class="current-book-label">
+            Current Book
+          </span>
+
+        </div>
+        `
+        : `
+        <a
+          class="other-book-item"
+          href="book.html?id=${encodeURIComponent(seriesBook.bookId)}&source=${encodeURIComponent(source)}">
+
+          <img
+            class="other-book-cover"
+            src="${seriesBook.bookCover || defaultCover}"
+            onerror="this.onerror=null;this.src='${defaultCover}'"
+          >
+
+          <span class="other-book-title">
+            ${seriesBook.title}
+          </span>
+
+          <span class="other-book-date">
+            Book ${seriesBook.seriesNumber}
+          </span>
+
+        </a>
+        `;
+
+    }).join("");
+
+  card.style.display = "";
+
+}
+
+    async function trackBookClick(bookId) {
+  if (!bookId) return;
+  if (!shouldTrackBookClick(bookId)) return;
+
+  const source = getBookSource();
+
+  // Google Analytics tracking
+  if (typeof gtag === "function") {
+    gtag("event", "book_click", {
+      book_id: bookId,
+      source: source
+    });
+  }
+
+  // Your backend tracking for trending/rankings
+  try {
+    await fetch(API_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "text/plain;charset=utf-8"
+      },
+      body: JSON.stringify({
+        action: "track-click",
+        bookId: bookId,
+        source: source
+      })
+    });
+
+    markBookClickTracked(bookId);
+  } catch (error) {
+    console.error("Click tracking failed:", error);
+  }
+}
+
+    function getRetailerIcon(label) {
+  const icons = {
+    "Amazon": `
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M7 16c1.5 1 3.2 1.5 5 1.5 2.4 0 4.5-.7 6.5-2.1"/>
+        <path d="M16.8 15.2h2.7v2.7"/>
+        <path d="M8.5 13.5V8.7c0-1.5 1.2-2.7 2.7-2.7h1.6c1.5 0 2.7 1.2 2.7 2.7v4.8"/>
+        <path d="M8.5 11.5h6.9"/>
+      </svg>
+    `,
+    "Apple Books": `
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M4.5 6.5c2.2 0 3.5.8 4.8 1.8 1.3-1 2.6-1.8 4.8-1.8 2.4 0 4 1.1 5.4 2.5v9.5c-1.4-1.2-3-1.8-5-1.8-2.2 0-3.6.8-5.2 1.9-1.6-1.1-3-1.9-5.2-1.9-2 0-3.6.6-5 1.8V9c1.4-1.4 3-2.5 5.4-2.5z"/>
+        <path d="M9.3 8.3v10.3"/>
+      </svg>
+    `,
+    "Barnes & Noble": `
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M7 5.5h5a3 3 0 0 1 0 6H7z"/>
+        <path d="M7 11.5h5.5a3.2 3.2 0 0 1 0 6.5H7z"/>
+        <path d="M17 18l2-12 3 12"/>
+      </svg>
+    `,
+    "Kobo": `
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M6 5v14"/>
+        <path d="M6 12l7-7"/>
+        <path d="M6 12l7 7"/>
+        <circle cx="17.5" cy="12" r="3.5"/>
+      </svg>
+    `,
+    "BookFunnel": `
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M4 6h16l-6 7v4l-4 2v-6z"/>
+      </svg>
+    `,
+    "Website": `
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="8"/>
+        <path d="M4 12h16"/>
+        <path d="M12 4c2.5 2.5 3.5 5 3.5 8S14.5 17.5 12 20"/>
+        <path d="M12 4c-2.5 2.5-3.5 5-3.5 8S9.5 17.5 12 20"/>
+      </svg>
+    `,
+    "Other Retailer": `
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M6 7h12l-1 12H7z"/>
+        <path d="M9 7a3 3 0 0 1 6 0"/>
+      </svg>
+    `
+  };
+
+  return icons[label] || icons["Other Retailer"];
+}
+
+    function populateBook(payload) {
+      const book = normalizeBookPayload(payload);
+
+      setText("breadcrumb-title", book.title, "Book");
+setText("book-title", book.title, "Untitled Book");
+setHTML("book-author", buildAuthorLine(book));
+setText(
+  "book-genre",
+  book.genre || book.subgenres.join(", "),
+  "—"
+);
+      setText("book-vibe", book.vibes.join(", "), "—");
+      setText("book-age", book.ageRange, "—");
+      setText("book-spice", book.spiceLevel, "—");
+      setText(
+  "book-description",
+  book.description,
+  "Description coming soon."
+);
+
+setText(
+  "book-release",
+  book.releaseDate,
+  "—"
+);
+
+setText(
+  "book-formats",
+  book.formats.join(", "),
+  "—"
+);
+
+/*
+ * Series
+ */
+const seriesText =
+  book.seriesName
+    ? book.seriesNumber
+      ? `${book.seriesName} • Book ${book.seriesNumber}`
+      : book.seriesName
+    : "";
+
+setText(
+  "book-series-subtitle",
+  seriesText
+);
+
+showOrHide(
+  "book-series-subtitle",
+  Boolean(seriesText)
+);
+
+/*
+ * Page count
+ */
+const pageInfo =
+  getDisplayPageCount(book);
+
+if (pageInfo) {
+
+  setText(
+    "book-pages-meta",
+    pageInfo.estimated
+      ? `≈ ${pageInfo.pages.toLocaleString()} pages`
+      : `${pageInfo.pages.toLocaleString()} pages`
+  );
+
+}
+
+showOrHide(
+  "page-count-meta",
+  Boolean(pageInfo)
+);
+
+/*
+ * Audiobook
+ */
+let audiobookHtml = "";
+
+if (book.hasAudiobook) {
+  audiobookHtml = "Available";
+
+  if (book.audiobookNarrators) {
+    audiobookHtml += `
+      <br>
+      Narrated by ${escapeHtml(
+        book.audiobookNarrators
+      )}
+    `;
+  }
+
+  if (book.audiobookLink) {
+    audiobookHtml += `
+      <br>
+      <a
+        class="detail-link"
+        href="${escapeHtml(
+          book.audiobookLink
+        )}"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Listen or learn more
+      </a>
+    `;
+  }
+}
+
+setHTML(
+  "book-audiobook",
+  audiobookHtml
+);
+
+showOrHide(
+  "audiobook-detail-item",
+  book.hasAudiobook
+);
+
+/*
+ * Young reader category
+ */
+setText(
+  "book-kids-category",
+  book.kidsCategory,
+  "—"
+);
+
+showOrHide(
+  "kids-detail-item",
+  Boolean(book.kidsCategory)
+);
+
+setHTML(
+  "badge-row",
+  buildPills(
+    book.badges,
+    "badge",
+    "Book Details"
+  )
+);
+
+      const allTags = [
+        ...book.subgenres,
+        ...book.vibes,
+        ...book.tags,
+        ...book.representation
+      ].filter(Boolean);
+
+      setHTML("tag-row", buildPills(allTags, "tag", "No tags listed"));
+      showOrHide("tags-card", allTags.length > 0);
+
+            loadCover(book);
+
+      const buyButton = document.getElementById("buy-button");
+const dropdown = document.getElementById("buy-dropdown");
+
+const options = [
+  { label: "Website", url: book.externalLinks.website },
+  { label: "Amazon", url: book.externalLinks.amazon },
+  { label: "Barnes & Noble", url: book.externalLinks.barnesAndNoble },
+  { label: "Kobo", url: book.externalLinks.kobo },
+  { label: "Apple Books", url: book.externalLinks.appleBooks },
+  { label: "BookFunnel", url: book.externalLinks.bookfunnel },
+  { label: "Other Retailer", url: book.externalLinks.other }
+].filter(opt => opt.url);
+
+if (!options.length) {
+  buyButton.textContent = "Purchase Link Coming Soon";
+  buyButton.disabled = true;
+} 
+else if (options.length === 1) {
+  buyButton.onclick = () => {
+    window.open(options[0].url, "_blank", "noopener,noreferrer");
+  };
+} 
+else {
+  buyButton.textContent = "Where to Buy ▼";
+
+  buyButton.onclick = (e) => {
+    e.stopPropagation();
+    dropdown.style.display = dropdown.style.display === "none" ? "block" : "none";
+  };
+
+  dropdown.innerHTML = options.map(opt => `
+  <a class="buy-option" href="${escapeHtml(opt.url)}" target="_blank" rel="noopener noreferrer">
+    <span class="buy-option-icon">${getRetailerIcon(opt.label)}</span>
+    <span class="buy-option-label">${opt.label}</span>
+  </a>
+`).join("");
+
+  document.addEventListener("click", () => {
+    dropdown.style.display = "none";
+  });
+}
+
+      const authorLink = document.getElementById("author-link");
+if (authorLink && book.authorId) {
+  const source = getBookSource();
+  authorLink.href = `author.html?id=${encodeURIComponent(book.authorId)}&source=${encodeURIComponent(source)}`;
+} else if (authorLink) {
+  authorLink.style.display = "none";
+}
+
+      renderSeriesBooks(book);
+
+renderOtherBooksByAuthor(
+  book.otherBooksByAuthor
+);
+
+document.title =
+  `${book.title} – The Blk Shelf`;
+    }
+
+    async function loadBook() {
+  const bookId = getBookId();
+  const errorBox = document.getElementById("error-box");
+
+  if (!bookId) {
+    errorBox.style.display = "block";
+    errorBox.textContent = "No book ID was found in the URL.";
+    return;
+  }
+
+  try {
+    const bookRows = await supabaseFetch(
+      `public_books?select=*&Book_ID=eq.${encodeURIComponent(bookId)}&Is_Live=eq.Yes&limit=1`
+    );
+
+    if (!bookRows.length) {
+      throw new Error("Book not found");
+    }
+
+    const row = bookRows[0];
+
+    const otherRows = await supabaseFetch(
+      `public_books?select=*&Author_ID=eq.${encodeURIComponent(row.Author_ID)}&Is_Live=eq.Yes&Book_ID=neq.${encodeURIComponent(bookId)}&limit=4`
+    );
+
+    let seriesRows = [];
+
+if (row.Series_Name) {
+
+  seriesRows = await supabaseFetch(
+    `public_books?select=*&Series_Name=eq.${encodeURIComponent(
+      row.Series_Name
+    )}&Is_Live=eq.Yes&order=Series_Number.asc`
+  );
+
+}
+
+    const connectedContributors =
+  await connectContributorsToAuthors(
+    parseContributors(row.Contributors)
+  );
+
+    const payload = {
+      book: {
+        bookId: row.Book_ID || "",
+authorId: row.Author_ID || "",
+authorName: row.Author_Name || "",
+contributors: connectedContributors,
+title: row.Title || "",
+description: row.Description || "",
+        bookCover: row.CoverImagePath
+  ? `${SUPABASE_URL}/storage/v1/object/public/covers/${encodeURIComponent(row.CoverImagePath)}`
+  : "",
+        availableFormats: row.Available_Formats || "",
+        websiteLink: row.Website_Link || "",
+        amazonLink: row.Amazon_Link || "",
+        amazonAsin: row.Amazon_ASIN || "",
+        bnLink: row.BN_Link || "",
+        bookfunnelLink: row.Bookfunnel_Link || "",
+        otherLink: row.Other_Link || "",
+        genre: row.Genre || "",
+        subGenres: row.Sub_Genres || "",
+        vibes: row.Vibes || "",
+        spiceLevel: row.Spice_Level || "",
+        ageRange:
+  row.Age_Range || "",
+
+seriesName:
+  row.Series_Name || "",
+
+seriesNumber:
+  row.Series_Number || null,
+
+wordCount:
+  row.Word_Count || null,
+
+pageCount:
+  row.Page_Count || null,
+
+hasAudiobook:
+  row.Has_Audiobook || false,
+
+audiobookNarrators:
+  row.Audiobook_Narrators || "",
+
+audiobookLink:
+  row.Audiobook_Link || "",
+
+kidsCategory:
+  row.Kids_Category || "",
+
+releaseDate:
+  row["Release/Expected_Release_Date"] || "",
+
+representation:
+  row.Representation || "",
+
+koboLink:
+  row.Kobo_Link || "",
+
+applebooksLink:
+  row.Apple_Books_Link || ""
+      },
+      otherBooksByAuthor: otherRows.map(book => ({
+        bookId: book.Book_ID || "",
+        title: book.Title || "Untitled Book",
+        bookCover: book.CoverImagePath
+  ? `${SUPABASE_URL}/storage/v1/object/public/covers/${encodeURIComponent(book.CoverImagePath)}`
+  : "",
+        releaseDate: book["Release/Expected_Release_Date"] || ""
+      })),
+
+seriesBooks: seriesRows.map(book => ({
+
+  bookId: book.Book_ID,
+
+  title: book.Title,
+
+  seriesNumber: book.Series_Number,
+
+  releaseDate:
+    book["Release/Expected_Release_Date"],
+
+  bookCover: book.CoverImagePath
+    ? `${SUPABASE_URL}/storage/v1/object/public/covers/${encodeURIComponent(book.CoverImagePath)}`
+    : ""
+
+}))
+    };
+
+    populateBook(payload);
+    trackBookClick(bookId);
+  } catch (error) {
+    console.error("Book load error:", error);
+    errorBox.style.display = "block";
+    errorBox.textContent = `We couldn't load this book right now. ${error.message}`;
+  }
+}
+
+    loadBook();
+  </script>
+
+  <script>
+async function loadIncludes() {
+
+  const header = await fetch('includes/header.html');
+  document.getElementById('site-header').innerHTML =
+    await header.text();
+
+  const footer = await fetch('includes/footer.html');
+  document.getElementById('site-footer').innerHTML =
+    await footer.text();
+}
+
+loadIncludes();
+</script>
+
+<script src="includes/shared.js"></script>
+
+</body>
+</html>

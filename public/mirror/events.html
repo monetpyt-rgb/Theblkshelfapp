@@ -1,0 +1,2369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Events – The BLK Shelf</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <link rel="stylesheet" href="includes/shared.css">
+
+  <style>
+    :root {
+      --bg: #0f0c0a;
+      --panel: #241d17;
+      --panel-dark: #17100c;
+      --text: #fff8f0;
+      --muted: #e3d2c0;
+      --soft: #c9b7a5;
+      --accent: #d8a35d;
+      --accent-light: #f2c994;
+      --line: rgba(255,255,255,0.18);
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      color: var(--text);
+      line-height: 1.6;
+      background:
+        linear-gradient(rgba(15,12,10,0.55), rgba(15,12,10,0.55)),
+        url("https://njgprucvnayyiooiftaw.supabase.co/storage/v1/object/public/logo/bckgrnd.png");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+
+    button, input, select { font: inherit; }
+    button { color: inherit; }
+    a { color: inherit; text-decoration: none; }
+
+    header {
+      padding: 2rem 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .page { padding: 2.5rem 0 4rem; }
+
+    .events-card {
+      padding: 2rem;
+      border: 1px solid rgba(255,255,255,0.22);
+      border-radius: 28px;
+      background: linear-gradient(180deg, #3f2e23, #241d17);
+      box-shadow:
+        0 12px 30px rgba(0,0,0,0.35),
+        inset 0 1px 0 rgba(255,255,255,0.05);
+    }
+
+    .events-header {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 1.5rem;
+      align-items: end;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      padding: 0.42rem 0.88rem;
+      border: 1px solid rgba(216,163,93,0.24);
+      border-radius: 999px;
+      background: rgba(216,163,93,0.08);
+      color: #f2cb98;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0.9rem 0 0.8rem;
+      font-size: clamp(2.4rem, 5vw, 4.3rem);
+      line-height: 0.98;
+      letter-spacing: -0.03em;
+    }
+
+    .intro {
+      max-width: 58rem;
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .header-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 0.7rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      padding: 0.7rem 1rem;
+      border: none;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #120e0b;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.2s ease;
+      text-align: center;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      background: #e6b06a;
+    }
+
+    .btn.secondary {
+      border: 1px solid rgba(216,163,93,0.3);
+      background: rgba(216,163,93,0.08);
+      color: var(--accent-light);
+    }
+
+    .btn.secondary:hover { background: rgba(216,163,93,0.16); }
+
+    .filter-panel {
+      margin-top: 2rem;
+      padding: 1.2rem;
+      border: 1px solid rgba(255,255,255,0.16);
+      border-radius: 22px;
+      background: rgba(15,12,10,0.45);
+    }
+
+    .primary-filters {
+      display: grid;
+      grid-template-columns: 1.5fr 0.85fr 0.85fr 0.85fr;
+      gap: 0.8rem;
+    }
+
+    .advanced-filters {
+      display: none;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0.8rem;
+      margin-top: 0.8rem;
+    }
+
+    .advanced-filters.active { display: grid; }
+
+    .field {
+      width: 100%;
+      padding: 0.9rem 1rem;
+      border: 2px solid rgba(255,255,255,0.25);
+      border-radius: 14px;
+      background: #17100c;
+      color: var(--text);
+    }
+
+    .field::placeholder { color: var(--soft); }
+
+    .field:focus {
+      outline: 3px solid var(--accent-light);
+      border-color: var(--accent-light);
+    }
+
+    .distance-filter {
+  display: none;
+}
+
+.distance-filter.active,
+.distance-filter.location-active {
+  display: block;
+}
+
+    select.field option {
+      background: var(--panel-dark);
+      color: var(--text);
+    }
+
+    .filter-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 0.8rem;
+      margin-top: 1rem;
+    }
+
+    .quick-filters,
+    .utility-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .filter-pill,
+    .utility-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      width: fit-content;
+      padding: 0.5rem 0.78rem;
+      border: 1px solid rgba(216,163,93,0.24);
+      border-radius: 999px;
+      background: rgba(216,163,93,0.08);
+      color: var(--muted);
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .filter-pill:hover,
+    .filter-pill.active,
+    .utility-button:hover {
+      border-color: var(--accent);
+      background: var(--accent);
+      color: #120e0b;
+    }
+
+    .results-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+
+    .result-count {
+      color: var(--soft);
+      font-size: 0.9rem;
+    }
+
+    .view-toggle {
+      display: inline-flex;
+      gap: 0.35rem;
+      padding: 0.35rem;
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 999px;
+      background: rgba(15,12,10,0.5);
+    }
+
+    .view-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.42rem;
+      padding: 0.55rem 0.8rem;
+      border: none;
+      border-radius: 999px;
+      background: transparent;
+      color: var(--soft);
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .view-button.active {
+      background: var(--accent);
+      color: #120e0b;
+    }
+
+    .view-panel { display: none; }
+    .view-panel.active { display: block; }
+
+    .section-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .section-heading h2 {
+      margin: 0;
+      color: var(--accent-light);
+      font-size: 1.55rem;
+    }
+
+    .section-heading p {
+      margin: 0;
+      color: var(--soft);
+      font-size: 0.9rem;
+    }
+
+    .featured-section {
+      margin-bottom: 2rem;
+      padding: 1.2rem;
+      border: 1px solid rgba(255,255,255,0.16);
+      border-radius: 24px;
+      background: rgba(63,46,35,0.85);
+    }
+
+    .featured-section-top {
+  margin-bottom: 2.2rem;
+}
+
+    .featured-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 360px));
+  justify-content: center;
+  gap: 1rem;
+}
+
+    .featured-event {
+      display: flex;
+      min-width: 0;
+      flex-direction: column;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 20px;
+      background: linear-gradient(180deg, #3f2e23, #241d17);
+      transition: 0.2s ease;
+    }
+
+    .featured-event:hover {
+      transform: translateY(-3px);
+      border-color: rgba(216,163,93,0.5);
+    }
+
+    .featured-image {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      background: var(--panel-dark);
+    }
+
+    .featured-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .featured-badge {
+      position: absolute;
+      top: 0.7rem;
+      left: 0.7rem;
+      padding: 0.38rem 0.65rem;
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 999px;
+      background: rgba(15,12,10,0.76);
+      color: var(--accent-light);
+      font-size: 0.72rem;
+      font-weight: 700;
+      backdrop-filter: blur(10px);
+    }
+
+    .featured-content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 0.8rem;
+  padding: 1rem;
+}
+
+    .featured-content h3 {
+      margin: 0 0 0.45rem;
+      font-size: 1.2rem;
+      line-height: 1.2;
+    }
+
+    .featured-meta {
+      display: grid;
+      gap: 0.3rem;
+      color: var(--soft);
+      font-size: 0.86rem;
+    }
+
+    .featured-content .btn { margin-top: auto; }
+
+    .event-list {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .load-more-events-btn {
+  margin: 1.4rem auto 0;
+}
+
+    .event-list-card {
+      display: grid;
+      grid-template-columns: 220px minmax(0, 1fr) auto;
+      gap: 1rem;
+      min-width: 0;
+      padding: 0.85rem;
+      border: 1px solid rgba(255,255,255,0.16);
+      border-radius: 20px;
+      background: rgba(15,12,10,0.45);
+      transition: 0.2s ease;
+    }
+
+    .event-list-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(216,163,93,0.45);
+    }
+
+    .event-list-image {
+      min-height: 155px;
+      overflow: hidden;
+      border-radius: 15px;
+      background: var(--panel-dark);
+    }
+
+    .event-list-image img {
+      width: 100%;
+      height: 100%;
+      min-height: 155px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .event-list-content {
+      min-width: 0;
+      padding: 0.2rem 0;
+    }
+
+    .event-list-content h3 {
+      margin: 0 0 0.35rem;
+      font-size: 1.3rem;
+      line-height: 1.2;
+    }
+
+    .event-list-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem 1rem;
+      color: var(--soft);
+      font-size: 0.88rem;
+    }
+
+    .event-list-description {
+      margin: 0.65rem 0;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.42rem;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      padding: 0.38rem 0.65rem;
+      border: 1px solid rgba(216,163,93,0.22);
+      border-radius: 999px;
+      background: rgba(216,163,93,0.08);
+      color: var(--muted);
+      font-size: 0.78rem;
+    }
+
+    .event-list-actions {
+      display: flex;
+      min-width: 150px;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0.65rem;
+    }
+
+    .empty-state,
+    .loading-state {
+      padding: 2rem 1rem;
+      color: var(--soft);
+      text-align: center;
+    }
+
+    .calendar-shell {
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.16);
+      border-radius: 22px;
+      background: rgba(15,12,10,0.45);
+    }
+
+    .calendar-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1rem;
+      border-bottom: 1px solid rgba(255,255,255,0.14);
+    }
+
+    .calendar-toolbar h2 {
+      margin: 0;
+      color: var(--accent-light);
+      font-size: 1.35rem;
+    }
+
+    .calendar-nav {
+      width: 40px;
+      height: 40px;
+      border: 1px solid rgba(216,163,93,0.25);
+      border-radius: 50%;
+      background: rgba(216,163,93,0.08);
+      color: var(--accent-light);
+      cursor: pointer;
+    }
+
+    .calendar-nav:hover {
+      background: var(--accent);
+      color: #120e0b;
+    }
+
+    .calendar-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  grid-template-rows: repeat(6, minmax(125px, auto));
+  position: relative;
+}
+
+    .calendar-weekdays div {
+      padding: 0.7rem 0.4rem;
+      border-bottom: 1px solid rgba(255,255,255,0.14);
+      color: var(--soft);
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    .calendar-day {
+      min-height: 125px;
+      padding: 0.55rem;
+      border-right: 1px solid rgba(255,255,255,0.09);
+      border-bottom: 1px solid rgba(255,255,255,0.09);
+    }
+
+    .calendar-day:nth-child(7n) { border-right: none; }
+
+    .calendar-day.outside {
+      background: rgba(0,0,0,0.12);
+      color: rgba(255,255,255,0.28);
+    }
+
+    .calendar-day.today {
+      box-shadow: inset 0 0 0 2px rgba(216,163,93,0.6);
+    }
+
+    .calendar-date {
+      display: block;
+      margin-bottom: 0.4rem;
+      color: var(--soft);
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+
+    .calendar-event {
+  display: block;
+  width: 100%;
+  margin-bottom: 0.35rem;
+  padding: 0.38rem 0.45rem;
+  overflow: hidden;
+  border: none;
+  border-left: 3px solid var(--accent);
+  border-radius: 7px;
+  background: rgba(216,163,93,0.1);
+  color: var(--muted);
+  font-size: 0.72rem;
+  line-height: 1.25;
+  text-align: left;
+  cursor: pointer;
+}
+
+    .calendar-event:hover {
+      background: rgba(216,163,93,0.18);
+      color: var(--text);
+    }
+
+    .calendar-event-bar {
+  position: relative;
+  z-index: 3;
+  height: 1.45rem;
+  margin: 2.15rem 0.22rem 0;
+  padding: 0.18rem 0.5rem;
+  border: 1px solid rgba(216,163,93,0.35);
+  border-radius: 999px;
+  background: rgba(216,163,93,0.16);
+  color: var(--text);
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1;
+  text-align: left;
+  overflow: hidden;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.calendar-event-bar:hover {
+  filter: brightness(1.18);
+}
+
+.calendar-event-bar.is-start {
+  border-top-left-radius: 999px;
+  border-bottom-left-radius: 999px;
+}
+
+.calendar-event-bar.is-end {
+  border-top-right-radius: 999px;
+  border-bottom-right-radius: 999px;
+}
+
+    .calendar-event-book-festival {
+  border-left-color: #d8a35d;
+  background: rgba(216,163,93,0.14);
+}
+
+.calendar-event-author-signing {
+  border-left-color: #c56a4a;
+  background: rgba(197,106,74,0.14);
+}
+
+.calendar-event-convention {
+  border-left-color: #7b4f86;
+  background: rgba(123,79,134,0.16);
+}
+
+.calendar-event-workshop {
+  border-left-color: #b9844d;
+  background: rgba(185,132,77,0.14);
+}
+
+.calendar-event-panel {
+  border-left-color: #5f8f88;
+  background: rgba(95,143,136,0.14);
+}
+
+.calendar-event-community-event {
+  border-left-color: #7f9f6a;
+  background: rgba(127,159,106,0.14);
+}
+
+.calendar-event-virtual-event {
+  border-left-color: #7f91a8;
+  background: rgba(127,145,168,0.14);
+}
+
+.calendar-event-vendor-market {
+  border-left-color: #b65f3f;
+  background: rgba(182,95,63,0.14);
+}
+
+.calendar-event-reader-meetup {
+  border-left-color: #f2c994;
+  background: rgba(242,201,148,0.12);
+}
+
+.map-marker {
+  position: relative;
+  display: block;
+  width: 22px;
+  height: 22px;
+  border: 2px solid #fff8f0;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.45);
+}
+
+.map-marker::after {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  top: 5px;
+  left: 5px;
+  border-radius: 50%;
+  background: #fff8f0;
+}
+
+.map-marker-book-festival { background: #c9964f; }
+.map-marker-author-signing { background: #b95b3e; }
+.map-marker-convention { background: #6d4778; }
+.map-marker-workshop { background: #a97845; }
+.map-marker-panel { background: #4f7d77; }
+.map-marker-community-event { background: #6f8f5d; }
+.map-marker-virtual-event { background: #71849d; }
+.map-marker-vendor-market { background: #a75539; }
+.map-marker-reader-meetup { background: #e2bc87; }
+
+.selected-calendar-event {
+  display: none;
+  padding: 1rem;
+  border-top: 1px solid rgba(255,255,255,0.14);
+}
+
+.selected-calendar-event.active {
+  display: block;
+}
+
+.selected-calendar-event .event-list-card {
+  margin-top: 0;
+}
+
+    .calendar-agenda {
+      display: none;
+      padding: 1rem;
+    }
+
+    .agenda-date-group {
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .agenda-date-group:last-child { border-bottom: none; }
+
+    .agenda-date-group h3 {
+      margin: 0 0 0.65rem;
+      color: var(--accent-light);
+      font-size: 1rem;
+    }
+
+    .agenda-event {
+      display: block;
+      margin-top: 0.5rem;
+      padding: 0.75rem;
+      border: 1px solid rgba(216,163,93,0.2);
+      border-radius: 12px;
+      background: rgba(216,163,93,0.07);
+    }
+
+    .agenda-event strong {
+      display: block;
+      line-height: 1.25;
+    }
+
+    .agenda-event span {
+      color: var(--soft);
+      font-size: 0.83rem;
+    }
+
+    .map-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.45fr) minmax(290px, 0.55fr);
+      gap: 1rem;
+    }
+
+    #eventMap {
+      min-height: 560px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.16);
+      border-radius: 22px;
+      background: #17100c;
+    }
+
+    #eventMap .leaflet-tile {
+  filter:
+    sepia(0.45)
+    saturate(0.75)
+    brightness(0.62)
+    contrast(1.1)
+    hue-rotate(-10deg);
+}
+
+    .map-list {
+      display: flex;
+      max-height: 560px;
+      flex-direction: column;
+      gap: 0.7rem;
+      overflow-y: auto;
+      padding-right: 0.2rem;
+    }
+
+    .map-event-card {
+      padding: 0.9rem;
+      border: 1px solid rgba(255,255,255,0.16);
+      border-radius: 16px;
+      background: rgba(15,12,10,0.5);
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .map-event-card:hover,
+    .map-event-card.active {
+      border-color: var(--accent);
+      background: rgba(216,163,93,0.1);
+    }
+
+    .map-event-card h3 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      line-height: 1.25;
+    }
+
+    .map-event-card p {
+      margin: 0.2rem 0;
+      color: var(--soft);
+      font-size: 0.83rem;
+    }
+
+    .selected-map-event {
+  display: none;
+  grid-column: 1 / -1;
+  padding-top: 1rem;
+}
+
+.selected-map-event.active {
+  display: block;
+}
+
+        .virtual-map-note {
+      margin-bottom: 1rem;
+      padding: 0.9rem 1rem;
+      border: 1px solid rgba(216,163,93,0.22);
+      border-radius: 16px;
+      background: rgba(216,163,93,0.08);
+      color: var(--muted);
+    }
+
+    .virtual-map-note a {
+      color: var(--accent-light);
+      font-weight: 700;
+    }
+
+    .leaflet-popup-content-wrapper,
+    .leaflet-popup-tip {
+      background: #241d17;
+      color: #fff8f0;
+    }
+
+    .leaflet-popup-content a {
+      color: #f2c994;
+      font-weight: 700;
+    }
+
+    footer {
+      padding: 2rem 0 2.2rem;
+      border-top: 1px solid var(--line);
+      color: var(--soft);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 1000px) {
+      .primary-filters { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .advanced-filters { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .featured-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+      .event-list-card {
+        grid-template-columns: 190px minmax(0, 1fr);
+      }
+
+      .event-list-actions {
+        grid-column: 2;
+        min-width: 0;
+        flex-direction: row;
+        justify-content: flex-start;
+      }
+
+      .map-layout { grid-template-columns: 1fr; }
+      #eventMap { min-height: 440px; }
+
+      .map-list {
+        max-height: none;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 750px) {
+      .events-header { grid-template-columns: 1fr; }
+      .header-actions { justify-content: flex-start; }
+
+      .featured-grid {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        padding-bottom: 0.4rem;
+      }
+
+      .featured-event {
+        min-width: min(82vw, 330px);
+        scroll-snap-align: start;
+      }
+
+      .event-list-card { grid-template-columns: 145px minmax(0, 1fr); }
+
+      .calendar-weekdays,
+      .calendar-grid { display: none; }
+
+      .calendar-agenda { display: block; }
+    }
+
+    @media (max-width: 600px) {
+      body {
+        background:
+          linear-gradient(rgba(15,12,10,0.55), rgba(15,12,10,0.55)),
+          url("https://njgprucvnayyiooiftaw.supabase.co/storage/v1/object/public/logo/bckgrnd-mobile.png");
+        background-size: cover;
+        background-position: center top;
+        background-repeat: no-repeat;
+        background-attachment: scroll;
+      }
+
+      header { padding: 1.3rem 0 1.7rem; }
+
+      .events-card {
+        padding: 1.15rem;
+        border-radius: 22px;
+      }
+
+      h1 { font-size: 2.35rem; }
+
+      .primary-filters,
+      .advanced-filters { grid-template-columns: 1fr; }
+
+      .filter-actions,
+      .results-toolbar {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .quick-filters,
+      .utility-filters { width: 100%; }
+
+      .view-toggle {
+        display: grid;
+        width: 100%;
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .view-button { justify-content: center; }
+      .view-button span { display: none; }
+
+      .event-list-card { grid-template-columns: 1fr; }
+
+      .event-list-image,
+      .event-list-image img { min-height: 190px; }
+
+      .event-list-actions {
+        grid-column: auto;
+        flex-direction: column;
+      }
+
+      .event-list-actions .btn { width: 100%; }
+
+      .map-list { grid-template-columns: 1fr; }
+      #eventMap { min-height: 360px; }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div id="site-header"></div>
+</header>
+
+<main class="page">
+  <div class="container">
+    <div class="events-card">
+
+      <section class="featured-section" id="featuredSection">
+          <div class="section-heading">
+            <div>
+              <h2>Featured Events</h2>
+              <p>Events worth putting on your calendar.</p>
+            </div>
+          </div>
+
+          <div class="featured-grid" id="featuredEventsGrid"></div>
+        </section>
+
+      <section class="events-header">
+        <div>
+          <span class="eyebrow">Bookish Events</span>
+          <h1>The BLK Shelf <span style="color:#d8a35d;">Events</span></h1>
+          <p class="intro">
+            Discover author signings, book festivals, conventions, virtual panels,
+            reader meetups, workshops, and community events celebrating Black books
+            and the people who love them.
+          </p>
+        </div>
+
+        <div class="header-actions">
+          <a class="btn" href="submit-event.html">
+            <i class="fa-solid fa-plus"></i>
+            Submit an Event
+          </a>
+        </div>
+      </section>
+
+      <section class="filter-panel" aria-label="Event filters">
+        <div class="primary-filters">
+          <input class="field" id="eventSearch" type="search" placeholder="Search events, authors, venues..." aria-label="Search events">
+          <input class="field" id="locationFilter" type="search" placeholder="Search city/state" aria-label="Search near city and state">
+
+          <select class="field distance-filter" id="distanceFilter" aria-label="Nearby distance">
+  <option value="25">Within 25 Miles</option>
+  <option value="50">Within 50 Miles</option>
+  <option value="100" selected>Within 100 Miles</option>
+  <option value="250">Within 250 Miles</option>
+  <option value="300">Within 300 Miles</option>
+  <option value="350">Within 350 Miles</option>
+  <option value="400">Within 400 Miles</option>
+  <option value="450">Within 450 Miles</option>
+  <option value="500">Within 500 Miles</option>
+  <option value="550">Within 550 Miles</option>
+  <option value="600">Within 600 Miles</option>
+  <option value="650">Within 650 Miles</option>
+</select>
+
+          <select class="field" id="eventTypeFilter" aria-label="Filter by event type">
+            <option value="">All Event Types</option>
+          </select>
+
+          <select class="field" id="dateFilter" aria-label="Filter by date">
+            <option value="all">All Upcoming</option>
+            <option value="today">Today</option>
+            <option value="weekend">This Weekend</option>
+            <option value="month">This Month</option>
+            <option value="next30">Next 30 Days</option>
+            <option value="multi">Multi-Day Events</option>
+          </select>
+        </div>
+
+        <div class="advanced-filters" id="advancedFilters">
+          <select class="field" id="audienceFilter" aria-label="Filter by audience">
+            <option value="">All Audiences</option>
+          </select>
+
+          <select class="field" id="genreFilter" aria-label="Filter by genre">
+            <option value="">All Genres</option>
+          </select>
+
+          <select class="field" id="formatFilter" aria-label="Filter by format">
+            <option value="">All Formats</option>
+            <option value="In-Person">In-Person</option>
+            <option value="Virtual">Virtual</option>
+            <option value="Hybrid">Hybrid</option>
+          </select>
+
+          <select class="field" id="sortFilter" aria-label="Sort events">
+            <option value="soonest">Sort: Soonest</option>
+            <option value="az">Event Name A–Z</option>
+            <option value="featured">Featured First</option>
+          </select>
+        </div>
+
+        <div class="filter-actions">
+          <div class="quick-filters">
+            <button class="filter-pill" type="button" data-quick-filter="virtual"><i class="fa-solid fa-video"></i>Virtual</button>
+            <button class="filter-pill" type="button" data-quick-filter="vendors"><i class="fa-solid fa-store"></i>Vendor Opportunities</button>
+            <button class="filter-pill" type="button" data-quick-filter="free"><i class="fa-solid fa-ticket"></i>Free Events</button>
+            <button class="filter-pill" type="button" data-quick-filter="family"><i class="fa-solid fa-people-roof"></i>Family Friendly</button>
+            <button class="filter-pill" type="button" id="nearMeButton"><i class="fa-solid fa-location-crosshairs"></i>Near Me</button>
+          </div>
+
+          <div class="utility-filters">
+            <button class="utility-button" type="button" id="moreFiltersButton"><i class="fa-solid fa-sliders"></i>More Filters</button>
+            <button class="utility-button" type="button" id="clearFiltersButton"><i class="fa-solid fa-rotate-left"></i>Clear</button>
+          </div>
+        </div>
+      </section>
+
+      <div class="results-toolbar">
+        <div class="result-count" id="eventResultCount">Loading events...</div>
+
+        <div class="view-toggle" aria-label="Choose event view">
+          <button class="view-button active" type="button" data-view="list"><i class="fa-solid fa-list"></i><span>List</span></button>
+          <button class="view-button" type="button" data-view="calendar"><i class="fa-regular fa-calendar-days"></i><span>Calendar</span></button>
+          <button class="view-button" type="button" data-view="map"><i class="fa-solid fa-map-location-dot"></i><span>Map</span></button>
+        </div>
+      </div>
+
+      <section class="view-panel active" id="listView">
+
+        <section>
+          <div class="section-heading">
+            <div>
+              <h2>Upcoming Events</h2>
+              <p>Browse the full event directory.</p>
+            </div>
+          </div>
+
+          <div class="event-list" id="eventList"></div>
+
+<button class="btn load-more-events-btn" id="loadMoreEventsButton" type="button" style="display:none;">
+  Load More Events
+</button>
+        </section>
+      </section>
+
+      <section class="view-panel" id="calendarView">
+        <div class="calendar-shell">
+          <div class="calendar-toolbar">
+            <button class="calendar-nav" type="button" id="previousMonthButton" aria-label="Previous month"><i class="fa-solid fa-chevron-left"></i></button>
+            <h2 id="calendarMonthLabel"></h2>
+            <button class="calendar-nav" type="button" id="nextMonthButton" aria-label="Next month"><i class="fa-solid fa-chevron-right"></i></button>
+          </div>
+
+          <div class="calendar-weekdays">
+            <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
+          </div>
+
+          <div class="calendar-grid" id="calendarGrid"></div>
+<div class="calendar-agenda" id="calendarAgenda"></div>
+
+<div class="selected-calendar-event" id="selectedCalendarEvent"></div>
+        </div>
+      </section>
+
+      <section class="view-panel" id="mapView">
+        <div id="virtualMapEvents"></div>
+
+        <div class="map-layout">
+          <div id="eventMap">
+            <div class="loading-state">Map loads when Map View is selected.</div>
+          </div>
+
+          <div class="map-list" id="mapEventList"></div>
+
+<div class="selected-map-event" id="selectedMapEvent"></div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</main>
+
+<footer id="site-footer"></footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="admin/js/supabase.js"></script>
+
+<script>
+
+  const TEST_LOCATION_COORDINATES = {
+  "sanford fl": { latitude: 28.8029, longitude: -81.2695, label: "Sanford, FL" },
+  "orlando fl": { latitude: 28.5383, longitude: -81.3792, label: "Orlando, FL" },
+  "tampa fl": { latitude: 27.9506, longitude: -82.4572, label: "Tampa, FL" },
+  "jacksonville fl": { latitude: 30.3322, longitude: -81.6557, label: "Jacksonville, FL" },
+  "atlanta ga": { latitude: 33.7490, longitude: -84.3880, label: "Atlanta, GA" },
+  "charlotte nc": { latitude: 35.2271, longitude: -80.8431, label: "Charlotte, NC" },
+  "tulsa ok": { latitude: 36.1540, longitude: -95.9928, label: "Tulsa, OK" }
+};
+
+let allEvents = [];
+let filteredEvents = [];
+let visibleEventLimit = 6;
+let currentView = "list";
+let currentCalendarDate = new Date(2026, 6, 1);
+let activeQuickFilters = new Set();
+let userCoordinates = null;
+let leafletMap = null;
+let mapMarkers = [];
+
+function escapeHtml(value) {
+  return String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+function getEventFlyerUrl(event) {
+  if (event?.flyer_storage_path) {
+    const encodedPath = String(event.flyer_storage_path)
+      .split("/")
+      .map(encodeURIComponent)
+      .join("/");
+
+    return `https://njgprucvnayyiooiftaw.supabase.co/storage/v1/object/public/event-flyers/${encodedPath}`;
+  }
+
+  return event?.event_image_url || event?.flyer_image_url || "";
+}
+
+function getEventImage(event) {
+  return (
+    getEventFlyerUrl(event) ||
+    "https://njgprucvnayyiooiftaw.supabase.co/storage/v1/object/public/defaults/event-default.jpg"
+  );
+}
+
+function normalizeForSearch(value) {
+  return String(value || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim();
+}
+
+function formatDate(dateValue, options = {}) {
+  if (!dateValue) return "";
+  return new Date(`${dateValue}T00:00:00`).toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+    ...options
+  });
+}
+
+function formatDateRange(event) {
+  const start = formatDate(event.start_date);
+  if (!event.end_date || event.end_date === event.start_date) return start;
+  return `${start} – ${formatDate(event.end_date)}`;
+}
+
+function formatTime(value) {
+  if (!value) return "";
+  const [hour, minute] = value.split(":");
+  const date = new Date();
+  date.setHours(Number(hour), Number(minute || 0));
+  return date.toLocaleTimeString("en-US", {
+    hour: "numeric",
+    minute: "2-digit"
+  });
+}
+
+function formatTimeRange(event) {
+  if (!event.start_time) return "Time TBA";
+  const start = formatTime(event.start_time);
+  const end = event.end_time ? formatTime(event.end_time) : "";
+  return `${start}${end ? ` – ${end}` : ""}${event.timezone ? ` ${event.timezone}` : ""}`;
+}
+
+function getLocationLabel(event) {
+  if (event.event_format === "Virtual") return "Virtual Event";
+  return [
+    event.venue_name,
+    [event.city, event.state].filter(Boolean).join(", ")
+  ].filter(Boolean).join(" • ") || "Location TBA";
+}
+
+function slugifyType(value) {
+  return String(value || "")
+    .toLowerCase()
+    .replace(/&/g, "and")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+function getCalendarEventClass(event) {
+  return `calendar-event-${slugifyType(event.event_type)}`;
+}
+
+function getMapMarkerClass(event) {
+  return `map-marker-${slugifyType(event.event_type)}`;
+}
+
+function renderPills(items, limit = null) {
+  const cleanItems = Array.isArray(items) ? items.filter(Boolean) : [];
+  if (!cleanItems.length) return "";
+  const visibleItems = limit ? cleanItems.slice(0, limit) : cleanItems;
+  return `
+    <div class="pill-row">
+      ${visibleItems.map(item => `<span class="pill">${escapeHtml(item)}</span>`).join("")}
+    </div>
+  `;
+}
+
+function getEventSearchText(event) {
+  return normalizeForSearch([
+    event.event_name,
+    event.description,
+    event.event_type,
+    ...(event.event_types || []),
+    event.venue_name,
+    event.city,
+    event.state,
+    event.featured_authors,
+    ...(event.audiences || []),
+    ...(event.genres || []),
+    ...(event.event_focus || [])
+  ].filter(Boolean).join(" "));
+}
+
+function getSearchRelevanceScore(event, search) {
+  if (!search) return 0;
+
+  const eventName = normalizeForSearch(event.event_name);
+  const venue = normalizeForSearch(event.venue_name);
+  const cityState = normalizeForSearch([event.city, event.state].filter(Boolean).join(" "));
+  const fullText = getEventSearchText(event);
+  const searchWords = search.split(" ").filter(Boolean);
+
+  let score = 0;
+
+  if (eventName === search) score += 100;
+  if (eventName.startsWith(search)) score += 70;
+  if (eventName.includes(search)) score += 50;
+
+  if (venue.includes(search)) score += 35;
+  if (cityState.includes(search)) score += 25;
+  if (fullText.includes(search)) score += 20;
+
+  searchWords.forEach(word => {
+    if (eventName.includes(word)) score += 15;
+    if (venue.includes(word)) score += 10;
+    if (fullText.includes(word)) score += 5;
+  });
+
+  return score;
+}
+
+function getWeekendRange(referenceDate = new Date()) {
+  const start = new Date(referenceDate);
+  const day = start.getDay();
+  const daysUntilSaturday = (6 - day + 7) % 7;
+  start.setDate(start.getDate() + daysUntilSaturday);
+  start.setHours(0, 0, 0, 0);
+
+  const end = new Date(start);
+  end.setDate(start.getDate() + 1);
+  end.setHours(23, 59, 59, 999);
+
+  return { start, end };
+}
+
+function eventOverlapsRange(event, rangeStart, rangeEnd) {
+  const eventStart = new Date(`${event.start_date}T00:00:00`);
+  const eventEnd = new Date(`${event.end_date || event.start_date}T23:59:59`);
+  return eventStart <= rangeEnd && eventEnd >= rangeStart;
+}
+
+function getSearchedLocationCoordinates(locationValue) {
+  const normalizedLocation = normalizeForSearch(locationValue);
+  if (!normalizedLocation) return null;
+
+  return TEST_LOCATION_COORDINATES[normalizedLocation] || null;
+}
+
+function calculateDistanceMiles(lat1, lon1, lat2, lon2) {
+  const radius = 3958.8;
+  const toRadians = degrees => degrees * Math.PI / 180;
+  const deltaLat = toRadians(lat2 - lat1);
+  const deltaLon = toRadians(lon2 - lon1);
+
+  const a =
+    Math.sin(deltaLat / 2) ** 2 +
+    Math.cos(toRadians(lat1)) *
+    Math.cos(toRadians(lat2)) *
+    Math.sin(deltaLon / 2) ** 2;
+
+  return radius * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+}
+
+async function loadEvents() {
+  const resultCount = document.getElementById("eventResultCount");
+  const eventList = document.getElementById("eventList");
+
+  resultCount.textContent = "Loading events...";
+  eventList.innerHTML = `
+    <div class="loading-state">
+      Loading upcoming events...
+    </div>
+  `;
+
+  try {
+    const { data, error } = await supabaseClient
+  .from("events")
+  .select("*")
+  .eq("event_status", "active")
+  .order("start_date", { ascending: true });
+
+    if (error) {
+      throw error;
+    }
+
+    allEvents = (data || []).map(event => {
+      const eventTypes =
+        Array.isArray(event.event_types) && event.event_types.length
+          ? event.event_types
+          : [event.event_type].filter(Boolean);
+
+      return {
+        ...event,
+
+        slug:
+          event.slug ||
+          event.id,
+
+        event_type:
+          event.event_type ||
+          eventTypes[0] ||
+          "Community Event",
+
+        event_types: eventTypes,
+
+        audiences:
+          Array.isArray(event.audiences)
+            ? event.audiences
+            : [],
+
+        genres:
+          Array.isArray(event.genres)
+            ? event.genres
+            : [],
+
+        event_focus:
+          Array.isArray(event.event_focus)
+            ? event.event_focus
+            : [],
+
+        featured_event:
+          Boolean(event.featured_event),
+
+        vendor_available:
+          Boolean(event.vendor_available),
+
+        family_friendly:
+          Boolean(event.family_friendly),
+
+        free_event:
+          Boolean(event.free_event),
+
+        priority:
+          Number(event.priority || 0),
+
+        latitude:
+          event.latitude == null
+            ? null
+            : Number(event.latitude),
+
+        longitude:
+          event.longitude == null
+            ? null
+            : Number(event.longitude),
+
+        event_image_url:
+          getEventImage(event),
+
+        event_image_alt:
+          event.event_image_alt ||
+          `${event.event_name || "Event"} flyer`
+      };
+    });
+
+    filteredEvents = [...allEvents];
+
+    populateFilterOptions();
+    applyFilters();
+
+    const nextUpcomingEvent = allEvents
+      .filter(event => {
+        const endDate =
+          event.end_date ||
+          event.start_date;
+
+        return endDate &&
+          new Date(`${endDate}T23:59:59`) >= new Date();
+      })
+      .sort(
+        (a, b) =>
+          new Date(a.start_date) -
+          new Date(b.start_date)
+      )[0];
+
+    if (nextUpcomingEvent?.start_date) {
+      const nextDate = new Date(
+        `${nextUpcomingEvent.start_date}T00:00:00`
+      );
+
+      currentCalendarDate = new Date(
+        nextDate.getFullYear(),
+        nextDate.getMonth(),
+        1
+      );
+
+      renderCalendar();
+    }
+  } catch (error) {
+    console.error("Unable to load public events:", error);
+
+    allEvents = [];
+    filteredEvents = [];
+
+    resultCount.textContent =
+      "Events could not be loaded.";
+
+    eventList.innerHTML = `
+      <div class="empty-state">
+        Events are temporarily unavailable. Please try again later.
+      </div>
+    `;
+
+    document.getElementById(
+      "featuredSection"
+    ).style.display = "none";
+  }
+}
+
+function populateFilterOptions() {
+  const eventTypeFilter =
+    document.getElementById("eventTypeFilter");
+
+  const audienceFilter =
+    document.getElementById("audienceFilter");
+
+  const genreFilter =
+    document.getElementById("genreFilter");
+
+  eventTypeFilter.innerHTML =
+    `<option value="">All Event Types</option>`;
+
+  audienceFilter.innerHTML =
+    `<option value="">All Audiences</option>`;
+
+  genreFilter.innerHTML =
+    `<option value="">All Genres</option>`;
+
+  const eventTypes = [
+    ...new Set(
+      allEvents.flatMap(
+        event =>
+          event.event_types ||
+          [event.event_type].filter(Boolean)
+      )
+    )
+  ].filter(Boolean).sort();
+
+  const audiences = [
+    ...new Set(
+      allEvents.flatMap(
+        event =>
+          event.audiences || []
+      )
+    )
+  ].filter(Boolean).sort();
+
+  const genres = [
+    ...new Set(
+      allEvents.flatMap(
+        event =>
+          event.genres || []
+      )
+    )
+  ].filter(Boolean).sort();
+
+  eventTypeFilter.insertAdjacentHTML(
+    "beforeend",
+    eventTypes
+      .map(type => `
+        <option value="${escapeHtml(type)}">
+          ${escapeHtml(type)}
+        </option>
+      `)
+      .join("")
+  );
+
+  audienceFilter.insertAdjacentHTML(
+    "beforeend",
+    audiences
+      .map(audience => `
+        <option value="${escapeHtml(audience)}">
+          ${escapeHtml(audience)}
+        </option>
+      `)
+      .join("")
+  );
+
+  genreFilter.insertAdjacentHTML(
+    "beforeend",
+    genres
+      .map(genre => `
+        <option value="${escapeHtml(genre)}">
+          ${escapeHtml(genre)}
+        </option>
+      `)
+      .join("")
+  );
+}
+
+function applyFilters() {
+  const search = normalizeForSearch(document.getElementById("eventSearch").value);
+  const location = normalizeForSearch(document.getElementById("locationFilter").value);
+  const distanceLimit = Number(document.getElementById("distanceFilter").value);
+  const eventType = document.getElementById("eventTypeFilter").value;
+  const dateFilter = document.getElementById("dateFilter").value;
+  const audience = document.getElementById("audienceFilter").value;
+  const genre = document.getElementById("genreFilter").value;
+  const format = document.getElementById("formatFilter").value;
+  const sort = document.getElementById("sortFilter").value;
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  filteredEvents = allEvents.filter(event => {
+    const eventEnd = new Date(`${event.end_date || event.start_date}T23:59:59`);
+    if (eventEnd < today) return false;
+    if (search && getSearchRelevanceScore(event, search) === 0) return false;
+
+    const searchedLocationCoordinates = getSearchedLocationCoordinates(
+  document.getElementById("locationFilter").value
+);
+
+if (location && searchedLocationCoordinates) {
+  if (event.latitude == null || event.longitude == null) return false;
+
+  const locationDistance = calculateDistanceMiles(
+    searchedLocationCoordinates.latitude,
+    searchedLocationCoordinates.longitude,
+    event.latitude,
+    event.longitude
+  );
+
+  if (locationDistance > distanceLimit) return false;
+}
+
+if (location && !searchedLocationCoordinates) {
+  const eventLocation = normalizeForSearch([
+    event.venue_name,
+    event.city,
+    event.state,
+    event.zip_code,
+    event.country
+  ].filter(Boolean).join(" "));
+
+  if (!eventLocation.includes(location)) return false;
+}
+
+    if (eventType && !(event.event_types || [event.event_type]).includes(eventType)) return false;
+    if (audience && !(event.audiences || []).includes(audience)) return false;
+    if (genre && !(event.genres || []).includes(genre)) return false;
+    if (format && event.event_format !== format) return false;
+
+    if (dateFilter === "today") {
+      const todayEnd = new Date(today);
+      todayEnd.setHours(23, 59, 59, 999);
+      if (!eventOverlapsRange(event, today, todayEnd)) return false;
+    }
+
+    if (dateFilter === "weekend") {
+      const weekend = getWeekendRange(today);
+      if (!eventOverlapsRange(event, weekend.start, weekend.end)) return false;
+    }
+
+    if (dateFilter === "month") {
+      const monthStart = new Date(today.getFullYear(), today.getMonth(), 1);
+      const monthEnd = new Date(today.getFullYear(), today.getMonth() + 1, 0, 23, 59, 59);
+      if (!eventOverlapsRange(event, monthStart, monthEnd)) return false;
+    }
+
+    if (dateFilter === "next30") {
+      const nextThirtyDays = new Date(today);
+      nextThirtyDays.setDate(nextThirtyDays.getDate() + 30);
+      nextThirtyDays.setHours(23, 59, 59, 999);
+      if (!eventOverlapsRange(event, today, nextThirtyDays)) return false;
+    }
+
+    if (dateFilter === "multi" && (!event.end_date || event.end_date === event.start_date)) return false;
+    if (activeQuickFilters.has("virtual") && !["Virtual", "Hybrid"].includes(event.event_format)) return false;
+    if (activeQuickFilters.has("vendors") && !event.vendor_available) return false;
+    if (activeQuickFilters.has("free") && !event.free_event) return false;
+    if (activeQuickFilters.has("family") && !event.family_friendly) return false;
+
+    if (activeQuickFilters.has("nearby")) {
+      if (!userCoordinates || event.latitude == null || event.longitude == null) return false;
+
+      const distance = calculateDistanceMiles(
+        userCoordinates.latitude,
+        userCoordinates.longitude,
+        event.latitude,
+        event.longitude
+      );
+
+      if (distance > distanceLimit) return false;
+    }
+
+    return true;
+  });
+
+  if (search) {
+  filteredEvents.sort((a, b) =>
+    getSearchRelevanceScore(b, search) - getSearchRelevanceScore(a, search) ||
+    new Date(a.start_date) - new Date(b.start_date)
+  );
+} else if (sort === "az") {
+  filteredEvents.sort((a, b) => a.event_name.localeCompare(b.event_name));
+} else if (sort === "featured") {
+    filteredEvents.sort((a, b) =>
+      Number(b.featured_event) - Number(a.featured_event) ||
+      (b.priority || 0) - (a.priority || 0) ||
+      new Date(a.start_date) - new Date(b.start_date)
+    );
+  } else {
+    filteredEvents.sort((a, b) =>
+      new Date(a.start_date) - new Date(b.start_date) ||
+      (b.priority || 0) - (a.priority || 0)
+    );
+  }
+
+  visibleEventLimit = 6;
+renderAllViews();
+}
+
+function renderFeaturedEvents() {
+  const section = document.getElementById("featuredSection");
+  const target = document.getElementById("featuredEventsGrid");
+
+  const featuredEvents = filteredEvents
+    .filter(event => event.featured_event)
+    .sort((a, b) => (b.priority || 0) - (a.priority || 0))
+    .slice(0, 3);
+
+  if (!featuredEvents.length) {
+    section.style.display = "none";
+    target.innerHTML = "";
+    return;
+  }
+
+  section.style.display = "block";
+
+  target.innerHTML = featuredEvents.map(event => `
+    <article class="featured-event">
+      <a class="featured-image" href="event.html?slug=${encodeURIComponent(event.slug)}">
+        <img
+  src="${escapeHtml(getEventImage(event))}"
+  alt="${escapeHtml(event.event_image_alt || event.event_name)}"
+  loading="lazy"
+  onerror="this.style.display='none';"
+>
+        <span class="featured-badge">Featured Event</span>
+      </a>
+
+      <div class="featured-content">
+        <h3><a href="event.html?slug=${encodeURIComponent(event.slug)}">${escapeHtml(event.event_name)}</a></h3>
+
+        <div class="featured-meta">
+          <span><i class="fa-regular fa-calendar"></i> ${escapeHtml(formatDateRange(event))}</span>
+          <span><i class="fa-solid fa-location-dot"></i> ${escapeHtml(getLocationLabel(event))}</span>
+        </div>
+
+        ${renderPills(event.event_types || [event.event_type], 3)}
+
+<a class="btn" href="event.html?slug=${encodeURIComponent(event.slug)}">View Event</a>
+      </div>
+    </article>
+  `).join("");
+}
+
+function renderEventCard(event) {
+  return `
+    <article class="event-list-card">
+      <a class="event-list-image" href="event.html?slug=${encodeURIComponent(event.slug)}">
+        <img
+  src="${escapeHtml(getEventImage(event))}"
+  alt="${escapeHtml(event.event_image_alt || event.event_name)}"
+  loading="lazy"
+  onerror="this.style.display='none';"
+>
+      </a>
+
+      <div class="event-list-content">
+        <h3><a href="event.html?slug=${encodeURIComponent(event.slug)}">${escapeHtml(event.event_name)}</a></h3>
+
+        <div class="event-list-meta">
+          <span><i class="fa-regular fa-calendar"></i> ${escapeHtml(formatDateRange(event))}</span>
+          <span><i class="fa-regular fa-clock"></i> ${escapeHtml(formatTimeRange(event))}</span>
+          <span><i class="fa-solid fa-location-dot"></i> ${escapeHtml(getLocationLabel(event))}</span>
+          <span><i class="fa-solid fa-ticket"></i> ${escapeHtml(event.free_event ? "Free Event" : event.ticket_price || "Price TBA")}</span>
+        </div>
+
+        <p class="event-list-description">${escapeHtml(event.description)}</p>
+        ${renderPills(event.event_types || [event.event_type], 4)}
+      </div>
+
+      <div class="event-list-actions">
+        <a class="btn" href="event.html?slug=${encodeURIComponent(event.slug)}">View Details</a>
+
+        ${event.registration_link ? `
+          <a class="btn secondary" href="${escapeHtml(event.registration_link)}" target="_blank" rel="noopener">Tickets</a>
+        ` : ""}
+      </div>
+    </article>
+  `;
+}
+
+function renderEventList() {
+  const target = document.getElementById("eventList");
+  const loadMoreButton = document.getElementById("loadMoreEventsButton");
+  const visibleEvents = filteredEvents.slice(0, visibleEventLimit);
+
+  if (!filteredEvents.length) {
+    target.innerHTML = `<div class="empty-state">No events match your filters.</div>`;
+    loadMoreButton.style.display = "none";
+    return;
+  }
+
+  target.innerHTML = visibleEvents.map(renderEventCard).join("");
+
+  loadMoreButton.style.display =
+    filteredEvents.length > visibleEventLimit ? "inline-flex" : "none";
+}
+
+function selectCalendarEvent(slug) {
+  const selectedEvent = filteredEvents.find(event => event.slug === slug);
+  const target = document.getElementById("selectedCalendarEvent");
+
+  if (!selectedEvent) {
+    target.classList.remove("active");
+    target.innerHTML = "";
+    return;
+  }
+
+  target.innerHTML = `
+    <div class="section-heading">
+      <div>
+        <h2>Selected Event</h2>
+        <p>Quick preview from the calendar.</p>
+      </div>
+    </div>
+
+    ${renderEventCard(selectedEvent)}
+  `;
+
+  target.classList.add("active");
+
+  target.scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
+}
+
+function getEventsForDate(date) {
+  const dateString = [
+    date.getFullYear(),
+    String(date.getMonth() + 1).padStart(2, "0"),
+    String(date.getDate()).padStart(2, "0")
+  ].join("-");
+
+  return filteredEvents.filter(event => {
+    const start = event.start_date;
+    const end = event.end_date || event.start_date;
+    return dateString >= start && dateString <= end;
+  });
+}
+
+function buildCalendarBars(gridStart) {
+  const weekLaneMap = Array.from({ length: 6 }, () => []);
+  const bars = [];
+
+  filteredEvents.forEach(event => {
+    const eventStart = new Date(`${event.start_date}T00:00:00`);
+    const eventEnd = new Date(`${event.end_date || event.start_date}T00:00:00`);
+
+    for (let weekIndex = 0; weekIndex < 6; weekIndex++) {
+      const weekStart = new Date(gridStart);
+      weekStart.setDate(gridStart.getDate() + weekIndex * 7);
+
+      const weekEnd = new Date(weekStart);
+      weekEnd.setDate(weekStart.getDate() + 6);
+
+      if (eventEnd < weekStart || eventStart > weekEnd) continue;
+
+      const segmentStart = eventStart > weekStart ? eventStart : weekStart;
+      const segmentEnd = eventEnd < weekEnd ? eventEnd : weekEnd;
+
+      const startColumn = segmentStart.getDay() + 1;
+      const endColumn = segmentEnd.getDay() + 2;
+
+      const lane = getAvailableCalendarLane(
+        weekLaneMap[weekIndex],
+        startColumn,
+        endColumn
+      );
+
+      const isStart = segmentStart.getTime() === eventStart.getTime();
+      const isEnd = segmentEnd.getTime() === eventEnd.getTime();
+
+      bars.push(`
+        <button
+          class="calendar-event-bar ${getCalendarEventClass(event)}${isStart ? " is-start" : ""}${isEnd ? " is-end" : ""}"
+          type="button"
+          data-calendar-event-slug="${escapeHtml(event.slug)}"
+          title="${escapeHtml(event.event_name)}"
+          style="
+            grid-row:${weekIndex + 1};
+            grid-column:${startColumn} / ${endColumn};
+            margin-top:${2.15 + lane * 1.65}rem;
+          "
+        >
+          ${escapeHtml(event.event_name)}
+        </button>
+      `);
+    }
+  });
+
+  return bars.join("");
+}
+
+function getAvailableCalendarLane(weekLanes, startColumn, endColumn) {
+  for (let laneIndex = 0; laneIndex < weekLanes.length; laneIndex++) {
+    const lane = weekLanes[laneIndex];
+
+    const overlaps = lane.some(range =>
+      startColumn < range.endColumn && endColumn > range.startColumn
+    );
+
+    if (!overlaps) {
+      lane.push({ startColumn, endColumn });
+      return laneIndex;
+    }
+  }
+
+  weekLanes.push([{ startColumn, endColumn }]);
+  return weekLanes.length - 1;
+}
+
+function renderCalendar() {
+  const year = currentCalendarDate.getFullYear();
+  const month = currentCalendarDate.getMonth();
+
+  document.getElementById("calendarMonthLabel").textContent =
+    currentCalendarDate.toLocaleDateString("en-US", {
+      month: "long",
+      year: "numeric"
+    });
+
+  const gridStart = new Date(year, month, 1);
+  gridStart.setDate(gridStart.getDate() - gridStart.getDay());
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  const dayCells = [];
+
+  for (let index = 0; index < 42; index++) {
+    const date = new Date(gridStart);
+    date.setDate(gridStart.getDate() + index);
+
+    const isOutside = date.getMonth() !== month;
+    const isToday = date.getTime() === today.getTime();
+    const row = Math.floor(index / 7) + 1;
+    const column = (index % 7) + 1;
+
+    dayCells.push(`
+      <div
+        class="calendar-day${isOutside ? " outside" : ""}${isToday ? " today" : ""}"
+        style="grid-row:${row}; grid-column:${column};"
+      >
+        <span class="calendar-date">${date.getDate()}</span>
+      </div>
+    `);
+  }
+
+  const calendarBars = buildCalendarBars(gridStart);
+
+  document.getElementById("calendarGrid").innerHTML =
+    dayCells.join("") + calendarBars;
+
+  document.querySelectorAll("[data-calendar-event-slug]").forEach(button => {
+    button.addEventListener("click", () => {
+      selectCalendarEvent(button.dataset.calendarEventSlug);
+    });
+  });
+
+  const monthStart = new Date(year, month, 1);
+  const monthEnd = new Date(year, month + 1, 0, 23, 59, 59);
+
+  const agendaEvents = filteredEvents
+    .filter(event => eventOverlapsRange(event, monthStart, monthEnd))
+    .sort((a, b) => new Date(a.start_date) - new Date(b.start_date));
+
+  document.getElementById("calendarAgenda").innerHTML = agendaEvents.length
+    ? agendaEvents.map(event => `
+      <div class="agenda-date-group">
+        <h3>${escapeHtml(formatDateRange(event))}</h3>
+
+        <button
+          class="agenda-event"
+          type="button"
+          data-calendar-event-slug="${escapeHtml(event.slug)}"
+        >
+          <strong>${escapeHtml(event.event_name)}</strong>
+          <span>${escapeHtml(formatTimeRange(event))} • ${escapeHtml(getLocationLabel(event))}</span>
+        </button>
+      </div>
+    `).join("")
+    : `<div class="empty-state">No events are scheduled for this month.</div>`;
+
+  document.querySelectorAll(".calendar-agenda [data-calendar-event-slug]").forEach(button => {
+    button.addEventListener("click", () => {
+      selectCalendarEvent(button.dataset.calendarEventSlug);
+    });
+  });
+}
+
+function loadLeaflet() {
+  if (window.L) return Promise.resolve();
+
+  return new Promise((resolve, reject) => {
+    if (!document.querySelector('link[data-leaflet="true"]')) {
+      const stylesheet = document.createElement("link");
+      stylesheet.rel = "stylesheet";
+      stylesheet.href = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css";
+      stylesheet.dataset.leaflet = "true";
+      document.head.appendChild(stylesheet);
+    }
+
+    const existingScript = document.querySelector('script[data-leaflet="true"]');
+
+    if (existingScript) {
+      existingScript.addEventListener("load", resolve);
+      existingScript.addEventListener("error", reject);
+      return;
+    }
+
+    const script = document.createElement("script");
+    script.src = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js";
+    script.dataset.leaflet = "true";
+    script.onload = resolve;
+    script.onerror = reject;
+    document.body.appendChild(script);
+  });
+}
+
+function clearMapMarkers() {
+  if (!leafletMap) return;
+  mapMarkers.forEach(marker => marker.remove());
+  mapMarkers = [];
+}
+
+function renderMapEventList(eventsWithCoordinates) {
+  const target = document.getElementById("mapEventList");
+
+  if (!eventsWithCoordinates.length) {
+    target.innerHTML = `<div class="empty-state">No in-person events match your filters.</div>`;
+    return;
+  }
+
+  target.innerHTML = eventsWithCoordinates.map((event, index) => `
+    <article class="map-event-card" data-map-event-index="${index}">
+      <h3>${escapeHtml(event.event_name)}</h3>
+      <p><i class="fa-regular fa-calendar"></i> ${escapeHtml(formatDateRange(event))}</p>
+      <p><i class="fa-solid fa-location-dot"></i> ${escapeHtml(getLocationLabel(event))}</p>
+    </article>
+  `).join("");
+
+  document.querySelectorAll("[data-map-event-index]").forEach(card => {
+    card.addEventListener("click", () => {
+      const index = Number(card.dataset.mapEventIndex);
+      const marker = mapMarkers[index];
+
+      if (!marker || !leafletMap) return;
+
+      document.querySelectorAll("[data-map-event-index]").forEach(item => item.classList.remove("active"));
+      card.classList.add("active");
+
+      leafletMap.setView(marker.getLatLng(), 11, { animate: true });
+      marker.openPopup();
+      selectMapEvent(eventsWithCoordinates[index].slug);
+    });
+  });
+}
+
+function selectMapEvent(slug) {
+  const selectedEvent = filteredEvents.find(event => event.slug === slug);
+  const target = document.getElementById("selectedMapEvent");
+
+  if (!selectedEvent) {
+    target.classList.remove("active");
+    target.innerHTML = "";
+    return;
+  }
+
+  target.innerHTML = `
+    <div class="section-heading">
+      <div>
+        <h2>Selected Event</h2>
+        <p>Quick preview from the map.</p>
+      </div>
+    </div>
+
+    ${renderEventCard(selectedEvent)}
+  `;
+
+  target.classList.add("active");
+
+  target.scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
+}
+
+async function renderMap() {
+  const physicalEvents = filteredEvents.filter(event =>
+    event.latitude != null &&
+    event.longitude != null &&
+    event.event_format !== "Virtual"
+  );
+
+  const virtualEvents = filteredEvents.filter(event => event.event_format === "Virtual");
+
+  document.getElementById("virtualMapEvents").innerHTML = virtualEvents.length
+    ? `
+      <div class="virtual-map-note">
+        <strong>${virtualEvents.length} virtual ${virtualEvents.length === 1 ? "event is" : "events are"} also available.</strong>
+        ${virtualEvents.map(event => `
+          <a href="event.html?slug=${encodeURIComponent(event.slug)}">${escapeHtml(event.event_name)}</a>
+        `).join(" • ")}
+      </div>
+    `
+    : "";
+
+  renderMapEventList(physicalEvents);
+
+  try {
+    await loadLeaflet();
+
+    if (!leafletMap) {
+      leafletMap = L.map("eventMap", { scrollWheelZoom: false }).setView([33.5, -81.5], 5);
+
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        maxZoom: 19,
+        attribution: "&copy; OpenStreetMap contributors"
+      }).addTo(leafletMap);
+    }
+
+    clearMapMarkers();
+
+    physicalEvents.forEach(event => {
+      const marker = L.marker(
+  [event.latitude, event.longitude],
+  {
+    icon: L.divIcon({
+      className: "",
+      html: `<span class="map-marker ${getMapMarkerClass(event)}"></span>`,
+      iconSize: [26, 26],
+      iconAnchor: [13, 26],
+      popupAnchor: [0, -26]
+    })
+  }
+).addTo(leafletMap);
+
+      marker.bindPopup(`
+  <strong>${escapeHtml(event.event_name)}</strong><br>
+  ${escapeHtml(formatDateRange(event))}<br>
+  ${escapeHtml(getLocationLabel(event))}<br><br>
+  <a href="event.html?slug=${encodeURIComponent(event.slug)}">View Event</a>
+`);
+
+marker.on("click", () => {
+  selectMapEvent(event.slug);
+});
+
+      mapMarkers.push(marker);
+    });
+
+    if (mapMarkers.length) {
+      const group = L.featureGroup(mapMarkers);
+      leafletMap.fitBounds(group.getBounds().pad(0.25), { maxZoom: 10 });
+    }
+
+    setTimeout(() => leafletMap.invalidateSize(), 100);
+  } catch (error) {
+    console.error("Map could not load:", error);
+    document.getElementById("eventMap").innerHTML =
+      `<div class="empty-state">The map could not load. The event list is still available.</div>`;
+  }
+}
+
+function renderAllViews() {
+  const count = filteredEvents.length;
+
+  document.getElementById("eventResultCount").textContent =
+    `${count} upcoming ${count === 1 ? "event" : "events"} found`;
+
+  renderFeaturedEvents();
+  renderEventList();
+  renderCalendar();
+
+  if (currentView === "map") renderMap();
+}
+
+function switchView(view) {
+  currentView = view;
+
+  document.querySelectorAll(".view-button").forEach(button => {
+    button.classList.toggle("active", button.dataset.view === view);
+  });
+
+  document.querySelectorAll(".view-panel").forEach(panel => {
+    panel.classList.remove("active");
+  });
+
+  document.getElementById(`${view}View`).classList.add("active");
+
+  if (view === "map") renderMap();
+}
+
+function clearFilters() {
+  document.getElementById("eventSearch").value = "";
+  document.getElementById("locationFilter").value = "";
+  document.getElementById("distanceFilter").value = "100";
+  document.getElementById("eventTypeFilter").value = "";
+  document.getElementById("dateFilter").value = "all";
+  document.getElementById("audienceFilter").value = "";
+  document.getElementById("genreFilter").value = "";
+  document.getElementById("formatFilter").value = "";
+  document.getElementById("sortFilter").value = "soonest";
+
+  activeQuickFilters.clear();
+
+  document.querySelectorAll(".filter-pill").forEach(button => {
+    button.classList.remove("active");
+  });
+
+  document.getElementById("nearMeButton").classList.remove("active");
+document.getElementById("distanceFilter").classList.remove("active");
+document.getElementById("distanceFilter").classList.remove("location-active");
+
+  applyFilters();
+}
+
+function enableNearMe() {
+  if (activeQuickFilters.has("nearby")) {
+    activeQuickFilters.delete("nearby");
+    document.getElementById("nearMeButton").classList.remove("active");
+document.getElementById("distanceFilter").classList.remove("active");
+document.getElementById("distanceFilter").classList.remove("location-active");
+applyFilters();
+return;
+  }
+
+  if (!navigator.geolocation) {
+    alert("Location services are not supported by this browser.");
+    return;
+  }
+
+  navigator.geolocation.getCurrentPosition(
+    position => {
+      userCoordinates = {
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude
+      };
+
+      activeQuickFilters.add("nearby");
+      document.getElementById("nearMeButton").classList.add("active");
+document.getElementById("distanceFilter").classList.add("active");
+applyFilters();
+    },
+    error => {
+  console.error("Geolocation error:", error);
+
+  alert(
+    "Your location could not be accessed. You can still search by city or state. " +
+    "Error: " + error.message
+  );
+}
+  );
+}
+
+function bindEventListeners() {
+  document.getElementById("eventSearch").addEventListener("input", applyFilters);
+
+document.getElementById("locationFilter").addEventListener("input", () => {
+  const locationCoordinates = getSearchedLocationCoordinates(
+    document.getElementById("locationFilter").value
+  );
+
+  document.getElementById("distanceFilter").classList.toggle(
+    "location-active",
+    Boolean(locationCoordinates)
+  );
+
+  applyFilters();
+});
+
+  [
+  "eventTypeFilter",
+  "dateFilter",
+  "audienceFilter",
+  "genreFilter",
+  "formatFilter",
+  "sortFilter",
+  "distanceFilter"
+].forEach(id => {
+    document.getElementById(id).addEventListener("change", applyFilters);
+  });
+
+  document.querySelectorAll("[data-quick-filter]").forEach(button => {
+    button.addEventListener("click", () => {
+      const filter = button.dataset.quickFilter;
+
+      if (activeQuickFilters.has(filter)) {
+        activeQuickFilters.delete(filter);
+        button.classList.remove("active");
+      } else {
+        activeQuickFilters.add(filter);
+        button.classList.add("active");
+      }
+
+      applyFilters();
+    });
+  });
+
+  document.getElementById("nearMeButton").addEventListener("click", enableNearMe);
+
+  document.getElementById("moreFiltersButton").addEventListener("click", () => {
+    const panel = document.getElementById("advancedFilters");
+    panel.classList.toggle("active");
+
+    document.getElementById("moreFiltersButton").innerHTML =
+      panel.classList.contains("active")
+        ? '<i class="fa-solid fa-chevron-up"></i> Fewer Filters'
+        : '<i class="fa-solid fa-sliders"></i> More Filters';
+  });
+
+  document.getElementById("clearFiltersButton").addEventListener("click", clearFilters);
+
+  document.getElementById("loadMoreEventsButton").addEventListener("click", () => {
+  visibleEventLimit += 6;
+  renderEventList();
+});
+
+  document.querySelectorAll(".view-button").forEach(button => {
+    button.addEventListener("click", () => switchView(button.dataset.view));
+  });
+
+  document.getElementById("previousMonthButton").addEventListener("click", () => {
+    currentCalendarDate = new Date(
+      currentCalendarDate.getFullYear(),
+      currentCalendarDate.getMonth() - 1,
+      1
+    );
+
+    renderCalendar();
+  });
+
+  document.getElementById("nextMonthButton").addEventListener("click", () => {
+    currentCalendarDate = new Date(
+      currentCalendarDate.getFullYear(),
+      currentCalendarDate.getMonth() + 1,
+      1
+    );
+
+    renderCalendar();
+  });
+}
+
+async function loadIncludes() {
+  try {
+    const header = await fetch("includes/header.html");
+    document.getElementById("site-header").innerHTML = await header.text();
+
+    const footer = await fetch("includes/footer.html");
+    document.getElementById("site-footer").innerHTML = await footer.text();
+  } catch (error) {
+    console.error("Unable to load shared includes:", error);
+  }
+}
+
+async function initializeEventsPage() {
+  bindEventListeners();
+  await loadEvents();
+}
+
+loadIncludes();
+initializeEventsPage();
+</script>
+
+<script src="includes/shared.js"></script>
+
+</body>
+</html>

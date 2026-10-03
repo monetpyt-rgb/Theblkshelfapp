@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Submission Received – The BLK Shelf</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+  <link rel="stylesheet" href="includes/shared.css">
+
+  <style>
+    :root {
+      --bg: #0f0c0a;
+      --panel: #3f2e23;
+      --panel-2: #241d17;
+      --text: #fff8f0;
+      --muted: #e3d2c0;
+      --soft: #c9b7a5;
+      --accent: #e6b06a;
+      --accent-light: #f2c994;
+      --line: rgba(255,255,255,0.18);
+      --radius: 22px;
+      --max: 1280px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      background:
+        linear-gradient(rgba(15,12,10,0.65), rgba(15,12,10,0.65)),
+        url("https://njgprucvnayyiooiftaw.supabase.co/storage/v1/object/public/logo/bckgrnd.png");
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .received-header {
+      padding: 0;
+      margin: 0;
+      background: transparent;
+      border: 0;
+    }
+
+    .received-wrap {
+      max-width: 850px;
+      padding: 3rem 0;
+    }
+
+    .received-card {
+      background: linear-gradient(180deg, var(--panel), var(--panel-2));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 2rem;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+      text-align: center;
+    }
+
+    .checkmark {
+      width: 74px;
+      height: 74px;
+      margin: 0 auto 1rem;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: rgba(230,176,106,0.14);
+      border: 1px solid rgba(230,176,106,0.35);
+      color: var(--accent-light);
+      font-size: 2rem;
+    }
+
+    h1 {
+      font-size: clamp(2.3rem, 5vw, 4rem);
+      line-height: 1;
+      margin: 0 0 0.8rem;
+    }
+
+    p {
+      color: var(--muted);
+    }
+
+    .reference-box {
+      margin: 1.5rem auto;
+      padding: 1rem;
+      border-radius: 16px;
+      background: rgba(23,16,12,0.72);
+      border: 1px solid rgba(230,176,106,0.28);
+      max-width: 480px;
+    }
+
+    .reference-label {
+      display: block;
+      color: var(--soft);
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 0.35rem;
+    }
+
+    .reference-id {
+      color: var(--accent-light);
+      font-size: 1.25rem;
+      font-weight: bold;
+      word-break: break-word;
+    }
+
+    .next-steps {
+      margin: 1.5rem auto;
+      text-align: left;
+      max-width: 620px;
+      padding: 1rem;
+      border-radius: 16px;
+      background: rgba(230,176,106,0.08);
+      border: 1px solid rgba(230,176,106,0.22);
+    }
+
+    .next-steps strong {
+      color: var(--text);
+    }
+
+    .next-steps ul {
+      color: var(--muted);
+      margin: 0.75rem 0 0;
+      padding-left: 1.2rem;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.95rem 1.2rem;
+      border-radius: 14px;
+      border: 2px solid #120e0b;
+      background: var(--accent);
+      color: #120e0b;
+      font-weight: bold;
+    }
+
+    .btn:hover {
+      background: var(--accent-light);
+    }
+
+    .button-row {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.secondary-btn {
+  background: transparent;
+  color: var(--accent-light);
+  border: 2px solid rgba(230,176,106,.35);
+}
+
+.secondary-btn:hover {
+  background: rgba(230,176,106,.12);
+}
+
+    @media (max-width: 720px) {
+      body {
+        background:
+          linear-gradient(rgba(15,12,10,0.5), rgba(15,12,10,0.5)),
+          url("https://njgprucvnayyiooiftaw.supabase.co/storage/v1/object/public/logo/bckgrnd-mobile.png");
+        background-size: cover;
+        background-position: center top;
+        background-repeat: no-repeat;
+        background-attachment: scroll;
+      }
+
+      .received-card {
+        padding: 1.35rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="received-header">
+    <div id="site-header"></div>
+  </header>
+
+  <main class="received-wrap container">
+    <section class="received-card">
+      <div class="checkmark">✓</div>
+
+      <h1 id="submissionHeading">
+  Submission received.
+</h1>
+
+      <p id="submissionMessage">
+  Your submission has been received and is awaiting review.
+</p>
+
+      <div class="reference-box">
+        <span class="reference-label">Reference Number</span>
+        <span class="reference-id" id="referenceId">Unavailable</span>
+      </div>
+
+      <div class="next-steps">
+  <strong>What happens next?</strong>
+
+  <ul id="nextStepsList"></ul>
+</div>
+
+      <p id="reviewTime">
+  <strong>Estimated review time:</strong>
+  3–7 business days.
+</p>
+
+      <div class="button-row">
+
+  <a
+    class="btn secondary-btn"
+    id="continueButton"
+    href="#"
+    hidden
+  >
+    Continue
+  </a>
+
+  <a
+    class="btn"
+    id="returnButton"
+    href="index.html"
+  >
+    Return to Home
+  </a>
+
+</div>
+    </section>
+  </main>
+
+  <footer id="site-footer"></footer>
+
+  <script>
+  const params =
+    new URLSearchParams(
+      window.location.search
+    );
+
+  const submissionId =
+    params.get("id");
+
+    const authorSubmissionId =
+  params.get("submission_id") || "";
+
+  const submissionType =
+    params.get("type") || "author";
+
+  const contentByType = {
+    author: {
+      heading:
+        "Application received.",
+
+      message:
+        "Thank you for applying to join The BLK Shelf. Your author submission has been received and is awaiting review. Please watch your email, including your spam and promotions folders, for an update.",
+
+      steps: [
+        "Our team will review your author application.",
+        "If approved, you’ll receive an approval email with your personal link to submit new books or request updates to existing books.",
+        "If you use additional pen names, you may submit them separately."
+      ],
+
+      reviewTime:
+        "3–7 business days",
+
+      buttonText:
+        "Return to Home",
+
+      buttonHref:
+        "index.html"
+    },
+
+    book: {
+  heading:
+    "Book submission received.",
+
+  message:
+    "Your book has been submitted to The BLK Shelf and is awaiting review. You can track its status from your Author Manager.",
+
+  steps: [
+    "Our team will review the book details, classification, links, and cover.",
+    "The submission will appear in your Author Manager while it is pending, needs information, or is denied.",
+    "If approved, the book will be added to the live BLK Shelf library and disappear from the Books Under Review section."
+  ],
+
+  reviewTime:
+    "3–7 business days",
+
+  buttonText:
+    "Submit Another Book",
+
+  buttonHref:
+    `submit-book.html?submission_id=${encodeURIComponent(
+      authorSubmissionId
+    )}&mode=new`,
+
+  continueText:
+    "Return to Author Actions",
+
+  continueHref:
+    `author-actions.html?submission_id=${encodeURIComponent(
+      authorSubmissionId
+    )}`
+},
+
+    "book-update": {
+  heading:
+    "Book update received.",
+
+  message:
+    "Your requested book changes have been received and are awaiting review. The live book will remain unchanged until the update is approved.",
+
+  steps: [
+    "Our team will compare the requested changes with the current live book.",
+    "Approved changes will be applied to the live book.",
+    "If more information is needed, our team will contact you by email."
+  ],
+
+  reviewTime:
+    "3–7 business days",
+
+  buttonText:
+    "Return to Home",
+
+  buttonHref:
+    "index.html",
+
+  continueText:
+    "Return to Author Actions",
+
+  continueHref:
+  `author-actions.html?submission_id=${encodeURIComponent(
+    authorSubmissionId
+  )}`
+},
+
+    "author-update": {
+  heading:
+    "Profile update received.",
+
+  message:
+    "Your requested author profile changes have been received and are awaiting review. Your public author profile will remain unchanged until the update is approved.",
+
+  steps: [
+    "Our team will compare your requested changes with your current live author profile.",
+    "If approved, your public author profile will be updated automatically.",
+    "If we need additional information, we'll contact you by email."
+  ],
+
+  reviewTime:
+    "3–7 business days",
+
+  buttonText:
+    "Return to Home",
+
+  buttonHref:
+    "index.html",
+
+  continueText:
+    "Return to Author Actions",
+
+  continueHref:
+  `author-actions.html?submission_id=${encodeURIComponent(
+    authorSubmissionId
+  )}`
+},
+
+    event: {
+      heading:
+        "Event submission received.",
+
+      message:
+        "Your event has been submitted to The BLK Shelf and is awaiting review. Please watch your email, including your spam and promotions folders, for an update.",
+
+      steps: [
+        "Our team will review the event details, dates, location, links, and flyer.",
+        "If approved, the event will be added to the public events calendar.",
+        "If more information is needed, our team will contact the organizer by email."
+      ],
+
+      reviewTime:
+        "3–7 business days",
+
+      buttonText:
+        "Return to Events",
+
+      buttonHref:
+        "events.html"
+    }
+  };
+
+  const content =
+    contentByType[submissionType] ||
+    contentByType.author;
+
+  document.getElementById(
+    "referenceId"
+  ).textContent =
+    submissionId || "Unavailable";
+
+  document.getElementById(
+    "submissionHeading"
+  ).textContent =
+    content.heading;
+
+  document.getElementById(
+    "submissionMessage"
+  ).textContent =
+    content.message;
+
+  document.getElementById(
+    "nextStepsList"
+  ).innerHTML =
+    content.steps
+      .map(
+        step => `<li>${step}</li>`
+      )
+      .join("");
+
+  document.getElementById(
+    "reviewTime"
+  ).innerHTML =
+    `<strong>Estimated review time:</strong> ${content.reviewTime}.`;
+
+  const returnButton =
+    document.getElementById(
+      "returnButton"
+    );
+
+    const continueButton =
+  document.getElementById(
+    "continueButton"
+  );
+
+  returnButton.textContent =
+    content.buttonText;
+
+  returnButton.href =
+    content.buttonHref;
+
+    if (content.continueText) {
+
+  continueButton.hidden = false;
+
+  continueButton.textContent =
+    content.continueText;
+
+  continueButton.href =
+    content.continueHref;
+
+}
+
+  async function loadIncludes() {
+    const header =
+      await fetch(
+        "includes/header.html"
+      );
+
+    if (header.ok) {
+      document.getElementById(
+        "site-header"
+      ).innerHTML =
+        await header.text();
+    }
+
+    const footer =
+      await fetch(
+        "includes/footer.html"
+      );
+
+    if (footer.ok) {
+      document.getElementById(
+        "site-footer"
+      ).innerHTML =
+        await footer.text();
+    }
+  }
+
+  loadIncludes();
+</script>
+
+<script src="includes/shared.js"></script>
+
+</body>
+</html>

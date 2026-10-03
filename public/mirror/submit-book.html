@@ -1,0 +1,2283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Submit a Book – The BLK Shelf</title>
+
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+>
+
+<link rel="stylesheet" href="includes/shared.css">
+
+  <style>
+  :root {
+    --bg: #0f0c0a;
+    --panel: #3f2e23;
+    --panel-2: #241d17;
+    --text: #fff8f0;
+    --muted: #e3d2c0;
+    --soft: #c9b7a5;
+    --accent: #e6b06a;
+    --accent-light: #f2c994;
+    --danger: #e7b0a2;
+    --line: rgba(255,255,255,0.18);
+    --radius: 22px;
+    --max: 1280px;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+
+    .form-field {
+  display: grid;
+  gap: 0.35rem;
+  position: relative;
+  min-width: 0;
+}
+
+.form-grid > * {
+  min-width: 0;
+}
+
+    .form-field.full {
+      grid-column: 1 / -1;
+    }
+
+    .author-profile-display {
+  width: 100%;
+  padding: 0.95rem;
+  border-radius: 14px;
+  border: 2px solid rgba(230,176,106,0.3);
+  background: rgba(230,176,106,0.08);
+  color: var(--accent-light);
+  font-weight: bold;
+}
+
+.submission-type-options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+@media (max-width: 700px) {
+  .submission-type-options {
+    grid-template-columns: 1fr;
+  }
+}
+
+    #bookSubmissionForm label {
+  color: var(--soft);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+    #bookSubmissionForm input,
+#bookSubmissionForm select,
+#bookSubmissionForm textarea {
+  width: 100%;
+  padding: 0.9rem;
+  border-radius: 14px;
+  border: 2px solid rgba(255,255,255,0.22);
+  background-color: #17100c;
+  color: var(--text);
+  font: inherit;
+  color-scheme: dark;
+}
+
+#bookSubmissionForm select {
+  width: 100%;
+  padding: 0.9rem 2.75rem 0.9rem 0.9rem;
+  border-radius: 14px;
+  border: 2px solid rgba(255,255,255,0.22);
+  background-color: #17100c !important;
+  color: var(--text) !important;
+  font: inherit;
+
+  appearance: none;
+  -webkit-appearance: none;
+  color-scheme: dark;
+
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--accent-light) 50%),
+    linear-gradient(135deg, var(--accent-light) 50%, transparent 50%);
+
+  background-position:
+    calc(100% - 18px) 50%,
+    calc(100% - 12px) 50%;
+
+  background-size:
+    6px 6px,
+    6px 6px;
+
+  background-repeat: no-repeat;
+}
+
+#bookSubmissionForm select option {
+  background-color: #17100c;
+  color: var(--text);
+}
+
+#bookSubmissionForm select:focus {
+  outline: 3px solid var(--accent-light);
+  border-color: var(--accent-light);
+}
+
+#bookSubmissionForm input[type="date"] {
+  color-scheme: dark;
+}
+
+#bookSubmissionForm input[type="file"] {
+  padding: 0.55rem;
+  color: var(--muted);
+}
+
+#bookSubmissionForm input[type="file"]::file-selector-button {
+  margin-right: 0.75rem;
+  padding: 0.65rem 0.9rem;
+  border: 0;
+  border-radius: 10px;
+  background: var(--accent);
+  color: #120e0b;
+  font: inherit;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#bookSubmissionForm input[type="file"]::-webkit-file-upload-button {
+  margin-right: 0.75rem;
+  padding: 0.65rem 0.9rem;
+  border: 0;
+  border-radius: 10px;
+  background: var(--accent);
+  color: #120e0b;
+  font: inherit;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#bookSubmissionForm option {
+  background: #17100c;
+  color: var(--text);
+}
+
+    #bookSubmissionForm textarea {
+  min-height: 160px;
+  resize: vertical;
+}
+
+    .checkbox-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.6rem;
+    }
+
+    .check-card {
+  display: grid;
+  grid-template-columns: 22px 1fr;
+  align-items: center;
+  gap: 0.65rem;
+
+  min-height: 58px;
+  padding: 0.7rem 0.85rem;
+
+  border-radius: 12px;
+  background: rgba(23,16,12,0.65);
+  border: 1px solid rgba(255,255,255,0.12);
+
+  color: var(--muted);
+  line-height: 1.25;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+#bookSubmissionForm .check-card input[type="checkbox"],
+#bookSubmissionForm .check-card input[type="radio"] {
+  width: 18px;
+  height: 18px;
+  min-width: 18px;
+  padding: 0;
+  margin: 0;
+  border: initial;
+  border-radius: initial;
+  background: initial;
+  appearance: auto;
+  -webkit-appearance: auto;
+  accent-color: var(--accent-light);
+}
+
+#bookSubmissionForm .check-card {
+  cursor: pointer;
+}
+
+#bookSubmissionForm .check-card:has(input:checked) {
+  border-color: rgba(230,176,106,0.65);
+  background: rgba(230,176,106,0.16);
+  color: var(--accent-light);
+}
+
+.check-card span {
+  display: block;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+    .option-panel {
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(23,16,12,0.55);
+  overflow: hidden;
+}
+
+.option-panel summary {
+  padding: 0.9rem 1rem;
+  cursor: pointer;
+  color: var(--accent-light);
+  font-weight: bold;
+}
+
+.option-panel-body {
+  padding: 0 1rem 1rem;
+}
+
+.option-help {
+  margin: 0 0 0.75rem;
+  color: var(--soft);
+  font-size: 0.9rem;
+}
+
+    #bookSubmissionForm .hidden {
+  display: none;
+}
+
+    body {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  background:
+    linear-gradient(
+      rgba(15,12,10,0.65),
+      rgba(15,12,10,0.65)
+    ),
+    url("https://njgprucvnayyiooiftaw.supabase.co/storage/v1/object/public/logo/bckgrnd.png");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  color: var(--text);
+  line-height: 1.6;
+}
+
+.submit-header {
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  border: 0;
+}
+
+.submit-wrap {
+  max-width: 900px;
+  padding: 3rem 0;
+}
+
+.submit-card {
+  background: linear-gradient(
+    180deg,
+    var(--panel),
+    var(--panel-2)
+  );
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 2rem;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+}
+
+.eyebrow {
+  display: inline-block;
+  padding: 0.45rem 0.8rem;
+  margin-bottom: 1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(230,176,106,0.3);
+  background: rgba(230,176,106,0.1);
+  color: var(--accent-light);
+  font-size: 0.76rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.submit-title {
+  margin: 0 0 0.8rem;
+  font-size: clamp(2.3rem, 5vw, 4rem);
+  line-height: 1;
+}
+
+.submit-subtitle {
+  margin: 0 0 1.5rem;
+  color: var(--muted);
+}
+
+.form-container {
+  width: 100%;
+}
+
+#bookSubmissionForm {
+  display: grid;
+  gap: 1rem;
+}
+
+@media (max-width: 720px) {
+  body {
+    background:
+      linear-gradient(
+        rgba(15,12,10,0.5),
+        rgba(15,12,10,0.5)
+      ),
+      url("https://njgprucvnayyiooiftaw.supabase.co/storage/v1/object/public/logo/bckgrnd-mobile.png");
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+  }
+
+  .submit-wrap {
+    padding: 2rem 1rem;
+  }
+
+  .submit-card {
+    padding: 1.3rem;
+  }
+}
+
+    .form-card {
+  margin: 0;
+  padding: 1.25rem;
+  border-radius: 22px;
+  background: linear-gradient(180deg, rgba(63,46,35,0.95), rgba(36,29,23,0.95));
+  border: 1px solid rgba(255,255,255,0.16);
+}
+
+.form-card h2 {
+  margin: 0 0 0.25rem;
+}
+
+.form-help {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: var(--muted);
+}
+
+.retailer-grid {
+  margin-top: 1rem;
+}
+
+.tag-picker {
+  position: relative;
+  min-height: 58px;
+  padding: 0.65rem;
+  border-radius: 14px;
+  border: 2px solid rgba(255,255,255,0.22);
+  background: rgba(23,16,12,0.92);
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-bottom: 0.5rem;
+}
+
+.author-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.45rem 0.65rem;
+  border-radius: 999px;
+  background: rgba(230,176,106,0.12);
+  border: 1px solid rgba(230,176,106,0.28);
+  color: var(--accent-light);
+  font-size: 0.9rem;
+}
+
+.author-tag.unmatched {
+  background: rgba(255,255,255,0.08);
+  color: var(--muted);
+}
+
+.author-tag button {
+  border: none;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+#coAuthorInput {
+  border: none;
+  background: transparent;
+  padding: 0.4rem;
+}
+
+#coAuthorInput:focus {
+  outline: none;
+}
+
+.tag-suggestions {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% + 0.35rem);
+  z-index: 20;
+  display: grid;
+  gap: 0.35rem;
+  padding: 0.5rem;
+  border-radius: 14px;
+  background: #241d17;
+  border: 1px solid rgba(255,255,255,0.18);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.35);
+}
+
+.suggestion-item {
+  width: 100%;
+  text-align: left;
+  padding: 0.65rem 0.75rem;
+  border: none;
+  border-radius: 10px;
+  background: rgba(23,16,12,0.8);
+  color: var(--text);
+  cursor: pointer;
+  font: inherit;
+}
+
+.suggestion-item:hover {
+  background: rgba(230,176,106,0.12);
+}
+
+.suggestion-meta {
+  display: block;
+  color: var(--soft);
+  font-size: 0.82rem;
+}
+
+    @media (max-width: 800px) {
+      .form-grid,
+      .checkbox-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Force Safari form controls to use the dark theme */
+#bookSubmissionForm input:not([type="checkbox"]):not([type="radio"]):not([type="file"]),
+#bookSubmissionForm select,
+#bookSubmissionForm textarea {
+  width: 100%;
+  padding: 0.9rem;
+  border: 2px solid rgba(255,255,255,0.22) !important;
+  border-radius: 14px;
+
+  background: #17100c !important;
+  background-color: #17100c !important;
+
+  box-shadow:
+    0 0 0 1000px #17100c inset !important;
+  -webkit-box-shadow:
+    0 0 0 1000px #17100c inset !important;
+
+  color: var(--text) !important;
+  -webkit-text-fill-color: var(--text) !important;
+
+  font: inherit;
+  color-scheme: dark;
+}
+
+#bookSubmissionForm select {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+
+  background-image:
+    linear-gradient(
+      45deg,
+      transparent 50%,
+      var(--accent-light) 50%
+    ),
+    linear-gradient(
+      135deg,
+      var(--accent-light) 50%,
+      transparent 50%
+    ) !important;
+
+  background-position:
+    calc(100% - 18px) 50%,
+    calc(100% - 12px) 50% !important;
+
+  background-size:
+    6px 6px,
+    6px 6px !important;
+
+  background-repeat: no-repeat !important;
+  padding-right: 2.75rem;
+}
+
+#bookSubmissionForm select option {
+  background: #17100c !important;
+  color: #fff8f0 !important;
+  -webkit-text-fill-color: #fff8f0 !important;
+}
+
+#bookSubmissionForm input:focus,
+#bookSubmissionForm select:focus,
+#bookSubmissionForm textarea:focus {
+  outline: 3px solid var(--accent-light);
+  border-color: var(--accent-light) !important;
+}
+    
+  </style>
+</head>
+
+<body>
+  
+  <header class="submit-header">
+    <div id="site-header"></div>
+  </header>
+
+  <main class="submit-wrap container">
+    <section class="submit-card">
+      <span class="eyebrow">
+  Approved Author Submission
+</span>
+
+      <h1 class="submit-title">
+        Submit a Book
+      </h1>
+
+      <p class="submit-subtitle">
+        Use this form to submit a book under the approved author profile linked in your approval email.
+      </p>
+
+      <div class="form-container">
+  <form id="bookSubmissionForm">
+
+  <section class="form-card">
+  <h2>Book Details</h2>
+  <p class="form-help">Basic information readers and reviewers need first.</p>
+
+  <div class="form-grid">
+    <div class="form-field full">
+  <label>Author Profile</label>
+
+  <div
+    id="authorProfileDisplay"
+    class="author-profile-display"
+  >
+    Verifying approved author profile...
+  </div>
+
+  <input
+    id="authorId"
+    type="hidden"
+  >
+</div>
+
+<div class="form-field full">
+  <label>Submission Type *</label>
+
+  <div class="submission-type-options">
+    <label class="check-card">
+      <input
+        type="radio"
+        name="submissionType"
+        value="new"
+        checked
+      >
+
+      <span>Submit a New Book</span>
+    </label>
+
+    <label class="check-card">
+      <input
+        type="radio"
+        name="submissionType"
+        value="update"
+      >
+
+      <span>Update an Existing Book</span>
+    </label>
+  </div>
+</div>
+
+<div
+  class="form-field full hidden"
+  id="existingBookField"
+>
+  <label for="existingBookId">
+    Select Book to Update *
+  </label>
+
+  <select id="existingBookId">
+    <option value="">
+      Select a book
+    </option>
+  </select>
+</div>
+
+<div class="form-field">
+  <label for="title">Book Title *</label>
+  <input id="title" required>
+</div>
+
+      <div class="form-field">
+        <label for="releaseDate">Release / Expected Release Date *</label>
+        <input id="releaseDate" type="date" required>
+      </div>
+
+      <div class="form-field full">
+        <label for="cover">Book Cover (front cover only) *</label>
+        <input id="cover" type="file" accept=".jpg,.jpeg,.png,.webp" required>
+      </div>
+
+      <div class="form-field full">
+        <label for="description">Book Description *</label>
+        <textarea id="description" required></textarea>
+      </div>
+    </div>
+  </section>
+
+  <section class="form-card">
+  <h2>Series Information</h2>
+  <p class="form-help">If this book is part of a series, tell us where it belongs.</p>
+
+  <div class="form-field">
+    <label class="check-card">
+      <input type="checkbox" id="isSeriesBook">
+      <span>This book belongs to a series.</span>
+    </label>
+  </div>
+
+  <div id="seriesFields" class="hidden">
+    <div class="form-grid">
+      <div class="form-field">
+        <label for="seriesName">Series Name</label>
+        <input id="seriesName" type="text" placeholder="Start typing a series..." autocomplete="off">
+        <div class="tag-suggestions hidden" id="seriesSuggestions"></div>
+      </div>
+
+      <div class="form-field">
+        <label for="seriesNumber">Number in Series</label>
+        <input id="seriesNumber" type="number" min="1" step="1">
+      </div>
+    </div>
+  </div>
+</section>
+
+  <section class="form-card">
+    <h2>Classification</h2>
+    <p class="form-help">Help readers discover the right book for their mood, age range, and interests.</p>
+
+    <div class="form-grid">
+      <div class="form-field">
+        <label for="primaryGenre">Primary Genre *</label>
+        <select id="primaryGenre" required>
+          <option value="">Select genre</option>
+          <option>Romance</option>
+          <option>Fantasy</option>
+          <option>Science Fiction</option>
+          <option>Thriller / Suspense</option>
+          <option>Mystery / Crime</option>
+          <option>Horror</option>
+          <option>Literary Fiction</option>
+          <option>Historical Fiction</option>
+          <option>Urban Fiction</option>
+          <option>Contemporary Fiction</option>
+          <option>Young Adult (YA)</option>
+          <option>Nonfiction</option>
+          <option>Christian Fiction</option>
+          <option>Journals</option>
+          <option>Erotica</option>
+          <option>Children's books</option>
+          <option>Other</option>
+        </select>
+      </div>
+
+      <div class="form-field full">
+  <label>Subgenres *</label>
+  <details class="option-panel">
+    <summary>Select up to 3 subgenres</summary>
+    <div class="option-panel-body">
+      <p class="option-help">Choose up to 3.</p>
+      <div class="checkbox-grid" id="subGenresOptions"></div>
+    </div>
+  </details>
+</div>
+
+      <div class="form-field full">
+  <label>Vibes *</label>
+  <details class="option-panel">
+    <summary>Select up to 3 vibes</summary>
+    <div class="option-panel-body">
+      <p class="option-help">Choose up to 3.</p>
+      <div class="checkbox-grid" id="vibesOptions"></div>
+    </div>
+  </details>
+</div>
+
+      <div class="form-field">
+        <label for="spiceLevel">Spice Level *</label>
+        <select id="spiceLevel" required>
+          <option value="">Select spice level</option>
+          <option>N/A</option>
+          <option>🌶️ Bell Pepper</option>
+          <option>🌶️🌶️ Jalapeño</option>
+          <option>🌶️🌶️🌶️ Cayenne</option>
+          <option>🌶️🌶️🌶️🌶️ Habanero</option>
+          <option>🌶️🌶️🌶️🌶️🌶️ Ghost Pepper</option>
+        </select>
+      </div>
+
+      <div class="form-field">
+        <label for="ageRange">Age Range *</label>
+        <select id="ageRange" required>
+          <option value="">Select age range</option>
+          <option>Children</option>
+          <option>Middle Grade</option>
+          <option>Young Adult (YA)</option>
+          <option>New Adult</option>
+          <option>Adult</option>
+          <option>All Ages</option>
+        </select>
+      </div>
+
+      <div class="form-field full">
+  <label>Representation</label>
+  <details class="option-panel">
+    <summary>Select representation</summary>
+    <div class="option-panel-body">
+      <div class="checkbox-grid" id="representationOptions"></div>
+    </div>
+  </details>
+</div>
+
+<div class="form-field full">
+  <p class="form-help">
+    If you know the word count, enter that. Otherwise, enter the page count. Only one is needed.
+  </p>
+</div>
+
+<div class="form-field">
+  <label for="wordCount">Word Count</label>
+  <input id="wordCount" type="number" min="0">
+</div>
+
+<div class="form-field">
+  <label for="pageCount">Page Count</label>
+  <input id="pageCount" type="number" min="0">
+</div>
+    </div>
+  </section>
+
+  <section class="form-card">
+    <h2>Availability</h2>
+    <p class="form-help">Tell readers where and how they can get the book (all links need to include https://).</p>
+
+    <div class="form-field full">
+      <label>Available Formats *</label>
+      <div
+  class="checkbox-grid"
+  id="availableFormatsOptions"
+>
+  <label class="check-card">
+    <input type="checkbox" name="formats" value="Ebook">
+    <span>Ebook</span>
+  </label>
+
+  <label class="check-card">
+    <input type="checkbox" name="formats" value="Paperback">
+    <span>Paperback</span>
+  </label>
+        <label class="check-card"><input type="checkbox" name="formats" value="Hardcover"> Hardcover</label>
+        <label class="check-card"><input type="checkbox" name="formats" value="Audiobook" id="audiobookCheck"> Audiobook</label>
+      </div>
+    </div>
+
+    <div class="form-grid retailer-grid">
+      <div class="form-field">
+        <label for="websiteLink">Website Link</label>
+        <input id="websiteLink" type="url">
+      </div>
+
+      <div class="form-field">
+        <label for="amazonLink">Amazon Link</label>
+        <input id="amazonLink" type="url">
+      </div>
+
+      <div class="form-field">
+        <label for="bnLink">Barnes & Noble Link</label>
+        <input id="bnLink" type="url">
+      </div>
+
+      <div class="form-field">
+        <label for="bookfunnelLink">BookFunnel Link</label>
+        <input id="bookfunnelLink" type="url">
+      </div>
+
+      <div class="form-field">
+        <label for="koboLink">Kobo Link</label>
+        <input id="koboLink" type="url">
+      </div>
+
+      <div class="form-field">
+        <label for="appleLink">Apple Books Link</label>
+        <input id="appleLink" type="url">
+      </div>
+
+      <div class="form-field full">
+        <label for="otherLink">Other Link</label>
+        <input id="otherLink" type="url">
+      </div>
+    </div>
+  </section>
+
+  <section class="form-card hidden" id="audioSection">
+    <h2>Audiobook Details</h2>
+    <p class="form-help">Only complete this section if the book is available in audio.</p>
+
+    <div class="form-grid">
+      <div class="form-field">
+        <label for="audioNarrators">Audiobook Narrator(s)</label>
+        <input id="audioNarrators" placeholder="Narrator name(s)">
+      </div>
+
+      <div class="form-field">
+        <label for="audiobookLink">Audiobook Link</label>
+        <input id="audiobookLink" type="url">
+      </div>
+    </div>
+  </section>
+
+  <section class="form-card">
+    <h2>BLK Shelf Kids</h2>
+    <p class="form-help">Use this if the book should be considered for the BLK Shelf Kids section.</p>
+
+    <div class="form-grid">
+      <div class="form-field full">
+        <label for="kidsCategory">Kids / Youth Category</label>
+        <select id="kidsCategory">
+          <option value="">Not a children's / youth book</option>
+          <option>Picture Book</option>
+          <option>Early Reader</option>
+          <option>Middle Grade</option>
+          <option>Young Adult</option>
+          <option>Educational / Activity</option>
+        </select>
+      </div>
+    </div>
+  </section>
+
+  <section class="form-card">
+  <h2>Contributors</h2>
+  <p class="form-help">
+    Add coauthors or contributors. Select approved BLK Shelf authors when they appear, or press comma/Enter to add an unlisted name.
+  </p>
+
+  <div class="form-field full">
+    <label for="coAuthorInput">Additional Authors / Coauthors</label>
+
+    <div class="tag-picker" id="coAuthorPicker">
+      <div class="tag-list" id="coAuthorTags"></div>
+
+      <input
+        id="coAuthorInput"
+        type="text"
+        placeholder="Start typing a coauthor name..."
+        autocomplete="off"
+      >
+
+      <div class="tag-suggestions hidden" id="coAuthorSuggestions"></div>
+    </div>
+  </div>
+</section>
+
+  <div
+  style="
+    padding:1rem;
+    border-radius:16px;
+    background:rgba(230,176,106,0.08);
+    border:1px solid rgba(230,176,106,0.22);
+  "
+>
+  <button
+    id="submitButton"
+    type="submit"
+    style="
+      width:100%;
+      padding:.95rem 1.2rem;
+      border-radius:14px;
+      border:2px solid #120e0b;
+      background:var(--accent);
+      color:#120e0b;
+      font:inherit;
+      font-weight:bold;
+      cursor:pointer;
+    "
+  >
+    Submit Book for Review
+  </button>
+
+  <p
+  id="submissionNote"
+  aria-live="polite"
+  style="
+    min-height:1.5rem;
+    margin-bottom:0;
+    color:var(--soft);
+  "
+></p>
+</div>
+</form>
+      </div>
+    </section>
+  </main>
+
+  <footer id="site-footer"></footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+  const SUPABASE_URL =
+    "https://njgprucvnayyiooiftaw.supabase.co";
+
+  const SUPABASE_ANON_KEY =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5qZ3BydWN2bmF5eWlvb2lmdGF3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc3NDg0ODMsImV4cCI6MjA5MzMyNDQ4M30.1r6r8vyYB0PnrZtugcBz3CPuCP9MMlTTMYXfewEINNw";
+
+  const supabaseClient =
+    supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_ANON_KEY
+    );
+</script>
+
+  <script>
+    let approvedAuthor = null;
+let authorBooks = [];
+let selectedExistingBook = null;
+let coAuthors = [];
+let coAuthorSearchTimer = null;
+
+    function clean(value) {
+      return String(value || "").trim();
+    }
+
+    function generateId(prefix) {
+      const now = new Date();
+      const stamp =
+        now.getFullYear().toString() +
+        String(now.getMonth() + 1).padStart(2, "0") +
+        String(now.getDate()).padStart(2, "0") +
+        String(now.getHours()).padStart(2, "0") +
+        String(now.getMinutes()).padStart(2, "0") +
+        String(now.getSeconds()).padStart(2, "0");
+
+      const random = Math.random().toString(36).substring(2, 6).toUpperCase();
+      return `${prefix}${stamp}${random}`;
+    }
+
+    function slugify(value) {
+      return String(value || "")
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "")
+        .slice(0, 60);
+    }
+
+    const SUBGENRE_OPTIONS = [
+  "Urban Romance", "Paranormal Romance", "Dark Romance", "Mafia Romance", "Billionaire Romance", "Contemporary Romance",
+  "Romantic Suspense", "Fantasy Romance (Romantasy)", "Epic Fantasy", "Urban Fantasy/Fiction",
+  "Workplace Romance", "Dark Fantasy", "Sword & Sorcery", "Mythological Fantasy",
+  "Street Lit", "Trap Lit", "Drama", "Psychological Thriller", "Legal Thriller",
+  "Crime Thriller", "Detective Mystery", "Supernatural Horror", "Psychological Horror",
+  "Gore / Extreme Horror", "Faith Based", "Sports Romance", "Memoir", "Self-help",
+  "Devotional", "Motivational", "Dystopian"
+];
+
+const VIBE_OPTIONS = [
+  "Hot & Heavy 🌶️", "Worth the Wait (Slow Burn)", "No Breathers (Fast-Paced)",
+  "Emotional Damage", "Soft Life (Cozy)", "Ain't Nothing Sweet (Gritty)",
+  "Dark & Twisted", "Healing / Redemption", "Found Family", "Everybody Got Issues",
+  "Plot gonna Plot", "Character-Driven"
+];
+
+const REPRESENTATION_OPTIONS = [
+  "Plus Size Lead", "Lead with a Disability", "Neurodivergent Characters",
+  "LGBTQ+", "Interracial", "Multicultural", "Seasoned Adults"
+];
+
+function renderOptionGroup(targetId, name, options, max = null) {
+  const target = document.getElementById(targetId);
+
+  target.innerHTML = options.map(option => `
+    <label class="check-card">
+  <input type="checkbox" name="${name}" value="${option}">
+  <span>${option}</span>
+</label>
+  `).join("");
+
+  if (max) {
+    target.addEventListener("change", () => {
+      const checked = Array.from(document.querySelectorAll(`input[name="${name}"]:checked`));
+
+      if (checked.length > max) {
+        checked[checked.length - 1].checked = false;
+        alert(`You can select up to ${max}.`);
+      }
+    });
+  }
+}
+
+    function checkedValues(name) {
+      return Array.from(document.querySelectorAll(`input[name="${name}"]:checked`))
+        .map(input => input.value);
+    }
+
+    async function uploadCover(file, submissionId, title) {
+      const extension = file.name.split(".").pop() || "jpg";
+      const fileName = `${submissionId}-${slugify(title)}.${extension}`;
+      const filePath = `pending/${fileName}`;
+
+      const { error } = await supabaseClient.storage
+        .from("book-submissions")
+        .upload(filePath, file, {
+          cacheControl: "3600",
+          upsert: false
+        });
+
+      if (error) throw error;
+
+      return filePath;
+    }
+
+    function renderCoAuthorTags() {
+  const target = document.getElementById("coAuthorTags");
+
+  target.innerHTML = coAuthors.map((author, index) => `
+    <span class="author-tag ${author.matched ? "" : "unmatched"}">
+      ${author.matched ? "✓ " : ""}${author.name}
+      <button type="button" onclick="removeCoAuthor(${index})">×</button>
+    </span>
+  `).join("");
+}
+
+function removeCoAuthor(index) {
+  coAuthors.splice(index, 1);
+  renderCoAuthorTags();
+}
+
+function addCoAuthor(author) {
+  const name = clean(author.name);
+
+  if (!name) return;
+
+  const duplicate = coAuthors.some(item =>
+    item.name.toLowerCase() === name.toLowerCase()
+  );
+
+  if (duplicate) return;
+
+  coAuthors.push({
+    name,
+    author_id: author.author_id || null,
+    matched: Boolean(author.author_id)
+  });
+
+  document.getElementById("coAuthorInput").value = "";
+  hideCoAuthorSuggestions();
+  renderCoAuthorTags();
+}
+
+function hideCoAuthorSuggestions() {
+  const target = document.getElementById("coAuthorSuggestions");
+  target.classList.add("hidden");
+  target.innerHTML = "";
+}
+
+async function searchApprovedAuthors(query) {
+  const target = document.getElementById("coAuthorSuggestions");
+
+  if (!query || query.length < 2) {
+    hideCoAuthorSuggestions();
+    return;
+  }
+
+  const { data, error } = await supabaseClient
+    .from("authors")
+    .select("AUTHOR_ID, AUTHOR_NAME, GENRES")
+    .ilike("AUTHOR_NAME", `%${query}%`)
+    .eq("APPROVAL", "Approved")
+    .limit(8);
+
+  if (error) {
+    console.error(error);
+    hideCoAuthorSuggestions();
+    return;
+  }
+
+  if (!data || !data.length) {
+    hideCoAuthorSuggestions();
+    return;
+  }
+
+  target.innerHTML = data.map(author => `
+    <button
+      class="suggestion-item"
+      type="button"
+      onclick="addCoAuthor({
+        name: '${String(author.AUTHOR_NAME || "").replace(/'/g, "\\'")}',
+        author_id: '${author.AUTHOR_ID}'
+      })"
+    >
+      ${author.AUTHOR_NAME}
+      <span class="suggestion-meta">${author.GENRES || "Approved BLK Shelf author"}</span>
+    </button>
+  `).join("");
+
+  target.classList.remove("hidden");
+}
+
+function setupCoAuthorPicker() {
+  const input = document.getElementById("coAuthorInput");
+
+  input.addEventListener("input", () => {
+    clearTimeout(coAuthorSearchTimer);
+
+    const query = clean(input.value);
+
+    coAuthorSearchTimer = setTimeout(() => {
+      searchApprovedAuthors(query);
+    }, 250);
+  });
+
+  input.addEventListener("keydown", event => {
+    const value = clean(input.value);
+
+    if ((event.key === "Enter" || event.key === ",") && value) {
+      event.preventDefault();
+
+      addCoAuthor({
+        name: value.replace(/,$/, ""),
+        author_id: null
+      });
+    }
+
+    if (event.key === "Escape") {
+      hideCoAuthorSuggestions();
+    }
+  });
+
+  document.addEventListener("click", event => {
+    if (!document.getElementById("coAuthorPicker").contains(event.target)) {
+      hideCoAuthorSuggestions();
+    }
+  });
+}
+
+function getSubmissionType() {
+  return document.querySelector(
+    'input[name="submissionType"]:checked'
+  )?.value || "new";
+}
+
+function applyModeFromUrl() {
+  const params =
+    new URLSearchParams(
+      window.location.search
+    );
+
+  const mode =
+    clean(params.get("mode"))
+      .toLowerCase();
+
+  const requestedMode =
+    mode === "update"
+      ? "update"
+      : "new";
+
+  const radio =
+    document.querySelector(
+      `input[name="submissionType"][value="${requestedMode}"]`
+    );
+
+  if (radio) {
+    radio.checked = true;
+  }
+
+  setSubmissionMode(
+    requestedMode
+  );
+
+  const title =
+  document.querySelector(
+    ".submit-title"
+  );
+
+const subtitle =
+  document.querySelector(
+    ".submit-subtitle"
+  );
+
+if (requestedMode === "update") {
+  title.textContent =
+    "Update a Book";
+
+  subtitle.textContent =
+    "Select one of your existing books, review the current information, and submit any requested changes for approval.";
+} else {
+  title.textContent =
+    "Submit a Book";
+
+  subtitle.textContent =
+    "Use this form to submit a new book under the approved author profile linked in your approval email.";
+}
+  
+}
+
+function setSubmissionMode(mode) {
+  const updateMode =
+    mode === "update";
+
+  const existingBookField =
+    document.getElementById(
+      "existingBookField"
+    );
+
+  const existingBookSelect =
+    document.getElementById(
+      "existingBookId"
+    );
+
+  const coverInput =
+    document.getElementById("cover");
+
+  existingBookField.classList.toggle(
+    "hidden",
+    !updateMode
+  );
+
+  existingBookSelect.required =
+    updateMode;
+
+  coverInput.required =
+    !updateMode;
+
+  if (!updateMode) {
+    existingBookSelect.value = "";
+    selectedExistingBook = null;
+  }
+}
+
+function normalizeBookList(value) {
+  if (Array.isArray(value)) {
+    return value;
+  }
+
+  if (
+    typeof value === "string" &&
+    value.trim()
+  ) {
+    return value
+      .split(/[,;|]/)
+      .map(item => item.trim())
+      .filter(Boolean);
+  }
+
+  return [];
+}
+
+function normalizeOptionValue(value) {
+  return String(value || "")
+    .normalize("NFKC")
+    .replace(/\uFE0F/g, "")
+    .replace(/[’‘]/g, "'")
+    .replace(/[–—]/g, "-")
+    .replace(/\s+/g, " ")
+    .trim()
+    .toLowerCase();
+}
+
+function applyCheckedValues(
+  containerId,
+  storedValue
+) {
+  const container =
+    document.getElementById(containerId);
+
+  if (!container) {
+    console.error(
+      "Missing checkbox container:",
+      containerId
+    );
+    return;
+  }
+
+  const selectedValues =
+    normalizeBookList(storedValue);
+
+  container
+    .querySelectorAll(
+      'input[type="checkbox"]'
+    )
+    .forEach(input => {
+      input.checked =
+        selectedValues.includes(
+          input.value
+        );
+    });
+}
+
+function formatBookDateForInput(
+  value
+) {
+  if (!value) {
+    return "";
+  }
+
+  const raw =
+    String(value).trim();
+
+  if (
+    /^\d{4}-\d{2}-\d{2}/.test(raw)
+  ) {
+    return raw.slice(0, 10);
+  }
+
+  const date =
+    new Date(value);
+
+  if (
+    Number.isNaN(date.getTime())
+  ) {
+    return "";
+  }
+
+  return date
+    .toISOString()
+    .slice(0, 10);
+}
+
+function normalizeContributors(
+  value
+) {
+  if (Array.isArray(value)) {
+    return value.map(item => {
+      if (
+        typeof item === "string"
+      ) {
+        return {
+          name: item,
+          author_id: null,
+          matched: false
+        };
+      }
+
+      return {
+        name:
+          item.name ||
+          item.author_name ||
+          "",
+        author_id:
+          item.author_id ||
+          item.AUTHOR_ID ||
+          null,
+        matched:
+          Boolean(
+            item.matched ||
+            item.author_id ||
+            item.AUTHOR_ID
+          )
+      };
+    }).filter(item => item.name);
+  }
+
+  if (!value) {
+    return [];
+  }
+
+  if (typeof value === "string") {
+    const trimmed =
+      value.trim();
+
+    if (
+      trimmed.startsWith("[") ||
+      trimmed.startsWith("{")
+    ) {
+      try {
+        return normalizeContributors(
+          JSON.parse(trimmed)
+        );
+      } catch (error) {
+        // Fall through.
+      }
+    }
+
+    return trimmed
+      .split(",")
+      .map(name => ({
+        name: name.trim(),
+        author_id: null,
+        matched: false
+      }))
+      .filter(item => item.name);
+  }
+
+  return [];
+}
+
+function populateExistingBook(
+  book
+) {
+  document.getElementById(
+    "title"
+  ).value =
+    book.Title || "";
+
+  document.getElementById(
+    "releaseDate"
+  ).value =
+    formatBookDateForInput(
+      book[
+        "Release/Expected_Release_Date"
+      ]
+    );
+
+  document.getElementById(
+    "description"
+  ).value =
+    book.Description || "";
+
+  document.getElementById(
+    "primaryGenre"
+  ).value =
+    book.Genre || "";
+
+  document.getElementById(
+    "spiceLevel"
+  ).value =
+    book.Spice_Level || "";
+
+  document.getElementById(
+    "ageRange"
+  ).value =
+    book.Age_Range || "";
+
+  document.getElementById(
+    "wordCount"
+  ).value =
+    book.Word_Count || "";
+
+  document.getElementById(
+    "pageCount"
+  ).value =
+    book.Page_Count || "";
+
+  document.getElementById(
+    "websiteLink"
+  ).value =
+    book.Website_Link || "";
+
+  document.getElementById(
+    "amazonLink"
+  ).value =
+    book.Amazon_Link || "";
+
+  document.getElementById(
+    "bnLink"
+  ).value =
+    book.BN_Link || "";
+
+  document.getElementById(
+    "bookfunnelLink"
+  ).value =
+    book.Bookfunnel_Link || "";
+
+  document.getElementById(
+    "koboLink"
+  ).value =
+    book.Kobo_Link || "";
+
+  document.getElementById(
+    "appleLink"
+  ).value =
+    book.Apple_Books_Link || "";
+
+  document.getElementById(
+    "otherLink"
+  ).value =
+    book.Other_Link || "";
+
+  applyCheckedValues(
+  "subGenresOptions",
+  book.Subgenres ||
+  book.Sub_Genres ||
+  book.sub_genres
+);
+
+applyCheckedValues(
+  "vibesOptions",
+  book.Vibes ||
+  book.vibes
+);
+
+applyCheckedValues(
+  "representationOptions",
+  book.Representation ||
+  book.representation
+);
+
+applyCheckedValues(
+  "availableFormatsOptions",
+  book.Available_Formats ||
+  book.available_formats
+);
+
+  const hasSeries =
+    Boolean(
+      clean(
+        book.Series_Name
+      )
+    );
+
+  document.getElementById(
+    "isSeriesBook"
+  ).checked =
+    hasSeries;
+
+  document.getElementById(
+    "seriesFields"
+  ).classList.toggle(
+    "hidden",
+    !hasSeries
+  );
+
+  document.getElementById(
+    "seriesName"
+  ).value =
+    book.Series_Name || "";
+
+  document.getElementById(
+    "seriesNumber"
+  ).value =
+    book.Series_Number || "";
+
+  document.getElementById(
+    "seriesName"
+  ).required =
+    hasSeries;
+
+  document.getElementById(
+    "seriesNumber"
+  ).required =
+    hasSeries;
+
+  const hasAudiobook =
+    book.Has_Audiobook === true ||
+    String(
+      book.Has_Audiobook || ""
+    ).toLowerCase() === "yes" ||
+    normalizeBookList(
+      book.Available_Formats
+    ).includes("Audiobook");
+
+  document.getElementById(
+    "audiobookCheck"
+  ).checked =
+    hasAudiobook;
+
+  document.getElementById(
+    "audioSection"
+  ).classList.toggle(
+    "hidden",
+    !hasAudiobook
+  );
+
+  document.getElementById(
+    "audioNarrators"
+  ).value =
+    book.Audiobook_Narrators || "";
+
+  document.getElementById(
+    "audiobookLink"
+  ).value =
+    book.Audiobook_Link || "";
+
+  document.getElementById(
+    "kidsCategory"
+  ).value =
+    book.Kids_Category || "";
+
+  coAuthors =
+    normalizeContributors(
+      book.Contributors
+    );
+
+  renderCoAuthorTags();
+
+  document.getElementById(
+    "cover"
+  ).value = "";
+
+  document.getElementById(
+    "submissionNote"
+  ).textContent =
+    "Current book information loaded. Upload a new cover only if the cover needs to be replaced.";
+}
+
+async function loadAuthorBooks(authorId) {
+  const bookSelect =
+    document.getElementById(
+      "existingBookId"
+    );
+
+  bookSelect.innerHTML = `
+    <option value="">
+      Loading books...
+    </option>
+  `;
+
+  const { data, error } =
+    await supabaseClient
+      .from("books")
+      .select("*")
+      .eq("Author_ID", authorId)
+      .eq("Is_Live", "Yes")
+      .order("Title", {
+        ascending: true
+      });
+
+  if (error) {
+    console.error(
+      "Unable to load author books:",
+      error
+    );
+
+    bookSelect.innerHTML = `
+      <option value="">
+        Unable to load books
+      </option>
+    `;
+
+    throw error;
+  }
+
+  authorBooks = data || [];
+
+  if (!authorBooks.length) {
+    bookSelect.innerHTML = `
+      <option value="">
+        No live books found
+      </option>
+    `;
+
+    return;
+  }
+
+  bookSelect.innerHTML = `
+    <option value="">
+      Select a book
+    </option>
+
+    ${authorBooks.map(book => `
+      <option value="${book.Book_ID}">
+        ${book.Title || "Untitled Book"}
+      </option>
+    `).join("")}
+  `;
+}
+
+    async function loadPublicBookForm() {
+  await loadIncludes();
+
+  setupCoAuthorPicker();
+
+  renderOptionGroup(
+    "subGenresOptions",
+    "subGenres",
+    SUBGENRE_OPTIONS,
+    3
+  );
+
+  renderOptionGroup(
+    "vibesOptions",
+    "vibes",
+    VIBE_OPTIONS,
+    3
+  );
+
+  renderOptionGroup(
+    "representationOptions",
+    "representation",
+    REPRESENTATION_OPTIONS
+  );
+
+  const params =
+    new URLSearchParams(window.location.search);
+
+  const submissionId =
+  clean(params.get("submission_id"));
+
+  const authorIdInput =
+  document.getElementById("authorId");
+
+const authorProfileDisplay =
+  document.getElementById(
+    "authorProfileDisplay"
+  );
+
+  if (!submissionId) {
+    authorProfileDisplay.textContent =
+  "Missing approved author link.";
+
+    throw new Error(
+      "This book submission link is incomplete. Please use the link provided in your author approval email."
+    );
+  }
+
+  const { data: author, error } =
+  await supabaseClient
+    .from("authors")
+    .select(
+      "AUTHOR_ID, AUTHOR_NAME, EMAIL, SUBMISSION_ID, APPROVAL"
+    )
+    .eq(
+      "SUBMISSION_ID",
+      submissionId
+    )
+    .eq(
+      "APPROVAL",
+      "Approved"
+    )
+    .maybeSingle();
+
+  if (error) {
+    throw error;
+  }
+
+  if (!author) {
+    authorProfileDisplay.textContent =
+  "Approved author profile not found.";
+
+    throw new Error(
+      "The approved author profile connected to this link could not be found."
+    );
+  }
+
+  approvedAuthor = author;
+
+authorIdInput.value =
+  author.AUTHOR_ID;
+
+authorProfileDisplay.textContent =
+  author.AUTHOR_NAME;
+
+await loadAuthorBooks(
+  author.AUTHOR_ID
+);
+
+applyModeFromUrl();
+}
+
+async function loadIncludes() {
+  const header =
+    await fetch("includes/header.html");
+
+  if (header.ok) {
+    document.getElementById(
+      "site-header"
+    ).innerHTML =
+      await header.text();
+  }
+
+  const footer =
+    await fetch("includes/footer.html");
+
+  if (footer.ok) {
+    document.getElementById(
+      "site-footer"
+    ).innerHTML =
+      await footer.text();
+  }
+}
+
+document
+  .querySelectorAll(
+    'input[name="submissionType"]'
+  )
+  .forEach(input => {
+    input.addEventListener(
+      "change",
+      event => {
+        setSubmissionMode(
+          event.target.value
+        );
+      }
+    );
+  });
+
+document
+  .getElementById("existingBookId")
+  .addEventListener("change", event => {
+    selectedExistingBook =
+      authorBooks.find(
+        book =>
+          book.Book_ID === event.target.value
+      ) || null;
+
+    if (!selectedExistingBook) {
+      return;
+    }
+
+    populateExistingBook(
+      selectedExistingBook
+    );
+  });
+
+    const seriesCheckbox = document.getElementById("isSeriesBook");
+const seriesFields = document.getElementById("seriesFields");
+const seriesName = document.getElementById("seriesName");
+const seriesNumber = document.getElementById("seriesNumber");
+
+seriesCheckbox.addEventListener("change", event => {
+  const enabled = event.target.checked;
+
+  seriesFields.classList.toggle("hidden", !enabled);
+
+  // Make the fields required only when this is a series.
+  seriesName.required = enabled;
+  seriesNumber.required = enabled;
+});
+
+    document.getElementById("audiobookCheck").addEventListener("change", event => {
+  document.getElementById("audioSection").classList.toggle("hidden", !event.target.checked);
+});
+
+    document.getElementById("bookSubmissionForm").addEventListener("submit", async event => {
+      event.preventDefault();
+
+      const note = document.getElementById("submissionNote");
+      const button = document.getElementById("submitButton");
+
+      note.textContent = "";
+      button.disabled = true;
+      button.textContent = "Submitting...";
+
+      try {
+        const authorId =
+  clean(
+    document.getElementById("authorId").value
+  );
+
+const author = approvedAuthor;
+
+if (
+  !author ||
+  author.AUTHOR_ID !== authorId
+) {
+  throw new Error(
+    "The approved author profile could not be verified."
+  );
+}
+
+        const submissionType =
+  getSubmissionType();
+
+const title =
+  clean(
+    document.getElementById("title").value
+  );
+
+const description =
+  clean(
+    document.getElementById("description").value
+  );
+
+const coverFile =
+  document.getElementById("cover").files[0];
+
+  if (coverFile) {
+  const allowedTypes = [
+    "image/jpeg",
+    "image/png",
+    "image/webp"
+  ];
+
+  if (!allowedTypes.includes(coverFile.type)) {
+    throw new Error(
+      "Please upload a JPG, PNG, or WebP image."
+    );
+  }
+
+  const maxSize = 10 * 1024 * 1024; // 10 MB
+
+  if (coverFile.size > maxSize) {
+    throw new Error(
+      "Book covers must be 10 MB or smaller."
+    );
+  }
+}
+
+if (!title || !description) {
+  throw new Error(
+    "Please complete all required fields."
+  );
+}
+
+if (
+  submissionType === "new" &&
+  !coverFile
+) {
+  throw new Error(
+    "A cover is required for a new book submission."
+  );
+}
+
+if (
+  submissionType === "update" &&
+  !selectedExistingBook
+) {
+  throw new Error(
+    "Please select the book you want to update."
+  );
+}
+
+const requestId =
+  generateId(
+    submissionType === "update"
+      ? "BLKBU"
+      : "BLKBS"
+  );
+
+const coverPath =
+  coverFile
+    ? await uploadCover(
+        coverFile,
+        requestId,
+        title
+      )
+    : "";
+
+const subGenres =
+  checkedValues("subGenres");
+
+const vibes =
+  checkedValues("vibes");
+
+const formats =
+  checkedValues("formats");
+
+if (!vibes.length) {
+  throw new Error(
+    "Please select at least one vibe."
+  );
+}
+
+if (!formats.length) {
+  throw new Error(
+    "Please select at least one available format."
+  );
+}
+
+const proposedData = {
+  title,
+  description,
+
+  release_date:
+    clean(
+      document.getElementById(
+        "releaseDate"
+      ).value
+    ) || null,
+
+  series_name:
+    document.getElementById(
+      "isSeriesBook"
+    ).checked
+      ? clean(
+          document.getElementById(
+            "seriesName"
+          ).value
+        )
+      : "",
+
+  series_number:
+    document.getElementById(
+      "isSeriesBook"
+    ).checked
+      ? clean(
+          document.getElementById(
+            "seriesNumber"
+          ).value
+        ) || null
+      : null,
+
+  primary_genre:
+    clean(
+      document.getElementById(
+        "primaryGenre"
+      ).value
+    ),
+
+  sub_genres:
+  subGenres,
+
+vibes:
+  vibes,
+
+  spice_level:
+    clean(
+      document.getElementById(
+        "spiceLevel"
+      ).value
+    ),
+
+  age_range:
+    clean(
+      document.getElementById(
+        "ageRange"
+      ).value
+    ),
+
+  representation:
+    checkedValues(
+      "representation"
+    ),
+
+  available_formats:
+    formats,
+
+  retailer_links: {
+    website:
+      clean(
+        document.getElementById(
+          "websiteLink"
+        ).value
+      ),
+
+    amazon:
+      clean(
+        document.getElementById(
+          "amazonLink"
+        ).value
+      ),
+
+    barnes_noble:
+      clean(
+        document.getElementById(
+          "bnLink"
+        ).value
+      ),
+
+    bookfunnel:
+      clean(
+        document.getElementById(
+          "bookfunnelLink"
+        ).value
+      ),
+
+    kobo:
+      clean(
+        document.getElementById(
+          "koboLink"
+        ).value
+      ),
+
+    apple_books:
+      clean(
+        document.getElementById(
+          "appleLink"
+        ).value
+      ),
+
+    other:
+      clean(
+        document.getElementById(
+          "otherLink"
+        ).value
+      )
+  },
+
+  word_count:
+    clean(
+      document.getElementById(
+        "wordCount"
+      ).value
+    ) || null,
+
+  page_count:
+    clean(
+      document.getElementById(
+        "pageCount"
+      ).value
+    ) || null,
+
+  audio: {
+    has_audiobook:
+      formats.includes(
+        "Audiobook"
+      ),
+
+    narrators:
+      clean(
+        document.getElementById(
+          "audioNarrators"
+        ).value
+      ),
+
+    link:
+      clean(
+        document.getElementById(
+          "audiobookLink"
+        ).value
+      )
+  },
+
+  kids: {
+    category:
+      clean(
+        document.getElementById(
+          "kidsCategory"
+        ).value
+      )
+  },
+
+  co_authors:
+    coAuthors
+};
+
+if (submissionType === "new") {
+  const payload = {
+    submission_id:
+      requestId,
+
+    account_id:
+      null,
+
+    author_id:
+      author.AUTHOR_ID,
+
+    author_name:
+      author.AUTHOR_NAME,
+
+    email:
+      author.EMAIL || "",
+
+    ...proposedData,
+
+    cover_path:
+      coverPath,
+
+    series_id:
+      null,
+
+    submission_status:
+      "pending",
+
+    submission_source:
+      "approved_author_book_form"
+  };
+
+  const { error } =
+    await supabaseClient
+      .from("book_submissions")
+      .insert(payload);
+
+  if (error) {
+    throw error;
+  }
+} else {
+  const updatePayload = {
+    request_id:
+      requestId,
+
+    book_id:
+      selectedExistingBook.Book_ID,
+
+    author_id:
+      author.AUTHOR_ID,
+
+    author_name:
+      author.AUTHOR_NAME,
+
+    email:
+      author.EMAIL || "",
+
+    proposed_data:
+      proposedData,
+
+    replacement_cover_path:
+      coverPath || null,
+
+    request_status:
+      "pending",
+
+    submission_source:
+      "approved_author_book_form"
+  };
+
+  const { error } =
+    await supabaseClient
+      .from("book_update_requests")
+      .insert(updatePayload);
+
+  if (error) {
+  console.error(error);
+  alert(JSON.stringify(error, null, 2));
+  throw error;
+}
+}
+
+window.location.href =
+  `submission-received.html` +
+  `?id=${encodeURIComponent(requestId)}` +
+  `&type=${encodeURIComponent(
+    submissionType === "update"
+      ? "book-update"
+      : "book"
+  )}` +
+  `&submission_id=${encodeURIComponent(
+    approvedAuthor.SUBMISSION_ID
+  )}`;
+
+      } catch (error) {
+        console.error(error);
+        note.textContent = error.message || "Unable to submit book.";
+      } finally {
+        button.disabled = false;
+        button.textContent = "Submit Book for Review";
+      }
+    });
+
+    loadPublicBookForm().catch(error => {
+  console.error(error);
+
+  document.getElementById(
+    "submissionNote"
+  ).textContent =
+    error.message ||
+    "Unable to load the book submission form.";
+
+  document.getElementById(
+    "submitButton"
+  ).disabled = true;
+});
+  </script>
+
+  <script src="includes/shared.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Submit an Event – The BLK Shelf</title>
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  />
+
+  <link rel="stylesheet" href="includes/shared.css">
+
+  <style>
+    :root {
+      --bg: #0f0c0a;
+      --text: #fff8f0;
+      --muted: #e3d2c0;
+      --soft: #c9b7a5;
+      --accent: #d8a35d;
+      --line: rgba(255,255,255,0.18);
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      color: var(--text);
+      line-height: 1.6;
+      background:
+        linear-gradient(rgba(15, 12, 10, 0.5), rgba(15, 12, 10, 0.5)),
+        url("https://njgprucvnayyiooiftaw.supabase.co/storage/v1/object/public/logo/bckgrnd.png");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    header {
+      padding: 2rem 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .page {
+      padding: 2.5rem 0 4rem;
+    }
+
+    .event-form-card {
+      background: linear-gradient(180deg, #3f2e23, #241d17);
+      border: 1px solid rgba(255,255,255,0.22);
+      border-radius: 28px;
+      padding: 2rem;
+      box-shadow:
+        0 12px 30px rgba(0,0,0,0.35),
+        inset 0 1px 0 rgba(255,255,255,0.05);
+    }
+
+    .eyebrow {
+      display: inline-block;
+      padding: 0.42rem 0.88rem;
+      border: 1px solid rgba(216,163,93,0.24);
+      border-radius: 999px;
+      background: rgba(216,163,93,0.08);
+      color: #f2cb98;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      font-size: clamp(2.4rem, 5vw, 4.3rem);
+      line-height: 0.98;
+      margin: 0.9rem 0 0.8rem;
+      letter-spacing: -0.03em;
+    }
+
+    .intro {
+      color: var(--muted);
+      max-width: 56rem;
+      font-size: 1.05rem;
+      margin: 0 0 1.8rem;
+    }
+
+    .form-section {
+      margin-top: 1.5rem;
+      padding: 1.25rem;
+      border-radius: 22px;
+      background: rgba(15,12,10,0.45);
+      border: 1px solid rgba(255,255,255,0.14);
+    }
+
+    .form-section h2 {
+      margin: 0 0 1rem;
+      color: #f2c994;
+      font-size: 1.35rem;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+
+    .form-grid.three {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .form-field.full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      color: var(--muted);
+      font-size: 0.92rem;
+      font-weight: bold;
+    }
+
+    .field {
+      width: 100%;
+      padding: 0.9rem 1rem;
+      border-radius: 14px;
+      border: 2px solid rgba(255,255,255,0.25);
+      background: #17100c;
+      color: var(--text);
+      font: inherit;
+    }
+
+    textarea.field {
+      min-height: 150px;
+      resize: vertical;
+    }
+
+    .field::placeholder {
+      color: var(--soft);
+    }
+
+    .field:focus {
+      outline: 3px solid #f2c994;
+      border-color: #f2c994;
+    }
+
+    .pill-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin-top: 0.5rem;
+}
+
+.pill-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  width: fit-content;
+  padding: 0.55rem 0.8rem;
+  border-radius: 999px;
+  background: rgba(216,163,93,0.08);
+  border: 1px solid rgba(216,163,93,0.22);
+  color: var(--muted);
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.pill-check input {
+  accent-color: var(--accent);
+}
+
+    .checkbox-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
+    }
+
+    .checkbox-grid.two {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+    .check-card {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.75rem;
+      border-radius: 14px;
+      background: rgba(216,163,93,0.08);
+      border: 1px solid rgba(216,163,93,0.18);
+      color: var(--muted);
+      cursor: pointer;
+    }
+
+    .check-card input {
+      accent-color: var(--accent);
+    }
+
+    .conditional-section {
+      display: none;
+    }
+
+    .conditional-section.active {
+      display: block;
+    }
+
+    .form-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 1.8rem;
+    }
+
+    .submit-btn {
+      border: none;
+      cursor: pointer;
+      padding: 0.75rem 1.3rem;
+      background: #d8a35d;
+      color: #120e0b;
+      border-radius: 999px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      transition: 0.2s ease;
+      font-family: inherit;
+    }
+
+    .submit-btn:hover {
+      background: #e6b06a;
+      transform: translateY(-1px);
+    }
+
+    .form-note {
+      color: var(--soft);
+      font-size: 0.9rem;
+    }
+
+    .success-message {
+      display: none;
+      margin-top: 1.5rem;
+      padding: 1rem 1.1rem;
+      border-radius: 18px;
+      background: rgba(216,163,93,0.08);
+      border: 1px solid rgba(216,163,93,0.22);
+      color: var(--muted);
+    }
+
+    .success-message.active {
+      display: block;
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 2rem 0 2.2rem;
+      color: var(--soft);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 850px) {
+      .form-grid,
+      .form-grid.three,
+      .checkbox-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      body {
+        background:
+          linear-gradient(rgba(15, 12, 10, 0.5), rgba(15, 12, 10, 0.5)),
+          url("https://njgprucvnayyiooiftaw.supabase.co/storage/v1/object/public/logo/bckgrnd-mobile.png");
+        background-size: cover;
+        background-position: center top;
+        background-repeat: no-repeat;
+        background-attachment: scroll;
+      }
+
+      header {
+        padding: 1.3rem 0 1.7rem;
+      }
+
+      .event-form-card {
+        padding: 1.15rem;
+        border-radius: 22px;
+      }
+
+      h1 {
+        font-size: 2.35rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div id="site-header"></div>
+</header>
+
+<main class="page">
+  <div class="container">
+    <div class="event-form-card">
+      <span class="eyebrow">Submit an Event</span>
+
+      <h1>Share a <span style="color:#d8a35d;">Bookish Event</span></h1>
+
+      <p class="intro">
+        Submit author signings, book festivals, conventions, workshops, virtual events, reader meetups, and community events for possible inclusion on The BLK Shelf.
+      </p>
+
+      <form id="submitEventForm">
+
+        <section class="form-section">
+          <h2>Event Basics</h2>
+
+          <div class="form-grid">
+            <div class="form-field">
+              <label for="eventName">Event Name *</label>
+              <input class="field" id="eventName" name="event_name" type="text" required>
+            </div>
+
+            <div class="form-field full">
+  <label>Event Type *</label>
+  <div class="pill-options">
+    <label class="pill-check"><input type="checkbox" name="event_types" value="Author Signing"> Author Signing</label>
+    <label class="pill-check"><input type="checkbox" name="event_types" value="Author Meetup"> Author Meetup</label>
+    <label class="pill-check"><input type="checkbox" name="event_types" value="Book Festival"> Book Festival</label>
+    <label class="pill-check"><input type="checkbox" name="event_types" value="Book Fair"> Book Fair</label>
+    <label class="pill-check"><input type="checkbox" name="event_types" value="Convention"> Convention</label>
+    <label class="pill-check"><input type="checkbox" name="event_types" value="Workshop"> Workshop</label>
+    <label class="pill-check"><input type="checkbox" name="event_types" value="Panel"> Panel</label>
+    <label class="pill-check"><input type="checkbox" name="event_types" value="Writing Conference"> Writing Conference</label>
+    <label class="pill-check"><input type="checkbox" name="event_types" value="Literary Festival"> Literary Festival</label>
+    <label class="pill-check"><input type="checkbox" name="event_types" value="Book Club"> Book Club</label>
+    <label class="pill-check"><input type="checkbox" name="event_types" value="Reader Meetup"> Reader Meetup</label>
+    <label class="pill-check"><input type="checkbox" name="event_types" value="Vendor Market"> Vendor Market</label>
+    <label class="pill-check"><input type="checkbox" name="event_types" value="Virtual Event"> Virtual Event</label>
+    <label class="pill-check"><input type="checkbox" name="event_types" value="Community Event"> Community Event</label>
+    <label class="pill-check"><input type="checkbox" name="event_types" value="Other"> Other</label>
+  </div>
+</div>
+
+            <div class="form-field full">
+              <label for="description">Event Description *</label>
+              <textarea class="field" id="description" name="description" required></textarea>
+            </div>
+          </div>
+        </section>
+
+        <section class="form-section">
+          <h2>Flyer Upload</h2>
+
+          <div class="form-field">
+            <label for="flyerImage">Event Flyer</label>
+            <input class="field" id="flyerImage" name="flyer_image" type="file" accept=".jpg,.jpeg,.png,.webp">
+          </div>
+        </section>
+
+
+
+        <section class="form-section">
+          <h2>Date & Time</h2>
+
+          <div class="form-grid three">
+            <div class="form-field">
+              <label for="startDate">Start Date *</label>
+              <input class="field" id="startDate" name="start_date" type="date" required>
+            </div>
+
+            <div class="form-field">
+              <label for="endDate">End Date</label>
+              <input class="field" id="endDate" name="end_date" type="date">
+            </div>
+
+            <div class="form-field">
+              <label for="timezone">Time Zone</label>
+              <input class="field" id="timezone" name="timezone" type="text" placeholder="Eastern, Central, etc.">
+            </div>
+
+            <div class="form-field">
+              <label for="startTime">Start Time</label>
+              <input class="field" id="startTime" name="start_time" type="time">
+            </div>
+
+            <div class="form-field">
+              <label for="endTime">End Time</label>
+              <input class="field" id="endTime" name="end_time" type="time">
+            </div>
+
+            <div class="form-field full">
+  <label>Does this event repeat?</label>
+  <div class="pill-options">
+  <label class="pill-check">
+    <input type="radio" name="repeat_frequency" value="No" checked>
+    No
+  </label>
+
+  <label class="pill-check">
+    <input type="radio" name="repeat_frequency" value="Weekly">
+    Weekly
+  </label>
+
+  <label class="pill-check">
+    <input type="radio" name="repeat_frequency" value="Monthly">
+    Monthly
+  </label>
+
+  <label class="pill-check">
+    <input type="radio" name="repeat_frequency" value="Annually">
+    Annually
+  </label>
+</div>
+</div>
+          </div>
+        </section>
+
+        <section class="form-section">
+          <h2>Location</h2>
+
+          <div class="form-grid">
+            <div class="form-field">
+              <label for="eventFormat">Event Format *</label>
+              <select class="field" id="eventFormat" name="event_format" required>
+                <option value="">Select format</option>
+                <option>In-Person</option>
+                <option>Virtual</option>
+                <option>Hybrid</option>
+              </select>
+            </div>
+
+            <div class="form-field">
+              <label for="venueName">Venue Name</label>
+              <input class="field" id="venueName" name="venue_name" type="text">
+            </div>
+
+            <div class="form-field full">
+              <label for="streetAddress">Street Address</label>
+              <input class="field" id="streetAddress" name="street_address" type="text">
+            </div>
+
+            <div class="form-field">
+              <label for="city">City</label>
+              <input class="field" id="city" name="city" type="text">
+            </div>
+
+            <div class="form-field">
+              <label for="state">State</label>
+              <input class="field" id="state" name="state" type="text">
+            </div>
+
+            <div class="form-field">
+              <label for="zipCode">ZIP Code</label>
+              <input class="field" id="zipCode" name="zip_code" type="text">
+            </div>
+
+            <div class="form-field">
+              <label for="country">Country</label>
+              <input class="field" id="country" name="country" type="text" value="United States">
+            </div>
+
+            <div class="form-field full conditional-section" id="virtualLinkWrap">
+              <label for="virtualLink">Virtual Event Link (include https://)</label>
+              <input class="field" id="virtualLink" name="virtual_link" type="url">
+            </div>
+          </div>
+        </section>
+
+        <section class="form-section">
+          <h2>Tickets & Links</h2>
+
+          <div class="form-grid">
+            <div class="form-field">
+  <label for="ticketPrice">Ticket Price / Range</label>
+  <input class="field" id="ticketPrice" name="ticket_price" type="text" placeholder="$10, $25–$50, sliding scale">
+
+  <div style="margin-top:0.75rem;">
+    <label class="pill-check">
+      <input type="checkbox" name="free_event" value="true">
+      Free Event
+    </label>
+  </div>
+</div>
+
+            <div class="form-field">
+              <label for="registrationLink">Ticket / Registration Link</label>
+              <input class="field" id="registrationLink" name="registration_link" type="url">
+            </div>
+
+            <div class="form-field full">
+              <label for="eventWebsite">Official Event Website (include https://)</label>
+              <input class="field" id="eventWebsite" name="event_website" type="url">
+            </div>
+          </div>
+        </section>
+
+        <section class="form-section">
+          <h2>Vendor Opportunities</h2>
+
+          <div class="form-grid">
+            <div class="form-field full">
+  <label>Are vendors being accepted?</label>
+  <div class="pill-options">
+  <label class="pill-check">
+    <input type="radio" name="vendor_available" value="false" checked>
+    No
+  </label>
+
+  <label class="pill-check">
+    <input type="radio" name="vendor_available" value="true">
+    Yes
+  </label>
+</div>
+</div>
+
+            <div class="form-field conditional-section" id="vendorDeadlineWrap">
+              <label for="vendorDeadline">Vendor Deadline</label>
+              <input class="field" id="vendorDeadline" name="vendor_deadline" type="date">
+            </div>
+
+            <div class="form-field conditional-section" id="vendorFeeWrap">
+              <label for="vendorFee">Vendor Fee / Range</label>
+              <input class="field" id="vendorFee" name="vendor_fee" type="text">
+            </div>
+
+            <div class="form-field full conditional-section" id="vendorLinkWrap">
+              <label for="vendorApplicationLink">Vendor Application Link</label>
+              <input class="field" id="vendorApplicationLink" name="vendor_application_link" type="url">
+            </div>
+          </div>
+        </section>
+
+        <section class="form-section">
+          <h2>Discoverability</h2>
+
+          <label>Audience</label>
+          <div class="pill-options" id="audienceOptions">
+  <label class="pill-check"><input type="checkbox" name="audiences" value="Children"> Children</label>
+  <label class="pill-check"><input type="checkbox" name="audiences" value="Middle Grade"> Middle Grade</label>
+  <label class="pill-check"><input type="checkbox" name="audiences" value="Young Adult"> Young Adult</label>
+  <label class="pill-check"><input type="checkbox" name="audiences" value="Adult"> Adult</label>
+  <label class="pill-check"><input type="checkbox" name="audiences" value="All Ages" id="allAgesCheckbox"> All Ages</label>
+</div>
+
+          <br>
+
+          <label>Genres</label>
+          <div class="pill-options">
+  <label class="pill-check"><input type="checkbox" name="genres" value="Romance"> Romance</label>
+  <label class="pill-check"><input type="checkbox" name="genres" value="Fantasy"> Fantasy</label>
+  <label class="pill-check"><input type="checkbox" name="genres" value="Science Fiction"> Science Fiction</label>
+  <label class="pill-check"><input type="checkbox" name="genres" value="Mystery"> Mystery</label>
+  <label class="pill-check"><input type="checkbox" name="genres" value="Thriller"> Thriller</label>
+  <label class="pill-check"><input type="checkbox" name="genres" value="Poetry"> Poetry</label>
+  <label class="pill-check"><input type="checkbox" name="genres" value="Nonfiction"> Nonfiction</label>
+  <label class="pill-check"><input type="checkbox" name="genres" value="General"> General</label>
+</div>
+
+          <br>
+
+          <label>Event Focus</label>
+          <div class="pill-options">
+  <label class="pill-check"><input type="checkbox" name="event_focus" value="Black Authors"> Black Authors</label>
+  <label class="pill-check"><input type="checkbox" name="event_focus" value="Indie Authors"> Indie Authors</label>
+  <label class="pill-check"><input type="checkbox" name="event_focus" value="Readers"> Readers</label>
+  <label class="pill-check"><input type="checkbox" name="event_focus" value="Writers"> Writers</label>
+  <label class="pill-check"><input type="checkbox" name="event_focus" value="Vendors"> Vendors</label>
+  <label class="pill-check"><input type="checkbox" name="event_focus" value="Families"> Families</label>
+</div>
+        </section>
+
+        <section class="form-section">
+          <h2>Additional Details</h2>
+
+          <div class="form-grid">
+            <div class="form-field full">
+              <label for="featuredAuthors">Featured Authors Appearing</label>
+              <input class="field" id="featuredAuthors" name="featured_authors" type="text" placeholder="Separate names with commas">
+            </div>
+
+            <div class="form-field full">
+              <label for="accessibilityNotes">Accessibility Notes</label>
+              <textarea class="field" id="accessibilityNotes" name="accessibility_notes"></textarea>
+            </div>
+
+            <div class="form-field full">
+              <label for="parkingNotes">Parking Notes</label>
+              <textarea class="field" id="parkingNotes" name="parking_notes"></textarea>
+            </div>
+
+            <label class="pill-check">
+  <input type="checkbox" name="family_friendly" value="true">
+  Family Friendly
+</label>
+          </div>
+        </section>
+
+                <section class="form-section">
+          <h2>Organizer Information</h2>
+
+          <div class="form-grid">
+            <div class="form-field">
+              <label for="organizerName">Organizer Name *</label>
+              <input class="field" id="organizerName" name="organizer_name" type="text" required>
+            </div>
+
+            <div class="form-field">
+              <label for="organizerEmail">Organizer Email *</label>
+              <input class="field" id="organizerEmail" name="organizer_email" type="email" required>
+            </div>
+
+            <div class="form-field">
+              <label for="organizerWebsite">Organizer Website (include https://)</label>
+              <input class="field" id="organizerWebsite" name="organizer_website" type="url">
+            </div>
+
+            <div class="form-field">
+              <label for="organizerSocial">Organizer Social Media (include https://)</label>
+              <input class="field" id="organizerSocial" name="organizer_social" type="text">
+            </div>
+          </div>
+        </section>
+
+        <section class="form-section">
+          <label class="check-card">
+            <input type="checkbox" id="permissionConfirm" required>
+            I confirm I am authorized to submit this event and any attached images.
+          </label>
+        </section>
+
+        <div class="form-actions">
+  <button class="submit-btn" type="submit">
+    Submit Event
+  </button>
+
+  <span class="form-note">
+    Submitted events are reviewed before appearing on The BLK Shelf.
+  </span>
+</div>
+
+      </form>
+    </div>
+  </div>
+</main>
+
+<footer id="site-footer"></footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="admin/js/supabase.js"></script>
+
+<script>
+function getCheckedValues(name) {
+  return Array.from(document.querySelectorAll(`input[name="${name}"]:checked`))
+    .map(input => input.value);
+}
+
+function toggleConditionalFields() {
+  const eventFormat = document.getElementById("eventFormat").value;
+
+  const hasVirtual =
+    eventFormat === "Virtual" ||
+    eventFormat === "Hybrid";
+
+  const vendorAvailable =
+    document.querySelector('input[name="vendor_available"]:checked')?.value === "true";
+
+  document.getElementById("virtualLinkWrap").classList.toggle("active", hasVirtual);
+
+  document.getElementById("vendorDeadlineWrap").classList.toggle("active", vendorAvailable);
+  document.getElementById("vendorFeeWrap").classList.toggle("active", vendorAvailable);
+  document.getElementById("vendorLinkWrap").classList.toggle("active", vendorAvailable);
+}
+
+function handleAudienceLogic(event) {
+  const allAges = document.getElementById("allAgesCheckbox");
+  const audienceBoxes = document.querySelectorAll('input[name="audiences"]');
+
+  if (event.target === allAges && allAges.checked) {
+    audienceBoxes.forEach(box => {
+      if (box !== allAges) box.checked = false;
+    });
+  }
+
+  if (event.target !== allAges && event.target.name === "audiences" && event.target.checked) {
+    allAges.checked = false;
+  }
+}
+
+function collectFormData() {
+  const form = document.getElementById("submitEventForm");
+  const formData = new FormData(form);
+
+  return {
+    event_name: formData.get("event_name"),
+    event_type: getCheckedValues("event_types")[0] || "",
+event_types: getCheckedValues("event_types"),
+    description: formData.get("description"),
+
+    start_date: formData.get("start_date"),
+    end_date: formData.get("end_date") || null,
+    start_time: formData.get("start_time") || null,
+    end_time: formData.get("end_time") || null,
+    timezone: formData.get("timezone") || null,
+
+    event_format: formData.get("event_format"),
+
+    venue_name: formData.get("venue_name") || null,
+    street_address: formData.get("street_address") || null,
+    city: formData.get("city") || null,
+    state: formData.get("state") || null,
+    zip_code: formData.get("zip_code") || null,
+    country: formData.get("country") || "United States",
+
+    virtual_link: formData.get("virtual_link") || null,
+
+    ticket_price: formData.get("ticket_price") || null,
+    registration_link: formData.get("registration_link") || null,
+    event_website: formData.get("event_website") || null,
+
+    vendor_available: formData.get("vendor_available") === "true",
+    vendor_application_link: formData.get("vendor_application_link") || null,
+    vendor_fee: formData.get("vendor_fee") || null,
+    vendor_deadline: formData.get("vendor_deadline") || null,
+
+    audiences: getCheckedValues("audiences"),
+    genres: getCheckedValues("genres"),
+    event_focus: getCheckedValues("event_focus"),
+
+    featured_authors: formData.get("featured_authors") || null,
+    family_friendly: formData.get("family_friendly") === "true",
+    free_event: formData.get("free_event") === "true",
+    accessibility_notes: formData.get("accessibility_notes") || null,
+    parking_notes: formData.get("parking_notes") || null,
+
+    organizer_name: formData.get("organizer_name"),
+    organizer_email: formData.get("organizer_email"),
+    organizer_website: formData.get("organizer_website") || null,
+    organizer_social: formData.get("organizer_social") || null,
+
+    repeat_frequency: formData.get("repeat_frequency") || "No",
+    submission_status: "pending"
+  };
+}
+
+document.getElementById("eventFormat")
+  .addEventListener("change", toggleConditionalFields);
+
+document.querySelectorAll('input[name="vendor_available"]').forEach(input => {
+  input.addEventListener("change", toggleConditionalFields);
+});
+
+document.querySelectorAll('input[name="audiences"]').forEach(input => {
+  input.addEventListener("change", handleAudienceLogic);
+});
+
+document
+  .getElementById("submitEventForm")
+  .addEventListener("submit", async event => {
+
+    event.preventDefault();
+
+    if (!getCheckedValues("event_types").length) {
+      alert("Please select at least one event type.");
+      return;
+    }
+
+    if (!document.getElementById("eventFormat").value) {
+      alert("Please select an event format.");
+      return;
+    }
+
+    const form =
+      document.getElementById("submitEventForm");
+
+    const submitButton =
+      form.querySelector('button[type="submit"]');
+
+    submitButton.disabled = true;
+    submitButton.textContent = "Submitting...";
+
+    let uploadedFlyerPath = null;
+
+    try {
+
+      const payload = collectFormData();
+
+      const flyerFile =
+  document.getElementById(
+    "flyerImage"
+  ).files[0];
+
+if (flyerFile) {
+  const allowedImageTypes = [
+    "image/jpeg",
+    "image/png",
+    "image/webp"
+  ];
+
+  const maxImageSize =
+    10 * 1024 * 1024;
+
+  if (
+    !allowedImageTypes.includes(
+      flyerFile.type
+    )
+  ) {
+    throw new Error(
+      "Please upload the event flyer as a JPG, PNG, or WebP image."
+    );
+  }
+
+  if (
+    flyerFile.size >
+    maxImageSize
+  ) {
+    throw new Error(
+      "Event flyers must be 10 MB or smaller."
+    );
+  }
+
+        const extension =
+          flyerFile.name.split(".").pop().toLowerCase();
+
+        const safeEventName =
+          String(payload.event_name || "event")
+            .toLowerCase()
+            .trim()
+            .replace(/[^a-z0-9]+/g, "-")
+            .replace(/^-+|-+$/g, "");
+
+        uploadedFlyerPath =
+          `pending/${Date.now()}-${safeEventName}.${extension}`;
+
+        const { error: uploadError } =
+          await supabaseClient.storage
+            .from("event-flyers")
+            .upload(
+              uploadedFlyerPath,
+              flyerFile,
+              {
+                cacheControl: "3600",
+                upsert: false,
+                contentType: flyerFile.type
+              }
+            );
+
+        if (uploadError) {
+          throw uploadError;
+        }
+
+        const { data: publicUrlData } =
+          supabaseClient.storage
+            .from("event-flyers")
+            .getPublicUrl(uploadedFlyerPath);
+
+        payload.flyer_storage_path =
+          uploadedFlyerPath;
+
+        payload.event_image_url =
+          publicUrlData?.publicUrl || null;
+      }
+
+      console.log(
+        "Event submission payload:",
+        payload
+      );
+
+      const {
+  data: submittedEvent,
+  error: insertError
+} =
+  await supabaseClient
+    .from("event_submissions")
+    .insert(payload)
+    .select("id")
+    .single();
+
+if (insertError) {
+  throw insertError;
+}
+
+window.location.href =
+  `submission-received.html` +
+  `?id=${encodeURIComponent(
+    submittedEvent.id
+  )}` +
+  `&type=event`;
+
+    } catch (error) {
+
+      console.error(
+        "Event submission failed:",
+        error
+      );
+
+      if (uploadedFlyerPath) {
+        const { error: cleanupError } =
+          await supabaseClient.storage
+            .from("event-flyers")
+            .remove([uploadedFlyerPath]);
+
+        if (cleanupError) {
+          console.error(
+            "Failed to remove uploaded flyer after submission error:",
+            cleanupError
+          );
+        }
+      }
+
+      alert(
+        error.message ||
+        "The event could not be submitted."
+      );
+
+    } finally {
+
+      submitButton.disabled = false;
+      submitButton.textContent =
+        "Submit Event";
+
+    }
+
+  });
+
+async function loadIncludes() {
+  const header = await fetch("includes/header.html");
+  document.getElementById("site-header").innerHTML = await header.text();
+
+  const footer = await fetch("includes/footer.html");
+  document.getElementById("site-footer").innerHTML = await footer.text();
+}
+
+loadIncludes();
+</script>
+
+<script src="includes/shared.js"></script>
+
+</body>
+</html>

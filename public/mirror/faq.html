@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-KZR7W1MNL3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-KZR7W1MNL3');
+  </script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FAQs – The Blk Shelf</title>
+
+  <link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+/>
+
+<link rel="stylesheet" href="includes/shared.css">
+
+  <style>
+    :root {
+      --bg: #0f0c0a;
+      --panel: #1d1814;
+      --text: #fff8f0;
+      --muted: #e3d2c0;
+      --soft: #c9b7a5;
+      --accent: #d8a35d;
+      --line: rgba(255,255,255,0.18);
+      --max: 1100px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      color: var(--text);
+      line-height: 1.6;
+      background:
+        linear-gradient(rgba(15, 12, 10, 0.5), rgba(15, 12, 10, 0.5)),
+        url("https://njgprucvnayyiooiftaw.supabase.co/storage/v1/object/public/logo/bckgrnd.png");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+
+    .page {
+      padding: 2.5rem 0 3.5rem;
+    }
+
+    .faq-card {
+      background: linear-gradient(180deg, #3f2e23, #241d17);
+      border: 1px solid rgba(255,255,255,0.22);
+      border-radius: 24px;
+      padding: 1.8rem;
+      color: var(--text);
+      box-shadow:
+        0 12px 30px rgba(0,0,0,0.35),
+        inset 0 1px 0 rgba(255,255,255,0.05);
+    }
+
+    .eyebrow {
+      display: inline-block;
+      padding: 0.42rem 0.88rem;
+      border: 1px solid rgba(216,163,93,0.24);
+      border-radius: 999px;
+      background: rgba(216,163,93,0.08);
+      color: #f2cb98;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      font-size: clamp(2.4rem, 5vw, 4.2rem);
+      line-height: 0.98;
+      margin: 0.9rem 0 0.8rem;
+      letter-spacing: -0.03em;
+    }
+
+    .intro {
+      color: var(--muted);
+      max-width: 52rem;
+      margin: 0 0 2rem;
+      font-size: 1.05rem;
+    }
+
+    .faq-hero {
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255,255,255,0.16);
+}
+
+    .faq-section {
+      margin-top: 2rem;
+    }
+
+    .faq-section h2 {
+      font-size: 1.8rem;
+      margin: 0 0 1rem;
+      color: var(--text);
+    }
+
+    .accordion {
+      display: grid;
+      gap: 0.8rem;
+    }
+
+    .accordion details {
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.06), transparent 32%),
+    rgba(63,46,35,0.92);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-left: 4px solid rgba(216,163,93,0.65);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.22);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.accordion details:hover {
+  transform: translateY(-2px);
+  border-color: rgba(216,163,93,0.45);
+}
+
+.accordion details[open] {
+  background:
+    linear-gradient(135deg, rgba(216,163,93,0.12), transparent 35%),
+    rgba(63,46,35,0.96);
+}
+
+    .accordion summary {
+  cursor: pointer;
+  padding: 1rem 1.1rem;
+  font-weight: bold;
+  color: var(--text);
+  list-style: none;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.accordion summary::before {
+  content: "✦";
+  color: #f2c994;
+  font-size: 0.95rem;
+}
+
+    .accordion summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .accordion summary::after {
+      content: "+";
+      color: #f2c994;
+      font-size: 1.35rem;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    .accordion details[open] summary::after {
+      content: "–";
+    }
+
+    .accordion details p,
+    .accordion details ul {
+      color: var(--muted);
+      margin: 0;
+      padding: 0 1.1rem 1rem;
+    }
+
+    .accordion details ul {
+      padding-left: 2.2rem;
+    }
+
+    .accordion details li {
+      margin-bottom: 0.35rem;
+    }
+
+    .faq-note {
+      margin-top: 2rem;
+      padding: 1rem 1.1rem;
+      border-radius: 18px;
+      background: rgba(216,163,93,0.08);
+      border: 1px solid rgba(216,163,93,0.22);
+      color: var(--muted);
+    }
+
+    .faq-note a {
+      color: #f2c994;
+      font-weight: bold;
+    }
+
+    a:focus-visible,
+    .accordion summary:focus-visible {
+      outline: 3px solid #f2c994;
+      outline-offset: 3px;
+    }
+
+    @media (max-width: 700px) {
+      body {
+        background:
+          linear-gradient(rgba(15, 12, 10, 0.5), rgba(15, 12, 10, 0.5)),
+          url("https://njgprucvnayyiooiftaw.supabase.co/storage/v1/object/public/logo/bckgrnd-mobile.png");
+        background-size: cover;
+        background-position: center top;
+        background-repeat: no-repeat;
+        background-attachment: scroll;
+      }
+
+      .page {
+        padding: 1.5rem 0 2.5rem;
+      }
+
+      .faq-card {
+        padding: 1.15rem;
+        border-radius: 22px;
+      }
+
+      h1 {
+        font-size: 2.35rem;
+      }
+
+      .intro {
+        font-size: 0.95rem;
+      }
+
+      .faq-section h2 {
+        font-size: 1.45rem;
+      }
+
+      .accordion summary {
+        padding: 0.9rem;
+        font-size: 0.95rem;
+      }
+
+      .accordion details p,
+      .accordion details ul {
+        padding: 0 0.9rem 0.9rem;
+        font-size: 0.92rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div id="site-header"></div>
+</header>
+
+<main class="page">
+  <div class="container">
+    <div class="faq-card">
+      <div class="faq-hero">
+  <span class="eyebrow">Reader & Author Help</span>
+  <h1>Questions, answered.</h1>
+  <p class="intro">
+    Everything readers and authors need to know before they browse, submit, or join the shelf.
+  </p>
+</div>
+
+      <section class="faq-section">
+        <h2>Reader FAQs</h2>
+
+        <div class="accordion">
+          <details>
+            <summary>What is The Blk Shelf?</summary>
+            <p>The Blk Shelf is a discovery platform built to help readers find Black indie books across genres, moods, and story styles without digging through algorithm clutter.</p>
+          </details>
+
+          <details>
+            <summary>How are books added to the site?</summary>
+            <p>Books are submitted by authors and reviewed before being listed. The catalog is not scraped, auto-filled, or randomly pulled from marketplaces.</p>
+          </details>
+
+          <details>
+            <summary>Can I read books directly on The Blk Shelf?</summary>
+            <p>No. The Blk Shelf is for discovery. Book pages link out to available retailers, author websites, BookFunnel, or other places where the author has made the book available.</p>
+          </details>
+
+          <details>
+  <summary>Does The Blk Shelf earn money when I purchase a book?</summary>
+
+  <p>
+    Sometimes. Some retailer links on The Blk Shelf are affiliate
+    links. If you make a qualifying purchase through one of these
+    links, The Blk Shelf may earn a commission at no additional cost
+    to you.
+  </p>
+
+  <p>
+    Affiliate relationships do not influence which books are accepted,
+    listed, featured, or promoted on the platform.
+  </p>
+</details>
+
+          <details>
+            <summary>What does “Trending” mean?</summary>
+            <p>Trending is based on reader activity from the previous completed week. It reflects books readers engaged with across the site.</p>
+          </details>
+
+          <details>
+            <summary>What do the “New” and “Upcoming” badges mean?</summary>
+            <p>“New” means the book was released recently. “Upcoming” means the book has a future release date. These labels are based on release dates submitted by the author.</p>
+          </details>
+
+          <details>
+            <summary>Why do some books have fewer purchase links?</summary>
+            <p>Authors choose which links to submit. Some books may only be available on one retailer, while others may include multiple options like Amazon, Barnes & Noble, Kobo, Apple Books, BookFunnel, or the author’s website.</p>
+          </details>
+
+          <details>
+            <summary>How do I find books by mood or trope?</summary>
+            <p>Use the Library filters. You can browse by genre, sub-genre, vibe, age range, spice level, representation, release type, and more.</p>
+          </details>
+
+          <details>
+            <summary>How do I stay updated?</summary>
+            <p>Join the reader list to receive updates about new books, featured authors, shelf updates, and platform news.</p>
+          </details>
+        </div>
+      </section>
+
+      <section class="faq-section">
+        <h2>Author FAQs</h2>
+
+        <div class="accordion">
+          <details>
+            <summary>Who can submit to The Blk Shelf?</summary>
+            <p>The Blk Shelf is built for Black indie authors, including self-published and independently published authors.</p>
+          </details>
+
+          <details>
+  <summary>What are the representation requirements for books?</summary>
+
+  <p>
+    Books featured on The BLK Shelf should reflect and celebrate Black stories, characters, and experiences.
+  </p>
+
+  <p>
+    If a cover includes human or human-adjacent characters, we strongly encourage visual representation that reflects the book’s Black lead characters or connection to the Black diaspora.
+  </p>
+
+  <p>
+    We understand that some genres — including certain fantasy, sci-fi, paranormal, or creature-based narratives — may not always feature visible human representation on the cover. These submissions are reviewed within the context of the story and overall brand alignment.
+  </p>
+
+  <p>
+    Our goal is to curate a platform where Black readers can easily discover stories that feel seen, represented, and intentional — both within the pages and through the visual presentation of the work.
+  </p>
+
+</details>
+
+          <details>
+            <summary>Is there a fee to be listed?</summary>
+            <p>No. Standard listing on The Blk Shelf is free. There is no pay-to-play requirement for books to appear in the library.</p>
+          </details>
+
+          <details>
+  <summary>Do affiliate links affect my royalties or how my book is featured?</summary>
+
+  <p>
+    No. The Blk Shelf may earn a commission from qualifying purchases
+    made through certain retailer affiliate links, but this does not
+    reduce the royalties paid to authors by the retailer.
+  </p>
+
+  <p>
+    Affiliate participation also does not affect whether a book is
+    accepted, listed, featured, or promoted on The Blk Shelf. Standard
+    listings remain free and are not pay-to-play.
+  </p>
+</details>
+
+          <details>
+            <summary>How do I submit my author information?</summary>
+            <p>Use the author submission form linked on the homepage. This helps create or update your author profile.</p>
+          </details>
+
+          <details>
+            <summary>How do I submit my book?</summary>
+            <p>Use the book submission form linked on the homepage. You can submit book details, cover information, genres, vibes, representation, links, and release date information.</p>
+          </details>
+
+          <details>
+            <summary>Do I need to submit author information before submitting a book?</summary>
+            <p>Yes, ideally. A book can only go fully live once the author profile and book submission are both approved and connected in the system.</p>
+          </details>
+
+          <details>
+            <summary>How long does approval take?</summary>
+            <p>Approval time depends on submission volume and whether the information provided is complete. Incomplete submissions may take longer because they require follow-up or correction.</p>
+          </details>
+
+          <details>
+            <summary>Why isn’t my book live yet?</summary>
+            <p>Common reasons include missing author approval, missing book approval, incomplete links, missing cover information, or a mismatch between the author submission and book submission.</p>
+          </details>
+
+          <details>
+            <summary>Can I update my author profile or book listing?</summary>
+            <p>Yes. If something needs to be corrected or updated, reach out with the requested change.</p>
+          </details>
+
+          <details>
+            <summary>How are featured authors selected?</summary>
+            <p>Featured authors are selected from approved authors who have at least one approved live book on the platform.</p>
+          </details>
+
+          <details>
+            <summary>How does trending work for authors?</summary>
+            <p>Trending is based on reader engagement. Organic discovery carries stronger weight than homepage exposure so the list is not overly influenced by placement alone.</p>
+          </details>
+
+          <details>
+  <summary>Can my book be removed after it’s approved?</summary>
+  <p>
+    Yes. The Blk Shelf reserves the right to remove books or author listings after approval if they no longer meet platform guidelines, contain inaccurate information, or conflict with the purpose of the platform.
+  </p>
+  <p>
+    Authors may also request removal of their own listings at any time.
+  </p>
+</details>
+
+        </div>
+      </section>
+
+      <div class="faq-note">
+        Still need help? Email <a href="mailto:theblkshelfbooks@gmail.com">theblkshelfbooks@gmail.com</a>.
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer id="site-footer"></footer>
+
+<script>
+async function loadIncludes() {
+
+  const header = await fetch('includes/header.html');
+  document.getElementById('site-header').innerHTML =
+    await header.text();
+
+  const footer = await fetch('includes/footer.html');
+  document.getElementById('site-footer').innerHTML =
+    await footer.text();
+}
+
+loadIncludes();
+</script>
+
+<script src="includes/shared.js"></script>
+
+</body>
+</html>

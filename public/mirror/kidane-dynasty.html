@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>The Kidane Dynasty – The BLK Shelf</title>
+
+  <link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+/>
+
+<link rel="stylesheet" href="includes/shared.css">
+
+  <style>
+
+    :root {
+  --bg: #0f0c0a;
+  --bg-soft: #171310;
+  --panel: #1d1814;
+  --panel-2: #241d17;
+
+  --text: #fff8f0;
+  --muted: #e3d2c0;
+  --soft: #c9b7a5;
+  --accent: #d8a35d;
+  --accent-soft: rgba(216,163,93,0.14);
+  --line: rgba(255,255,255,0.18);
+
+  --shadow: 0 22px 60px rgba(0,0,0,0.34);
+  --radius: 24px;
+  --max: 1280px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  color: var(--text);
+  line-height: 1.6;
+  background:
+    linear-gradient(rgba(15, 12, 10, 0.5), rgba(15, 12, 10, 0.5)),
+    url("https://njgprucvnayyiooiftaw.supabase.co/storage/v1/object/public/logo/bckgrnd.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+img {
+  max-width: 100%;
+}
+
+.page {
+  padding: 2rem 0 4rem;
+}
+
+.series-layout {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.series-panel,
+.series-main,
+.series-card {
+  background: linear-gradient(180deg, #3f2e23, #241d17);
+  border: 1px solid rgba(255,255,255,0.22);
+  border-radius: 30px;
+  color: var(--text);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+}
+
+.series-panel {
+  padding: 1.2rem;
+  position: sticky;
+  top: 1rem;
+}
+
+.series-panel img {
+  width: 100%;
+  border-radius: 22px;
+  display: block;
+}
+
+.series-main {
+  padding: 1.6rem;
+}
+
+.series-main h1 {
+  margin: 0.7rem 0 0.55rem;
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+}
+
+.series-card {
+  padding: 1.25rem;
+  margin-top: 1rem;
+}
+
+.series-blurb p {
+  color: var(--muted);
+  margin: 0 0 1rem;
+  line-height: 1.7;
+}
+
+.series-tagline {
+  color: var(--accent) !important;
+  font-weight: bold;
+  font-size: 1.1rem;
+  text-align: center;
+  margin-top: 1.5rem;
+}
+
+.series-shelf {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.03), transparent 18%),
+    linear-gradient(180deg, #2a1d14 0%, #1d140f 100%);
+  border: 12px solid #2b1d13;
+  border-radius: 14px;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,0.03),
+    0 24px 70px rgba(0,0,0,0.45);
+  padding: 0.5rem 0;
+  overflow: hidden;
+}
+
+.series-shelf-row {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  gap: 0.75rem;
+  padding: 2rem 1rem 1rem;
+  min-height: 285px;
+  flex-wrap: nowrap;
+}
+
+.series-shelf-row::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 22px;
+  background:
+    linear-gradient(180deg, #7b5230 0%, #5e3b21 45%, #3f2716 100%);
+  box-shadow:
+    inset 0 2px 0 rgba(255,255,255,0.08),
+    inset 0 -6px 10px rgba(0,0,0,0.35),
+    0 -8px 20px rgba(0,0,0,0.28);
+  z-index: 1;
+}
+
+.series-shelf-row > * {
+  position: relative;
+  z-index: 2;
+}
+
+.series-book-cover-link {
+  width: 112px;
+  flex: 0 0 112px;
+  display: block;
+  transition: transform 0.2s ease;
+}
+
+.series-book-cover-link:hover {
+  transform: translateY(-10px);
+}
+
+.series-book-cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 12px;
+  transition: transform 0.3s ease, filter 0.3s ease;
+  background: rgba(255,255,255,0.04);
+}
+
+.series-book-cover-wrap {
+  position: relative;
+  aspect-ratio: 2 / 3;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.35);
+}
+
+.series-book-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,0.92),
+    rgba(0,0,0,0.45),
+    transparent
+  );
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+
+  padding: 0.75rem;
+  text-align: center;
+
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.series-book-cover-link:hover .series-book-overlay {
+  opacity: 1;
+}
+
+.series-book-cover-link:hover .series-book-cover {
+  transform: scale(1.04);
+  filter: brightness(0.7);
+}
+
+.series-book-number {
+  color: white;
+  font-weight: bold;
+  font-size: 0.9rem;
+  letter-spacing: 0.04em;
+}
+
+@media (max-width: 760px) {
+  .series-shelf {
+    border-width: 7px;
+    border-radius: 12px;
+    padding: 0.25rem 0;
+  }
+
+  .series-shelf-row {
+    justify-content: flex-start;
+    gap: 0.42rem;
+    padding: 1.15rem 0.45rem 0.8rem;
+    min-height: 150px;
+    overflow-x: auto;
+  }
+
+  .series-shelf-row::before {
+    height: 13px;
+  }
+
+  .series-book-cover-link {
+    width: 62px;
+    flex: 0 0 62px;
+  }
+
+  .series-book-cover {
+    border-radius: 9px;
+  }
+}
+
+.breadcrumb {
+  color: var(--soft);
+  font-size: 0.92rem;
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.breadcrumb span {
+  opacity: 0.7;
+}
+
+@media (max-width: 900px) {
+  .series-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .series-panel {
+    position: static;
+  }
+}
+
+@media (max-width: 600px) {
+  body {
+    background:
+      linear-gradient(rgba(15, 12, 10, 0.5), rgba(15, 12, 10, 0.5)),
+      url("https://njgprucvnayyiooiftaw.supabase.co/storage/v1/object/public/logo/bckgrnd-mobile.png");
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+  }
+}
+
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div id="site-header"></div>
+
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="index.html">Home</a>
+      <span>•</span>
+      <a href="library.html">Library</a>
+      <span>•</span>
+      <span>The Kidane Dynasty</span>
+    </div>
+  </div>
+</header>
+
+<main class="page">
+  <div class="container series-layout">
+
+    <aside class="series-panel">
+      <img
+        src="https://njgprucvnayyiooiftaw.supabase.co/storage/v1/object/public/defaults/Combined%20Promo%20Image%203.png"
+        alt="The Kidane Dynasty series image"
+      >
+    </aside>
+
+    <section class="series-main">
+      <h1>The Kidane Dynasty</h1>
+
+      <article class="series-card series-blurb">
+  <h2>About the Series</h2>
+
+  <p>
+    The fate of a kingdom rests in the hands of six extraordinary heirs.
+  </p>
+
+  <p>
+    Born into a royal bloodline blessed with elemental powers, the members of the Kidane Dynasty must navigate political intrigue, dangerous enemies, powerful magic, and life-changing bonds as they fight to protect their family, their kingdom, and their future.
+  </p>
+
+  <p>
+    Each novel follows a different heir on their journey through love, war, destiny, and the burdens of power, while a larger story unfolds that threatens the very foundation of the throne itself.
+  </p>
+
+        <p>
+    Book Six coming soon!
+  </p>
+
+  <p class="series-tagline">
+    Six heirs. Six destinies. One dynasty.
+  </p>
+      </article>
+
+      <article class="series-card">
+  <h2>Books in This Series</h2>
+
+  <div class="series-shelf">
+    <div class="series-shelf-row">
+
+  <a class="series-book-cover-link" href="https://www.theblkshelf.com/book.html?id=BLKB20260602135606UL6J">
+    <div class="series-book-cover-wrap">
+      <img
+        class="series-book-cover"
+        src="https://njgprucvnayyiooiftaw.supabase.co/storage/v1/object/public/covers/BLKB20260602135606UL6J.jpg"
+        alt="Crowned In Flames cover"
+      >
+
+      <div class="series-book-overlay">
+        <span class="series-book-number">Book One</span>
+      </div>
+    </div>
+  </a>
+
+  <a class="series-book-cover-link" href="https://www.theblkshelf.com/book.html?id=BLKB20260606170741X5P0">
+    <div class="series-book-cover-wrap">
+      <img
+        class="series-book-cover"
+        src="https://njgprucvnayyiooiftaw.supabase.co/storage/v1/object/public/covers/BLKB20260606170741X5P0.jpg"
+        alt="Bound By Lightning cover"
+      >
+
+      <div class="series-book-overlay">
+        <span class="series-book-number">Book Two</span>
+      </div>
+    </div>
+  </a>
+
+  <a class="series-book-cover-link" href="https://www.theblkshelf.com/book.html?id=BLKB20260501222906TR9Q">
+    <div class="series-book-cover-wrap">
+      <img
+        class="series-book-cover"
+        src="https://njgprucvnayyiooiftaw.supabase.co/storage/v1/object/public/covers/BLKB20260501222906TR9Q.png"
+        alt="Shadowtide Covenant cover"
+      >
+
+      <div class="series-book-overlay">
+        <span class="series-book-number">Book Three</span>
+      </div>
+    </div>
+  </a>
+
+  <a class="series-book-cover-link" href="https://www.theblkshelf.com/book.html?id=BLKB20260615080710UCF6">
+    <div class="series-book-cover-wrap">
+      <img
+        class="series-book-cover"
+        src="https://njgprucvnayyiooiftaw.supabase.co/storage/v1/object/public/covers/BLKB20260615080710UCF6.png"
+        alt="Blood Under The Wintermoon cover"
+      >
+
+      <div class="series-book-overlay">
+        <span class="series-book-number">Book Four</span>
+      </div>
+    </div>
+  </a>
+
+      <a class="series-book-cover-link" href="https://www.theblkshelf.com/book.html?id=BLKB20260713171237MWLQ">
+    <div class="series-book-cover-wrap">
+      <img
+        class="series-book-cover"
+        src="https://njgprucvnayyiooiftaw.supabase.co/storage/v1/object/public/covers/BLKB20260713171237MWLQ.png"
+        alt="Forbidden Bonda of Ice cover"
+      >
+
+      <div class="series-book-overlay">
+        <span class="series-book-number">Book Five</span>
+      </div>
+    </div>
+  </a>
+
+  <a class="series-book-cover-link" href="https://www.theblkshelf.com/book.html?id=BLKB20260714224726LUWS">
+    <div class="series-book-cover-wrap">
+      <img
+        class="series-book-cover"
+        src="https://njgprucvnayyiooiftaw.supabase.co/storage/v1/object/public/covers/BLKB20260714224726LUWS.png"
+        alt="Icebound Prince of the Frozen Underworld"
+      >
+
+      <div class="series-book-overlay">
+        <span class="series-book-number">Book Six</span>
+      </div>
+    </div>
+  </a>
+
+</div>
+    </section>
+
+  </div>
+</main>
+
+  <footer id="site-footer"></footer>
+
+  <script>
+    async function loadIncludes() {
+      const header = await fetch('includes/header.html');
+      document.getElementById('site-header').innerHTML = await header.text();
+
+      const footer = await fetch('includes/footer.html');
+      document.getElementById('site-footer').innerHTML = await footer.text();
+    }
+
+    loadIncludes();
+  </script>
+
+<script src="includes/shared.js"></script>
+
+</body>
+</html>

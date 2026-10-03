@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KZR7W1MNL3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-KZR7W1MNL3');
+</script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Blk Shelf – Author</title>
+
+  <link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+/>
+
+<link rel="stylesheet" href="includes/shared.css">
+
+  <style>
+    :root {
+  --bg: #0f0c0a;
+  --bg-soft: #171310;
+  --panel: #1d1814;
+  --panel-2: #241d17;
+
+  --text: #fff8f0;
+  --muted: #e3d2c0;
+  --soft: #c9b7a5;
+  --accent: #d8a35d;
+  --accent-soft: rgba(216,163,93,0.14);
+  --line: rgba(255,255,255,0.18);
+
+  --shadow: 0 22px 60px rgba(0,0,0,0.34);
+  --radius: 24px;
+  --max: 1280px;
+}
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  color: var(--text);
+  line-height: 1.6;
+  background:
+    linear-gradient(rgba(15, 12, 10, 0.5), rgba(15, 12, 10, 0.5)),
+    url("https://njgprucvnayyiooiftaw.supabase.co/storage/v1/object/public/logo/bckgrnd.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+    .eyebrow {
+      display: inline-block;
+      padding: 0.42rem 0.88rem;
+      border: 1px solid rgba(216,163,93,0.24);
+      border-radius: 999px;
+      background: rgba(216,163,93,0.08);
+      color: #f2cb98;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .breadcrumb {
+      color: var(--soft);
+      font-size: 0.92rem;
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .breadcrumb span { opacity: 0.7; }
+
+    .page {
+      padding: 2rem 0 4rem;
+    }
+
+    .author-layout {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    .author-photo-panel,
+.author-main,
+.section-card {
+  background: linear-gradient(180deg, #3f2e23, #241d17);
+  border: 1px solid rgba(255,255,255,0.22);
+  border-radius: 30px;
+  color: var(--text);
+  box-shadow:
+    0 12px 30px rgba(0,0,0,0.35),
+    inset 0 1px 0 rgba(255,255,255,0.05);
+}
+
+    .author-photo-panel {
+      padding: 1.2rem;
+      position: sticky;
+      top: 1rem;
+    }
+
+    .author-photo-frame {
+      aspect-ratio: 1 / 1.2;
+      border-radius: 22px;
+      overflow: hidden;
+      background: linear-gradient(180deg, rgba(216,163,93,0.18), rgba(28,21,17,0.88));
+      position: relative;
+    }
+
+    .author-photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .photo-fallback {
+      width: 100%;
+      height: 100%;
+      padding: 1.4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.12), rgba(0,0,0,0.22)),
+        linear-gradient(180deg, #4e2d1f, #24150f);
+      color: #fff9f2;
+    }
+
+    .photo-fallback .mini {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      opacity: 0.82;
+      margin-bottom: 0.6rem;
+    }
+
+    .photo-fallback h2 {
+      margin: 0;
+      font-size: 1.5rem;
+      line-height: 1;
+    }
+
+    .author-actions {
+      display: grid;
+      gap: 0.8rem;
+      margin-top: 1rem;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.92rem 1.15rem;
+      border-radius: 14px;
+      font-weight: bold;
+      font-size: 1rem;
+      border: 1px solid transparent;
+      transition: 0.2s ease;
+      cursor: pointer;
+      text-align: center;
+      font-family: inherit;
+    }
+
+    .btn-primary {
+  background: #e6b06a;
+  color: #120e0b;
+  border: 2px solid #120e0b;
+}
+
+.btn-primary:hover {
+  background: #f2c994;
+}
+
+.btn-secondary {
+  background: #241d17;
+  border: 2px solid rgba(255,255,255,0.3);
+  color: var(--text);
+}
+
+.btn-secondary:hover {
+  background: #3f2e23;
+  border-color: rgba(216,163,93,0.45);
+}
+
+    .author-main {
+      padding: 1.6rem;
+    }
+
+    .author-head h1 {
+      margin: 0.7rem 0 0.55rem;
+      font-size: clamp(2.4rem, 5vw, 4.3rem);
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+    }
+
+    .author-subline {
+      font-size: 1.05rem;
+      color: var(--muted);
+      margin: 0.5rem 0 0;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 1rem;
+    }
+
+    .tag {
+      padding: 0.42rem 0.68rem;
+      border-radius: 999px;
+      border: 1px solid rgba(216,163,93,0.18);
+      background: rgba(216,163,93,0.08);
+      color: var(--muted);
+      font-size: 0.84rem;
+    }
+
+    .section-stack {
+      display: grid;
+      gap: 1rem;
+      margin-top: 1.4rem;
+    }
+
+    .section-card {
+      padding: 1.25rem;
+    }
+
+    .section-card h2 {
+      margin: 0 0 0.7rem;
+      font-size: 1.45rem;
+    }
+
+    .section-card p {
+  color: var(--muted);
+  margin: 0;
+  line-height: 1.7;
+  white-space: pre-wrap;
+}
+
+    .social-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.social-item {
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.03);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.2s ease;
+  color: var(--text);
+}
+
+.social-item:hover {
+  border-color: rgba(216,163,93,0.28);
+  background: rgba(216,163,93,0.12);
+  color: #f2cb98;
+  transform: translateY(-2px);
+}
+
+.social-item svg {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+
+    .works-section {
+      margin-top: 1.5rem;
+    }
+
+    .works-section h2 {
+      margin: 0 0 1rem;
+      font-size: 1.6rem;
+    }
+
+    .mini-shelf {
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.03), transparent 18%),
+        linear-gradient(180deg, #2a1d14 0%, #1d140f 100%);
+      border: 12px solid #2b1d13;
+      border-radius: 14px;
+      box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,0.03),
+        0 24px 70px rgba(0,0,0,0.45);
+      padding: 0.5rem 0;
+      overflow: hidden;
+    }
+
+    .mini-shelf-row {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: end;
+      gap: 1rem;
+      padding: 2rem 1.2rem 1rem;
+      min-height: 300px;
+      flex-wrap: wrap;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.025), transparent 30%),
+        linear-gradient(180deg, rgba(0,0,0,0.18), transparent 20%, transparent 75%, rgba(0,0,0,0.18) 100%);
+    }
+
+    .mini-shelf-row::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 22px;
+      background:
+        linear-gradient(180deg, #7b5230 0%, #5e3b21 45%, #3f2716 100%);
+      box-shadow:
+        inset 0 2px 0 rgba(255,255,255,0.08),
+        inset 0 -6px 10px rgba(0,0,0,0.35),
+        0 -8px 20px rgba(0,0,0,0.28);
+      z-index: 1;
+    }
+
+    .mini-shelf-row > * {
+      position: relative;
+      z-index: 2;
+    }
+
+    .mini-book {
+      position: relative;
+      width: 140px;
+      flex: 0 0 140px;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .mini-book:hover {
+      transform: translateY(-10px);
+      z-index: 10;
+    }
+
+    .mini-book-card {
+      background: linear-gradient(180deg, rgba(29,23,19,0.98), rgba(20,15,12,0.98));
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.35);
+    }
+
+    .mini-book-cover-wrap {
+      position: relative;
+      aspect-ratio: 2 / 3;
+      overflow: hidden;
+      background: rgba(255,255,255,0.04);
+    }
+
+    .mini-book-cover {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.3s ease, filter 0.3s ease;
+    }
+
+    .mini-book:hover .mini-book-cover {
+      transform: scale(1.03);
+      filter: brightness(0.8);
+    }
+
+    .mini-book-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to top,
+        rgba(0,0,0,0.88),
+        rgba(0,0,0,0.45),
+        transparent
+      );
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0.55rem;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+
+    .mini-book:hover .mini-book-overlay {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .mini-book-title {
+      font-size: 0.78rem;
+      font-weight: bold;
+      line-height: 1.2;
+    }
+
+    .mini-book-date {
+      font-size: 0.68rem;
+      opacity: 0.75;
+      margin-top: 0.2rem;
+    }
+
+    .error-box {
+      display: none;
+      padding: 1.25rem;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.06);
+      background: rgba(255,255,255,0.03);
+      color: var(--muted);
+      margin-top: 1rem;
+    }
+
+.social-item,
+.error-box {
+  background: rgba(63,46,35,0.9);
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+    @media (max-width: 1080px) {
+      .author-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .author-photo-panel {
+        position: static;
+      }
+    }
+
+        @media (max-width: 760px) {
+  body {
+    background:
+      linear-gradient(rgba(15, 12, 10, 0.5), rgba(15, 12, 10, 0.5)),
+      url("https://njgprucvnayyiooiftaw.supabase.co/storage/v1/object/public/logo/bckgrnd-mobile.png");
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+  }
+
+      .book-head {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+      .page {
+        padding: 1.4rem 0 2.5rem;
+      }
+
+      .author-layout {
+        gap: 1rem;
+      }
+
+      .author-photo-panel,
+      .author-main,
+      .section-card {
+        border-radius: 22px;
+      }
+
+      .author-photo-panel,
+      .author-main {
+        padding: 1rem;
+      }
+
+      .author-head h1 {
+        font-size: 2.3rem;
+      }
+
+      .works-section {
+        margin-top: 1.1rem;
+      }
+
+      .works-section h2 {
+        font-size: 1.35rem;
+      }
+
+      .mini-shelf {
+        border-width: 7px;
+        border-radius: 12px;
+        padding: 0.25rem 0;
+      }
+
+      .mini-shelf-row {
+        gap: 0.42rem;
+        padding: 1.15rem 0.45rem 0.8rem;
+        min-height: 150px;
+        flex-wrap: nowrap;
+      }
+
+      .mini-shelf-row::before {
+        height: 13px;
+      }
+
+      .mini-book {
+        width: 62px;
+        flex: 0 0 62px;
+      }
+
+      .mini-book-card {
+        border-radius: 9px;
+      }
+
+      .mini-book:hover {
+        transform: translateY(-6px);
+      }
+
+      .mini-book-overlay {
+        display: none;
+      }
+
+    }
+  </style>
+</head>
+<body>
+  <header>
+  <div id="site-header"></div>
+
+  <div class="container">
+    <div class="breadcrumb">
+        <a href="index.html">Home</a>
+        <span>•</span>
+        <a href="featured-authors.html">Featured Authors</a>
+        <span>•</span>
+        <span id="breadcrumb-author">Author</span>
+      </div>
+  </div>
+</header>
+
+  <main class="page">
+    <div class="container author-layout">
+      <aside class="author-photo-panel">
+        <div class="author-photo-frame">
+          <img id="author-photo" src="" alt="Author photo" style="display:none;" />
+          <div class="photo-fallback" id="photo-fallback">
+            <div class="mini">Featured Author</div>
+            <h2 id="fallback-author-name">Loading...</h2>
+          </div>
+        </div>
+
+        <div class="author-actions">
+          <a class="btn btn-primary" id="website-link" href="#" target="_blank" rel="noopener noreferrer">Visit Website</a>
+          <a class="btn btn-secondary" href="library.html">Browse Library</a>
+        </div>
+      </aside>
+
+      <section class="author-main">
+        <span class="eyebrow" id="author-spotlight-badge" style="display:none;">Featured Author</span>
+
+        <div class="author-head">
+          <h1 id="author-name">Loading...</h1>
+          <p class="author-subline">Discover this author’s work, bio, and socials.</p>
+        </div>
+
+        <div class="tag-row" id="genre-tags">
+          <span class="tag">Loading</span>
+        </div>
+
+        <div class="section-stack">
+          <article class="section-card">
+            <h2>About the Author</h2>
+            <p id="author-bio">Loading biography...</p>
+          </article>
+
+          <article class="section-card" id="socials-card">
+            <h2>Socials & Links</h2>
+            <div class="social-list" id="socials-list"></div>
+          </article>
+        </div>
+
+        <div class="works-section">
+          <h2>Books by This Author</h2>
+          <div class="mini-shelf" id="works-shelf"></div>
+        </div>
+
+        <div class="error-box" id="error-box">
+          We couldn’t load this author. Check the author ID in the URL and make sure the sheet has a matching approved row.
+        </div>
+      </section>
+    </div>
+  </main>
+
+<footer id="site-footer"></footer>
+
+  <script>
+    const API_URL = "https://script.google.com/macros/s/AKfycbxwQ5u0HwWY4ssrxfNaRffXiuPwx4wDwJEwT4Ay5DduHcu3z2Y53KBR4KiVMvGWUlV5zw/exec";
+
+    const SUPABASE_URL = "https://njgprucvnayyiooiftaw.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5qZ3BydWN2bmF5eWlvb2lmdGF3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc3NDg0ODMsImV4cCI6MjA5MzMyNDQ4M30.1r6r8vyYB0PnrZtugcBz3CPuCP9MMlTTMYXfewEINNw";
+
+async function supabaseFetch(path) {
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/${path}`, {
+    headers: {
+      apikey: SUPABASE_ANON_KEY,
+      Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+      Accept: "application/json"
+    }
+  });
+
+  if (!res.ok) {
+    throw new Error(`Supabase request failed: ${res.status}`);
+  }
+
+  return await res.json();
+}
+
+async function loadAllPublicBooks() {
+  const pageSize = 1000;
+  let from = 0;
+  let allBooks = [];
+
+  while (true) {
+    const res = await fetch(
+      `${SUPABASE_URL}/rest/v1/public_books?select=*&Is_Live=eq.Yes&order=Title.asc`,
+      {
+        headers: {
+          apikey: SUPABASE_ANON_KEY,
+          Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+          Accept: "application/json",
+          Range: `${from}-${from + pageSize - 1}`,
+          Prefer: "count=exact"
+        }
+      }
+    );
+
+    if (!res.ok) {
+      throw new Error(`Supabase books request failed: ${res.status}`);
+    }
+
+    const batch = await res.json();
+    allBooks = allBooks.concat(batch || []);
+
+    if (!batch || batch.length < pageSize) {
+      break;
+    }
+
+    from += pageSize;
+  }
+
+  return allBooks;
+}
+    
+    const DEFAULT_AUTHOR = `${SUPABASE_URL}/storage/v1/object/public/defaults/author-default.jpg`;
+const DEFAULT_COVER = `${SUPABASE_URL}/storage/v1/object/public/defaults/cover-default.jpg`;
+
+    function getAuthorId() {
+      const params = new URLSearchParams(window.location.search);
+      return params.get("id");
+    }
+
+    function getSourceParam() {
+  const params = new URLSearchParams(window.location.search);
+  return params.get("source");
+}
+
+    function textOrFallback(value, fallback = "—") {
+      if (value === null || value === undefined) return fallback;
+      const str = String(value).trim();
+      return str ? str : fallback;
+    }
+
+    function normalizeUrl(url) {
+      const value = textOrFallback(url, "");
+      if (!value || /^(?:n\/?a|none|null|undefined|#)$/i.test(value)) return "";
+      if (/^[a-z][a-z\d+.-]*:/i.test(value) && !/^https?:\/\//i.test(value)) return "";
+      try {
+        const link = new URL(/^https?:\/\//i.test(value) ? value : `https://${value.replace(/^\/\//, "")}`);
+        return /\./.test(link.hostname) && !link.username && !link.password ? link.href : "";
+      } catch { return ""; }
+    }
+
+    function socialUrl(value, platform) {
+      const raw = String(value || "").trim();
+      if (!raw || /^(?:n\/?a|none|null|undefined|#)$/i.test(raw)) return "";
+      if (!/\.(?:com|net|org|co|io)$/i.test(raw) && /^@?[a-z\d_.-]+$/i.test(raw)) {
+        const handle = raw.replace(/^@/, "");
+        if (platform === "TikTok") return `https://www.tiktok.com/@${encodeURIComponent(handle)}`;
+        if (platform === "Instagram") return `https://www.instagram.com/${encodeURIComponent(handle)}/`;
+        if (platform === "Facebook") return `https://www.facebook.com/${encodeURIComponent(handle)}`;
+        if (platform === "Substack") return `https://${handle}.substack.com/`;
+      }
+      return normalizeUrl(raw);
+    }
+
+    function splitToArray(value) {
+      if (!value) return [];
+      if (Array.isArray(value)) {
+        return value.map(v => String(v).trim()).filter(Boolean);
+      }
+      return String(value)
+        .split(",")
+        .map(v => v.trim())
+        .filter(Boolean);
+    }
+
+    function normalizeAuthorName(value) {
+  return String(value || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim();
+}
+
+function parseContributors(value) {
+
+  if (!value) return [];
+
+  let contributors = value;
+
+  if (typeof contributors === "string") {
+
+    try {
+      contributors = JSON.parse(contributors);
+    } catch {
+
+      contributors = contributors
+        .split(",")
+        .map(name => name.trim())
+        .filter(Boolean);
+
+    }
+
+  }
+
+  if (!Array.isArray(contributors)) {
+    contributors = [contributors];
+  }
+
+  return contributors
+    .map(contributor => {
+
+      if (typeof contributor === "string") {
+
+        return {
+          authorId: "",
+          authorName: contributor
+        };
+
+      }
+
+      return {
+        authorId:
+          contributor.author_id ||
+          contributor.authorId ||
+          contributor.AUTHOR_ID ||
+          "",
+
+        authorName:
+          contributor.author_name ||
+          contributor.authorName ||
+          contributor.AUTHOR_NAME ||
+          contributor.name ||
+          ""
+      };
+
+    })
+    .filter(c => c.authorId || c.authorName);
+
+}
+
+    function parseLocalDate(value) {
+  if (!value) return null;
+
+  const raw = String(value).trim();
+
+  const isoDateOnly = raw.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  if (isoDateOnly) {
+    return new Date(
+      Number(isoDateOnly[1]),
+      Number(isoDateOnly[2]) - 1,
+      Number(isoDateOnly[3])
+    );
+  }
+
+  const date = new Date(raw);
+  return Number.isNaN(date.getTime()) ? null : date;
+}
+
+function formatDate(dateString) {
+  if (!dateString) return "—";
+
+  const date = parseLocalDate(dateString);
+  if (!date) return String(dateString).trim();
+
+  return date.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric"
+  });
+}
+
+    function escapeHtml(value) {
+      return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#39;");
+    }
+
+    function normalizeAuthorPayload(payload) {
+      const raw = payload?.author || payload || {};
+      const works = Array.isArray(payload?.works)
+        ? payload.works.map(book => ({
+            id: textOrFallback(book.bookId, ""),
+            title: textOrFallback(book.title, "Untitled Book"),
+            coverUrl: textOrFallback(book.bookCover, ""),
+            releaseDate: book.releaseDate ? formatDate(book.releaseDate) : ""
+          }))
+        : [];
+
+      return {
+  id: textOrFallback(raw.authorId, ""),
+  name: textOrFallback(raw.authorName, "Unknown Author"),
+  bio: textOrFallback(raw.bio, ""),
+  photoUrl: textOrFallback(raw.headshotLogo, ""),
+  genres: splitToArray(raw.genres),
+  websiteLink: normalizeUrl(raw.websiteLink),
+  isFeaturedCurrentMonth: raw.isFeaturedCurrentMonth === true,
+  socials: [
+    { label: "TikTok", url: socialUrl(raw.tikTokLink, "TikTok") },
+    { label: "Instagram", url: socialUrl(raw.instagramLink, "Instagram") },
+    { label: "Facebook", url: socialUrl(raw.facebookLink, "Facebook") },
+    { label: "Substack", url: socialUrl(raw.substackLink, "Substack") },
+    { label: "Other", url: normalizeUrl(raw.otherSocials) }
+  ].filter(item => item.url),
+  works
+};
+    }
+
+    function setText(id, value, fallback = "—") {
+      const el = document.getElementById(id);
+      if (el) el.textContent = textOrFallback(value, fallback);
+    }
+
+    function setHTML(id, html) {
+      const el = document.getElementById(id);
+      if (el) el.innerHTML = html;
+    }
+
+    function toggleAuthorSpotlight(isFeaturedCurrentMonth) {
+  const badge = document.getElementById("author-spotlight-badge");
+  if (!badge) return;
+
+  badge.style.display = isFeaturedCurrentMonth ? "inline-block" : "none";
+}
+
+    function loadAuthorPhoto(author) {
+      const img = document.getElementById("author-photo");
+      const fallback = document.getElementById("photo-fallback");
+
+      document.getElementById("fallback-author-name").textContent = author.name || "Author";
+
+      img.onerror = () => {
+        if (img.dataset.fallbackTried === "true") {
+          img.style.display = "none";
+          fallback.style.display = "flex";
+          return;
+        }
+
+        img.dataset.fallbackTried = "true";
+        img.src = DEFAULT_AUTHOR;
+      };
+
+      if (author.photoUrl) {
+        img.dataset.fallbackTried = "false";
+        img.src = author.photoUrl;
+        img.alt = `${author.name} photo`;
+        img.style.display = "block";
+        fallback.style.display = "none";
+      } else {
+        img.dataset.fallbackTried = "true";
+        img.src = DEFAULT_AUTHOR;
+        img.alt = `${author.name} photo`;
+        img.style.display = "block";
+        fallback.style.display = "none";
+      }
+    }
+
+    function getSocialIcon(label) {
+  const icons = {
+    Website: `
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="8"></circle>
+        <path d="M4 12h16"></path>
+        <path d="M12 4c2.5 2.5 3.5 5 3.5 8S14.5 17.5 12 20"></path>
+        <path d="M12 4c-2.5 2.5-3.5 5-3.5 8S9.5 17.5 12 20"></path>
+      </svg>
+    `,
+    TikTok: `
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M16.5 3c.4 1.8 1.5 3.2 3.5 3.7v2.6c-1.4 0-2.6-.4-3.7-1.1v6.1c0 3-2.4 5.3-5.4 5.3s-5.4-2.3-5.4-5.3 2.4-5.3 5.4-5.3c.3 0 .6 0 .9.1v2.8c-.3-.1-.6-.2-.9-.2-1.4 0-2.5 1.1-2.5 2.5s1.1 2.5 2.5 2.5 2.5-1.1 2.5-2.5V3h3.1z"></path>
+      </svg>
+    `,
+    Instagram: `
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <rect x="3.5" y="3.5" width="17" height="17" rx="4.5"></rect>
+        <circle cx="12" cy="12" r="4"></circle>
+        <circle cx="17.5" cy="6.5" r="1"></circle>
+      </svg>
+    `,
+    Facebook: `
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M13.5 21v-7h2.4l.4-3h-2.8V9.2c0-.9.3-1.5 1.5-1.5h1.4V5.1c-.2 0-1-.1-2-.1-2 0-3.4 1.2-3.4 3.5V11H8.5v3H11v7h2.5z"></path>
+      </svg>
+    `,
+    Substack: `
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M4 5h16v2H4zM4 9h16v8.5l-8-4.6-8 4.6zM4 19h16v2H4z"></path>
+      </svg>
+    `,
+    Other: `
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M10 13a5 5 0 0 0 7.1 0l1.4-1.4a5 5 0 0 0-7.1-7.1L10.6 5"></path>
+        <path d="M14 11a5 5 0 0 0-7.1 0L5.5 12.4a5 5 0 1 0 7.1 7.1L13.4 19"></path>
+      </svg>
+    `
+  };
+
+  return icons[label] || icons.Other;
+}
+
+function renderSocials(socials, websiteLink) {
+  const card = document.getElementById("socials-card");
+  const list = document.getElementById("socials-list");
+
+  const items = [...socials];
+  if (websiteLink) {
+    items.unshift({ label: "Website", url: websiteLink });
+  }
+
+  if (!items.length) {
+    card.style.display = "none";
+    return;
+  }
+
+  list.innerHTML = items.map(item => `
+    <a
+      class="social-item"
+      href="${escapeHtml(item.url)}"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="${escapeHtml(item.label)}"
+      title="${escapeHtml(item.label)}"
+    >
+      ${getSocialIcon(item.label)}
+    </a>
+  `).join("");
+
+  card.style.display = "";
+}
+
+    function renderWorks(works) {
+      const shelf = document.getElementById("works-shelf");
+
+      const worksSection = shelf.closest(".works-section");
+
+if (!works.length) {
+  if (worksSection) worksSection.style.display = "none";
+  return;
+}
+
+if (worksSection) worksSection.style.display = "";
+
+      let rows = [];
+      for (let i = 0; i < works.length; i += 5) {
+        rows.push(works.slice(i, i + 5));
+      }
+
+      shelf.innerHTML = rows.map(row => `
+        <div class="mini-shelf-row">
+          ${row.map(book => `
+            <article class="mini-book" data-book-id="${escapeHtml(book.id)}" onclick="handleBookClick('${encodeURIComponent(book.id)}')">
+              <div class="mini-book-card">
+                <div class="mini-book-cover-wrap">
+                  <img
+                    class="mini-book-cover"
+                    src="${escapeHtml(book.coverUrl || DEFAULT_COVER)}"
+                    alt="${escapeHtml(book.title)} cover"
+                    loading="lazy"
+                    onerror="this.onerror=null;this.src='${DEFAULT_COVER}'"
+                  />
+                  <div class="mini-book-overlay">
+                    <div class="mini-book-title">${escapeHtml(book.title)}</div>
+                    ${book.releaseDate ? `${book.releaseDate ? `<div class="mini-book-date">${escapeHtml(book.releaseDate)}</div>` : ""}` : ""}
+                  </div>
+                </div>
+              </div>
+            </article>
+          `).join("")}
+        </div>
+      `).join("");
+    }
+
+    function populateAuthor(payload) {
+  const author = normalizeAuthorPayload(payload);
+
+  setText("breadcrumb-author", author.name, "Author");
+  setText("author-name", author.name, "Unknown Author");
+  toggleAuthorSpotlight(author.isFeaturedCurrentMonth);
+
+  const bioCard = document.getElementById("author-bio")?.closest(".section-card");
+  if (author.bio) {
+    setText("author-bio", author.bio, "");
+    if (bioCard) bioCard.style.display = "";
+  } else {
+    if (bioCard) bioCard.style.display = "none";
+  }
+
+  const genreTags = document.getElementById("genre-tags");
+  if (author.genres.length) {
+    setHTML(
+      "genre-tags",
+      author.genres.map(genre => `<span class="tag">${escapeHtml(genre)}</span>`).join("")
+    );
+    genreTags.style.display = "flex";
+  } else {
+    genreTags.style.display = "none";
+  }
+
+  loadAuthorPhoto(author);
+  renderSocials(author.socials, author.websiteLink);
+  renderWorks(author.works);
+
+  const websiteButton = document.getElementById("website-link");
+  if (author.websiteLink) {
+    websiteButton.href = author.websiteLink;
+    websiteButton.style.display = "";
+  } else {
+    websiteButton.style.display = "none";
+  }
+
+  document.title = `${author.name} – The Blk Shelf`;
+}
+
+    async function loadAuthor() {
+  const authorId = getAuthorId();
+  const errorBox = document.getElementById("error-box");
+
+  if (!authorId) {
+    errorBox.style.display = "block";
+    errorBox.textContent =
+      "No author ID was found in the URL.";
+    return;
+  }
+
+  try {
+
+    const [authorRows, booksRows, featuredRows] = await Promise.all([
+      supabaseFetch(
+        `public_authors?select=*&AUTHOR_ID=eq.${encodeURIComponent(authorId)}&APPROVAL=eq.Approved&limit=1`
+      ),
+      loadAllPublicBooks(),
+
+      supabaseFetch(
+        `public_featured_authors?select=*`
+      )
+    ]);
+
+    if (!authorRows.length) {
+      throw new Error("Author not found");
+    }
+
+    const author = authorRows[0];
+
+    const normalizedAuthorName =
+  normalizeAuthorName(author.AUTHOR_NAME);
+
+const filteredBooks = booksRows.filter(book => {
+
+  if (
+  String(book.Author_ID || "").trim() ===
+  String(authorId || "").trim()
+) {
+  return true;
+}
+
+  const contributors =
+    parseContributors(book.Contributors);
+
+  return contributors.some(contributor => {
+
+    if (
+      contributor.authorId &&
+      String(contributor.authorId || "").trim() ===
+String(authorId || "").trim()
+    ) {
+      return true;
+    }
+
+    return (
+      normalizeAuthorName(
+        contributor.authorName
+      ) === normalizedAuthorName
+    );
+
+  });
+
+});
+
+    const currentMonthKey = new Date().toISOString().slice(0, 7);
+
+    const isFeaturedCurrentMonth = featuredRows.some(row =>
+      row.Author_ID === authorId &&
+      row.Month_Key === currentMonthKey
+    );
+
+    const payload = {
+      author: {
+        authorId: author.AUTHOR_ID || "",
+        authorName: author.AUTHOR_NAME || "",
+        bio: author.BIO || "",
+        genres: author.GENRES || "",
+        websiteLink: author.WEBSITE || "",
+        headshotLogo: author.AUTHORIMAGEPATH
+  ? `${SUPABASE_URL}/storage/v1/object/public/authors/${encodeURIComponent(author.AUTHORIMAGEPATH)}`
+  : "",
+        tikTokLink: author.TIKTOK || "",
+instagramLink: author.INSTAGRAM || "",
+facebookLink: author.FACEBOOK || "",
+substackLink: author.SUBSTACK || "",
+otherSocials: author.OTHER_SOCIALS || "",
+        isFeaturedCurrentMonth
+      },
+
+      works: [...new Map(
+
+  filteredBooks.map(book => [
+    book.Book_ID,
+    book
+  ])
+
+).values()].map(book => ({
+        bookId: book.Book_ID || "",
+        title: book.Title || "",
+        bookCover: book.CoverImagePath
+  ? `${SUPABASE_URL}/storage/v1/object/public/covers/${encodeURIComponent(book.CoverImagePath)}`
+  : "",
+        releaseDate: book["Release/Expected_Release_Date"] || ""
+      }))
+    };
+
+    populateAuthor(payload);
+
+  } catch (error) {
+    console.error("Author load error:", error);
+    errorBox.style.display = "block";
+    errorBox.textContent =
+      `We couldn't load this author right now. ${error.message}`;
+  }
+}
+
+    function handleBookClick(bookId) {
+  const source = getSourceParam();
+
+  let finalSource = "author_page";
+
+  if (
+    source === "landing_featured_authors" ||
+    source === "featured_authors_page"
+  ) {
+    finalSource = "author_page_from_featured";
+  }
+
+  window.location.href = `book.html?id=${bookId}&source=${finalSource}`;
+}
+
+    loadAuthor();
+  </script>
+
+  <script>
+async function loadIncludes() {
+
+  const header = await fetch('includes/header.html');
+  document.getElementById('site-header').innerHTML =
+    await header.text();
+
+  const footer = await fetch('includes/footer.html');
+  document.getElementById('site-footer').innerHTML =
+    await footer.text();
+}
+
+loadIncludes();
+</script>
+
+<script src="includes/shared.js"></script>
+
+</body>
+</html>

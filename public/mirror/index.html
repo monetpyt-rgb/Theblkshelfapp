@@ -1,0 +1,2390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KZR7W1MNL3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-KZR7W1MNL3');
+</script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Blk Shelf</title>
+
+  <link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+/>
+
+<link rel="stylesheet" href="includes/shared.css">
+
+  <style>
+    :root {
+      --bg: #0f0c0a;
+      --bg-soft: #171310;
+      --panel: #1d1814;
+      --panel-2: #241d17;
+      --text: #f4eee8;
+      --muted: #c0b3a6;
+      --soft: #8d7f72;
+      --accent: #d8a35d;
+      --accent-2: #8a4f1d;
+      --line: rgba(255,255,255,0.08);
+      --shadow: 0 20px 60px rgba(0,0,0,0.35);
+      --radius: 22px;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  background:
+    linear-gradient(rgba(15, 12, 10, 0.5), rgba(15, 12, 10, 0.5)),
+    url("https://njgprucvnayyiooiftaw.supabase.co/storage/v1/object/public/logo/bckgrnd.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: var(--text);
+  line-height: 1.6;
+}
+
+    .eyebrow {
+      display: inline-block;
+      padding: 0.45rem 0.9rem;
+      border: 1px solid rgba(216,163,93,0.25);
+      border-radius: 999px;
+      background: rgba(216,163,93,0.08);
+      color: #f2c994;
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    header.hero {
+      padding: 2.2rem 0 2.8rem;
+      border-bottom: 1px solid var(--line);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-grid {
+  margin-top: -0.5rem;
+}
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    h1 {
+      font-size: clamp(2.6rem, 6vw, 5rem);
+      line-height: 0.96;
+      margin: 1rem 0 1rem;
+      letter-spacing: -0.03em;
+    }
+
+    .accent { color: var(--accent); }
+
+    .hero p.lead {
+      font-size: 1.15rem;
+      max-width: 45rem;
+      color: var(--muted);
+      margin: 0 0 1.2rem;
+    }
+
+    .hero p.support {
+      max-width: 42rem;
+      color: var(--soft);
+      margin-bottom: 2rem;
+    }
+
+    .button-row {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.95rem 1.35rem;
+      border-radius: 14px;
+      font-weight: bold;
+      border: 1px solid transparent;
+      transition: 0.2s ease;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #1a130d;
+    }
+
+    .btn-primary:hover {
+      background: #e6b06a;
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      border-color: var(--line);
+      background: rgba(255,255,255,0.03);
+      color: var(--text);
+    }
+
+    .btn-secondary:hover {
+      border-color: rgba(216,163,93,0.35);
+      background: rgba(255,255,255,0.05);
+    }
+
+.btn-full {
+  width: 100%;
+  text-align: center;
+  display: block;
+}
+
+.btn.disabled {
+  opacity: 0.6;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      max-width: 42rem;
+    }
+
+    .stat {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 1rem;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.4rem;
+      color: var(--accent);
+      margin-bottom: 0.3rem;
+    }
+
+    .hero-card {
+  background: linear-gradient(180deg, rgba(36,29,23,0.96), rgba(22,17,13,0.96));
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 28px;
+  padding: 1.4rem;
+  box-shadow: var(--shadow);
+  max-height: 780px;
+  overflow: auto;
+}
+
+    .hero-card h2 {
+      margin: 0.2rem 0 1rem;
+      font-size: 1.7rem;
+    }
+
+    .section-label {
+      color: var(--soft);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-size: 0.76rem;
+    }
+
+    .trend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 18px;
+  padding: 0.7rem;
+  margin-bottom: 0.65rem;
+}
+
+.trend-cover {
+  width: 42px;
+  height: 60px;
+  border-radius: 6px;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: rgba(0,0,0,0.25);
+}
+
+.trend-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.trend-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.trend-text strong {
+  font-size: 0.95rem;
+  line-height: 1.2;
+}
+
+.trend-text span {
+  font-size: 0.8rem;
+  color: var(--soft);
+}
+
+    .rank {
+  min-width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: rgba(216,163,93,0.14);
+  color: #f3c78e;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+.trending-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.trending-discussion {
+  display: flex;
+}
+
+.trending-discussion .btn {
+  width: 100%;
+}
+
+    .trend-item span {
+      display: block;
+      color: var(--soft);
+      font-size: 0.9rem;
+    }
+
+    section {
+      padding: 4rem 0;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-head h2 {
+      margin: 0.4rem 0 0;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.05;
+    }
+
+    .section-head p {
+      max-width: 30rem;
+      color: var(--soft);
+      margin: 0;
+    }
+
+    .vibe-grid,
+    .author-grid,
+    .benefit-grid {
+      display: grid;
+      gap: 1.2rem;
+    }
+
+    .vibe-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .author-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .benefit-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .card {
+      background: linear-gradient(180deg, rgba(29,24,20,0.96), rgba(22,17,13,0.96));
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: var(--radius);
+      padding: 1.3rem;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+    }
+
+    .card:hover {
+      border-color: rgba(216,163,93,0.22);
+      transform: translateY(-2px);
+      transition: 0.2s ease;
+    }
+
+    .thumb {
+      height: 120px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, rgba(216,163,93,0.24), rgba(36,29,23,0.8), rgba(138,79,29,0.24));
+      margin-bottom: 1rem;
+    }
+
+    .author-cover {
+      height: 210px;
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(216,163,93,0.20), rgba(30,24,18,0.9));
+      margin-bottom: 1rem;
+    }
+
+    .card h3 {
+      margin: 0.4rem 0;
+      font-size: 1.25rem;
+    }
+
+    .meta {
+      color: var(--soft);
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .card p {
+      color: var(--muted);
+      margin-bottom: 0;
+    }
+
+    .card-link,
+.trend-link {
+  display: block;
+}
+
+.card-link .card,
+.trend-link .trend-item {
+  transition: 0.2s ease;
+}
+
+.card-link:hover .card,
+.trend-link:hover .trend-item {
+  border-color: rgba(216,163,93,0.28);
+  transform: translateY(-2px);
+}
+
+.cover-frame,
+.author-photo {
+  width: 100%;
+  overflow: hidden;
+  border-radius: 18px;
+  background: linear-gradient(180deg, rgba(216,163,93,0.14), rgba(30,24,18,0.92));
+  margin-bottom: 1rem;
+}
+
+.cover-frame {
+  aspect-ratio: 2 / 3;
+}
+
+.author-photo {
+  aspect-ratio: 4 / 5;
+}
+
+.cover-frame img,
+.author-photo img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.release-carousel-shell {
+  overflow-x: auto;
+  overflow-y: hidden;
+  border-radius: 24px;
+  position: relative;
+  -webkit-overflow-scrolling: touch;
+}
+
+.release-carousel {
+  display: flex;
+  gap: 1rem;
+  width: max-content;
+  padding: 0.25rem 0 0.75rem;
+  animation: none;
+}
+
+.release-card {
+  scroll-snap-align: start;
+}
+
+.release-card {
+  width: 240px;
+  flex: 0 0 240px;
+}
+
+.release-card .card {
+  height: 100%;
+}
+
+.release-badge-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-bottom: 0.7rem;
+}
+
+.release-badge {
+  display: inline-block;
+  padding: 0.35rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border: 1px solid rgba(216,163,93,0.2);
+  background: rgba(216,163,93,0.08);
+  color: var(--muted);
+}
+
+.release-cover-wrap {
+  position: relative;
+  width: 180px;
+  aspect-ratio: 2 / 3;
+  border-radius: 18px;
+  overflow: hidden;
+  background:
+  linear-gradient(rgba(29,24,20,0.25), rgba(29,24,20,0.25)),
+  url("https://njgprucvnayyiooiftaw.supabase.co/storage/v1/object/public/defaults/cover-default.jpg");
+  background-size: cover;
+  background-position: center;
+  box-shadow:
+    0 12px 28px rgba(0,0,0,0.35),
+    0 2px 0 rgba(255,255,255,0.03) inset;
+  transition: transform 0.25s ease;
+}
+
+.release-card:hover .release-cover-wrap {
+  transform: translateY(-6px);
+}
+
+.release-cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  background: transparent;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+.release-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  padding: 0.6rem;
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,0.75),
+    rgba(0,0,0,0.35),
+    transparent
+  );
+}
+
+.release-date {
+  color: var(--soft);
+  font-size: 0.9rem;
+  margin-top: 0.45rem;
+}
+
+.inline-link {
+  color: var(--accent);
+  font-weight: bold;
+}
+
+.inline-link:hover {
+  color: #f2c994;
+}
+
+.section-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--accent);
+  font-weight: bold;
+}
+
+.section-cta:hover {
+  color: #f2c994;
+}
+
+.empty-state,
+.loading-state {
+  color: var(--soft);
+  padding: 1rem 0;
+}
+
+    .split {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 1.5rem;
+      align-items: stretch;
+    }
+
+    .callout {
+      background: linear-gradient(180deg, rgba(216,163,93,0.10), rgba(24,19,14,0.96));
+      border: 1px solid rgba(216,163,93,0.12);
+      border-radius: 28px;
+      padding: 2rem;
+    }
+
+    .callout h2, .wide-panel h2 {
+      margin-top: 0.5rem;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.06;
+    }
+
+    .wide-panel {
+      background: linear-gradient(180deg, rgba(29,24,20,0.96), rgba(22,17,13,0.96));
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 28px;
+      padding: 2rem;
+    }
+
+    .callout p, .wide-panel p {
+      color: var(--muted);
+      max-width: 48rem;
+    }
+
+        #readers .reader-signup-intro {
+      margin-bottom: 1rem;
+    }
+
+    #readers .reader-signup-perks {
+      display: grid;
+      gap: 0.7rem;
+      margin: 1.2rem 0 1.35rem;
+    }
+
+    #readers .reader-signup-perk {
+      padding: 0.85rem 0.95rem;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    #readers .reader-signup-perk strong {
+      display: block;
+      color: var(--text);
+      font-size: 0.95rem;
+      margin-bottom: 0.2rem;
+    }
+
+    #readers .reader-signup-perk span {
+      color: var(--soft);
+      font-size: 0.9rem;
+      line-height: 1.45;
+    }
+
+    #readers .reader-signup-perks-inline {
+  color: var(--soft);
+  font-size: 0.9rem;
+  margin: 0.6rem 0 1.1rem;
+  letter-spacing: 0.02em;
+}
+
+    #readerSignupForm {
+  display: grid;
+  gap: 0.7rem;
+  margin-top: 0.9rem;
+}
+
+    .signup-label {
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--soft);
+      margin-bottom: -0.35rem;
+    }
+
+    #readerSignupForm input {
+      width: 100%;
+      padding: 1rem 1rem;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(11,10,9,0.72);
+      color: var(--text);
+      font: inherit;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    #readerSignupForm input::placeholder {
+      color: #9f907f;
+    }
+
+    #readerSignupForm input:focus {
+      outline: none;
+      border-color: rgba(216,163,93,0.5);
+      box-shadow: 0 0 0 3px rgba(216,163,93,0.12);
+      background: rgba(11,10,9,0.82);
+    }
+
+    #readerSignupButton {
+      width: 100%;
+      justify-content: center;
+      margin-top: 0.2rem;
+    }
+
+    #readerSignupButton[disabled] {
+      opacity: 0.72;
+      cursor: wait;
+      transform: none;
+    }
+
+    .signup-hp {
+      position: absolute !important;
+      left: -9999px !important;
+      width: 1px !important;
+      height: 1px !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+    }
+
+    .note {
+      color: var(--soft);
+      font-size: 0.88rem;
+      margin-top: 0.9rem;
+      min-height: 1.4em;
+    }
+
+    .note.is-success {
+      color: #f2c994;
+    }
+
+    .note.is-error {
+      color: #e7b0a2;
+    }
+
+    @media (max-width: 1024px) {
+      .hero-grid,
+      .split,
+      .vibe-grid,
+      .author-grid,
+      .benefit-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .hero-grid,
+      .split {
+        grid-template-columns: 1fr;
+      }
+    }
+
+        @media (max-width: 720px) {
+
+  body {
+    background:
+      linear-gradient(rgba(15, 12, 10, 0.5), rgba(15, 12, 10, 0.5)),
+      url("https://njgprucvnayyiooiftaw.supabase.co/storage/v1/object/public/logo/bckgrnd-mobile.png");
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+  }
+
+  .section-head,
+  .button-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  header.hero {
+    padding: 1.6rem 0 2.6rem;
+  }
+
+  h1 {
+    font-size: 2.75rem;
+  }
+
+  .hero p.lead {
+    font-size: 1.02rem;
+  }
+
+  .hero p.support {
+    font-size: 0.95rem;
+    margin-bottom: 1.4rem;
+  }
+
+  .stats {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.55rem;
+  }
+
+  .stat {
+    padding: 0.75rem 0.55rem;
+    border-radius: 14px;
+    font-size: 0.78rem;
+    line-height: 1.35;
+  }
+
+  .stat strong {
+    font-size: 1.05rem;
+    margin-bottom: 0.15rem;
+  }
+
+  .hero-card {
+    max-height: none;
+    padding: 1rem;
+    border-radius: 22px;
+  }
+
+  .trend-item {
+    padding: 0.55rem;
+    gap: 0.55rem;
+    border-radius: 14px;
+  }
+
+  .rank {
+    min-width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    font-size: 0.85rem;
+  }
+
+  .trend-cover {
+    width: 34px;
+    height: 50px;
+  }
+
+  .trend-text strong {
+    font-size: 0.85rem;
+  }
+
+  .trend-text span {
+    font-size: 0.72rem;
+  }
+
+  .section-head {
+    gap: 0.65rem;
+    margin-bottom: 1rem;
+  }
+
+  .section-head h2,
+  .callout h2,
+  .wide-panel h2 {
+    font-size: 1.75rem;
+  }
+
+  .section-head p,
+  .callout p,
+  .wide-panel p {
+    font-size: 0.92rem;
+  }
+
+  .author-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+
+  .vibe-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.55rem;
+  }
+
+  .benefit-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.55rem;
+  }
+
+  .card {
+    padding: 0.75rem;
+    border-radius: 16px;
+  }
+
+  .author-photo {
+    border-radius: 12px;
+    margin-bottom: 0.55rem;
+  }
+
+  .thumb {
+    height: 54px;
+    border-radius: 12px;
+    margin-bottom: 0.55rem;
+  }
+
+  .meta {
+    font-size: 0.62rem;
+    letter-spacing: 0.05em;
+  }
+
+  .card h3 {
+    font-size: 0.9rem;
+    line-height: 1.15;
+    margin: 0.3rem 0;
+  }
+
+  .card p {
+    font-size: 0.72rem;
+    line-height: 1.35;
+  }
+
+  .release-carousel {
+    gap: 0.65rem;
+  }
+
+  .release-card {
+    width: 118px;
+    flex: 0 0 118px;
+  }
+
+  .release-cover-wrap {
+    width: 118px;
+    border-radius: 14px;
+  }
+
+  .release-badge {
+    font-size: 0.58rem;
+    padding: 0.28rem 0.42rem;
+  }
+
+  .split {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .wide-panel,
+  .callout {
+    padding: 1.2rem;
+    border-radius: 22px;
+  }
+
+  #readerSignupForm input {
+    padding: 0.85rem;
+  }
+}
+
+/* ===== BASELINE UPGRADE: BROWN IDENTITY + BETTER CONTRAST ===== */
+
+:root {
+  --text: #fff8f0;
+  --muted: #e3d2c0;
+  --soft: #c9b7a5;
+  --line: rgba(255,255,255,0.18);
+}
+
+/* Keep original brown background, just improve readability */
+body {
+  color: var(--text);
+}
+
+/* Lighter brown cards/panels */
+.card,
+.hero-card,
+.wide-panel,
+.callout {
+  background: linear-gradient(180deg, #3f2e23, #241d17);
+  border: 1px solid rgba(255,255,255,0.22);
+  color: var(--text);
+  box-shadow:
+    0 12px 30px rgba(0,0,0,0.35),
+    inset 0 1px 0 rgba(255,255,255,0.05);
+}
+
+/* Better paragraph contrast */
+.hero p.lead,
+.hero p.support,
+.section-head p,
+.card p,
+.callout p,
+.wide-panel p,
+.trend-text span,
+.empty-state,
+.loading-state,
+.footer-link,
+footer {
+  color: var(--muted);
+}
+
+/* Better small-label contrast */
+.section-label,
+.meta,
+.note,
+.release-date,
+#readers .reader-signup-perks-inline,
+.signup-label {
+  color: var(--soft);
+}
+
+/* Stronger mini cards */
+.stat,
+.trend-item,
+#readers .reader-signup-perk {
+  background: rgba(63,46,35,0.9);
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+/* Buttons stay gold/action-led */
+.btn-primary {
+  background: #e6b06a;
+  color: #120e0b;
+  border: 2px solid #120e0b;
+}
+
+.btn-primary:hover {
+  background: #f2c994;
+}
+
+/* Secondary buttons clearer */
+.btn-secondary {
+  background: #241d17;
+  border: 2px solid rgba(255,255,255,0.3);
+  color: var(--text);
+}
+
+.btn-secondary:hover {
+  background: #3f2e23;
+  border-color: rgba(216,163,93,0.45);
+}
+
+/* Gold accents stay for action/attention */
+.accent,
+.inline-link,
+.section-cta {
+  color: #f2c994;
+}
+
+/* Reader form inputs */
+#readerSignupForm input {
+  background: #17100c;
+  border: 2px solid rgba(255,255,255,0.3);
+  color: var(--text);
+}
+
+#readerSignupForm input::placeholder {
+  color: var(--soft);
+}
+
+#readerSignupForm input:focus {
+  outline: 3px solid #f2c994;
+  border-color: #f2c994;
+}
+
+/* Accessibility focus */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: 3px solid #f2c994;
+  outline-offset: 3px;
+}
+
+/* ===== END BASELINE UPGRADE ===== */
+
+  </style>
+</head>
+<body>
+  <header class="hero" id="homepageHeroSection">
+  <div id="site-header"></div>
+
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <span class="eyebrow" id="heroEyebrow">
+  Black indie books, curated by mood and story
+</span>
+
+<h1>
+  <span id="heroHeadlineBefore">Where</span>
+  <span class="accent" id="heroHeadlineAccent">
+    Black indie stories
+  </span>
+  <span id="heroHeadlineAfter">get found.</span>
+</h1>
+
+<p class="lead" id="heroLead">
+  Discover bold, romantic, gritty, lyrical, strange, and unforgettable books by Black independent authors across genres and across the diaspora.
+</p>
+
+<p class="support" id="heroSupport">
+  The Blk Shelf helps readers find the stories the algorithm keeps burying, and helps Black indie authors get discovered in a space built with their work in mind.
+</p>
+
+<div class="button-row">
+  <a
+    class="btn btn-primary"
+    id="heroPrimaryButton"
+    href="library.html"
+  >
+    Explore the Library
+  </a>
+
+  <a
+    class="btn btn-secondary"
+    id="heroSecondaryButton"
+    href="featured-authors.html"
+  >
+    Meet Featured Authors
+  </a>
+</div>
+
+        <div class="stats">
+          <div class="stat">
+            <strong id="booksStatValue">—</strong>
+            <span id="booksStatLabel">Black indie books</span>
+          </div>
+          <div class="stat">
+            <strong id="authorsStatValue">—</strong>
+            <span id="authorsStatLabel">Black indie authors</span>
+          </div>
+          <div class="stat">
+            <strong>Weekly</strong>
+            rankings + updates
+          </div>
+        </div>
+      </div>
+
+      <div class="trending-wrapper">
+        <aside class="hero-card" id="homepageTrendingSection">
+          <div class="section-label" id="trendingLabel">Loading shelf data</div>
+          <h2 id="trendingHeading">Loading books...</h2>
+          <div id="trendingBooks" class="loading-state">Loading books...</div>
+        </aside>
+
+        <div class="trending-discussion">
+          <a
+            id="discordButton"
+            class="btn btn-primary btn-full"
+            href="https://discord.gg/aBYkHkrMdn"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Discuss What's Trending on Discord
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+  <section id="authors" data-homepage-section="featured_authors" style="background: rgba(255,255,255,0.02); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="section-label">Featured authors</div>
+        <h2>Meet the writers behind the stories.</h2>
+      </div>
+      <p>This is where real authors get surfaced. Not buried behind a marketplace built to favor scale over connection.</p>
+    </div>
+
+    <div id="featuredAuthorsGrid" class="author-grid">
+      <div class="loading-state">Loading featured authors...</div>
+    </div>
+
+    <div style="margin-top: 1.5rem;">
+      <a class="section-cta" href="featured-authors.html">View all featured authors →</a>
+    </div>
+  </div>
+</section>
+
+  <section id="library">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <div class="section-label">Browse by vibe</div>
+          <h2>Because readers search for a feeling, not just a genre.</h2>
+        </div>
+        <p>Not every reader comes looking for a category. Sometimes they come looking for heat, comfort, chaos, tension, healing, or a book that refuses to leave them alone.</p>
+      </div>
+
+      <div class="vibe-grid" id="vibeGrid">
+  <div class="loading-state">Loading vibes...</div>
+</div>
+    </div>
+  </section>
+
+<section id="fresh-books" data-homepage-section="new_releases">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="section-label">New & upcoming</div>
+        <h2>Fresh from the shelf.</h2>
+      </div>
+      <p>← Scroll the new heat and upcoming drops →</p>
+    </div>
+
+    <div class="release-carousel-shell">
+      <div id="freshBooksCarousel" class="release-carousel loading-state">Loading books...</div>
+    </div>
+
+    <div style="margin-top: 1.5rem;">
+      <a class="section-cta" href="library.html">Browse the full library →</a>
+    </div>
+  </div>
+</section>
+
+  <section>
+  <div class="container split">
+    <div class="wide-panel">
+      <div class="section-label">Built to connect Black Indie authors to readers</div>
+      <h2>Find stories that feel like they were meant for you.</h2>
+      <p>Finding a good book shouldn’t feel like digging through noise. The Blk Shelf keeps the focus where it belongs—on stories that hit, voices that stand out, and books that actually match your mood.</p>
+
+      <div class="benefit-grid">
+        <article class="card">
+          <h3>Curated discovery</h3>
+          <p>Find books by vibe, voice, and what’s actually resonating—not whatever an algorithm decides to push.</p>
+        </article>
+        <article class="card">
+          <h3>Stories that hit</h3>
+          <p>From soft and cozy to dark and chaotic, the range is real. Pick your lane and find something worth your time.</p>
+        </article>
+        <article class="card">
+          <h3>No more digging</h3>
+          <p>You shouldn’t have to scroll forever to find something good. We already did that part.</p>
+        </article>
+      </div>
+    </div>
+
+            <aside
+  class="callout"
+  id="readers"
+  data-homepage-section="newsletter"
+>
+        <div class="section-label">Join the list</div>
+        <h2>Stay close to the books that matter.</h2>
+        <p class="reader-signup-intro">
+  Stay tapped in without chasing posts, pages, or algorithms.
+</p>
+
+        <p class="reader-signup-perks-inline">
+  New releases • Featured authors • Shelf updates
+</p>
+
+        <form id="readerSignupForm" novalidate>
+          <label class="signup-label" for="readerFirstName">First name</label>
+          <input
+            id="readerFirstName"
+            type="text"
+            name="firstName"
+            placeholder="Enter your first name"
+            autocomplete="given-name"
+            required
+          />
+
+          <label class="signup-label" for="readerEmail">Email address</label>
+          <input
+            id="readerEmail"
+            type="email"
+            name="email"
+            placeholder="Enter your email address"
+            autocomplete="email"
+            inputmode="email"
+            required
+          />
+
+          <input
+            type="text"
+            name="company"
+            id="readerCompany"
+            class="signup-hp"
+            tabindex="-1"
+            autocomplete="off"
+            aria-hidden="true"
+          />
+
+          <button class="btn btn-primary" id="readerSignupButton" type="submit">
+            Join the Reader List
+          </button>
+        </form>
+
+        <div class="note" id="readerSignupNote" aria-live="polite">
+          No clutter. Just Black indie books, featured authors, and updates worth opening.
+        </div>
+      </aside>
+    </div>
+  </section>
+
+<section id="submit" style="padding-top: 0;">
+  <div class="container">
+    <div class="callout">
+      <div class="section-label">For authors</div>
+
+      <h2>Put your books on The BLK Shelf.</h2>
+
+      <p>
+        The BLK Shelf was built to help readers discover Black independent
+        authors and the stories traditional algorithms too often bury.
+        Submit your author profile to begin the review process.
+      </p>
+
+      <p>
+        Once your author profile is approved, you’ll receive the information
+        needed to submit new books or update books already on the shelf.
+      </p>
+
+      <div class="button-row" style="margin-top:1.5rem; margin-bottom:0;">
+        <a
+          class="btn btn-primary"
+          href="submit-author.html"
+        >
+          <i class="fa-solid fa-user-plus"></i>
+          Submit an Author Profile
+        </a>
+
+        <a
+          class="btn btn-secondary"
+          href="faq.html"
+        >
+          Review Submission Guidelines
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="site-footer"></footer>
+
+  <script>
+    const SUPABASE_URL = "https://njgprucvnayyiooiftaw.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5qZ3BydWN2bmF5eWlvb2lmdGF3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc3NDg0ODMsImV4cCI6MjA5MzMyNDQ4M30.1r6r8vyYB0PnrZtugcBz3CPuCP9MMlTTMYXfewEINNw";
+    
+async function supabaseFetch(path) {
+  const pageSize = 500;
+  let from = 0;
+  let allRows = [];
+
+  while (true) {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/${path}`, {
+      headers: {
+        apikey: SUPABASE_ANON_KEY,
+        Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+        Accept: "application/json",
+        Range: `${from}-${from + pageSize - 1}`
+      }
+    });
+
+    if (!res.ok) {
+      throw new Error(`Supabase request failed: ${res.status}`);
+    }
+
+    const rows = await res.json();
+    allRows = allRows.concat(rows);
+
+    if (rows.length < pageSize) break;
+
+    from += pageSize;
+  }
+
+  return allRows;
+}
+
+const DEFAULT_COVER = `${SUPABASE_URL}/storage/v1/object/public/defaults/cover-default.jpg`;
+    const DEFAULT_AUTHOR = `${SUPABASE_URL}/storage/v1/object/public/defaults/author-default.jpg`;
+    const API_BASE = "https://script.google.com/macros/s/AKfycbym5D02u8oDcYYchQ40wWQLSGrx1FTuqJcjElJnf7AaD7c3CyQS3C2Xy5qMQjxby6v1hQ/exec";
+    const READER_SIGNUP_ENDPOINT = `${API_BASE}?type=reader-signup`;
+let releaseCarouselAnimationId = null;
+
+    function getCurrentMonthKey() {
+      const now = new Date();
+      const year = now.getFullYear();
+      const month = String(now.getMonth() + 1).padStart(2, "0");
+      return `${year}-${month}`;
+    }
+
+    function escapeHtml(value) {
+      return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    function pick(obj, keys, fallback = "") {
+      for (const key of keys) {
+        if (obj && obj[key] != null && String(obj[key]).trim() !== "") {
+          return obj[key];
+        }
+      }
+      return fallback;
+    }
+
+    function normalizeArray(data) {
+  if (Array.isArray(data)) return data;
+  if (Array.isArray(data?.books)) return data.books;
+  if (Array.isArray(data?.authors)) return data.authors;
+  if (Array.isArray(data?.items)) return data.items;
+  if (Array.isArray(data?.data)) return data.data;
+  if (Array.isArray(data?.rankings)) return data.rankings;
+  return [];
+}
+
+function splitCommaList(value) {
+  return String(value || "")
+    .split(",")
+    .map(item => item.trim())
+    .filter(Boolean);
+}
+
+function normalizeWeekKey(value) {
+  if (!value) return "";
+
+  const raw = String(value).trim();
+
+  if (/^\d{4}-\d{2}-\d{2}$/.test(raw)) return raw;
+
+  const date = new Date(raw);
+  if (!Number.isNaN(date.getTime())) {
+    return date.toISOString().slice(0, 10);
+  }
+
+  return raw;
+}
+
+function shuffleArray(items) {
+  const copy = [...items];
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy;
+}
+
+const VIBE_IMAGE_BASE = `${SUPABASE_URL}/storage/v1/object/public/vibes/`;
+
+const VIBE_OPTIONS = [
+  {
+    title: "Hot & Heavy 🌶️",
+    filterValue: "Hot & Heavy 🌶️",
+    image: `${VIBE_IMAGE_BASE}vibe-hot-heavy.jpg`,
+    description: "For readers who want heat on the page and chemistry that refuses to behave."
+  },
+  {
+    title: "Worth the Wait (Slow Burn)",
+    filterValue: "Worth the Wait (Slow Burn)",
+    image: `${VIBE_IMAGE_BASE}vibe-slow-burn.jpg`,
+    description: "Tension, restraint, and payoff that takes its sweet time getting there."
+  },
+  {
+    title: "No Breathers (Fast-Paced)",
+    filterValue: "No Breathers (Fast-Paced)",
+    image: `${VIBE_IMAGE_BASE}vibe-fast-paced.jpg`,
+    description: "Quick hooks, high momentum, and stories that do not let up."
+  },
+  {
+    title: "Emotional Damage",
+    filterValue: "Emotional Damage",
+    image: `${VIBE_IMAGE_BASE}vibe-emotional-damage.jpg`,
+    description: "Messy feelings, deep wounds, and books that drag your heart by the neck."
+  },
+  {
+    title: "Soft Life (Cozy)",
+    filterValue: "Soft Life (Cozy)",
+    image: `${VIBE_IMAGE_BASE}vibe-soft-life.jpg`,
+    description: "Comfort reads, gentler stakes, and stories you want to curl up inside."
+  },
+  {
+    title: "Ain't Nothing Sweet (Gritty)",
+    filterValue: "Ain't Nothing Sweet (Gritty)",
+    image: `${VIBE_IMAGE_BASE}vibe-gritty.jpg`,
+    description: "Sharp edges, hard truths, and stories that do not clean themselves up for you."
+  },
+  {
+    title: "Dark & Twisted",
+    filterValue: "Dark & Twisted",
+    image: `${VIBE_IMAGE_BASE}vibe-dark-twisted.jpg`,
+    description: "Morally messy, intense, and made for readers who like their stories with teeth."
+  },
+  {
+    title: "Healing / Redemption",
+    filterValue: "Healing / Redemption",
+    image: `${VIBE_IMAGE_BASE}vibe-healing-redemption.jpg`,
+    description: "Stories about repair, recovery, second chances, and becoming something new."
+  },
+  {
+    title: "Found Family",
+    filterValue: "Found Family",
+    image: `${VIBE_IMAGE_BASE}vibe-found-family.jpg`,
+    description: "Ride-or-die bonds, chosen people, and connection built the hard way."
+  },
+  {
+    title: "Everybody Got Issues",
+    filterValue: "Everybody Got Issues",
+    image: `${VIBE_IMAGE_BASE}vibe-everybody-got-issues.jpg`,
+    description: "Complicated people, complicated choices, and nobody clean enough to judge."
+  },
+  {
+    title: "Plot gonna Plot",
+    filterValue: "Plot gonna Plot",
+    image: `${VIBE_IMAGE_BASE}vibe-plot-driven.jpg`,
+    description: "For readers who want twists, turns, reveals, and strong external momentum."
+  },
+  {
+    title: "Character-Driven",
+    filterValue: "Character-Driven",
+    image: `${VIBE_IMAGE_BASE}vibe-character-driven.jpg`,
+    description: "For readers who stay for voice, interiority, and people who feel real."
+  }
+];
+
+function renderVibeCards() {
+  const target = document.getElementById("vibeGrid");
+  if (!target) return;
+
+  const selectedVibes = shuffleArray(VIBE_OPTIONS).slice(0, 6);
+
+  target.innerHTML = selectedVibes.map((vibe) => `
+    <a class="card-link" href="library.html?vibe=${encodeURIComponent(vibe.filterValue)}">
+      <article class="card">
+        <div class="thumb" style="${vibe.image ? `background-image: linear-gradient(rgba(0,0,0,0.18), rgba(0,0,0,0.18)), url('${escapeHtml(vibe.image)}'); background-size: cover; background-position: center;` : ''}"></div>
+        <div class="meta">Curated lane</div>
+        <h3>${escapeHtml(vibe.title)}</h3>
+        <p>${escapeHtml(vibe.description)}</p>
+      </article>
+    </a>
+  `).join("");
+}
+
+function formatRoundedStat(count) {
+  const safeCount = Number(count) || 0;
+
+  if (safeCount < 50) {
+    return String(safeCount);
+  }
+
+  return `${Math.floor(safeCount / 50) * 50}+`;
+}
+
+function countUniqueLiveAuthors(books) {
+  const uniqueAuthorIds = new Set();
+
+  books.forEach(book => {
+    const authorId = pick(book, ["authorId", "authorID"], "");
+    const authorName = pick(book, ["authorName", "author"], "");
+
+    if (authorId) {
+      uniqueAuthorIds.add(authorId);
+    } else if (authorName) {
+      uniqueAuthorIds.add(`name:${authorName.toLowerCase()}`);
+    }
+  });
+
+  return uniqueAuthorIds.size;
+}
+
+function renderHeroStats(books) {
+  const booksCount = books.length;
+  const authorsCount = countUniqueLiveAuthors(books);
+
+  const booksStatValue = document.getElementById("booksStatValue");
+  const authorsStatValue = document.getElementById("authorsStatValue");
+  const authorsStatLabel = document.getElementById("authorsStatLabel");
+
+  if (booksStatValue) {
+    booksStatValue.textContent = formatRoundedStat(booksCount);
+  }
+
+  if (authorsStatValue) {
+    authorsStatValue.textContent = formatRoundedStat(authorsCount);
+  }
+
+  if (authorsStatLabel) {
+    authorsStatLabel.textContent = authorsCount === 1 ? "Black indie author" : "Black indie authors";
+  }
+}
+
+async function fetchJson(url) {
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(`Request failed: ${res.status}`);
+  return await res.json();
+}
+
+    function renderTrendingBooks(books, mode = "fallback") {
+  const target = document.getElementById("trendingBooks");
+  const label = document.getElementById("trendingLabel");
+  const heading = document.getElementById("trendingHeading");
+
+  if (!books.length) {
+    label.textContent = "From the shelf";
+    heading.textContent = "Books to try";
+    target.innerHTML = '<div class="empty-state">No books available yet.</div>';
+    return;
+  }
+
+  const isTrending = mode === "trending";
+
+  label.textContent = isTrending ? "Trending now" : "From the shelf";
+  heading.textContent = isTrending ? "Top 10 books on the shelf" : "Books to try";
+
+  target.innerHTML = books.slice(0, 10).map((book, index) => {
+    const id = pick(book, ["id", "bookId", "bookID"]);
+    const title = pick(book, ["title", "bookTitle"], "Untitled");
+    const author = pick(book, ["author", "authorName"], "Author");
+    const genre = pick(book, ["genre", "genres", "category"], "Book");
+    const cover = pick(book, ["cover", "bookCover", "coverImage", "image"], DEFAULT_COVER);
+
+    const clickSource = isTrending ? "landing_trending" : "landing_books_to_try";
+    const rankDisplay = isTrending ? (index + 1) : "•";
+
+    return `
+      <a class="trend-link" href="book.html?id=${encodeURIComponent(id)}&source=${encodeURIComponent(clickSource)}">
+        <div class="trend-item">
+          <div class="rank">${rankDisplay}</div>
+
+          <div class="trend-cover">
+            <img 
+              src="${escapeHtml(cover)}" 
+              alt="${escapeHtml(title)} cover" 
+              loading="lazy"
+              onerror="this.onerror=null;this.src='${DEFAULT_COVER}'"
+            >
+          </div>
+
+          <div class="trend-text">
+            <strong>${escapeHtml(title)}</strong>
+            <span>${escapeHtml(author)} • ${escapeHtml(genre)}</span>
+          </div>
+        </div>
+      </a>
+    `;
+  }).join("");
+}
+
+function buildRankedBooks(rankings, books) {
+  const bookMap = new Map();
+
+  books.forEach(book => {
+    const id = pick(book, ["id", "bookId", "bookID"]);
+    if (id) {
+      bookMap.set(id, book);
+    }
+  });
+
+  return rankings
+    .map(rankItem => {
+      const bookId = pick(rankItem, ["bookId", "id", "bookID"]);
+      const matchedBook = bookMap.get(bookId);
+
+      if (!matchedBook) return null;
+
+      return {
+        ...matchedBook,
+        rank: pick(rankItem, ["rank"], null),
+        clickCount: pick(rankItem, ["clickCount"], 0)
+      };
+    })
+    .filter(Boolean);
+}
+
+function parseLocalDate(value) {
+  if (!value) return null;
+
+  const raw = String(value).trim();
+
+  const isoDateOnly = raw.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  if (isoDateOnly) {
+    return new Date(
+      Number(isoDateOnly[1]),
+      Number(isoDateOnly[2]) - 1,
+      Number(isoDateOnly[3])
+    );
+  }
+
+  const date = new Date(raw);
+  return Number.isNaN(date.getTime()) ? null : date;
+}
+
+    function formatReleaseDateLabel(dateValue) {
+  const date = parseLocalDate(dateValue);
+  if (!date) return "";
+
+  return date.toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric"
+  });
+}
+
+function startReleaseCarouselAutoScroll() {
+  const shell = document.querySelector(".release-carousel-shell");
+  if (!shell) return;
+
+  if (releaseCarouselAnimationId) {
+    cancelAnimationFrame(releaseCarouselAnimationId);
+  }
+
+  let isPaused = false;
+  let resumeTimer = null;
+
+  function pauseBriefly() {
+    isPaused = true;
+
+    clearTimeout(resumeTimer);
+    resumeTimer = setTimeout(() => {
+      isPaused = false;
+    }, 1200);
+  }
+
+  function step() {
+    const maxScroll = shell.scrollWidth - shell.clientWidth;
+
+    if (!isPaused && maxScroll > 0 && shell.scrollLeft < maxScroll - 1) {
+  shell.scrollLeft += 0.35;
+}
+
+    releaseCarouselAnimationId = requestAnimationFrame(step);
+  }
+
+  shell.addEventListener("mouseenter", () => isPaused = true);
+  shell.addEventListener("mouseleave", () => isPaused = false);
+
+  shell.addEventListener("pointerdown", pauseBriefly, { passive: true });
+  shell.addEventListener("pointerup", pauseBriefly, { passive: true });
+  shell.addEventListener("scroll", pauseBriefly, { passive: true });
+
+  step();
+}
+
+function renderFreshBooks(books) {
+  const target = document.getElementById("freshBooksCarousel");
+  if (!target) return;
+
+  if (!books.length) {
+    target.innerHTML = '<div class="empty-state">No books available yet.</div>';
+    return;
+  }
+
+  const now = new Date();
+  now.setHours(0, 0, 0, 0);
+
+  const datedBooks = books
+    .map((book) => {
+      const rawDate = pick(book, ["releaseDate", "pubDate", "publicationDate"], "");
+      const parsedDate = parseLocalDate(rawDate);
+
+return {
+  ...book,
+  _parsedReleaseDate: parsedDate,
+  _hasValidDate: !!parsedDate
+};
+    })
+    .filter(book => book._hasValidDate);
+
+  const upcomingBooks = datedBooks
+    .filter(book => book._parsedReleaseDate >= now)
+    .sort((a, b) => a._parsedReleaseDate - b._parsedReleaseDate)
+    .slice(0, 8)
+    .map(book => ({ ...book, _releaseType: "Upcoming Release" }));
+
+  const NEW_RELEASE_WINDOW_DAYS = 60;
+
+const newReleaseCutoff = new Date(now);
+newReleaseCutoff.setDate(newReleaseCutoff.getDate() - NEW_RELEASE_WINDOW_DAYS);
+
+const newReleaseBooks = datedBooks
+  .filter(book =>
+    book._parsedReleaseDate < now &&
+    book._parsedReleaseDate >= newReleaseCutoff
+  )
+  .sort((a, b) => b._parsedReleaseDate - a._parsedReleaseDate)
+  .slice(0, 8)
+  .map(book => ({ ...book, _releaseType: "Available Now" }));
+
+    let selectedBooks = [...upcomingBooks, ...newReleaseBooks];
+
+  if (!selectedBooks.length) {
+    selectedBooks = datedBooks
+      .sort((a, b) => b._parsedReleaseDate - a._parsedReleaseDate)
+      .slice(0, 8)
+      .map(book => ({ ...book, _releaseType: "From the Shelf" }));
+  }
+
+  if (!selectedBooks.length) {
+    target.classList.remove("loading-state");
+    target.innerHTML = '<div class="empty-state">No dated releases available yet.</div>';
+    return;
+  }
+
+    target.classList.remove("loading-state");
+
+  target.innerHTML = selectedBooks.map((book) => {
+    const id = pick(book, ["id", "bookId", "bookID"]);
+    const title = pick(book, ["title", "bookTitle"], "Untitled");
+    const author = pick(book, ["author", "authorName"], "Author");
+        const cover = pick(book, ["cover", "bookCover", "coverImage", "image"], DEFAULT_COVER);
+
+    return `
+  <a class="card-link release-card" href="book.html?id=${encodeURIComponent(id)}&source=landing_fresh_books">
+    <div class="release-cover-wrap">
+            <img
+        class="release-cover"
+        src="${escapeHtml(cover || DEFAULT_COVER)}"
+        alt="${escapeHtml(title)} cover"
+        loading="eager"
+        decoding="sync"
+        referrerpolicy="no-referrer"
+        onerror="this.onerror=null;this.src='${DEFAULT_COVER}'"
+      />
+
+      <div class="release-overlay">
+        <span class="release-badge">${escapeHtml(book._releaseType)}</span>
+      </div>
+    </div>
+  </a>
+`;
+  }).join("");
+
+  startReleaseCarouselAutoScroll();
+}
+
+function renderFeaturedAuthors(authors) {
+  const target = document.getElementById("featuredAuthorsGrid");
+  if (!authors.length) {
+    target.innerHTML = '<div class="empty-state">No featured authors available right now.</div>';
+    return;
+  }
+
+  target.innerHTML = authors.slice(0, 4).map((author) => {
+    const id = pick(author, ["id", "authorId", "authorID"]);
+    const name = pick(author, ["name", "authorName"], "Featured Author");
+    const genres = pick(author, ["genres", "genre", "category"], "Featured author");
+    const image = pick(author, ["headshotLogo", "image", "photo", "authorPhoto", "headshot"], DEFAULT_AUTHOR);
+    const featuredTitle = pick(author, ["featuredTitle", "bookTitle", "title"], "");
+
+    const genreText = Array.isArray(genres) ? genres.join(", ") : genres;
+
+    return `
+      <a class="card-link" href="author.html?id=${encodeURIComponent(id)}&source=landing_featured_authors">
+        <article class="card">
+          <div class="author-photo">
+            <img src="${escapeHtml(image)}" alt="${escapeHtml(name)}" loading="lazy" onerror="this.onerror=null;this.src='${DEFAULT_AUTHOR}'">
+          </div>
+          <div class="meta">${escapeHtml(genreText)}</div>
+          <h3>${escapeHtml(name)}</h3>
+          <p>${featuredTitle ? `Featured title: <em>${escapeHtml(featuredTitle)}</em>` : "View author profile"}</p>
+        </article>
+      </a>
+    `;
+  }).join("");
+}
+
+    async function loadLandingData() {
+  try {
+    const currentMonthKey = getCurrentMonthKey();
+
+    const [booksRows, authorsRows, featuredRows, rankingsRows] = await Promise.all([
+  supabaseFetch('public_library_books?select=*'),
+  supabaseFetch('public_authors?select=*&APPROVAL=eq.Approved'),
+  supabaseFetch('public_featured_authors?select=*'),
+  supabaseFetch('public_weekly_rankings?select=*&order=Week_Key.desc,Rank.asc&limit=10')
+]);
+
+    const books = booksRows.map(row => ({
+      id: row.Book_ID || "",
+      bookId: row.Book_ID || "",
+      authorId: row.Author_ID || "",
+      authorName: row.Author_Name || "",
+      title: row.Title || "",
+      genre: row.Genre || "",
+      releaseDate: row["Release/Expected_Release_Date"] || "",
+      cover: row.CoverImagePath
+  ? `${SUPABASE_URL}/storage/v1/object/public/covers/${encodeURIComponent(row.CoverImagePath)}`
+  : DEFAULT_COVER,
+
+bookCover: row.CoverImagePath
+  ? `${SUPABASE_URL}/storage/v1/object/public/covers/${encodeURIComponent(row.CoverImagePath)}`
+  : DEFAULT_COVER
+    }));
+
+    const authorsById = new Map(
+      authorsRows.map(author => [
+        author.AUTHOR_ID,
+        {
+          id: author.AUTHOR_ID || "",
+          authorId: author.AUTHOR_ID || "",
+          authorName: author.AUTHOR_NAME || "",
+          name: author.AUTHOR_NAME || "",
+          genres: splitCommaList(author.GENRES),
+          headshotLogo: author.AUTHORIMAGEPATH
+  ? `${SUPABASE_URL}/storage/v1/object/public/authors/${encodeURIComponent(author.AUTHORIMAGEPATH)}`
+  : DEFAULT_AUTHOR
+        }
+      ])
+    );
+
+    const featuredAuthorIds = featuredRows
+      .filter(row => row.Month_Key === currentMonthKey)
+      .map(row => row.Author_ID)
+      .filter(Boolean);
+
+    const featuredAuthors = featuredAuthorIds
+      .map(authorId => authorsById.get(authorId))
+      .filter(Boolean);
+
+    const rankings = rankingsRows.map(row => ({
+  bookId: row.Book_ID || "",
+  rank: Number(row.Rank) || null,
+  clickCount: Number(row.Click_Count) || 0
+}));
+
+    renderHeroStats(books);
+
+    const rankedBooks = buildRankedBooks(rankings, books);
+
+    if (rankedBooks.length > 0) {
+      renderTrendingBooks(rankedBooks, "trending");
+    } else {
+      const fallbackBooks = shuffleArray(books).slice(0, 10);
+      renderTrendingBooks(fallbackBooks, "fallback");
+    }
+
+    renderFreshBooks(books);
+    renderFeaturedAuthors(featuredAuthors);
+
+  } catch (error) {
+    console.error(error);
+    document.getElementById("trendingLabel").textContent = "From the shelf";
+    document.getElementById("trendingHeading").textContent = "Books to try";
+    document.getElementById("trendingBooks").innerHTML = '<div class="empty-state">Unable to load books right now.</div>';
+    document.getElementById("freshBooksCarousel").innerHTML = '<div class="empty-state">Unable to load books right now.</div>';
+    document.getElementById("featuredAuthorsGrid").innerHTML = '<div class="empty-state">Unable to load featured authors right now.</div>';
+  }
+}
+
+            document.getElementById("readerSignupForm").addEventListener("submit", async function (event) {
+  event.preventDefault();
+
+  const form = event.currentTarget;
+  const note = document.getElementById("readerSignupNote");
+  const button = document.getElementById("readerSignupButton");
+  const firstNameInput = form.querySelector('input[name="firstName"]');
+  const emailInput = form.querySelector('input[name="email"]');
+  const honeypotInput = form.querySelector('input[name="company"]');
+
+  note.classList.remove("is-success", "is-error");
+
+  const firstName = firstNameInput.value.trim();
+  const email = emailInput.value.trim();
+  const honeypot = honeypotInput.value.trim();
+
+  if (!firstName || !email) {
+    note.textContent = "Please enter your first name and email address.";
+    note.classList.add("is-error");
+    return;
+  }
+
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    note.textContent = "Please enter a valid email address.";
+    note.classList.add("is-error");
+    return;
+  }
+
+  if (honeypot) {
+    note.textContent = "Thanks for signing up.";
+    note.classList.add("is-success");
+    form.reset();
+    return;
+  }
+
+  button.disabled = true;
+  button.textContent = "Joining...";
+  note.textContent = "Submitting...";
+
+  try {
+    const payload = {
+      firstName,
+      email,
+      source: "landing_join_the_list",
+      page: "index",
+      submittedAt: new Date().toISOString()
+    };
+
+    const response = await fetch(READER_SIGNUP_ENDPOINT, {
+      method: "POST",
+      headers: {
+        "Content-Type": "text/plain;charset=utf-8"
+      },
+      body: JSON.stringify(payload)
+    });
+
+    const result = await response.json();
+
+    if (!response.ok || !result.success) {
+      throw new Error(result.message || `Signup failed: ${response.status}`);
+    }
+
+    note.textContent = "You’re in. Keep an eye on your inbox for new releases, featured authors, and shelf updates.";
+    note.classList.add("is-success");
+    form.reset();
+  } catch (error) {
+    console.error(error);
+    note.textContent = "Something went wrong. Please try again in a moment.";
+    note.classList.add("is-error");
+  } finally {
+    button.disabled = false;
+    button.textContent = "Join the Reader List";
+  }
+});
+
+function initializeDiscordButton() {
+  const discordUrl = "https://discord.gg/aBYkHkrMdn"; // ADD YOUR DISCORD LINK HERE LATER
+  const button = document.getElementById("discordButton");
+
+  if (!button) return;
+
+  if (discordUrl) {
+    button.href = discordUrl;
+    button.classList.remove("disabled");
+    button.removeAttribute("aria-disabled");
+    button.setAttribute("target", "_blank");
+    button.setAttribute("rel", "noopener noreferrer");
+  }
+}
+
+async function initializePublicPage() {
+  const maintenanceEnabled =
+    await checkMaintenanceMode();
+
+  if (maintenanceEnabled) {
+    return;
+  }
+
+  await Promise.all([
+  loadHomepageHero(),
+  loadHomepageSections()
+]);
+
+initializeDiscordButton();
+renderVibeCards();
+loadLandingData();
+loadIncludes();
+}
+
+  </script>
+
+<script>
+
+  async function loadHomepageSections() {
+  try {
+    const response = await fetch(
+      `${SUPABASE_URL}/rest/v1/site_settings` +
+      `?setting_key=eq.homepage_sections` +
+      `&select=setting_value`,
+      {
+        headers: {
+          apikey: SUPABASE_ANON_KEY,
+          Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+          Accept: "application/json"
+        }
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(
+        `Homepage sections request failed: ${response.status}`
+      );
+    }
+
+    const rows = await response.json();
+
+    const settings =
+      rows?.[0]?.setting_value || {};
+
+    const hero =
+      document.getElementById("homepageHeroSection");
+
+    const trending =
+      document.getElementById("homepageTrendingSection");
+
+    if (hero) {
+      hero.style.display =
+        settings.hero === false
+          ? "none"
+          : "";
+    }
+
+    if (trending) {
+      trending.style.display =
+        settings.trending === false
+          ? "none"
+          : "";
+    }
+
+    document
+      .querySelectorAll("[data-homepage-section]")
+      .forEach(section => {
+        const key =
+          section.dataset.homepageSection;
+
+        section.style.display =
+          settings[key] === false
+            ? "none"
+            : "";
+      });
+
+  } catch (error) {
+    console.error(
+      "Homepage section settings failed:",
+      error
+    );
+  }
+}
+
+  async function loadHomepageHero() {
+  try {
+    const response = await fetch(
+      `${SUPABASE_URL}/rest/v1/site_settings` +
+      `?setting_key=eq.homepage_hero` +
+      `&select=setting_value`,
+      {
+        headers: {
+          apikey: SUPABASE_ANON_KEY,
+          Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+          Accept: "application/json"
+        }
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(
+        `Homepage hero request failed: ${response.status}`
+      );
+    }
+
+    const rows = await response.json();
+    const settings =
+      rows?.[0]?.setting_value || {};
+
+    const setText = (id, value) => {
+      const element = document.getElementById(id);
+
+      if (element && String(value || "").trim()) {
+        element.textContent = String(value).trim();
+      }
+    };
+
+    setText(
+      "heroEyebrow",
+      settings.eyebrow
+    );
+
+    setText(
+      "heroHeadlineBefore",
+      settings.headline_before
+    );
+
+    setText(
+      "heroHeadlineAccent",
+      settings.headline_accent
+    );
+
+    setText(
+      "heroHeadlineAfter",
+      settings.headline_after
+    );
+
+    setText(
+      "heroLead",
+      settings.lead
+    );
+
+    setText(
+      "heroSupport",
+      settings.support
+    );
+
+    const primaryButton =
+      document.getElementById("heroPrimaryButton");
+
+    if (primaryButton) {
+      if (
+        String(
+          settings.primary_button_text || ""
+        ).trim()
+      ) {
+        primaryButton.textContent =
+          settings.primary_button_text.trim();
+      }
+
+      if (
+        String(
+          settings.primary_button_url || ""
+        ).trim()
+      ) {
+        primaryButton.href =
+          settings.primary_button_url.trim();
+      }
+    }
+
+    const secondaryButton =
+      document.getElementById("heroSecondaryButton");
+
+    if (secondaryButton) {
+      if (
+        String(
+          settings.secondary_button_text || ""
+        ).trim()
+      ) {
+        secondaryButton.textContent =
+          settings.secondary_button_text.trim();
+      }
+
+      if (
+        String(
+          settings.secondary_button_url || ""
+        ).trim()
+      ) {
+        secondaryButton.href =
+          settings.secondary_button_url.trim();
+      }
+    }
+
+  } catch (error) {
+    console.error(
+      "Homepage hero failed:",
+      error
+    );
+  }
+}
+
+  async function checkMaintenanceMode() {
+  try {
+    const response = await fetch(
+      `${SUPABASE_URL}/rest/v1/site_settings` +
+      `?setting_key=eq.maintenance_mode` +
+      `&select=setting_value`,
+      {
+        headers: {
+          apikey: SUPABASE_ANON_KEY,
+          Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+          Accept: "application/json"
+        }
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(
+        `Maintenance request failed: ${response.status}`
+      );
+    }
+
+    const rows = await response.json();
+    const settings =
+      rows?.[0]?.setting_value || {};
+
+    if (settings.enabled !== true) {
+      return false;
+    }
+
+    const message =
+      String(
+        settings.message ||
+        "The BLK Shelf is temporarily unavailable."
+      ).trim();
+
+    document.body.innerHTML = `
+      <main
+        style="
+          min-height:100vh;
+          display:grid;
+          place-items:center;
+          padding:2rem;
+          background:
+            linear-gradient(
+              rgba(15,12,10,.75),
+              rgba(15,12,10,.75)
+            ),
+            url('${SUPABASE_URL}/storage/v1/object/public/logo/bckgrnd.png');
+          background-size:cover;
+          background-position:center;
+          color:#fff8f0;
+          text-align:center;
+        "
+      >
+        <section
+          style="
+            width:min(680px,100%);
+            padding:2.5rem;
+            border-radius:28px;
+            background:linear-gradient(
+              180deg,
+              #3f2e23,
+              #241d17
+            );
+            border:1px solid rgba(255,255,255,.22);
+            box-shadow:0 20px 60px rgba(0,0,0,.45);
+          "
+        >
+          <img
+            src="${SUPABASE_URL}/storage/v1/object/public/logo/blkshelf-seal-cream.png"
+            alt="The BLK Shelf"
+            style="
+              width:140px;
+              max-width:45%;
+              margin-bottom:1.5rem;
+            "
+          >
+
+          <div
+            style="
+              color:#f2c994;
+              font-size:.8rem;
+              letter-spacing:.14em;
+              text-transform:uppercase;
+            "
+          >
+            Maintenance Mode
+          </div>
+
+          <h1
+            style="
+              margin:.8rem 0 1rem;
+              font-size:clamp(2.3rem,7vw,4.5rem);
+              line-height:1;
+            "
+          >
+            We’ll Be Right Back
+          </h1>
+
+          <p
+            style="
+              margin:0;
+              color:#e3d2c0;
+              font-size:1.1rem;
+              line-height:1.7;
+              white-space:pre-wrap;
+            "
+          >${escapeHtml(message)}</p>
+        </section>
+      </main>
+    `;
+
+    return true;
+
+  } catch (error) {
+    console.error(
+      "Maintenance mode check failed:",
+      error
+    );
+
+    return false;
+  }
+}
+  
+async function loadAnnouncementBanner() {
+  const banner =
+    document.getElementById("siteAnnouncementBanner");
+
+  const messageElement =
+    document.getElementById("siteAnnouncementMessage");
+
+  const linkElement =
+    document.getElementById("siteAnnouncementLink");
+
+  if (!banner || !messageElement || !linkElement) {
+    return;
+  }
+
+  try {
+    const response = await fetch(
+      `${SUPABASE_URL}/rest/v1/site_settings` +
+      `?setting_key=eq.announcement_banner` +
+      `&select=setting_value`,
+      {
+        headers: {
+          apikey: SUPABASE_ANON_KEY,
+          Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+          Accept: "application/json"
+        }
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(
+        `Announcement request failed: ${response.status}`
+      );
+    }
+
+    const rows = await response.json();
+    const settings = rows?.[0]?.setting_value || {};
+
+    if (
+      settings.enabled !== true ||
+      !String(settings.message || "").trim()
+    ) {
+      banner.hidden = true;
+      return;
+    }
+
+    messageElement.textContent =
+      String(settings.message).trim();
+
+    const linkText =
+      String(settings.link_text || "").trim();
+
+    const linkUrl =
+      String(settings.link_url || "").trim();
+
+    if (linkText && linkUrl) {
+      linkElement.textContent = linkText;
+      linkElement.href = linkUrl;
+      linkElement.hidden = false;
+    } else {
+      linkElement.textContent = "";
+      linkElement.removeAttribute("href");
+      linkElement.hidden = true;
+    }
+
+    banner.hidden = false;
+
+  } catch (error) {
+    console.error(
+      "Announcement banner failed:",
+      error
+    );
+
+    banner.hidden = true;
+  }
+}
+
+async function loadIncludes() {
+
+  const header = await fetch("includes/header.html");
+
+  if (!header.ok) {
+    throw new Error(
+      `Header failed to load: ${header.status}`
+    );
+  }
+
+  document.getElementById("site-header").innerHTML =
+    await header.text();
+
+  await loadAnnouncementBanner();
+
+  const footer = await fetch("includes/footer.html");
+
+  if (!footer.ok) {
+    throw new Error(
+      `Footer failed to load: ${footer.status}`
+    );
+  }
+
+  document.getElementById("site-footer").innerHTML =
+    await footer.text();
+}
+
+initializePublicPage();
+
+</script>
+
+<script src="includes/shared.js"></script>
+
+</body>
+</html>

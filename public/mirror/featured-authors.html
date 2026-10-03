@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KZR7W1MNL3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-KZR7W1MNL3');
+</script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Blk Shelf – Featured Authors</title>
+
+  <link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+/>
+
+<link rel="stylesheet" href="includes/shared.css">
+
+  <style>
+    :root {
+  --bg: #0f0c0a;
+  --bg-soft: #171310;
+  --panel: #1d1814;
+  --panel-2: #241d17;
+
+  --text: #fff8f0;
+  --muted: #e3d2c0;
+  --soft: #c9b7a5;
+  --accent: #d8a35d;
+  --accent-soft: rgba(216,163,93,0.14);
+  --line: rgba(255,255,255,0.18);
+
+  --shadow: 0 22px 60px rgba(0,0,0,0.34);
+  --radius: 24px;
+  --max: 1380px;
+}
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  color: var(--text);
+  line-height: 1.6;
+  background:
+    linear-gradient(rgba(15, 12, 10, 0.5), rgba(15, 12, 10, 0.5)),
+    url("https://njgprucvnayyiooiftaw.supabase.co/storage/v1/object/public/logo/bckgrnd.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+    .eyebrow {
+      display: inline-block;
+      padding: 0.42rem 0.88rem;
+      border: 1px solid rgba(216,163,93,0.24);
+      border-radius: 999px;
+      background: rgba(216,163,93,0.08);
+      color: #f2cb98;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .hero {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+    }
+
+    h1 {
+      margin: 0.8rem 0 0.6rem;
+      font-size: clamp(2.4rem, 5vw, 4.4rem);
+      line-height: 0.97;
+      letter-spacing: -0.03em;
+    }
+
+    .hero p {
+      color: var(--muted);
+      max-width: 50rem;
+      margin: 0;
+      font-size: 1.06rem;
+    }
+
+    .hero-note {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 1rem 1.1rem;
+      min-width: 250px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-note strong {
+      color: var(--accent);
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 1.5rem;
+      padding: 2rem 0 4rem;
+    }
+
+    .main-panel,
+.side-panel {
+  background: linear-gradient(180deg, #3f2e23, #241d17);
+  border: 1px solid rgba(255,255,255,0.22);
+  border-radius: 30px;
+  color: var(--text);
+  box-shadow:
+    0 12px 30px rgba(0,0,0,0.35),
+    inset 0 1px 0 rgba(255,255,255,0.05);
+}
+
+    .main-panel {
+      padding: 1.5rem;
+    }
+
+    .side-panel {
+      padding: 1.25rem;
+      align-self: start;
+      position: sticky;
+      top: 1rem;
+    }
+
+    .section-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 1rem;
+      margin-bottom: 1.2rem;
+      flex-wrap: wrap;
+    }
+
+    .section-title h2,
+    .side-panel h2 {
+      margin: 0.4rem 0 0;
+      font-size: 1.9rem;
+      line-height: 1.05;
+    }
+
+    .section-title p,
+    .side-panel p {
+      margin: 0;
+      color: var(--soft);
+    }
+
+    .author-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.25rem;
+    }
+
+    .author-card {
+  overflow: hidden;
+  border-radius: 26px;
+  border: 1px solid rgba(255,255,255,0.22);
+  background: linear-gradient(180deg, #3f2e23, #241d17);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+    .author-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(216,163,93,0.24);
+    }
+
+    .author-image {
+  height: 340px;
+  background: linear-gradient(180deg, rgba(216,163,93,0.2), rgba(36,28,22,0.85));
+  position: relative;
+  overflow: hidden;
+}
+
+.author-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+  background: #1a130d;
+}
+
+    .author-image::after {
+  content: "Featured";
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  padding: 0.35rem 0.55rem;
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  background: rgba(18,14,11,0.7);
+  border: 1px solid rgba(255,255,255,0.08);
+  color: #f3c78e;
+}
+
+    .author-content {
+      padding: 1.2rem;
+    }
+
+    .meta {
+      color: var(--soft);
+      font-size: 0.76rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 0.65rem;
+    }
+
+    .author-card h3 {
+      margin: 0 0 0.6rem;
+      font-size: 1.5rem;
+      line-height: 1.05;
+    }
+
+    .author-card p {
+      color: var(--muted);
+      margin: 0 0 1rem;
+    }
+
+    .featured-book {
+      padding: 0.85rem 0.95rem;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.06);
+      background: rgba(255,255,255,0.03);
+      margin-bottom: 1rem;
+    }
+
+    .featured-book strong {
+      display: block;
+      margin-bottom: 0.25rem;
+      color: var(--text);
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin-bottom: 1rem;
+    }
+
+    .tag {
+      padding: 0.38rem 0.62rem;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      border: 1px solid rgba(216,163,93,0.18);
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+
+    .button-row {
+      display: flex;
+      gap: 0.7rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.82rem 1.1rem;
+      border-radius: 14px;
+      font-weight: bold;
+      border: 1px solid transparent;
+      transition: 0.2s ease;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .btn-primary {
+  background: #e6b06a;
+  color: #120e0b;
+  border: 2px solid #120e0b;
+}
+
+.btn-primary:hover {
+  background: #f2c994;
+}
+
+.btn-secondary {
+  background: #241d17;
+  border: 2px solid rgba(255,255,255,0.3);
+  color: var(--text);
+}
+
+.btn-secondary:hover {
+  background: #3f2e23;
+  border-color: rgba(216,163,93,0.45);
+}
+
+    .month-list {
+      display: grid;
+      gap: 0.7rem;
+      margin-top: 1rem;
+    }
+
+    .month-link {
+      display: block;
+      padding: 0.95rem 1rem;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.06);
+      background: rgba(255,255,255,0.03);
+      transition: 0.2s ease;
+    }
+
+    .month-link:hover {
+      border-color: rgba(216,163,93,0.24);
+      transform: translateX(2px);
+    }
+
+    .month-link strong {
+      display: block;
+      margin-bottom: 0.18rem;
+    }
+
+    .month-link span {
+      color: var(--soft);
+      font-size: 0.92rem;
+    }
+
+    .empty-state {
+  padding: 1.2rem;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.03);
+  color: var(--muted);
+}
+
+    .archive-note {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      color: var(--soft);
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 1120px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .side-panel {
+        position: static;
+      }
+    }
+
+    @media (max-width: 820px) {
+  .author-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+
+  .author-card {
+    border-radius: 20px;
+  }
+
+  .author-content {
+    padding: 0.9rem;
+  }
+
+  .author-card h3 {
+    font-size: 1.1rem;
+  }
+
+  .author-card p {
+    font-size: 0.8rem;
+    line-height: 1.35;
+  }
+
+  .author-image {
+    height: 220px;
+  }
+}
+
+    @media (max-width: 640px) {
+  body {
+    background:
+      linear-gradient(rgba(15, 12, 10, 0.5), rgba(15, 12, 10, 0.5)),
+      url("https://njgprucvnayyiooiftaw.supabase.co/storage/v1/object/public/logo/bckgrnd-mobile.png");
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+  }
+
+  .hero, .section-title {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  .author-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.6rem;
+  }
+
+  .author-image {
+    height: 180px;
+  }
+
+  .author-card h3 {
+    font-size: 1rem;
+  }
+
+  .author-card p {
+    font-size: 0.75rem;
+  }
+
+  .meta {
+    font-size: 0.65rem;
+  }
+
+}
+
+.hero-note,
+.featured-book,
+.month-link,
+.empty-state {
+  background: rgba(63,46,35,0.9);
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+@media (max-width: 820px) {
+  #author-grid.author-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 0.65rem !important;
+  }
+
+    #author-grid .author-image::after {
+    font-size: 0.55rem;
+    padding: 0.25rem 0.45rem;
+    top: 8px;
+    left: 8px;
+    letter-spacing: 0.08em;
+  }
+
+  #author-grid .author-card {
+    min-width: 0;
+    border-radius: 18px;
+  }
+
+  #author-grid .author-image {
+    height: 170px;
+  }
+
+  #author-grid .author-content {
+    padding: 0.75rem;
+  }
+
+  #author-grid .author-card h3 {
+    font-size: 1rem;
+    line-height: 1.1;
+  }
+
+  #author-grid .author-card p {
+    font-size: 0.72rem;
+    line-height: 1.3;
+  }
+
+  #author-grid .button-row {
+    flex-direction: column;
+    gap: 0.45rem;
+  }
+
+  #author-grid .btn {
+    width: 100%;
+    padding: 0.65rem 0.7rem;
+    font-size: 0.78rem;
+    text-align: center;
+  }
+}
+
+@media (max-width: 820px) {
+  #author-grid.author-grid {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 0.65rem !important;
+  }
+
+  #author-grid .author-card {
+    width: calc(50% - 0.325rem) !important;
+    flex: 0 0 calc(50% - 0.325rem) !important;
+    min-width: 0 !important;
+    border-radius: 18px;
+  }
+
+  #author-grid .author-image {
+    height: 165px;
+  }
+
+  #author-grid .author-content {
+    padding: 0.7rem;
+  }
+
+  #author-grid .author-card h3 {
+    font-size: 0.95rem;
+    line-height: 1.1;
+  }
+
+  #author-grid .author-card p {
+    font-size: 0.7rem;
+    line-height: 1.25;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  #author-grid .tag-row {
+    display: none;
+  }
+
+  #author-grid .button-row {
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  #author-grid .btn {
+    width: 100%;
+    padding: 0.6rem 0.55rem;
+    font-size: 0.72rem;
+    text-align: center;
+  }
+}
+  </style>
+</head>
+<body>
+  <header>
+  <div id="site-header"></div>
+
+  <div class="container">
+    <div class="hero">
+      <div>
+        <span class="eyebrow">Monthly spotlight</span>
+        <h1>Featured Authors</h1>
+        <p>Each month, four Black indie authors are brought to the front of The Blk Shelf. The spotlight shifts, but the work doesn’t disappear—past features stay archived so they can keep being found.</p>
+      </div>
+
+      <div class="hero-note" id="hero-note">
+        <strong id="hero-note-title">Current Feature</strong>
+        <span id="hero-note-text">Loading featured authors...</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+  <main class="container layout">
+    <section class="main-panel">
+      <div class="section-title">
+  <div>
+    <span class="eyebrow">Current month</span>
+    <h2 id="current-month-heading">Featured Authors</h2>
+  </div>
+  <p id="current-month-subtext">Loading this month’s featured authors...</p>
+</div>
+
+      <div class="author-grid" id="author-grid"></div>
+<div id="featured-error" style="display:none; margin-top:1rem; color: var(--muted);">
+  We couldn’t load the featured authors right now.
+</div>
+    </section>
+
+    <aside class="side-panel">
+      <span class="eyebrow">Archive</span>
+      <h2>Previous Months</h2>
+
+      <div class="month-list" id="month-list">
+  <div class="empty-state">Loading archive...</div>
+</div>
+
+      <div class="archive-note">
+  Browse previous featured-author months without losing old spotlights.
+</div>
+    </aside>
+  </main>
+
+<footer id="site-footer"></footer>
+
+  <script>
+
+    const SUPABASE_URL = "https://njgprucvnayyiooiftaw.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5qZ3BydWN2bmF5eWlvb2lmdGF3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc3NDg0ODMsImV4cCI6MjA5MzMyNDQ4M30.1r6r8vyYB0PnrZtugcBz3CPuCP9MMlTTMYXfewEINNw";
+
+async function supabaseFetch(path) {
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/${path}`, {
+    headers: {
+      apikey: SUPABASE_ANON_KEY,
+      Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+      Accept: "application/json"
+    }
+  });
+
+  if (!res.ok) {
+    throw new Error(`Supabase request failed: ${res.status}`);
+  }
+
+  return await res.json();
+}
+    
+    const DEFAULT_AUTHOR = `${SUPABASE_URL}/storage/v1/object/public/defaults/author-default.jpg`;
+    const DEFAULT_COVER = `${SUPABASE_URL}/storage/v1/object/public/defaults/cover-default.jpg`;
+
+    function textOrFallback(value, fallback = "—") {
+      if (value === null || value === undefined) return fallback;
+      const str = String(value).trim();
+      return str ? str : fallback;
+    }
+
+    function normalizeUrl(url) {
+      const value = textOrFallback(url, "");
+      if (!value) return "";
+      if (/^https?:\/\//i.test(value)) return value;
+      return `https://${value}`;
+    }
+
+    function escapeHtml(value) {
+      return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#39;");
+    }
+
+    function splitToArray(value) {
+      if (!value) return [];
+      if (Array.isArray(value)) {
+        return value.map(v => String(v).trim()).filter(Boolean);
+      }
+      return String(value)
+        .split(",")
+        .map(v => v.trim())
+        .filter(Boolean);
+    }
+
+    function formatMonthKey(monthKey) {
+      if (!monthKey) return "Featured Authors";
+      const [year, month] = monthKey.split("-");
+      if (!year || !month) return "Featured Authors";
+
+      const date = new Date(Number(year), Number(month) - 1, 1);
+      return date.toLocaleDateString("en-US", {
+        month: "long",
+        year: "numeric"
+      });
+    }
+
+    function getSelectedMonth() {
+  const params = new URLSearchParams(window.location.search);
+  return params.get("month");
+}
+
+    function normalizeFeaturedAuthor(author) {
+      return {
+        id: textOrFallback(author.authorId, ""),
+        name: textOrFallback(author.authorName, "Unknown Author"),
+        bio: textOrFallback(author.bio, "Biography coming soon."),
+        photoUrl: textOrFallback(author.headshotLogo, ""),
+        genres: splitToArray(author.genres),
+        websiteLink: normalizeUrl(author.websiteLink)
+      };
+    }
+
+    function buildTagRow(genres) {
+      if (!genres.length) return "";
+      return `
+        <div class="tag-row">
+          ${genres.slice(0, 3).map(tag => `<span class="tag">${escapeHtml(tag)}</span>`).join("")}
+        </div>
+      `;
+    }
+
+    function buildMeta(author) {
+      if (!author.genres.length) return "Featured Author";
+      return escapeHtml(author.genres.slice(0, 2).join(" • "));
+    }
+
+    function renderArchive(months, currentMonthKey) {
+  const monthList = document.getElementById("month-list");
+  if (!monthList) return;
+
+  const archiveMonths = (Array.isArray(months) ? months : []).filter(
+    monthKey => monthKey && monthKey !== currentMonthKey
+  );
+
+  if (!archiveMonths.length) {
+    monthList.innerHTML = `<div class="empty-state">No archived featured months yet.</div>`;
+    return;
+  }
+
+  monthList.innerHTML = archiveMonths.map(monthKey => `
+    <a class="month-link" href="featured-authors.html?month=${encodeURIComponent(monthKey)}">
+      <strong>${escapeHtml(formatMonthKey(monthKey))}</strong>
+      <span>View featured authors</span>
+    </a>
+  `).join("");
+}
+
+    function renderFeaturedAuthors(payload) {
+  const authorGrid = document.getElementById("author-grid");
+  const heroNoteTitle = document.getElementById("hero-note-title");
+  const heroNoteText = document.getElementById("hero-note-text");
+  const currentMonthHeading = document.getElementById("current-month-heading");
+  const currentMonthSubtext = document.getElementById("current-month-subtext");
+
+  const monthLabel = formatMonthKey(payload.monthKey);
+  const authors = Array.isArray(payload.authors)
+    ? payload.authors.map(normalizeFeaturedAuthor)
+    : [];
+
+  heroNoteTitle.textContent = `${monthLabel} Feature`;
+  heroNoteText.textContent = `${authors.length} author${authors.length === 1 ? "" : "s"} currently featured`;
+  currentMonthHeading.textContent = `${monthLabel} Featured Authors`;
+  currentMonthSubtext.textContent = `These are the authors currently being highlighted across the platform this month.`;
+
+  renderArchive(payload.availableMonths, payload.monthKey);
+
+  if (!authors.length) {
+    authorGrid.innerHTML = `<div class="empty-state">No featured authors were found for this month.</div>`;
+    return;
+  }
+
+  authorGrid.innerHTML = authors.map(author => `
+    <article class="author-card">
+      <div class="author-image">
+        <img
+          src="${escapeHtml(author.photoUrl || DEFAULT_AUTHOR)}"
+          alt="${escapeHtml(author.name)} photo"
+          loading="lazy"
+          onerror="this.onerror=null;this.src='${DEFAULT_AUTHOR}'"
+        />
+      </div>
+
+      <div class="author-content">
+        <div class="meta">${buildMeta(author)}</div>
+        <h3>${escapeHtml(author.name)}</h3>
+        <p>${escapeHtml(author.bio)}</p>
+
+        ${buildTagRow(author.genres)}
+
+        <div class="button-row">
+          <a class="btn btn-primary" href="author.html?id=${encodeURIComponent(author.id)}&source=featured_authors_page">View Author</a>
+          ${author.websiteLink ? `<a class="btn btn-secondary" href="${escapeHtml(author.websiteLink)}" target="_blank" rel="noopener noreferrer">Visit Website</a>` : ""}
+        </div>
+      </div>
+    </article>
+  `).join("");
+}
+
+    async function loadFeaturedAuthors() {
+  const errorBox = document.getElementById("featured-error");
+
+  try {
+    const selectedMonth = getSelectedMonth();
+
+    const [featuredRows, authorRows] = await Promise.all([
+      supabaseFetch("public_featured_authors?select=*&order=Month_Key.desc,Selected_At.desc"),
+      supabaseFetch("public_authors?select=*&APPROVAL=eq.Approved&limit=2000")
+    ]);
+
+    const availableMonths = [...new Set(
+      featuredRows.map(row => row.Month_Key).filter(Boolean)
+    )].sort().reverse();
+
+    const targetMonth =
+      selectedMonth ||
+      availableMonths[0] ||
+      new Date().toISOString().slice(0, 7);
+
+    const authorsById = new Map(
+      authorRows.map(author => [author.AUTHOR_ID, author])
+    );
+
+    const authors = featuredRows
+      .filter(row => row.Month_Key === targetMonth)
+      .map(row => authorsById.get(row.Author_ID))
+      .filter(Boolean)
+      .map(author => ({
+        authorId: author.AUTHOR_ID || "",
+        authorName: author.AUTHOR_NAME || "",
+        bio: author.BIO || "",
+        headshotLogo: author.AUTHORIMAGEPATH
+  ? `${SUPABASE_URL}/storage/v1/object/public/authors/${encodeURIComponent(author.AUTHORIMAGEPATH)}`
+  : "",
+        genres: author.GENRES || "",
+        websiteLink: author.WEBSITE || ""
+      }));
+
+    renderFeaturedAuthors({
+      success: true,
+      monthKey: targetMonth,
+      authors,
+      availableMonths
+    });
+
+  } catch (error) {
+    console.error("Featured authors load error:", error);
+    errorBox.style.display = "block";
+    errorBox.textContent = `We couldn't load the featured authors right now. ${error.message}`;
+  }
+}
+
+    loadFeaturedAuthors();
+  </script>
+
+  <script>
+async function loadIncludes() {
+  const header = await fetch('includes/header.html');
+  document.getElementById('site-header').innerHTML = await header.text();
+
+  const footer = await fetch('includes/footer.html');
+  document.getElementById('site-footer').innerHTML = await footer.text();
+}
+
+loadIncludes();
+</script>
+
+<script src="includes/shared.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-KZR7W1MNL3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-KZR7W1MNL3');
+  </script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Us – The Blk Shelf</title>
+
+  <link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+/>
+
+<link rel="stylesheet" href="includes/shared.css">
+
+  <style>
+    :root {
+      --bg: #0f0c0a;
+      --text: #fff8f0;
+      --muted: #e3d2c0;
+      --soft: #c9b7a5;
+      --accent: #d8a35d;
+      --line: rgba(255,255,255,0.18);
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      color: var(--text);
+      line-height: 1.6;
+      background:
+        linear-gradient(rgba(15, 12, 10, 0.5), rgba(15, 12, 10, 0.5)),
+        url("https://njgprucvnayyiooiftaw.supabase.co/storage/v1/object/public/logo/bckgrnd.png");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+
+    .page {
+      padding: 2.5rem 0 3.5rem;
+    }
+
+    .about-card {
+      background: linear-gradient(180deg, #3f2e23, #241d17);
+      border: 1px solid rgba(255,255,255,0.22);
+      border-radius: 28px;
+      padding: 2rem;
+      box-shadow:
+        0 12px 30px rgba(0,0,0,0.35),
+        inset 0 1px 0 rgba(255,255,255,0.05);
+    }
+
+    .eyebrow {
+      display: inline-block;
+      padding: 0.42rem 0.88rem;
+      border: 1px solid rgba(216,163,93,0.24);
+      border-radius: 999px;
+      background: rgba(216,163,93,0.08);
+      color: #f2cb98;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      font-size: clamp(2.4rem, 5vw, 4.3rem);
+      line-height: 0.98;
+      margin: 0.9rem 0 0.8rem;
+      letter-spacing: -0.03em;
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      margin: 0 0 0.8rem;
+    }
+
+    .intro {
+      color: var(--muted);
+      max-width: 56rem;
+      font-size: 1.06rem;
+      margin: 0 0 2rem;
+    }
+
+    .split-section {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 1.2rem;
+      margin-top: 1.5rem;
+    }
+
+    .panel {
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.06), transparent 34%),
+        rgba(63,46,35,0.9);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-left: 4px solid rgba(216,163,93,0.65);
+      border-radius: 20px;
+      padding: 1.25rem;
+    }
+
+    .panel p {
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .founders-section {
+      margin-top: 2.5rem;
+    }
+
+    .founders-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 1rem;
+      margin-bottom: 1.2rem;
+      flex-wrap: wrap;
+    }
+
+    .founders-head p {
+      color: var(--soft);
+      max-width: 34rem;
+      margin: 0;
+    }
+
+  .founder-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.2rem;
+}
+
+.founder-grid .founder-card:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+  max-width: 560px;
+  justify-self: center;
+}
+
+.founder-card {
+  background:
+    linear-gradient(135deg, rgba(216,163,93,0.1), transparent 34%),
+    rgba(63,46,35,0.92);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 24px;
+  overflow: hidden;
+  transition: 0.2s ease;
+}
+
+.founder-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(216,163,93,0.45);
+}
+
+.founder-top {
+  display: grid;
+  grid-template-columns: 170px 1fr;
+  gap: 1rem;
+  padding: 1rem;
+  align-items: center;
+}
+
+.founder-photo {
+  width: 170px;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: 18px;
+  background: rgba(216,163,93,0.12);
+}
+
+.founder-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+.founder-content h3 {
+  margin: 0 0 0.25rem;
+  font-size: 1.25rem;
+  line-height: 1.1;
+}
+
+.founder-role {
+  color: #f2c994;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.65rem;
+}
+
+.founder-summary {
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.45;
+  margin: 0;
+}
+
+.founder-bio {
+  border-top: 1px solid rgba(255,255,255,0.16);
+  padding: 0 1rem 1rem;
+}
+
+.founder-bio summary {
+  cursor: pointer;
+  color: #f2c994;
+  font-weight: bold;
+  padding: 0.9rem 0 0.4rem;
+}
+
+.founder-bio p {
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.5;
+  margin: 0 0 0.75rem;
+}
+
+    .cta-note {
+      margin-top: 2rem;
+      padding: 1rem 1.1rem;
+      border-radius: 18px;
+      background: rgba(216,163,93,0.08);
+      border: 1px solid rgba(216,163,93,0.22);
+      color: var(--muted);
+    }
+
+    @media (max-width: 1050px) {
+  .founder-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .split-section {
+    grid-template-columns: 1fr;
+  }
+}
+
+    @media (max-width: 700px) {
+      body {
+        background:
+          linear-gradient(rgba(15, 12, 10, 0.5), rgba(15, 12, 10, 0.5)),
+          url("https://njgprucvnayyiooiftaw.supabase.co/storage/v1/object/public/logo/bckgrnd-mobile.png");
+        background-size: cover;
+        background-position: center top;
+        background-repeat: no-repeat;
+        background-attachment: scroll;
+      }
+
+      .page {
+        padding: 1.5rem 0 2.5rem;
+      }
+
+      .about-card {
+        padding: 1.15rem;
+        border-radius: 22px;
+      }
+
+      h1 {
+        font-size: 2.35rem;
+      }
+
+      .intro {
+        font-size: 0.95rem;
+      }
+
+  .founder-grid {
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.founder-grid .founder-card:last-child:nth-child(odd) {
+  grid-column: auto;
+  max-width: none;
+  justify-self: stretch;
+}
+
+.founder-top {
+  grid-template-columns: 1fr;
+  text-align: center;
+}
+
+.founder-photo {
+  width: min(100%, 250px);
+  margin: 0 auto;
+}
+
+.founder-content h3 {
+  font-size: 1.1rem;
+}
+
+.founder-role {
+  font-size: 0.72rem;
+}
+
+.founder-summary {
+  font-size: 0.88rem;
+}
+
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div id="site-header"></div>
+</header>
+
+<main class="page">
+  <div class="container">
+    <div class="about-card">
+      <span class="eyebrow">About The Blk Shelf</span>
+      <h1>Built for Black indie stories to be found.</h1>
+
+      <p class="intro">
+        The Blk Shelf was created to make discovery easier for readers and visibility stronger for Black independent authors. We believe good stories should not disappear because an algorithm failed to notice them.
+      </p>
+
+      <div class="split-section">
+        <section class="panel">
+          <h2>Our Mission</h2>
+          <p>
+            To connect readers with Black indie books across genres, moods, and storytelling traditions while creating a discovery space that values visibility, intention, and community.
+          </p>
+        </section>
+
+        <section class="panel">
+          <h2>Why We Built It</h2>
+          <p>
+            Readers should not have to dig through endless noise to find Black indie stories, and authors should not have to beg platforms to make their work visible. The Blk Shelf is built to close that gap.
+          </p>
+        </section>
+      </div>
+
+      <section class="founders-section">
+        <div class="founders-head">
+          <div>
+            <span class="eyebrow">The Founders</span>
+            <h2>Meet the people behind the shelf.</h2>
+          </div>
+          <p>
+The team behind The Blk Shelf brings together readers, writers, and builders committed to making Black indie stories easier to find and harder to overlook.
+</p>
+        </div>
+
+  <div class="founder-grid">
+
+  <article class="founder-card">
+    <div class="founder-top">
+      <div class="founder-photo">
+        <img src="https://njgprucvnayyiooiftaw.supabase.co/storage/v1/object/public/logo/c.wynter.png" alt="C. Wynter">
+      </div>
+
+      <div class="founder-content">
+        <h3>C. Wynter</h3>
+        <div class="founder-role">Founder</div>
+        <p class="founder-summary">
+          Author, creator, and visionary founder helping shape The BLK Shelf as a space built by and for Black indie authors.
+        </p>
+      </div>
+    </div>
+
+    <details class="founder-bio">
+      <summary>Read Full Bio</summary>
+
+      <p>C. Wynter was born and raised in Virginia, 757 to be exact. She wears many hats, but in this space, she shows up as an author and a creator.</p>
+
+      <p>For a long time, she believed her purpose was just writing. Somewhere along the way, God showed her it was bigger than that.</p>
+
+      <p>The BLK Shelf didn’t come from perfection. It came from an idea. A wild one at that. But what makes it powerful is the people who believed in it enough to bring it to life.</p>
+
+      <p>At its core, The BLK Shelf is about ownership. It’s about saying we don’t need a seat in someone else’s room because we built our own. It’s about creating space for Black indie authors who write purely for the love of the pen and giving those voices the exposure they’ve always deserved.</p>
+
+      <p>Her role? If you ask the founders, they’ll tell you she asks for the impossible in the shortest amount of time. But to her, it’s about always thinking ahead: what’s next, how we improve, what we fix, and, as always, just one more thing.</p>
+
+      <p>She believes everyone has a place in The BLK Shelf. No single role defines the team, but together, they play to their strengths for the success of something bigger than any one person.</p>
+
+      <p>This isn’t just for her. This is for us. And most importantly, this is for her daughter, so one day she can show her what her mother built and remind her that she is unstoppable.</p>
+
+      <p>She is grateful to be on the right side of history.</p>
+    </details>
+  </article>
+
+
+  <article class="founder-card">
+    <div class="founder-top">
+      <div class="founder-photo">
+        <img src="https://njgprucvnayyiooiftaw.supabase.co/storage/v1/object/public/logo/shani.png" alt="Shani Denise">
+      </div>
+
+      <div class="founder-content">
+        <h3>Shani Denise</h3>
+        <div class="founder-role">Founder</div>
+        <p class="founder-summary">
+          Detroit native author, publisher, and advocate for Black indie authors, known for soulful and spicy urban romance.
+        </p>
+      </div>
+    </div>
+
+    <details class="founder-bio">
+      <summary>Read Full Bio</summary>
+
+      <p>Shani Denise is a Detroit native author, publisher, and co-founder of The BLK Shelf.</p>
+
+      <p>Known for her soulful and spicy urban romances, she writes stories that center Black love in all its beauty, blending heart, heat, and healing into every page.</p>
+
+      <p>As the voice behind multiple titles including <em>Summertime in the City</em>, <em>When the City Sleeps</em>, and <em>Carried to the Altar</em>, Shani Denise brings the grit and warmth of Detroit into her storytelling while creating unforgettable characters readers can feel.</p>
+
+      <p>Beyond her work as an author, she is the founder of Pink Flame Publishing and a passionate advocate for Black indie authors.</p>
+
+      <p>Through The BLK Shelf, she is helping build a space where Black writers are not only visible, but valued, supported, and celebrated on their own terms.</p>
+    </details>
+  </article>
+
+
+  <article class="founder-card">
+    <div class="founder-top">
+      <div class="founder-photo">
+        <img src="https://njgprucvnayyiooiftaw.supabase.co/storage/v1/object/public/logo/monet.png" alt="Monét">
+      </div>
+
+      <div class="founder-content">
+        <h3>Monét</h3>
+        <div class="founder-role">Founder</div>
+        <p class="founder-summary">
+          Marketing creative, graphic designer, and founder of Marketing by Monèt, dedicated to amplifying Black indie authors.
+        </p>
+      </div>
+    </div>
+
+    <details class="founder-bio">
+      <summary>Read Full Bio</summary>
+
+      <p>Monét is a co-founder of The BLK Shelf and the creative force behind Marketing by Monèt, a bookish marketing brand dedicated to amplifying Black indie authors.</p>
+
+      <p>With a strong background in marketing and graphic design, Monét has worked across a wide range of projects within the indie author community, crafting visuals, branding, and promotional strategies that help stories stand out and connect with the right audience.</p>
+
+      <p>Her work is rooted in intention and representation. Having collaborated with a diverse array of Black authors across multiple genres, Monét understands the importance of not only visibility, but authenticity in how these stories are presented to the world.</p>
+
+      <p>From eye-catching graphics to cohesive brand identities, her goal is always to make sure each story feels seen before it’s even read.</p>
+
+      <p>Beyond her professional work, Monét is a passionate reader who genuinely loves Black stories in all their forms: romance, fantasy, drama, and everything in between.</p>
+
+      <p>That love fuels both her business and her mission to create spaces where Black authors are celebrated, supported, and discovered.</p>
+
+      <p>Through The BLK Shelf, Monét continues to merge her creative expertise with her passion for storytelling, helping build a platform where Black literature thrives.</p>
+    </details>
+  </article>
+
+
+  <article class="founder-card">
+    <div class="founder-top">
+      <div class="founder-photo">
+        <img src="https://njgprucvnayyiooiftaw.supabase.co/storage/v1/object/public/logo/vera.png" alt="Vera T. Brown">
+      </div>
+
+      <div class="founder-content">
+        <h3>Vera T. Brown</h3>
+        <div class="founder-role">Founder</div>
+        <p class="founder-summary">
+          Southern Black author, Navy veteran, and paranormal storyteller helping build the systems behind The BLK Shelf.
+        </p>
+      </div>
+    </div>
+
+    <details class="founder-bio">
+      <summary>Read Full Bio</summary>
+
+      <p>Vera T. Brown is a Southern Black author, Navy veteran, and co-founder of The BLK Shelf.</p>
+
+      <p>Known for her paranormal and supernatural storytelling, she writes emotionally driven stories that explore power, identity, and transformation through a Black lens.</p>
+
+      <p>By trade, she works in the legal field, bringing structure and precision into both her writing and her work behind the scenes.</p>
+
+      <p>As a co-founder of The BLK Shelf, she focuses on building the systems and foundation that support discoverability for Black indie authors.</p>
+
+      <p>Through her work, she is committed to helping create a space where Black stories are not only visible, but consistently found, supported, and positioned to grow.</p>
+    </details>
+  </article>
+
+
+  <article class="founder-card">
+    <div class="founder-top">
+      <div class="founder-photo">
+        <img src="https://njgprucvnayyiooiftaw.supabase.co/storage/v1/object/public/logo/k.will.png" alt="Coach K. Will">
+      </div>
+
+      <div class="founder-content">
+        <h3>Coach K. Will</h3>
+        <div class="founder-role">Founder</div>
+        <p class="founder-summary">
+          Author, editor, and faith-rooted storyteller from Norfolk, Virginia, bringing bold range and grounded wisdom to The BLK Shelf.
+        </p>
+      </div>
+    </div>
+
+    <details class="founder-bio">
+      <summary>Read Full Bio</summary>
+
+      <p>Coach K. Will is an author, editor, and co-founder of The BLK Shelf from Norfolk, Virginia. If you're looking to put her in a box, you'll need a bigger one.</p>
+
+      <p>Her catalog tells the story: <em>Rebuilt</em>, a raw look at rising from rock bottom; <em>Street Proverbs</em>, 31 days in Proverbs for the culture; <em>When the Saints Slide Back</em>, Christian fiction that hits like real life; and <em>Dust & Glory</em>, <em>90 Days with STILL</em>, and <em>Where Faith Meets Monday</em>, devotionals and tools for people who want faith that works outside of Sunday.</p>
+
+      <p>Then there is <em>YZ</em>, her debut literary crime novel that goes where many writers will not. A family shattered by police violence. A fight for justice that will not be silenced. K. Will does not tiptoe around the hard stuff. She puts it center stage.</p>
+
+      <p>And for the grown woman who has done the work and is done shrinking, there is <em>Aht Aht: Grown Woman Wisdom</em>, 40 short, powerful chapters of clarity, boundaries, and that firm but loving “no ma’am” to everything she has already outgrown.</p>
+
+      <p>Her theological training, her Norfolk roots, and her own journey of rebuilding give her work a grounded, authentic voice that connects across the aisle, from the church pew to the courtroom steps to the nightstand of a woman who finally knows her worth.</p>
+
+      <p>One label will never be enough. That is kind of the point.</p>
+    </details>
+  </article>
+
+</div>
+      </section>
+
+      <div class="cta-note">
+        The Blk Shelf is powered by Black authors and built for readers, authors, and the stories that deserve to be seen.
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer id="site-footer"></footer>
+
+<script>
+async function loadIncludes() {
+
+  const header = await fetch('includes/header.html');
+  document.getElementById('site-header').innerHTML =
+    await header.text();
+
+  const footer = await fetch('includes/footer.html');
+  document.getElementById('site-footer').innerHTML =
+    await footer.text();
+}
+
+loadIncludes();
+</script>
+
+<script src="includes/shared.js"></script>
+
+</body>
+</html>

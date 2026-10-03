@@ -1,0 +1,1837 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KZR7W1MNL3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-KZR7W1MNL3');
+</script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Blk Shelf – Library</title>
+
+  <link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+/>
+
+<link rel="stylesheet" href="includes/shared.css">
+
+  <style>
+    :root {
+  --bg: #0f0c0a;
+  --bg-soft: #171310;
+  --panel: #1d1814;
+  --panel-2: #241d17;
+  --wood: #6b4427;
+  --wood-dark: #4c301a;
+  --wood-light: #9b6b43;
+
+  --text: #fff8f0;
+  --muted: #e3d2c0;
+  --soft: #c9b7a5;
+  --accent: #d8a35d;
+  --accent-soft: rgba(216,163,93,0.14);
+  --line: rgba(255,255,255,0.18);
+
+  --shadow: 0 24px 70px rgba(0,0,0,0.35);
+  --radius: 22px;
+  --max: 1380px;
+}
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  color: var(--text);
+  line-height: 1.6;
+  background:
+    linear-gradient(rgba(15, 12, 10, 0.5), rgba(15, 12, 10, 0.5)),
+    url("https://njgprucvnayyiooiftaw.supabase.co/storage/v1/object/public/logo/bckgrnd.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+    .eyebrow {
+      display: inline-block;
+      padding: 0.4rem 0.85rem;
+      border: 1px solid rgba(216,163,93,0.25);
+      border-radius: 999px;
+      background: rgba(216,163,93,0.08);
+      color: #f2cb98;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .hero {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    h1 {
+      margin: 0.8rem 0 0.6rem;
+      font-size: clamp(2.3rem, 5vw, 4.3rem);
+      line-height: 0.97;
+      letter-spacing: -0.03em;
+    }
+
+    .hero p {
+      color: var(--muted);
+      max-width: 48rem;
+      margin: 0;
+      font-size: 1.05rem;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.9rem 1.25rem;
+      border-radius: 14px;
+      border: 1px solid transparent;
+      font-weight: bold;
+      transition: 0.2s ease;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #1a130d;
+      width: 100%;
+      margin-top: 1rem;
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.03);
+      color: var(--text);
+      border: 1px solid var(--line);
+    }
+
+    .btn-primary {
+  background: #e6b06a;
+  color: #120e0b;
+  border: 2px solid #120e0b;
+}
+
+.btn-primary:hover {
+  background: #f2c994;
+}
+
+.btn-secondary {
+  background: #241d17;
+  border: 2px solid rgba(255,255,255,0.3);
+  color: var(--text);
+}
+
+.btn-secondary:hover {
+  background: #3f2e23;
+  border-color: rgba(216,163,93,0.45);
+}
+
+    .library-layout {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 2rem;
+      padding: 3rem 0;
+    }
+
+    /* FILTERS SIDEBAR */
+    .filters {
+  align-self: start;
+  background: linear-gradient(180deg, #3f2e23, #241d17);
+  border: 1px solid rgba(255,255,255,0.22);
+  border-radius: 28px;
+  padding: 1.5rem;
+  color: var(--text);
+  box-shadow:
+    0 12px 30px rgba(0,0,0,0.35),
+    inset 0 1px 0 rgba(255,255,255,0.05);
+}
+
+    .filters h2 { margin: 0.2rem 0 0.4rem; font-size: 1.6rem; }
+    .filters .desc { margin: 0 0 1rem; color: var(--soft); font-size: 0.95rem; }
+
+.filter-group {
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 1.2rem 0 0;
+  margin-top: 1.2rem;
+}
+
+.filter-group:first-of-type {
+  border-top: none;
+  padding-top: 0;
+  margin-top: 0;
+}
+
+.filter-group summary {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1.02rem;
+  user-select: none;
+}
+
+.filter-group summary::after {
+  content: '→';
+  font-size: 0.8rem;
+  color: var(--accent);
+  transition: transform 0.3s ease;
+}
+
+.filter-group[open] summary::after {
+  transform: rotate(90deg);
+}
+
+.filter-content {
+  padding-top: 1rem;
+}
+
+    .chip-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.8rem; }
+    .chip {
+      padding: 0.45rem 0.7rem;
+      border: 1px solid rgba(216,163,93,0.18);
+      border-radius: 999px;
+      background: rgba(216,163,93,0.07);
+      color: var(--muted);
+      font-size: 0.85rem;
+      cursor: pointer;
+    }
+
+    .chip.active {
+  background: var(--accent);
+  color: #1a130d;
+  border-color: var(--accent);
+  font-weight: bold;
+}
+
+.book.hidden {
+  display: none;
+}
+
+    .field {
+      width: 100%;
+      background: rgba(7,7,7,0.28);
+      color: var(--text);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 0.8rem 0.9rem;
+      font: inherit;
+      margin-bottom: 0.7rem;
+    }
+
+    .search-radio-row {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.search-radio-row label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  cursor: pointer;
+}
+
+.search-radio-row input {
+  accent-color: var(--accent);
+}
+
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; }
+
+    /* BOOKCASE RESULTS */
+    .results-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      color: var(--muted);
+    }
+
+    .bookshelf {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.03), transparent 18%),
+    linear-gradient(180deg, #2a1d14 0%, #1d140f 100%);
+  border: 12px solid #2b1d13;
+  border-radius: 14px;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,0.03),
+    0 24px 70px rgba(0,0,0,0.45);
+  padding: 0.5rem 0;
+  overflow: hidden;
+}
+
+.shelf-row {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  gap: 1rem;
+  padding: 2.4rem 1.5rem 1.2rem;
+  min-height: 340px;
+  flex-wrap: nowrap;
+
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.025), transparent 30%),
+    linear-gradient(180deg, rgba(0,0,0,0.18), transparent 20%, transparent 75%, rgba(0,0,0,0.18) 100%);
+}
+
+.shelf-row::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 22px;
+  background:
+    linear-gradient(180deg, #7b5230 0%, #5e3b21 45%, #3f2716 100%);
+  box-shadow:
+    inset 0 2px 0 rgba(255,255,255,0.08),
+    inset 0 -6px 10px rgba(0,0,0,0.35),
+    0 -8px 20px rgba(0,0,0,0.28);
+  z-index: 1;
+}
+
+.shelf-row::after {
+  content: "";
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: 22px;
+  height: 16px;
+  background: linear-gradient(180deg, rgba(0,0,0,0.22), transparent);
+  display: none;
+  z-index: 0;
+}
+
+.shelf-row > * {
+  position: relative;
+  z-index: 2;
+}
+
+.shelf-row:nth-child(odd) {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.02), transparent 30%),
+    linear-gradient(180deg, rgba(0,0,0,0.16), transparent 20%, transparent 75%, rgba(0,0,0,0.2) 100%);
+}
+
+.shelf-row:nth-child(even) {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.03), transparent 30%),
+    linear-gradient(180deg, rgba(0,0,0,0.2), transparent 20%, transparent 75%, rgba(0,0,0,0.16) 100%);
+}
+
+.book {
+  position: relative;
+  width: 180px;
+  flex: 0 0 180px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.book:hover {
+  transform: translateY(-12px);
+  z-index: 10;
+}
+
+.book-card {
+  background: linear-gradient(180deg, rgba(29,23,19,0.98), rgba(20,15,12,0.98));
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow:
+    0 10px 24px rgba(0,0,0,0.35),
+    0 2px 0 rgba(255,255,255,0.03) inset;
+}
+
+.book-cover-wrap {
+  position: relative;
+  aspect-ratio: 2 / 3;
+  background: rgba(255,255,255,0.04);
+  overflow: hidden;
+}
+
+.book-release-badge {
+  position: absolute;
+  top: 0.45rem;
+  left: 0.45rem;
+  z-index: 3;
+  padding: 0.28rem 0.45rem;
+  border-radius: 999px;
+  font-size: 0.58rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-weight: bold;
+  background: rgba(18,14,11,0.78);
+  border: 1px solid rgba(216,163,93,0.35);
+  color: #f2c994;
+  max-width: calc(100% - 0.9rem);
+  text-align: center;
+}
+
+@media (max-width: 720px) {
+  .book-release-badge {
+    top: 0.25rem;
+    left: 0.25rem;
+    padding: 0.18rem 0.28rem;
+    border-radius: 999px;
+    font-size: 0.42rem;
+    letter-spacing: 0.04em;
+    line-height: 1;
+    max-width: calc(100% - 0.5rem);
+    white-space: nowrap;
+  }
+}
+
+.book-cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  background: rgba(255,255,255,0.04);
+  transition: transform 0.3s ease, filter 0.3s ease;
+  -webkit-user-drag: none;
+}
+
+.book:hover .book-cover {
+  transform: scale(1.03);
+  filter: brightness(0.8);
+}
+
+.book-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,0.85),
+    rgba(0,0,0,0.4),
+    transparent
+  );
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0.6rem;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.book:hover .book-overlay {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.overlay-title {
+  font-size: 0.8rem;
+  font-weight: bold;
+  line-height: 1.2;
+}
+
+.overlay-author {
+  font-size: 0.7rem;
+  opacity: 0.75;
+}
+
+    .pagination {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 4rem;
+    }
+
+    .page-numbers{
+    display:flex;
+    align-items:center;
+    gap:.4rem;
+    flex-wrap:wrap;
+}
+
+.page-number{
+    width:36px;
+    height:36px;
+    border-radius:50%;
+    border:1px solid var(--line);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    transition:.2s;
+    color:var(--text);
+}
+
+.page-number:hover{
+    background:rgba(255,255,255,.08);
+}
+
+.page-number.active{
+    background:var(--accent);
+    color:#120e0b;
+    font-weight:bold;
+}
+
+    .shelf-page-indicator {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  font-weight: bold;
+  min-width: 120px;
+}
+
+    .btn-nav {
+      background: var(--bg-soft);
+      border: 1px solid var(--line);
+      color: white;
+      min-width: 200px;
+    }
+
+        @media (max-width: 1150px) {
+      .library-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+  body {
+    background:
+      linear-gradient(rgba(15, 12, 10, 0.5), rgba(15, 12, 10, 0.5)),
+      url("https://njgprucvnayyiooiftaw.supabase.co/storage/v1/object/public/logo/bckgrnd-mobile.png");
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+  }
+
+  .book,
+.book-cover {
+  transition: none;
+}
+
+.book:hover {
+  transform: none;
+}
+
+.book:hover .book-cover {
+  transform: none;
+  filter: none;
+}
+
+      .hero h1 {
+        font-size: 2.35rem;
+      }
+
+      .library-layout {
+        gap: 1.2rem;
+        padding: 1.4rem 0 2rem;
+      }
+
+      .filters {
+        border-radius: 20px;
+        padding: 1rem;
+        box-shadow: 0 14px 34px rgba(0,0,0,0.32);
+      }
+
+      .filters h2 {
+        font-size: 1.25rem;
+      }
+
+      .filter-group {
+        padding: 0.85rem 0 0;
+        margin-top: 0.85rem;
+      }
+
+      .filter-group summary {
+        font-size: 0.95rem;
+      }
+
+      .filter-content {
+        padding-top: 0.75rem;
+      }
+
+      .chip-row {
+        gap: 0.4rem;
+        margin-bottom: 0.6rem;
+      }
+
+      .chip {
+        font-size: 0.78rem;
+        padding: 0.38rem 0.58rem;
+      }
+
+      .field {
+        padding: 0.72rem 0.78rem;
+        font-size: 0.9rem;
+      }
+
+      .results-top {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 0.75rem;
+        margin-bottom: 1rem;
+        font-size: 0.9rem;
+      }
+
+      .results-top p {
+        margin: 0;
+      }
+
+      .results-top select.field {
+        max-width: 100%;
+      }
+
+      .bookshelf {
+        border-width: 7px;
+        border-radius: 12px;
+        padding: 0.25rem 0;
+      }
+
+      .shelf-row {
+        gap: 0.42rem;
+        padding: 1.15rem 0.45rem 0.8rem;
+        min-height: 150px;
+      }
+
+      .shelf-row::before {
+        height: 13px;
+      }
+
+      .shelf-row::after {
+        bottom: 13px;
+        height: 10px;
+      }
+
+      .book {
+        width: 62px;
+        flex: 0 0 62px;
+      }
+
+      .book-card {
+        border-radius: 9px;
+      }
+
+      .book:hover {
+  transform: none;
+}
+
+      .book-overlay {
+        display: none;
+      }
+
+      .btn-nav {
+        min-width: 0;
+        width: 100%;
+      }
+      
+    }
+
+    @media (max-width: 720px) {
+
+  .pagination {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: .75rem;
+    margin-top: 2rem;
+  }
+
+  .page-numbers{
+    order:3;
+    width:100%;
+    justify-content:center;
+  }
+
+  .btn-nav{
+    flex:1;
+    min-width:140px;
+  }
+
+}
+
+  </style>
+</head>
+<body>
+
+  <header>
+  <div id="site-header"></div>
+</header>
+
+  <main class="container library-layout" id="library-anchor">
+<aside class="filters">
+  <span class="eyebrow">Filter library</span>
+  <h2>Find your next read.</h2>
+<p> </p>
+  <details class="filter-group">
+    <summary>Search</summary>
+<div class="filter-content">
+
+  <div class="search-radio-row">
+    <label>
+  <input type="radio" name="search-type" value="author" checked>
+  Author
+</label>
+
+<label>
+  <input type="radio" name="search-type" value="title-series">
+  Title/Series
+</label>
+  </div>
+
+  <input
+  class="field"
+  id="author-search"
+  type="text"
+  placeholder="Search author or contributor..."
+/>
+
+</div>
+
+  </details>
+
+  <details class="filter-group" id="genre-filter-group">
+    <summary>Genre</summary>
+    <div class="filter-content">
+      <div class="chip-row" id="genre-filters"></div>
+    </div>
+  </details>
+
+  <details class="filter-group" id="subgenre-filter-group">
+  <summary>Sub-Genre</summary>
+  <div class="filter-content">
+    <div class="chip-row" id="subgenre-filters"></div>
+  </div>
+</details>
+
+  <details class="filter-group" id="vibe-filter-group">
+  <summary>Vibe</summary>
+  <div class="filter-content">
+    <div class="chip-row" id="vibe-filters"></div>
+  </div>
+</details>
+
+  <details class="filter-group" id="age-filter-group">
+    <summary>Age Range</summary>
+    <div class="filter-content">
+      <div class="chip-row" id="age-filters"></div>
+    </div>
+  </details>
+
+  <details class="filter-group" id="spice-filter-group">
+    <summary>Spice Level</summary>
+    <div class="filter-content">
+      <div class="chip-row" id="spice-filters"></div>
+    </div>
+  </details>
+
+  <details class="filter-group" id="representation-filter-group">
+    <summary>Representation</summary>
+    <div class="filter-content">
+      <div class="chip-row" id="representation-filters"></div>
+    </div>
+  </details>
+
+  <details class="filter-group" id="format-filter-group">
+  <summary>Format</summary>
+  <div class="filter-content">
+    <div class="chip-row" id="format-filters"></div>
+  </div>
+</details>
+
+  <details class="filter-group" id="length-filter-group">
+  <summary>Length</summary>
+  <div class="filter-content">
+    <div class="chip-row" id="length-filters"></div>
+  </div>
+</details>
+
+  <details class="filter-group" id="ranking-filter-group">
+  <summary>Ranking</summary>
+  <div class="filter-content">
+    <div class="chip-row">
+      <span class="chip ranking-filter-chip" data-ranking-filter="trending">Trending</span>
+      <span class="chip ranking-filter-chip" data-ranking-filter="new-releases">New Releases</span>
+      <span class="chip ranking-filter-chip" data-ranking-filter="upcoming-releases">Upcoming Releases</span>
+      <span class="chip ranking-filter-chip" data-ranking-filter="featured-authors">Featured Authors</span>
+    </div>
+  </div>
+</details>
+
+  <button class="btn btn-primary" id="apply-filters-btn">Apply Filters</button>
+  <button class="btn btn-secondary" id="clear-filters-btn" style="width:100%; margin-top:0.75rem;">Clear Filters</button>
+</aside>
+
+    <section>
+      <div class="results-top">
+        <p>Loading library...</p>
+        <div style="font-size: 0.9rem;">
+          Sort:
+          <select id="sort-select" class="field" style="display:inline-block; width:auto; margin:0 0 0 0.5rem; padding:0.45rem 0.7rem;">
+            <option value="default">Default</option>
+            <option value="title-asc">Title A–Z</option>
+            <option value="title-desc">Title Z–A</option>
+            <option value="newest">Newest Release</option>
+            <option value="oldest">Oldest Release</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="bookshelf" id="bookshelf-inject">
+        </div>
+
+      <div class="pagination" id="paginationControls">
+
+  <button class="btn btn-nav" id="prevCaseBtn" onclick="navigate(-1)">
+    ← Previous Shelf
+  </button>
+
+  <div id="pageNumbers" class="page-numbers"></div>
+
+  <button class="btn btn-nav" id="nextCaseBtn" onclick="navigate(1)">
+    Next Shelf →
+  </button>
+
+</div>
+    </section>
+  </main>
+
+  <footer id="site-footer"></footer>
+
+<script>
+  const SUPABASE_URL = "https://njgprucvnayyiooiftaw.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5qZ3BydWN2bmF5eWlvb2lmdGF3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc3NDg0ODMsImV4cCI6MjA5MzMyNDQ4M30.1r6r8vyYB0PnrZtugcBz3CPuCP9MMlTTMYXfewEINNw";
+
+async function supabaseFetch(path) {
+  const pageSize = 500;
+  let from = 0;
+  let allRows = [];
+
+  while (true) {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/${path}`, {
+      headers: {
+        apikey: SUPABASE_ANON_KEY,
+        Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+        Accept: "application/json",
+        Range: `${from}-${from + pageSize - 1}`,
+        Prefer: "count=exact"
+      }
+    });
+
+    if (!res.ok) {
+      throw new Error(`Supabase request failed: ${res.status}`);
+    }
+
+    const rows = await res.json();
+    allRows = allRows.concat(rows);
+
+    if (rows.length < pageSize) break;
+
+    from += pageSize;
+  }
+
+  return allRows;
+}
+
+const DEFAULT_COVER = `${SUPABASE_URL}/storage/v1/object/public/defaults/cover-default.jpg`;
+const NEW_RELEASE_WINDOW_DAYS = 60;
+
+  let page = 1;
+  const booksPerShelf = 5;
+  const shelvesPerCase = 10;
+  const booksPerCase = booksPerShelf * shelvesPerCase;
+
+  let allBooks = [];
+let filteredBooks = [];
+let trendingBookIds = new Set();
+let featuredAuthorIds = new Set();
+
+const state = {
+  authorQuery: "",
+searchType: "author",
+  genres: new Set(),
+  subGenres: new Set(),
+  vibes: new Set(),
+  ageRanges: new Set(),
+  spiceLevels: new Set(),
+  representations: new Set(),
+  formats: new Set(),
+  lengths: new Set(),
+  rankingFilter: new Set(),
+  sortBy: "default"
+};
+
+  async function loadLibrary() {
+  try {
+    const booksRows = await supabaseFetch(
+  'public_library_books?select=*'
+);
+
+console.log("First library row:", booksRows[0]);
+console.log("Available_Formats:", booksRows[0]?.Available_Formats);
+
+    const rankingRows = await supabaseFetch(
+      'public_weekly_rankings?select=*&order=Week_Key.desc,Rank.asc'
+    );
+
+    const featuredRows = await supabaseFetch(
+      'public_featured_authors?select=*&order=Month_Key.desc'
+    );
+
+    const books = booksRows.map(row => ({
+      bookId: row.Book_ID || "",
+      authorId: row.Author_ID || "",
+      authorName: row.Author_Name || "",
+      contributors: splitCommaList(row.Contributors),
+      title: row.Title || "",
+      series: row.Series_Name || "",
+      description: row.Description || "",
+      bookCover: row.CoverImagePath
+  ? `${SUPABASE_URL}/storage/v1/object/public/covers/${encodeURIComponent(row.CoverImagePath)}`
+  : DEFAULT_COVER,
+      availableFormats: splitCommaList(row.Available_Formats),
+      websiteLink: row.Website_Link || "",
+      amazonLink: row.Amazon_Link || "",
+      bnLink: row.BN_Link || "",
+      bookfunnelLink: row.Bookfunnel_Link || "",
+      otherLink: row.Other_Link || "",
+      genre: row.Genre || "",
+      subGenres: splitCommaList(row.Sub_Genres),
+      vibes: splitCommaList(row.Vibes),
+      spiceLevel: row.Spice_Level || "",
+      ageRange: row.Age_Range || "",
+      releaseDate: row["Release/Expected_Release_Date"] || "",
+      representation: splitCommaList(row.Representation),
+      wordCount: row.Word_Count || 0,
+      pageCount: row.Page_Count || 0,
+      lengthCategory: getLengthCategory(row.Word_Count, row.Page_Count),
+      koboLink: row.Kobo_Link || "",
+      applebooksLink: row.Apple_Books_Link || ""
+      
+    }));
+
+    const latestWeekKey = rankingRows[0]?.Week_Key || "";
+
+    const rankings = rankingRows
+      .filter(row => row.Week_Key === latestWeekKey)
+      .map(row => ({
+        bookId: row.Book_ID,
+        rank: row.Rank,
+        clickCount: row.Click_Count
+      }));
+
+    const currentMonthKey = new Date().toISOString().slice(0, 7);
+
+let featuredAuthors = featuredRows
+  .filter(row => normalizeMonthKey(row.Month_Key) === currentMonthKey)
+  .map(row => ({
+    authorId: row.Author_ID
+  }));
+
+if (!featuredAuthors.length) {
+  const latestMonthKey = [...new Set(featuredRows.map(row => normalizeMonthKey(row.Month_Key)))]
+    .filter(Boolean)
+    .sort()
+    .reverse()[0] || "";
+
+  featuredAuthors = featuredRows
+    .filter(row => normalizeMonthKey(row.Month_Key) === latestMonthKey)
+    .map(row => ({
+      authorId: row.Author_ID
+    }));
+}
+
+    let shuffledBooks = books;
+
+    const savedShuffleOrder = sessionStorage.getItem("library_shuffle_order");
+
+    if (state.sortBy === "default" && savedShuffleOrder) {
+      shuffledBooks = applySavedShuffleOrder(books, savedShuffleOrder);
+    } else if (state.sortBy === "default") {
+      shuffledBooks = shuffleArray(books);
+      sessionStorage.setItem(
+        "library_shuffle_order",
+        JSON.stringify(shuffledBooks.map(book => book.bookId).filter(Boolean))
+      );
+    }
+
+    allBooks = shuffledBooks;
+    filteredBooks = [...allBooks];
+
+    trendingBookIds = new Set(rankings.map(item => item.bookId));
+    featuredAuthorIds = new Set(featuredAuthors.map(item => item.authorId));
+
+    buildDynamicFilterChips();
+    attachFilterEvents();
+    applyInitialUrlFilters();
+    applyFilters();
+
+  } catch (error) {
+    console.error("Library load failed:", error);
+    document.getElementById("bookshelf-inject").innerHTML = `
+      <div style="padding:2rem; color:#f5eee6;">
+        Could not load books right now.
+      </div>
+    `;
+  }
+}
+
+  function buildDynamicFilterChips() {
+    buildChipGroup("genre-filters", getUniqueValues(allBooks, "genre"), "genre");
+    buildChipGroup("subgenre-filters", getUniqueFlattenedValues(allBooks, "subGenres"), "subgenre");
+    buildChipGroup("vibe-filters", getUniqueFlattenedValues(allBooks, "vibes"), "vibe");
+    buildChipGroup("age-filters", getUniqueValues(allBooks, "ageRange"), "age");
+    buildChipGroup("spice-filters", getUniqueValues(allBooks, "spiceLevel"), "spice");
+    buildChipGroup(
+  "representation-filters",
+  getUniqueFlattenedValues(allBooks, "representation"),
+  "representation"
+);
+
+buildChipGroup(
+  "format-filters",
+  getUniqueFlattenedValues(allBooks, "availableFormats"),
+  "format"
+);
+
+    buildChipGroup(
+    "length-filters",
+    getUniqueValues(allBooks, "lengthCategory"),
+    "length"
+);
+  }
+
+  function buildChipGroup(containerId, values, type) {
+  const container = document.getElementById(containerId);
+  container.innerHTML = "";
+
+  if (type === "length") {
+    const order = [
+      "Lil' Snack",
+      "Quick Sip",
+      "Got Some Time",
+      "Locked In",
+      "Thickems",
+      "Don't Bother Me"
+    ];
+
+    values = order.filter(value => values.includes(value));
+  }
+
+  values.forEach(value => {
+
+  const chip = document.createElement("span");
+  chip.className = "chip filter-chip";
+  chip.dataset.type = type;
+  chip.dataset.value = value;
+
+  if (type === "length") {
+
+    const labels = {
+      "Lil' Snack": "Lil' Snack (<40 pgs)",
+      "Quick Sip": "Quick Sip (40–120 pgs)",
+      "Got Some Time": "Got Some Time (120–240 pgs)",
+      "Locked In": "Locked In (240–400 pgs)",
+      "Thickems": "Thickems (400–600 pgs)",
+      "Don't Bother Me": "Don't Bother Me (600+ pgs)"
+    };
+
+    chip.textContent = labels[value] || value;
+
+  } else {
+
+    chip.textContent = value;
+
+  }
+
+  container.appendChild(chip);
+
+});
+}
+
+  function getUniqueValues(items, field) {
+    return [...new Set(
+      items
+        .map(item => normalizeText(item[field]))
+        .filter(Boolean)
+    )].sort((a, b) => a.localeCompare(b));
+  }
+
+  function getUniqueFlattenedValues(items, field) {
+    return [...new Set(
+      items.flatMap(item => Array.isArray(item[field]) ? item[field] : [])
+        .map(value => normalizeText(value))
+        .filter(Boolean)
+    )].sort((a, b) => a.localeCompare(b));
+  }
+
+  function getUniqueCommaSeparatedValues(items, field) {
+  return [...new Set(
+    items
+      .flatMap(item => normalizeText(item[field]).split(","))
+      .map(value => normalizeText(value))
+      .filter(Boolean)
+  )].sort((a, b) => a.localeCompare(b));
+}
+
+  function normalizeText(value) {
+  return String(value || "").trim();
+}
+
+function normalizeForSearch(value) {
+  return String(value || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/['’]/g, "")
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim();
+}
+
+function normalizeMonthKey(value) {
+  if (!value) return "";
+
+  const raw = String(value).trim();
+
+  if (/^\d{4}-\d{2}$/.test(raw)) return raw;
+
+  const date = new Date(raw);
+  if (!Number.isNaN(date.getTime())) {
+    return date.toISOString().slice(0, 7);
+  }
+
+  return raw;
+}
+
+function getSearchScore(book, query) {
+  if (!query) return 0;
+
+  const title = normalizeForSearch(book.title);
+  const series = normalizeForSearch(book.series);
+  const author = normalizeForSearch(book.authorName);
+
+  const contributors = Array.isArray(book.contributors)
+    ? book.contributors.map(normalizeForSearch).join(" ")
+    : normalizeForSearch(book.contributors);
+
+  const target =
+    state.searchType === "title-series"
+      ? `${title} ${series}`.trim()
+      : `${author} ${contributors}`.trim();
+
+  if (target === query) return 100;
+  if (target.includes(query)) return 85;
+
+  const queryWords = query.split(" ").filter(Boolean);
+
+  if (!queryWords.length) return 0;
+
+  let matchedWords = 0;
+
+  queryWords.forEach(word => {
+    if (target.includes(word)) {
+      matchedWords++;
+    }
+  });
+
+  const matchRatio = matchedWords / queryWords.length;
+
+  return matchRatio >= 0.6
+    ? Math.round(matchRatio * 60)
+    : 0;
+}
+
+function shuffleArray(items) {
+  const copy = [...items];
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy;
+}
+
+function applySavedShuffleOrder(items, savedOrder) {
+  let orderedIds = [];
+
+  try {
+    orderedIds = JSON.parse(savedOrder);
+  } catch (_) {
+    sessionStorage.removeItem("library_shuffle_order");
+    return shuffleArray(items);
+  }
+
+  const itemMap = new Map(
+    items
+      .filter(book => book.bookId)
+      .map(book => [book.bookId, book])
+  );
+
+  const orderedItems = orderedIds
+    .map(id => itemMap.get(id))
+    .filter(Boolean);
+
+  const orderedIdSet = new Set(orderedIds);
+
+  const newItems = items.filter(book => !orderedIdSet.has(book.bookId));
+
+  return [...orderedItems, ...newItems];
+}
+
+function applyUrlFilter(paramName, stateSet, chipContainerId, groupId) {
+  const params = new URLSearchParams(window.location.search);
+  const value = normalizeText(params.get(paramName));
+
+  if (!value) return;
+
+  stateSet.clear();
+
+  const chips = document.querySelectorAll(
+    `#${chipContainerId} .filter-chip`
+  );
+
+  chips.forEach(chip => {
+    const chipValue = normalizeText(chip.dataset.value);
+    const match =
+  normalizeForSearch(chipValue) === normalizeForSearch(value);
+
+    chip.classList.toggle("active", match);
+
+    if (match) {
+      stateSet.add(chipValue);
+    }
+  });
+
+  if (stateSet.size) {
+    document.getElementById(groupId)?.setAttribute("open", "open");
+  }
+}
+
+function applyRankingUrlFilter() {
+
+  const params = new URLSearchParams(window.location.search);
+  const ranking = normalizeText(params.get("ranking"));
+
+  if (!ranking) return;
+
+  state.rankingFilter.clear();
+
+  document.querySelectorAll(".ranking-filter-chip").forEach(chip => {
+
+    const value = chip.dataset.rankingFilter;
+
+    const match = value.toLowerCase() === ranking.toLowerCase();
+
+    chip.classList.toggle("active", match);
+
+    if (match) {
+      state.rankingFilter.add(value);
+    }
+
+  });
+
+  if (state.rankingFilter.size) {
+    document
+      .getElementById("ranking-filter-group")
+      ?.setAttribute("open", "open");
+  }
+}
+
+function applyInitialUrlFilters() {
+
+  applyUrlFilter("genre", state.genres, "genre-filters", "genre-filter-group");
+
+  applyUrlFilter("subgenre", state.subGenres, "subgenre-filters", "subgenre-filter-group");
+
+  applyUrlFilter("vibe", state.vibes, "vibe-filters", "vibe-filter-group");
+
+  applyUrlFilter("age", state.ageRanges, "age-filters", "age-filter-group");
+
+  applyUrlFilter("spice", state.spiceLevels, "spice-filters", "spice-filter-group");
+
+  applyUrlFilter("representation", state.representations, "representation-filters", "representation-filter-group");
+
+  applyUrlFilter(
+  "format",
+  state.formats,
+  "format-filters",
+  "format-filter-group"
+);
+
+  applyRankingUrlFilter();
+}
+
+  function attachFilterEvents() {
+  document.getElementById("apply-filters-btn").addEventListener("click", applyFilters);
+
+  document.getElementById("clear-filters-btn").addEventListener("click", clearFilters);
+
+  document.getElementById("author-search").addEventListener("input", (e) => {
+  state.authorQuery = normalizeForSearch(e.target.value);
+});
+
+document.querySelectorAll('input[name="search-type"]').forEach(radio => {
+  radio.addEventListener("change", (e) => {
+    state.searchType = e.target.value;
+
+    const searchInput = document.getElementById("author-search");
+    searchInput.placeholder =
+  state.searchType === "title-series"
+    ? "Search title or series..."
+    : "Search author or contributor...";
+
+    applyFilters();
+  });
+});
+
+  document.getElementById("sort-select").addEventListener("change", (e) => {
+    state.sortBy = e.target.value;
+    applyFilters();
+  });
+
+  document.addEventListener("click", (e) => {
+    const chip = e.target.closest(".filter-chip");
+    if (chip) {
+      chip.classList.toggle("active");
+
+      const { type, value } = chip.dataset;
+
+      if (type === "genre") toggleSetValue(state.genres, value);
+      if (type === "subgenre") toggleSetValue(state.subGenres, value);
+      if (type === "vibe") toggleSetValue(state.vibes, value);
+      if (type === "age") toggleSetValue(state.ageRanges, value);
+      if (type === "spice") toggleSetValue(state.spiceLevels, value);
+      if (type === "representation") toggleSetValue(state.representations, value);
+      if (type === "format") toggleSetValue(state.formats, value);
+      if (type === "length") toggleSetValue(state.lengths, value);
+    }
+
+    const rankingFilterChip = e.target.closest(".ranking-filter-chip");
+    if (rankingFilterChip) {
+      rankingFilterChip.classList.toggle("active");
+      toggleSetValue(state.rankingFilter, rankingFilterChip.dataset.rankingFilter);
+    }
+  });
+}
+
+  function toggleSetValue(setObj, value) {
+    if (setObj.has(value)) {
+      setObj.delete(value);
+    } else {
+      setObj.add(value);
+    }
+  }
+
+  function clearFilters() {
+    state.authorQuery = "";
+state.genres.clear();
+state.subGenres.clear();
+state.vibes.clear();
+state.ageRanges.clear();
+state.spiceLevels.clear();
+state.representations.clear();
+state.formats.clear();
+state.rankingFilter.clear();
+state.sortBy = "default";
+state.searchType = "author";
+state.lengths.clear();
+
+document.getElementById("author-search").value = "";
+document.getElementById("sort-select").value = "default";
+document.querySelector('input[name="search-type"][value="author"]').checked = true;
+document.getElementById("author-search").placeholder =
+  "Search author or contributor...";
+document.querySelectorAll(".chip").forEach(chip => chip.classList.remove("active"));
+
+page = 1;
+applyFilters();
+  }
+
+  function applyFilters() {
+  filteredBooks = allBooks.filter(book => {
+    const searchScore = getSearchScore(book, state.authorQuery);
+    const genre = normalizeText(book.genre);
+    const subGenres = Array.isArray(book.subGenres) ? book.subGenres.map(normalizeText) : [];
+    const ageRange = normalizeText(book.ageRange);
+    const spiceLevel = normalizeText(book.spiceLevel);
+    const formats = Array.isArray(book.availableFormats)
+  ? book.availableFormats.map(normalizeText).filter(Boolean)
+  : splitCommaList(book.availableFormats).map(normalizeText);
+
+const matchesFormat =
+  state.formats.size === 0 ||
+  formats.some(format => state.formats.has(format));
+
+const lengthCategory = normalizeText(book.lengthCategory);
+
+const matchesLength =
+  state.lengths.size === 0 ||
+  state.lengths.has(lengthCategory);
+    const vibes = Array.isArray(book.vibes) ? book.vibes.map(normalizeText) : [];
+
+    const matchesSearch =
+  !state.authorQuery || searchScore > 0;
+
+book._searchScore = searchScore;
+
+    const matchesGenre =
+      state.genres.size === 0 || state.genres.has(genre);
+
+    const matchesSubGenre =
+      state.subGenres.size === 0 || subGenres.some(sub => state.subGenres.has(sub));
+
+    const matchesVibe =
+      state.vibes.size === 0 || vibes.some(vibe => state.vibes.has(vibe));
+
+    const matchesAge =
+      state.ageRanges.size === 0 || state.ageRanges.has(ageRange);
+
+    const matchesSpice =
+      state.spiceLevels.size === 0 || state.spiceLevels.has(spiceLevel);
+
+    const matchesRepresentation =
+  state.representations.size === 0 ||
+  representations.some(rep => state.representations.has(rep));
+
+    const isTrending = trendingBookIds.has(book.bookId);
+
+    const now = new Date();
+now.setHours(0, 0, 0, 0);
+
+const newReleaseCutoff = new Date(now);
+newReleaseCutoff.setDate(newReleaseCutoff.getDate() - NEW_RELEASE_WINDOW_DAYS);
+
+const releaseDate = parseLocalDate(book.releaseDate);
+const releaseTime = releaseDate ? releaseDate.getTime() : 0;
+const hasValidReleaseDate = !!releaseDate;
+
+const isUpcomingRelease =
+  hasValidReleaseDate && releaseTime >= now.getTime();
+
+const isNewRelease =
+  hasValidReleaseDate &&
+  releaseTime < now.getTime() &&
+  releaseTime >= newReleaseCutoff.getTime();
+
+const isFeaturedAuthor = featuredAuthorIds.has(book.authorId);
+
+const matchesRankingFilter =
+  state.rankingFilter.size === 0 ||
+  (state.rankingFilter.has("trending") && isTrending) ||
+  (state.rankingFilter.has("new-releases") && isNewRelease) ||
+  (state.rankingFilter.has("upcoming-releases") && isUpcomingRelease) ||
+  (state.rankingFilter.has("featured-authors") && isFeaturedAuthor);
+
+    return matchesSearch &&
+   matchesGenre &&
+   matchesSubGenre &&
+   matchesVibe &&
+   matchesAge &&
+   matchesSpice &&
+   matchesRepresentation &&
+   matchesFormat &&
+   matchesLength &&
+   matchesRankingFilter;
+  });
+
+  if (state.authorQuery && state.sortBy === "default") {
+  filteredBooks.sort((a, b) => (b._searchScore || 0) - (a._searchScore || 0));
+} else {
+  sortFilteredBooks();
+}
+
+  page = 1;
+  renderCase();
+  updateResultsTop();
+}
+
+       
+
+  function sortFilteredBooks() {
+  if (state.sortBy === "title-asc") {
+    filteredBooks.sort((a, b) =>
+      normalizeText(a.title).localeCompare(normalizeText(b.title))
+    );
+    return;
+  }
+
+  if (state.sortBy === "title-desc") {
+    filteredBooks.sort((a, b) =>
+      normalizeText(b.title).localeCompare(normalizeText(a.title))
+    );
+    return;
+  }
+
+  if (state.sortBy === "newest") {
+    filteredBooks.sort((a, b) => {
+      const dateA = parseLocalDate(a.releaseDate);
+      const dateB = parseLocalDate(b.releaseDate);
+
+      return (dateB ? dateB.getTime() : 0) -
+             (dateA ? dateA.getTime() : 0);
+    });
+    return;
+  }
+
+  if (state.sortBy === "oldest") {
+    filteredBooks.sort((a, b) => {
+      const dateA = parseLocalDate(a.releaseDate);
+      const dateB = parseLocalDate(b.releaseDate);
+
+      return (dateA ? dateA.getTime() : Number.MAX_SAFE_INTEGER) -
+             (dateB ? dateB.getTime() : Number.MAX_SAFE_INTEGER);
+    });
+    return;
+  }
+}
+
+function splitCommaList(value) {
+  if (!value) return [];
+
+  if (Array.isArray(value)) {
+    return value
+      .map(item => String(item || "").trim())
+      .filter(Boolean);
+  }
+
+  const raw = String(value).trim();
+
+  if (!raw) return [];
+
+  try {
+    const parsed = JSON.parse(raw);
+
+    if (Array.isArray(parsed)) {
+      return parsed
+        .map(item => String(item || "").trim())
+        .filter(Boolean);
+    }
+  } catch (_) {
+    // The value is a regular comma-separated string.
+  }
+
+  return raw
+    .split(",")
+    .map(item =>
+      item
+        .trim()
+        .replace(/^\[+/, "")
+        .replace(/\]+$/, "")
+        .replace(/^["']+|["']+$/g, "")
+        .trim()
+    )
+    .filter(Boolean);
+}
+
+  function parseLocalDate(value) {
+  if (!value) return null;
+
+  const raw = String(value).trim();
+
+  const isoDateOnly = raw.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  if (isoDateOnly) {
+    return new Date(
+      Number(isoDateOnly[1]),
+      Number(isoDateOnly[2]) - 1,
+      Number(isoDateOnly[3])
+    );
+  }
+
+  const date = new Date(raw);
+  return Number.isNaN(date.getTime()) ? null : date;
+}
+
+function getLengthCategory(wordCount, pageCount) {
+
+  const words = Number(wordCount) || 0;
+  const pages = Number(pageCount) || 0;
+
+  if (words > 0) {
+
+    if (words < 10000) return "Lil' Snack";
+    if (words < 30000) return "Quick Sip";
+    if (words < 60000) return "Got Some Time";
+    if (words < 100000) return "Locked In";
+    if (words < 150000) return "Thickems";
+
+    return "Don't Bother Me";
+  }
+
+  if (pages > 0) {
+
+    if (pages < 40) return "Lil' Snack";
+    if (pages < 120) return "Quick Sip";
+    if (pages < 240) return "Got Some Time";
+    if (pages < 400) return "Locked In";
+    if (pages < 600) return "Thickems";
+
+    return "Don't Bother Me";
+  }
+
+  return "";
+}
+
+function getReleaseBadgeLabel(book) {
+  const releaseDate = parseLocalDate(book.releaseDate);
+  if (!releaseDate) return "";
+
+  const now = new Date();
+  now.setHours(0, 0, 0, 0);
+
+  const newReleaseCutoff = new Date(now);
+  newReleaseCutoff.setDate(newReleaseCutoff.getDate() - NEW_RELEASE_WINDOW_DAYS);
+
+  if (releaseDate >= now) {
+    return "Upcoming";
+  }
+
+  if (releaseDate >= newReleaseCutoff && releaseDate < now) {
+    return "Fresh";
+  }
+
+  return "";
+}
+
+  function renderCase() {
+    const container = document.getElementById("bookshelf-inject");
+    container.innerHTML = "";
+
+    const startIndex = (page - 1) * booksPerCase;
+    const endIndex = startIndex + booksPerCase;
+    const caseBooks = filteredBooks.slice(startIndex, endIndex);
+
+    if (!caseBooks.length) {
+  container.innerHTML = `
+    <div style="padding:2rem; color:#f5eee6;">
+      No books matched these filters.
+    </div>
+  `;
+  
+  updatePaginationControls();
+  renderPageNumbers();
+  return;
+}
+
+    for (let s = 0; s < shelvesPerCase; s++) {
+      const shelfBooks = caseBooks.slice(s * booksPerShelf, (s + 1) * booksPerShelf);
+      if (!shelfBooks.length) break;
+
+      const shelf = document.createElement("div");
+      shelf.className = "shelf-row";
+
+      shelfBooks.forEach((book, index) => {
+      const article = document.createElement("article");
+article.className = "book";
+article.dataset.bookId = book.bookId;
+
+const releaseBadge = getReleaseBadgeLabel(book);
+
+article.innerHTML = `
+  <div class="book-card">
+    <div class="book-cover-wrap">
+      ${releaseBadge ? `<div class="book-release-badge">${escapeHtml(releaseBadge)}</div>` : ""}
+
+      <img
+        class="book-cover"
+        src="${escapeHtml(book.bookCover || DEFAULT_COVER)}"
+        alt="${escapeHtml(book.title || "Untitled")} cover"
+        loading="lazy"
+      />
+
+      <div class="book-overlay">
+        <div class="overlay-title">${escapeHtml(book.title || "Untitled")}</div>
+        <div class="overlay-author">${escapeHtml(book.authorName || "Unknown Author")}</div>
+      </div>
+    </div>
+  </div>
+`;
+
+const img = article.querySelector(".book-cover");
+if (img) {
+  img.onerror = () => {
+    img.onerror = null;
+    img.src = DEFAULT_COVER;
+  };
+}
+
+        article.addEventListener("click", () => {
+  window.location.href = `book.html?id=${encodeURIComponent(book.bookId)}&source=library`;
+});
+
+        shelf.appendChild(article);
+      });
+
+      container.appendChild(shelf);
+    }
+
+    const displayStart = filteredBooks.length ? startIndex + 1 : 0;
+    const displayEnd = Math.min(endIndex, filteredBooks.length);
+
+updatePaginationControls();
+renderPageNumbers();
+  }
+
+  function updateResultsTop() {
+  const resultsTop = document.querySelector(".results-top");
+  const p = resultsTop.querySelector("p");
+
+  const start = filteredBooks.length === 0 ? 0 : ((page - 1) * booksPerCase) + 1;
+  const end = Math.min(page * booksPerCase, filteredBooks.length);
+
+  p.textContent = `Shelf ${page} • Books ${start}-${end} of ${filteredBooks.length}`;
+}
+
+function updatePaginationControls() {
+  const paginationControls = document.getElementById("paginationControls");
+  const prevBtn = document.getElementById("prevCaseBtn");
+  const nextBtn = document.getElementById("nextCaseBtn");
+
+  if (!paginationControls || !prevBtn || !nextBtn) return;
+
+  const maxPage = Math.ceil(filteredBooks.length / booksPerCase);
+
+  if (filteredBooks.length <= booksPerCase) {
+    paginationControls.style.display = "none";
+    return;
+  }
+
+  paginationControls.style.display = "flex";
+  prevBtn.style.display = page <= 1 ? "none" : "inline-block";
+  nextBtn.style.display = page >= maxPage ? "none" : "inline-block";
+}
+
+  function navigate(direction) {
+    const maxPage = Math.max(1, Math.ceil(filteredBooks.length / booksPerCase));
+    const nextPage = page + direction;
+
+    if (nextPage < 1 || nextPage > maxPage) return;
+
+    page = nextPage;
+    renderCase();
+    updateResultsTop();
+    document.getElementById("library-anchor").scrollIntoView({ behavior: "smooth" });
+  }
+
+  function escapeHtml(value) {
+    return String(value)
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#39;");
+  }
+
+
+    function setupAccordionFilters() {
+    const filterGroups = document.querySelectorAll(".filter-group");
+
+    filterGroups.forEach(group => {
+      group.addEventListener("toggle", () => {
+        if (group.open) {
+          filterGroups.forEach(otherGroup => {
+            if (otherGroup !== group) {
+              otherGroup.removeAttribute("open");
+            }
+          });
+        }
+      });
+    });
+  }
+
+  function renderPageNumbers() {
+
+    const container = document.getElementById("pageNumbers");
+    const maxPage = Math.ceil(filteredBooks.length / booksPerCase);
+
+    container.innerHTML = "";
+
+    if (maxPage <= 1) return;
+
+    function addButton(number){
+
+        const btn=document.createElement("div");
+
+        btn.className="page-number";
+
+        if(number===page){
+            btn.classList.add("active");
+        }
+
+        btn.textContent=number;
+
+        btn.onclick=()=>{
+            page=number;
+            renderCase();
+            updateResultsTop();
+        };
+
+        container.appendChild(btn);
+    }
+
+    function addDots(){
+
+        const dots=document.createElement("span");
+
+        dots.textContent="...";
+
+        dots.style.padding="0 .4rem";
+
+        container.appendChild(dots);
+
+    }
+
+    const start=Math.max(2,page-2);
+    const end=Math.min(maxPage-1,page+2);
+
+    addButton(1);
+
+    if(start>2){
+        addDots();
+    }
+
+    for(let i=start;i<=end;i++){
+        addButton(i);
+    }
+
+    if(end<maxPage-1){
+        addDots();
+    }
+
+    if(maxPage>1){
+        addButton(maxPage);
+    }
+
+}
+
+  setupAccordionFilters();
+  loadLibrary();
+</script>
+
+<script>
+async function loadIncludes() {
+
+  const header = await fetch('includes/header.html');
+  document.getElementById('site-header').innerHTML =
+    await header.text();
+
+  const footer = await fetch('includes/footer.html');
+  document.getElementById('site-footer').innerHTML =
+    await footer.text();
+}
+
+loadIncludes();
+</script>
+
+<script src="includes/shared.js"></script>
+
+</body>
+</html>

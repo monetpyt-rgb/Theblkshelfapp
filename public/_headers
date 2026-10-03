@@ -1,0 +1,4 @@
+/mirror/*
+  Cache-Control: no-cache, max-age=0, must-revalidate
+/manifest.webmanifest
+  Cache-Control: no-cache, max-age=0, must-revalidate

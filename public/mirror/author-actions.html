@@ -1,0 +1,1719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Author Actions – The BLK Shelf</title>
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="includes/shared.css"
+  >
+
+  <style>
+    :root {
+      --bg: #0f0c0a;
+      --panel: #3f2e23;
+      --panel-2: #241d17;
+      --text: #fff8f0;
+      --muted: #e3d2c0;
+      --soft: #c9b7a5;
+      --accent: #e6b06a;
+      --accent-light: #f2c994;
+      --line: rgba(255,255,255,0.18);
+      --radius: 22px;
+      --max: 1280px;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      color: var(--text);
+      line-height: 1.6;
+
+      background:
+        linear-gradient(
+          rgba(15,12,10,0.65),
+          rgba(15,12,10,0.65)
+        ),
+        url(
+          "https://njgprucvnayyiooiftaw.supabase.co/storage/v1/object/public/logo/bckgrnd.png"
+        );
+
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+
+    .actions-header {
+      padding: 0;
+      margin: 0;
+      background: transparent;
+      border: 0;
+    }
+
+    .actions-wrap {
+  width: 100%;
+  max-width: 1200px;
+  padding: 3rem 1rem;
+}
+
+    .actions-card {
+      padding: 2rem;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+
+      background:
+        linear-gradient(
+          180deg,
+          var(--panel),
+          var(--panel-2)
+        );
+
+      box-shadow:
+        0 20px 60px rgba(0,0,0,0.4);
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 1rem;
+      padding: 0.45rem 0.8rem;
+      border-radius: 999px;
+      border: 1px solid rgba(230,176,106,0.3);
+      background: rgba(230,176,106,0.1);
+      color: var(--accent-light);
+      font-size: 0.76rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .actions-title {
+      margin: 0 0 0.8rem;
+      font-size: clamp(2.3rem, 5vw, 4rem);
+      line-height: 1;
+    }
+
+    .actions-subtitle {
+      margin: 0 0 1.5rem;
+      color: var(--muted);
+    }
+
+    .author-profile-display {
+      width: 100%;
+      margin-bottom: 1.25rem;
+      padding: 0.95rem;
+      border: 2px solid rgba(230,176,106,0.3);
+      border-radius: 14px;
+      background: rgba(230,176,106,0.08);
+      color: var(--accent-light);
+      font-weight: bold;
+    }
+
+    .action-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .action-card {
+      display: grid;
+      grid-template-columns: 54px 1fr;
+      gap: 1rem;
+      align-items: center;
+
+      padding: 1.4rem;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 18px;
+      background: rgba(23,16,12,0.75);
+
+      transition:
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        background 0.2s ease;
+    }
+
+    .action-card:hover,
+    .action-card:focus-visible {
+      transform: translateY(-2px);
+      border-color: var(--accent);
+      background: rgba(230,176,106,0.1);
+      outline: none;
+    }
+
+    .action-icon {
+      width: 54px;
+      height: 54px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: rgba(230,176,106,0.12);
+      color: var(--accent-light);
+      font-size: 1.45rem;
+    }
+
+    .action-card h2 {
+      margin: 0 0 0.25rem;
+      color: var(--text);
+      font-size: 1.25rem;
+    }
+
+    .action-card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .review-section {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--line);
+}
+
+.review-section[hidden] {
+  display: none;
+}
+
+.review-heading {
+  margin: 0 0 0.4rem;
+  color: var(--text);
+  font-size: 1.65rem;
+}
+
+.review-intro {
+  margin: 0 0 1.25rem;
+  color: var(--muted);
+}
+
+.profile-update-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.profile-update-card {
+  padding: 1.15rem;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: rgba(23,16,12,0.82);
+}
+
+.profile-update-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.profile-update-title {
+  margin: 0 0 0.3rem;
+  color: var(--text);
+  font-size: 1.1rem;
+}
+
+.profile-update-meta {
+  margin: 0;
+  color: var(--soft);
+  font-size: 0.86rem;
+}
+
+.profile-status-badge {
+  flex: 0 0 auto;
+  padding: 0.42rem 0.7rem;
+  border-radius: 999px;
+
+  color: #120e0b;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.7rem;
+  font-weight: bold;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.profile-status-badge.pending {
+  background: #f2c994;
+}
+
+.profile-status-badge.needs-info {
+  background: #f0b36a;
+}
+
+.profile-status-badge.denied {
+  background: #d99486;
+}
+
+.profile-update-note {
+  margin-top: 0.9rem;
+  padding: 0.85rem;
+  border-left: 4px solid var(--accent);
+  border-radius: 8px;
+  background: rgba(230,176,106,0.08);
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.profile-update-note strong {
+  color: var(--accent-light);
+}
+
+.review-shelf {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.25rem;
+}
+
+.review-book-card {
+  flex: 0 0 200px;
+  max-width: 200px;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: rgba(23,16,12,0.82);
+}
+
+.review-cover-wrap {
+  position: relative;
+  aspect-ratio: 2 / 3;
+  background: rgba(255,255,255,0.06);
+}
+
+.review-cover {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.review-cover-placeholder {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  color: var(--soft);
+  text-align: center;
+}
+
+.review-status-badge {
+  position: absolute;
+  top: 0.7rem;
+  left: 0.7rem;
+  z-index: 2;
+
+  padding: 0.42rem 0.7rem;
+  border-radius: 999px;
+
+  color: #120e0b;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.7rem;
+  font-weight: bold;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.review-status-badge.pending {
+  background: #f2c994;
+}
+
+.review-status-badge.needs-info {
+  background: #f0b36a;
+}
+
+.review-status-badge.denied {
+  background: #d99486;
+}
+
+.review-book-body {
+  padding: 1rem;
+}
+
+.review-book-title {
+  margin: 0 0 0.45rem;
+  color: var(--text);
+  font-size: 1.05rem;
+  line-height: 1.25;
+}
+
+.review-book-meta {
+  margin: 0;
+  color: var(--soft);
+  font-size: 0.85rem;
+}
+
+.review-note {
+  margin-top: 0.85rem;
+  padding: 0.85rem;
+  border-left: 4px solid var(--accent);
+  border-radius: 8px;
+  background: rgba(230,176,106,0.08);
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.review-note strong {
+  color: var(--accent-light);
+}
+
+.update-change-list {
+  margin-top: 0.9rem;
+  padding: 0.85rem;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.05);
+}
+
+.update-change-heading {
+  margin: 0 0 0.55rem;
+  color: var(--accent-light);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.74rem;
+  font-weight: bold;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.update-change-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.update-change-item {
+  display: inline-block;
+  padding: 0.35rem 0.55rem;
+  border: 1px solid rgba(230,176,106,0.28);
+  border-radius: 999px;
+  background: rgba(230,176,106,0.1);
+  color: var(--muted);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.76rem;
+}
+
+.book-update-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.book-update-card {
+  display: grid;
+  grid-template-columns: 150px minmax(0, 1fr);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: rgba(23,16,12,0.82);
+}
+
+.book-update-cover {
+  position: relative;
+  min-height: 225px;
+  background: rgba(255,255,255,0.06);
+}
+
+.book-update-cover img {
+  width: 100%;
+  height: 100%;
+  min-height: 225px;
+  display: block;
+  object-fit: cover;
+}
+
+.book-update-cover .review-cover-placeholder {
+  min-height: 225px;
+}
+
+.book-update-content {
+  min-width: 0;
+  padding: 1.25rem;
+}
+
+.book-update-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.book-update-title {
+  margin: 0 0 0.35rem;
+  color: var(--text);
+  font-size: 1.25rem;
+  line-height: 1.25;
+}
+
+.book-update-meta {
+  margin: 0;
+  color: var(--soft);
+  font-size: 0.88rem;
+}
+
+.book-update-card .review-status-badge {
+  position: static;
+  flex: 0 0 auto;
+}
+
+.book-update-card .update-change-items {
+  gap: 0.5rem;
+}
+
+.book-update-card .update-change-item {
+  white-space: normal;
+}
+
+@media (max-width: 650px) {
+  .book-update-card {
+    grid-template-columns: 105px minmax(0, 1fr);
+  }
+
+  .book-update-cover,
+  .book-update-cover img,
+  .book-update-cover .review-cover-placeholder {
+    min-height: 158px;
+  }
+
+  .book-update-content {
+    padding: 1rem;
+  }
+
+  .book-update-header {
+    display: block;
+  }
+
+  .book-update-card .review-status-badge {
+    display: inline-block;
+    margin-bottom: 0.75rem;
+  }
+}
+
+.review-empty {
+  margin: 0;
+  padding: 1rem;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  color: var(--muted);
+  text-align: center;
+}
+
+    .page-note {
+      min-height: 1.5rem;
+      margin-top: 1rem;
+      color: var(--soft);
+    }
+
+    @media (max-width: 720px) {
+      body {
+        background:
+          linear-gradient(
+            rgba(15,12,10,0.5),
+            rgba(15,12,10,0.5)
+          ),
+          url(
+            "https://njgprucvnayyiooiftaw.supabase.co/storage/v1/object/public/logo/bckgrnd-mobile.png"
+          );
+
+        background-size: cover;
+        background-position: center top;
+        background-repeat: no-repeat;
+        background-attachment: scroll;
+      }
+
+      .actions-wrap {
+        padding: 2rem 1rem;
+      }
+
+      .actions-card {
+        padding: 1.3rem;
+      }
+
+      .action-card {
+        grid-template-columns: 44px 1fr;
+      }
+
+      .action-icon {
+        width: 44px;
+        height: 44px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="actions-header">
+    <div id="site-header"></div>
+  </header>
+
+  <main class="actions-wrap container">
+    <section class="actions-card">
+      <span class="eyebrow">
+        Approved Author Access
+      </span>
+
+      <h1 class="actions-title">
+        Manage Your BLK Shelf Profile
+      </h1>
+
+      <p class="actions-subtitle">
+        Choose what you would like to submit for review.
+      </p>
+
+      <div
+        class="author-profile-display"
+        id="authorProfileDisplay"
+      >
+        Verifying approved author profile...
+      </div>
+
+      <div class="action-grid">
+        <a
+          class="action-card"
+          id="newBookAction"
+          href="#"
+        >
+          <span class="action-icon">
+            <i class="fa-solid fa-book"></i>
+          </span>
+
+          <span>
+            <h2>Add a New Book</h2>
+
+            <p>
+              Submit a new title for inclusion on The BLK Shelf.
+            </p>
+          </span>
+        </a>
+
+        <a
+          class="action-card"
+          id="updateBookAction"
+          href="#"
+        >
+          <span class="action-icon">
+            <i class="fa-solid fa-pen-to-square"></i>
+          </span>
+
+          <span>
+            <h2>Update an Existing Book</h2>
+
+            <p>
+              Request changes to one of your current books.
+            </p>
+          </span>
+        </a>
+
+        <a
+          class="action-card"
+          id="updateAuthorAction"
+          href="#"
+        >
+          <span class="action-icon">
+            <i class="fa-solid fa-user-pen"></i>
+          </span>
+
+          <span>
+            <h2>Update My Author Profile</h2>
+
+            <p>
+              Update your bio, links, genres, headshot, and profile details.
+            </p>
+          </span>
+        </a>
+            </div>
+
+            <section
+  class="review-section"
+  id="authorUpdatesSection"
+  hidden
+>
+  <h2 class="review-heading">
+    Author Profile Updates
+  </h2>
+
+  <p class="review-intro">
+    Track profile changes that are pending review, need
+    additional information, or were denied.
+  </p>
+
+  <div
+    class="profile-update-list"
+    id="authorUpdatesList"
+  ></div>
+</section>
+
+<section
+  class="review-section"
+  id="bookUpdatesSection"
+  hidden
+>
+  <h2 class="review-heading">
+    Book Update Requests
+  </h2>
+
+  <p class="review-intro">
+    Track requested changes to books that are already live
+    on The BLK Shelf.
+  </p>
+
+  <div
+  class="book-update-list"
+  id="bookUpdatesShelf"
+></div>
+</section>
+
+      <section
+        class="review-section"
+        id="booksUnderReviewSection"
+        hidden
+      >
+        <h2 class="review-heading">
+          Books Under Review
+        </h2>
+
+        <p class="review-intro">
+          Track books that are pending review, need additional
+          information, or were denied.
+        </p>
+
+        <div
+          class="review-shelf"
+          id="booksUnderReviewShelf"
+        ></div>
+      </section>
+
+      <p
+        class="page-note"
+        id="pageNote"
+        aria-live="polite"
+      ></p>
+    </section>
+  </main>
+
+  <footer id="site-footer"></footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script>
+    const SUPABASE_URL =
+      "https://njgprucvnayyiooiftaw.supabase.co";
+
+    const SUPABASE_ANON_KEY =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5qZ3BydWN2bmF5eWlvb2lmdGF3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc3NDg0ODMsImV4cCI6MjA5MzMyNDQ4M30.1r6r8vyYB0PnrZtugcBz3CPuCP9MMlTTMYXfewEINNw";
+
+    const supabaseClient =
+      supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_ANON_KEY
+      );
+
+    function clean(value) {
+      return String(value || "").trim();
+    }
+
+    function escapeHtml(value) {
+  return String(value || "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+function formatDate(value) {
+  if (!value) {
+    return "Date unavailable";
+  }
+
+  const date =
+    new Date(value);
+
+  if (
+    Number.isNaN(
+      date.getTime()
+    )
+  ) {
+    return "Date unavailable";
+  }
+
+  return date.toLocaleDateString(
+    "en-US",
+    {
+      month: "short",
+      day: "numeric",
+      year: "numeric"
+    }
+  );
+}
+
+function normalizeBookStatus(value) {
+  const status =
+    clean(value).toLowerCase();
+
+  const labels = {
+    pending:
+      "Pending Review",
+
+    needs_info:
+      "Needs Information",
+
+    denied:
+      "Denied"
+  };
+
+  return {
+    value: status,
+
+    label:
+      labels[status] ||
+      "Under Review",
+
+    className:
+      status === "needs_info"
+        ? "needs-info"
+        : status
+  };
+}
+
+function normalizeProfileUpdateStatus(
+  value
+) {
+  const status =
+    clean(value).toLowerCase();
+
+  const labels = {
+    pending:
+      "Pending Review",
+
+    needs_info:
+      "Needs Information",
+
+    denied:
+      "Denied"
+  };
+
+  return {
+    value: status,
+
+    label:
+      labels[status] ||
+      "Under Review",
+
+    className:
+      status === "needs_info"
+        ? "needs-info"
+        : status
+  };
+}
+
+function renderAuthorProfileUpdates(
+  updates
+) {
+  const section =
+    document.getElementById(
+      "authorUpdatesSection"
+    );
+
+  const list =
+    document.getElementById(
+      "authorUpdatesList"
+    );
+
+  if (!updates.length) {
+    section.hidden = true;
+    list.innerHTML = "";
+    return;
+  }
+
+  list.innerHTML =
+    updates.map(update => {
+      const status =
+        normalizeProfileUpdateStatus(
+          update.request_status
+        );
+
+      const requestId =
+        escapeHtml(
+          update.request_id ||
+          "Unavailable"
+        );
+
+      const safeNote =
+        escapeHtml(
+          update.admin_notes
+        );
+
+      const noteHtml =
+        update.admin_notes
+          ? `
+            <div class="profile-update-note">
+              <strong>Reviewer note:</strong><br>
+              ${safeNote}
+            </div>
+          `
+          : "";
+
+      return `
+        <article class="profile-update-card">
+          <div class="profile-update-top">
+            <div>
+              <h3 class="profile-update-title">
+                Author Profile Update
+              </h3>
+
+              <p class="profile-update-meta">
+                Submitted
+                ${formatDate(
+                  update.submitted_at
+                )}
+              </p>
+
+              <p class="profile-update-meta">
+                Request ID:
+                ${requestId}
+              </p>
+            </div>
+
+            <span
+              class="
+                profile-status-badge
+                ${status.className}
+              "
+            >
+              ${status.label}
+            </span>
+          </div>
+
+          ${noteHtml}
+        </article>
+      `;
+    }).join("");
+
+  section.hidden = false;
+}
+
+async function loadAuthorProfileUpdates(
+  authorSubmissionId
+) {
+  const {
+    data,
+    error
+  } =
+    await supabaseClient.rpc(
+      "get_author_update_statuses",
+      {
+        p_author_submission_id:
+          authorSubmissionId
+      }
+    );
+
+  if (error) {
+    throw error;
+  }
+
+  renderAuthorProfileUpdates(
+    data || []
+  );
+}
+
+function resolveBookUpdateCover(
+  coverReference,
+  coverBucket
+) {
+  const reference =
+    clean(coverReference);
+
+  if (!reference) {
+    return "";
+  }
+
+  if (
+    /^https?:\/\//i.test(
+      reference
+    )
+  ) {
+    return reference;
+  }
+
+  const bucket =
+    clean(coverBucket) ||
+    "covers";
+
+  const cleanPath =
+    reference.replace(
+      /^\/+/,
+      ""
+    );
+
+  return (
+    `${SUPABASE_URL}` +
+    `/storage/v1/object/public/` +
+    `${bucket}/${cleanPath}`
+  );
+}
+
+function normalizeComparisonValue(
+  value
+) {
+  if (
+    value === null ||
+    value === undefined
+  ) {
+    return "";
+  }
+
+  if (Array.isArray(value)) {
+    return value
+      .map(item =>
+        normalizeComparisonValue(item)
+      )
+      .filter(Boolean)
+      .sort()
+      .join("|");
+  }
+
+  if (
+    typeof value === "object"
+  ) {
+    const normalizedObject = {};
+
+    Object.keys(value)
+      .sort()
+      .forEach(key => {
+        normalizedObject[key] =
+          normalizeComparisonValue(
+            value[key]
+          );
+      });
+
+    return JSON.stringify(
+      normalizedObject
+    );
+  }
+
+  return String(value)
+    .trim()
+    .replace(/\s+/g, " ")
+    .toLowerCase();
+}
+
+function parseStoredList(value) {
+  if (Array.isArray(value)) {
+    return value;
+  }
+
+  const text =
+    clean(value);
+
+  if (!text) {
+    return [];
+  }
+
+  return text
+    .split(",")
+    .map(item =>
+      clean(item)
+    )
+    .filter(Boolean);
+}
+
+function valuesAreDifferent(
+  proposedValue,
+  currentValue
+) {
+  return (
+    normalizeComparisonValue(
+      proposedValue
+    ) !==
+    normalizeComparisonValue(
+      currentValue
+    )
+  );
+}
+
+function getChangedBookFields(
+  update
+) {
+  const proposed =
+    update.proposed_data &&
+    typeof update.proposed_data ===
+      "object"
+      ? update.proposed_data
+      : {};
+
+  const current =
+    update.current_book &&
+    typeof update.current_book ===
+      "object"
+      ? update.current_book
+      : {};
+
+  const changedFields = [];
+
+  const compare = (
+    proposedValue,
+    currentValue,
+    label
+  ) => {
+    if (
+      valuesAreDifferent(
+        proposedValue,
+        currentValue
+      )
+    ) {
+      changedFields.push(label);
+    }
+  };
+
+  compare(
+    proposed.title,
+    current.Title,
+    "Title"
+  );
+
+  compare(
+    proposed.description,
+    current.Description,
+    "Description"
+  );
+
+  compare(
+    proposed.release_date,
+    current["Release/Expected_Release_Date"],
+    "Release Date"
+  );
+
+  compare(
+    proposed.primary_genre,
+    current.Genre,
+    "Primary Genre"
+  );
+
+  compare(
+  proposed.sub_genres,
+  parseStoredList(
+    current.Sub_Genres
+  ),
+  "Subgenres"
+);
+
+  compare(
+  proposed.vibes,
+  parseStoredList(
+    current.Vibes
+  ),
+  "Vibes"
+);
+
+  compare(
+    proposed.age_range,
+    current.Age_Range,
+    "Age Range"
+  );
+
+  compare(
+    proposed.spice_level,
+    current.Spice_Level,
+    "Spice Level"
+  );
+
+  compare(
+  proposed.representation,
+  parseStoredList(
+    current.Representation
+  ),
+  "Representation"
+);
+
+  compare(
+  proposed.available_formats,
+  parseStoredList(
+    current.Available_Formats
+  ),
+  "Available Formats"
+);
+
+  compare(
+    proposed.word_count,
+    current.Word_Count,
+    "Word Count"
+  );
+
+  compare(
+    proposed.page_count,
+    current.Page_Count,
+    "Page Count"
+  );
+
+  compare(
+    proposed.series_name,
+    current.Series_Name,
+    "Series Name"
+  );
+
+  compare(
+    proposed.series_number,
+    current.Series_Number,
+    "Series Number"
+  );
+
+  compare(
+    proposed.co_authors,
+    current.Contributors,
+    "Contributing Authors"
+  );
+
+  const currentRetailerLinks = {
+    website:
+      current.Website_Link || "",
+
+    amazon:
+      current.Amazon_Link || "",
+
+    barnes_noble:
+      current.Barnes_Noble_Link || "",
+
+    bookfunnel:
+      current.BookFunnel_Link || "",
+
+    kobo:
+      current.Kobo_Link || "",
+
+    apple_books:
+      current.Apple_Books_Link || "",
+
+    other:
+      current.Other_Retailer_Link || ""
+  };
+
+  compare(
+    proposed.retailer_links,
+    currentRetailerLinks,
+    "Retailer Links"
+  );
+
+  const currentAudio = {
+    has_audiobook:
+      String(
+        current.Has_Audiobook || ""
+      )
+        .trim()
+        .toLowerCase() === "yes",
+
+    narrators:
+      current.Audiobook_Narrators || "",
+
+    link:
+      current.Audiobook_Link || ""
+  };
+
+  compare(
+    proposed.audio,
+    currentAudio,
+    "Audiobook Information"
+  );
+
+  const currentKids = {
+    category:
+      current.Kids_Category || ""
+  };
+
+  compare(
+    proposed.kids,
+    currentKids,
+    "Children’s Category"
+  );
+
+  if (
+    clean(
+      update.cover_bucket
+    ) === "book-submissions"
+  ) {
+    changedFields.push(
+      "Book Cover"
+    );
+  }
+
+  return [
+    ...new Set(
+      changedFields
+    )
+  ];
+}
+
+function renderBookUpdateRequests(
+  updates
+) {
+  const section =
+    document.getElementById(
+      "bookUpdatesSection"
+    );
+
+  const shelf =
+    document.getElementById(
+      "bookUpdatesShelf"
+    );
+
+  if (!updates.length) {
+    section.hidden = true;
+    shelf.innerHTML = "";
+    return;
+  }
+
+  shelf.innerHTML =
+    updates.map(update => {
+      const status =
+        normalizeBookStatus(
+          update.request_status
+        );
+
+      const coverUrl =
+        resolveBookUpdateCover(
+          update.cover_reference,
+          update.cover_bucket
+        );
+
+      const safeTitle =
+        escapeHtml(
+          update.title ||
+          "Untitled Book"
+        );
+
+      const safeNote =
+        escapeHtml(
+          update.reviewer_notes
+        );
+
+      const changedFields =
+        getChangedBookFields(
+          update
+        );
+
+      const coverHtml =
+        coverUrl
+          ? `
+            <img
+              class="review-cover"
+              src="${escapeHtml(coverUrl)}"
+              alt="Cover for ${safeTitle}"
+              loading="lazy"
+              decoding="async"
+            >
+          `
+          : `
+            <div class="review-cover-placeholder">
+              Cover unavailable
+            </div>
+          `;
+
+      const changesHtml =
+        changedFields.length
+          ? `
+            <div class="update-change-list">
+              <p class="update-change-heading">
+                Changes Submitted
+              </p>
+
+              <div class="update-change-items">
+                ${changedFields
+                  .map(field => `
+                    <span class="update-change-item">
+                      &#10003;
+                      ${escapeHtml(field)}
+                    </span>
+                  `)
+                  .join("")}
+              </div>
+            </div>
+          `
+          : `
+            <div class="update-change-list">
+              <p class="update-change-heading">
+                Update Submitted
+              </p>
+            </div>
+          `;
+
+      const noteHtml =
+        update.reviewer_notes
+          ? `
+            <div class="review-note">
+              <strong>Reviewer note:</strong><br>
+              ${safeNote}
+            </div>
+          `
+          : "";
+
+      return `
+  <article class="book-update-card">
+    <div class="book-update-cover">
+      ${coverHtml}
+    </div>
+
+    <div class="book-update-content">
+      <div class="book-update-header">
+        <div>
+          <h3 class="book-update-title">
+            ${safeTitle}
+          </h3>
+
+          <p class="book-update-meta">
+            Submitted
+            ${formatDate(
+              update.submitted_at
+            )}
+          </p>
+        </div>
+
+        <span
+          class="
+            review-status-badge
+            ${status.className}
+          "
+        >
+          ${status.label}
+        </span>
+      </div>
+
+      ${changesHtml}
+
+      ${noteHtml}
+    </div>
+  </article>
+`;
+    }).join("");
+
+  section.hidden = false;
+}
+
+async function loadBookUpdateRequests(
+  authorSubmissionId
+) {
+  const {
+    data,
+    error
+  } =
+    await supabaseClient.rpc(
+      "get_author_book_update_statuses",
+      {
+        p_author_submission_id:
+          authorSubmissionId
+      }
+    );
+
+  if (error) {
+    throw error;
+  }
+
+  renderBookUpdateRequests(
+    data || []
+  );
+}
+
+function resolveSubmissionCover(
+  coverReference
+) {
+  const reference =
+    clean(coverReference);
+
+  if (!reference) {
+    return "";
+  }
+
+  if (
+    /^https?:\/\//i.test(
+      reference
+    )
+  ) {
+    return reference;
+  }
+
+  const cleanPath =
+    reference.replace(
+      /^\/+/,
+      ""
+    );
+
+  return (
+    `${SUPABASE_URL}` +
+    `/storage/v1/object/public/` +
+    `book-submissions/${cleanPath}`
+  );
+}
+
+function renderBooksUnderReview(
+  books
+) {
+  const section =
+    document.getElementById(
+      "booksUnderReviewSection"
+    );
+
+  const shelf =
+    document.getElementById(
+      "booksUnderReviewShelf"
+    );
+
+  if (!books.length) {
+    section.hidden = true;
+    shelf.innerHTML = "";
+    return;
+  }
+
+  shelf.innerHTML =
+    books.map(book => {
+      const status =
+        normalizeBookStatus(
+          book.submission_status
+        );
+
+      const coverUrl =
+        resolveSubmissionCover(
+          book.cover_reference
+        );
+
+      const safeTitle =
+        escapeHtml(
+          book.title ||
+          "Untitled Book"
+        );
+
+      const safeNote =
+        escapeHtml(
+          book.admin_notes
+        );
+
+      const coverHtml =
+        coverUrl
+          ? `
+            <img
+              class="review-cover"
+              src="${escapeHtml(coverUrl)}"
+              alt="Cover for ${safeTitle}"
+              loading="lazy"
+              decoding="async"
+            >
+          `
+          : `
+            <div class="review-cover-placeholder">
+              Cover unavailable
+            </div>
+          `;
+
+      const noteHtml =
+        book.admin_notes
+          ? `
+            <div class="review-note">
+              <strong>Reviewer note:</strong><br>
+              ${safeNote}
+            </div>
+          `
+          : "";
+
+      return `
+        <article class="review-book-card">
+          <div class="review-cover-wrap">
+            <span
+              class="
+                review-status-badge
+                ${status.className}
+              "
+            >
+              ${status.label}
+            </span>
+
+            ${coverHtml}
+          </div>
+
+          <div class="review-book-body">
+            <h3 class="review-book-title">
+              ${safeTitle}
+            </h3>
+
+            <p class="review-book-meta">
+              Submitted
+              ${formatDate(
+                book.submitted_at
+              )}
+            </p>
+
+            ${noteHtml}
+          </div>
+        </article>
+      `;
+    }).join("");
+
+  section.hidden = false;
+}
+
+async function loadBooksUnderReview(
+  authorSubmissionId
+) {
+  const {
+    data,
+    error
+  } =
+    await supabaseClient.rpc(
+      "get_author_book_statuses",
+      {
+        p_author_submission_id:
+          authorSubmissionId
+      }
+    );
+
+  if (error) {
+    throw error;
+  }
+
+  renderBooksUnderReview(
+    data || []
+  );
+}
+
+    async function loadIncludes() {
+      const header =
+        await fetch("includes/header.html");
+
+      if (header.ok) {
+        document.getElementById(
+          "site-header"
+        ).innerHTML =
+          await header.text();
+      }
+
+      const footer =
+        await fetch("includes/footer.html");
+
+      if (footer.ok) {
+        document.getElementById(
+          "site-footer"
+        ).innerHTML =
+          await footer.text();
+      }
+    }
+
+    async function loadAuthorActions() {
+      await loadIncludes();
+
+      const params =
+        new URLSearchParams(
+          window.location.search
+        );
+
+      const submissionId =
+  clean(
+    params.get("submission_id")
+  );
+
+      const display =
+        document.getElementById(
+          "authorProfileDisplay"
+        );
+
+      const pageNote =
+        document.getElementById(
+          "pageNote"
+        );
+
+      if (!submissionId) {
+  display.textContent =
+    "Missing approved author link.";
+
+  pageNote.textContent =
+    "Please use the personal link provided in your approval email.";
+
+  return;
+}
+
+      const {
+        data: author,
+        error
+      } =
+        await supabaseClient
+  .from("authors")
+  .select(
+    "AUTHOR_ID, AUTHOR_NAME, SUBMISSION_ID, APPROVAL"
+  )
+  .eq(
+    "SUBMISSION_ID",
+    submissionId
+  )
+  .eq(
+    "APPROVAL",
+    "Approved"
+  )
+  .maybeSingle();
+
+      if (error) {
+        throw error;
+      }
+
+      if (!author) {
+        display.textContent =
+          "Approved author profile not found.";
+
+        pageNote.textContent =
+          "The author profile connected to this link could not be verified.";
+
+        return;
+      }
+
+      display.textContent =
+        author.AUTHOR_NAME;
+
+      const encodedSubmissionId =
+  encodeURIComponent(
+    author.SUBMISSION_ID
+  );
+
+      document.getElementById(
+  "newBookAction"
+).href =
+  `submit-book.html?submission_id=${encodedSubmissionId}&mode=new`;
+
+document.getElementById(
+  "updateBookAction"
+).href =
+  `submit-book.html?submission_id=${encodedSubmissionId}&mode=update`;
+
+document.getElementById(
+  "updateAuthorAction"
+).href =
+  `update-author.html?submission_id=${encodedSubmissionId}`;
+
+await Promise.all([
+  loadAuthorProfileUpdates(
+    author.SUBMISSION_ID
+  ),
+
+  loadBookUpdateRequests(
+    author.SUBMISSION_ID
+  ),
+
+  loadBooksUnderReview(
+    author.SUBMISSION_ID
+  )
+]);
+    }
+
+    loadAuthorActions().catch(error => {
+      console.error(error);
+
+      document.getElementById(
+        "pageNote"
+      ).textContent =
+        error.message ||
+        "Unable to load author options.";
+    });
+  </script>
+  <script src="includes/shared.js"></script>
+</body>
+</html>
